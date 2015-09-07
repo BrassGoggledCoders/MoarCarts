@@ -36,8 +36,8 @@ archivesBaseName = "moarcarts"
 minecraft {
     version = "${config.minecraft.version}-${config.forge.version}-${config.minecraft.version}"
 
-    //replace "@VERSION@", project.version
-    //replaceIn "MoarCarts.java"
+    replace "@VERSION@", project.version
+    replaceIn "ModInfo.java"
 }
 
 repositories {
@@ -68,4 +68,9 @@ processResources {
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+}
+
+configurations.all {
+    // check for updates every build
+    resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
 }
