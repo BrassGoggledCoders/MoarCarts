@@ -48,8 +48,27 @@ repositories {
 }
 
 dependencies {
-    compile "brassgoggledcoders:boilerplate:1.7.10-6.0.0.+:deobf"
+    compile "brassgoggledcoders:boilerplate:${config.minecraft.version}-${config.boilerplate.version}:deobf"
+    compile files("libs/Railcraft_${config.minecraft.version}-${config.railcraft.version}-dev.jar")
 }
+
+task getLibraries {
+    def libsFolder = new File('libs')
+    if (!libsFolder.isDirectory()) {
+        libsFolder.mkdirs()
+    }
+
+    def railcraft = 'Railcraft_' + config.minecraft.version + '-' + config.railcraft.version + '-dev.jar'
+    def railcraftSource = 'https://dl.dropboxusercontent.com/u/38558957/Minecraft/Railcraft/' + railcraft
+    def railcraftDest = new File('libs', railcraft)
+
+    if(!railcraftDest.exists()){
+        railcraftDest.withOutputStream { out ->
+            new URL(railcraftSource).withInputStream { from ->  out << from; }
+        }
+    }
+}
+
 
 processResources {
     // this will ensure that this task is redone when the versions change.
