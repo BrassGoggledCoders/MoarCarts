@@ -1,0 +1,71 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'forge'
+
+file "gradle.properties" withReader {
+    def prop = new Properties()
+    prop.load(it)
+    ext.config = new ConfigSlurper().parse prop
+}
+
+project.ext {
+    buildNum = System.getenv("BUILD_NUMBER")
+    mcVersion = "${config.minecraft.version}"
+}
+
+version = "${config.minecraft.version}-${config.moarcarts.version}-project.ext.buildNum"
+group = "brassgoggledcoders"
+archivesBaseName = "moarcarts"
+
+minecraft {
+    version = "${config.minecraft.version}-${config.forge.version}-${config.minecraft.version}"
+
+    //replace "@VERSION@", project.version
+    //replaceIn "MoarCarts.java"
+}
+
+repositories {
+    maven {
+        name "K4Repo"
+        url "http://maven.k-4u.nl"
+    }
+}
+
+dependencies {
+    compile "brassgoggledcoders:boilerplate:1.7.10-6.0.0.+:deobf"
+}
+
+processResources {
+    // this will ensure that this task is redone when the versions change.
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+                
+        // replace version and mcversion
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+        
+    // copy everything else, thats not the mcmod.info
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}

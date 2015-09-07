@@ -1,3 +1,12 @@
+#Project Related
+build/
+run/
+libs/
+
+#Gradle
+.gradle
+
+#Java
 *.class
 
 # Mobile Tools for Java (J2ME)
