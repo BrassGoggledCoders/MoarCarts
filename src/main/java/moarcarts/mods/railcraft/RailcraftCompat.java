@@ -9,18 +9,38 @@
  * (http://forum.feed-the-beast.com/threads/1-7-10-b0-7-0-extra-carts.47925/)
  *
  */
-package moarcarts.mods.vanilla;
+package moarcarts.mods.railcraft;
 
 import boilerplate.common.modcompat.ModCompat;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 /**
  * @author SkySom
  */
-public class VanillaCompat extends ModCompat
+public class RailcraftCompat extends ModCompat
 {
 	@Override
 	public String getName()
 	{
-		return "vanilla";
+		return "Railcraft";
+	}
+
+	@Override
+	public boolean areRequirementsMet()
+	{
+		return Loader.isModLoaded("railcraft");
+	}
+
+	@Override
+	public String dependencies()
+	{
+		return "after:Railcraft;";
+	}
+
+	@Override
+	public void preInit(FMLPreInitializationEvent event)
+	{
+		RailcraftConfigValues.setConfigValues();
 	}
 }

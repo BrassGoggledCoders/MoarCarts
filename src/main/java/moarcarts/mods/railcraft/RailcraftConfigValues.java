@@ -1,16 +1,34 @@
+/**
+ * This class was created by BrassGoggledCoders modding team.
+ * This class is available as part of the MoarCarts Mod for Minecraft.
+ *
+ * MoarCarts is open-source and is distributed under the MIT License.
+ *
+ * MoarCarts is based on the original ExtraCarts Mod created by ScottDTA and SkySom.
+ * ExtraCarts (c) ScottDTA 2014
+ * (http://forum.feed-the-beast.com/threads/1-7-10-b0-7-0-extra-carts.47925/)
+ *
+ */
 package moarcarts.mods.railcraft;
 
-import cpw.mods.fml.relauncher.ReflectionHelper;
+import moarcarts.config.ConfigSettings;
+import moarcarts.utils.LoggerMoarCarts;
 import mods.railcraft.common.core.RailcraftConfig;
 
 /**
- * Created by Skylar on 9/7/2015.
+ * @author Skysom
  */
 public class RailcraftConfigValues
 {
-	public static int getMinecraftItemStackSize()
+	public static void setConfigValues()
 	{
-		Configur
-		return Integer.getInteger(ReflectionHelper.findField(RailcraftConfig.class, "minecartStackSize").toString());
+		try
+		{
+			ConfigSettings.setMinecartsBreakOnDrop(RailcraftConfig.doCartsBreakOnDrop());
+			ConfigSettings.setMinecartStackSize(RailcraftConfig.getMinecartStackSize());
+		} catch(Exception exception)
+		{
+			LoggerMoarCarts.warning("Couldn't grab Railcraft config settings. Warn the author. As this is not good");
+		}
 	}
 }
