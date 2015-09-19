@@ -30,9 +30,9 @@ import net.minecraft.world.World;
 @Optional.Interface(modid = "RailcraftAPI|items", iface = "mods.railcraft.api.core.items.IMinecartItem")
 public abstract class ItemMinecartBase extends ItemMinecart implements IMinecartItem
 {
-	public ItemMinecartBase(int type)
+	public ItemMinecartBase()
 	{
-		super(type);
+		super(0);
 		this.setCreativeTab(CreativeTabs.tabTransport);
 		this.setMaxStackSize(ConfigSettings.getMinecartStackSize());
 	}
