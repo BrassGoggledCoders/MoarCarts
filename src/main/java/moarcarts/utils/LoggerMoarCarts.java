@@ -11,7 +11,7 @@
  */
 package moarcarts.utils;
 
-import moarcarts.ModInfo;
+import moarcarts.MoarCarts;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -48,6 +48,6 @@ public class LoggerMoarCarts
 
 	protected static Logger getLogger()
 	{
-		return LogManager.getLogger(ModInfo.MODID);
+		return LogManager.getLogger(MoarCarts.MODID);
 	}
 }

@@ -37,7 +37,7 @@ minecraft {
     version = "${config.minecraft.version}-${config.forge.version}-${config.minecraft.version}"
 
     replace "@VERSION@", project.version
-    replaceIn "ModInfo.java"
+    replaceIn "MoarCarts.java"
 }
 
 repositories {

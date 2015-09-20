@@ -21,15 +21,19 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import moarcarts.config.ConfigHandler;
 import moarcarts.mods.railcraft.RailcraftCompat;
 import moarcarts.mods.vanilla.VanillaCompat;
-import moarcarts.utils.LoggerMoarCarts;
 /*
  * @author SkySom
  */
-@Mod(modid = ModInfo.MODID, name = ModInfo.MODNAME, version = ModInfo.MODVERSION, dependencies = ModInfo.DEPENDENCIES)
+@Mod(modid = MoarCarts.MODID, name = MoarCarts.MODNAME, version = MoarCarts.MODVERSION, dependencies = MoarCarts.DEPENDENCIES)
 public class MoarCarts
 {
 	@Instance("moarcarts")
 	public static MoarCarts instance;
+	public static final String MODID = "moarcarts";
+	public static final String MODNAME = "MoarCarts";
+	public static final String MODVERSION = "@Version@";
+	public static final String DEPENDENCIES = "after:boilerplate;after:railcraft;";
+
 	public static CompatibilityHandler compatibilityHandler;
 
 	@EventHandler
@@ -38,7 +42,6 @@ public class MoarCarts
 		initModCompatHandler();
 		ConfigHandler.setConfigFile(event.getSuggestedConfigurationFile());
 		ConfigHandler.init();
-		LoggerMoarCarts.info("PreInit is complete");
 	}
 
 	@EventHandler

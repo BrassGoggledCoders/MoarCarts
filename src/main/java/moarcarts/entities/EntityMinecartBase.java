@@ -180,5 +180,12 @@ public abstract class EntityMinecartBase extends EntityMinecartContainer impleme
 	}
 
 	@Override
-	public abstract boolean doesCartMatchFilter(ItemStack itemStack, EntityMinecart entityMinecart);
+	public boolean doesCartMatchFilter(ItemStack itemStack, EntityMinecart entityMinecart)
+	{
+		if(itemStack != null && entityMinecart instanceof EntityMinecartBase)
+		{
+			return itemStack.isItemEqual(entityMinecart.getCartItem());
+		}
+		return false;
+	}
 }

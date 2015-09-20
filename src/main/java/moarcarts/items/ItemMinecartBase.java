@@ -41,7 +41,7 @@ public abstract class ItemMinecartBase extends ItemMinecart implements IMinecart
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int i, int j, int k, int l, float par8, float par9, float par10) {
 		if (!world.isRemote)
 			return false;
-		return placeCart(stack, world, i, j, k, getEntityFromItem());
+		return placeCart(stack, world, i, j, k, this.getEntityFromItem(world));
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public abstract class ItemMinecartBase extends ItemMinecart implements IMinecart
 	@Optional.Method(modid = "RailcraftAPI|items")
 	public EntityMinecart placeCart(GameProfile gameProfile, ItemStack itemStack, World world, int posX, int posY, int posZ)
 	{
-		EntityMinecart entityMinecart = getEntityFromItem();
+		EntityMinecart entityMinecart = getEntityFromItem(world);
 		CartTools.setCartOwner(entityMinecart, gameProfile);
 		if (placeCart(itemStack, world, posX, posY, posZ, entityMinecart))
 		{
@@ -82,5 +82,5 @@ public abstract class ItemMinecartBase extends ItemMinecart implements IMinecart
 		return false;
 	}
 
-	public abstract EntityMinecart getEntityFromItem();
+	public abstract EntityMinecart getEntityFromItem(World world);
 }
