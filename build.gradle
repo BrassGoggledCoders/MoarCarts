@@ -45,11 +45,21 @@ repositories {
         name "K4Repo"
         url "http://maven.k-4u.nl"
     }
+    maven {
+        name "Chickenbones"
+        url "http://chickenbones.net/maven/"
+    }
+    maven {
+        name "Waila"
+        url "http://mobiusstrip.eu/maven"
+    }
 }
 
 dependencies {
     compile "brassgoggledcoders:boilerplate:${config.minecraft.version}-${config.boilerplate.version}:deobf"
-    compile files("libs/Railcraft_${config.minecraft.version}-${config.railcraft.version}-dev.jar")
+    compile "codechicken:NotEnoughItems:${config.minecraft.version}-${config.nei.version}:dev"
+    compile "codechicken:CodeChickenCore:${config.minecraft.version}-${config.codechickencore.version}:dev"
+    compile "codechicken:CodeChickenLib:${config.minecraft.version}-${config.codechickenlib.version}:dev"
 }
 
 task getLibraries {

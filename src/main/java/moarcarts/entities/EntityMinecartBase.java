@@ -13,17 +13,19 @@ package moarcarts.entities;
 
 import boilerplate.common.utils.interfaceimpl.IInventoryImpl;
 import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
+import moarcarts.MoarCarts;
 import mods.railcraft.api.carts.IItemCart;
 import mods.railcraft.api.carts.IMinecart;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityMinecart;
-import net.minecraft.entity.item.EntityMinecartContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.minecart.MinecartInteractEvent;
 
 /**
  * @author SkySom
@@ -32,7 +34,7 @@ import net.minecraft.world.World;
 		@Optional.Interface(iface = "mods.railcraft.api.carts.IItemCart", modid = "RailcraftAPI|carts"),
 		@Optional.Interface(iface = "mods.railcraft.api.carts.IMinecart", modid = "RailcraftAPI|carts")
 })
-public abstract class EntityMinecartBase extends EntityMinecartContainer implements IMinecart, IItemCart, IInventory
+public abstract class EntityMinecartBase extends EntityMinecart implements IMinecart, IItemCart, IInventory
 {
 	protected IInventoryImpl iInventoryImpl;
 
@@ -65,10 +67,26 @@ public abstract class EntityMinecartBase extends EntityMinecartContainer impleme
 	@Override
 	public int getMinecartType()
 	{
-		return 0;
+		return 1;
 	}
 
 	public abstract Block getCartBlock();
+
+	@Override
+	public boolean interactFirst(EntityPlayer player)
+	{
+		if(net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new MinecartInteractEvent(this, player)))
+		{
+			return true;
+		}
+
+		if (!this.worldObj.isRemote && !player.isSneaking())
+		{
+			FMLNetworkHandler.openGui(player, MoarCarts.instance, 2, player.worldObj, this.getEntityId(), 0, 0);
+		}
+
+		return true;
+	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {
@@ -86,7 +104,7 @@ public abstract class EntityMinecartBase extends EntityMinecartContainer impleme
 	@Override
 	public boolean hasCustomInventoryName()
 	{
-		return iInventoryImpl.hasCustomInventoryName();
+		return !this.getInventoryName().equals(this.getCartItem().getDisplayName());
 	}
 
 	@Override

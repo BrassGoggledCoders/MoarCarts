@@ -42,18 +42,19 @@ public class MoarCarts
 		initModCompatHandler();
 		ConfigHandler.setConfigFile(event.getSuggestedConfigurationFile());
 		ConfigHandler.init();
+		compatibilityHandler.preInit(event);
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-
+		compatibilityHandler.init(event);
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
-
+		compatibilityHandler.postInit(event);
 	}
 
 	public void initModCompatHandler()

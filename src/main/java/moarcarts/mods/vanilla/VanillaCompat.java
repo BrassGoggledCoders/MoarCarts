@@ -12,12 +12,13 @@
 package moarcarts.mods.vanilla;
 
 import boilerplate.common.modcompat.ModCompat;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import moarcarts.MoarCarts;
 import moarcarts.mods.vanilla.entities.EntityMinecartEnderChest;
 import moarcarts.mods.vanilla.items.ItemMinecartEnderChest;
+import moarcarts.utils.EntityUtils;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -33,7 +34,7 @@ public class VanillaCompat extends ModCompat
 	@Override
 	public String getName()
 	{
-		return "vanilla";
+		return "Vanilla";
 	}
 
 	@Override
@@ -41,7 +42,12 @@ public class VanillaCompat extends ModCompat
 	{
 		ITEM_MINECART_ENDERCHEST = new ItemMinecartEnderChest();
 		GameRegistry.registerItem(ITEM_MINECART_ENDERCHEST, MoarCarts.MODID + "_" + ITEM_MINECART_ENDERCHEST.getUnlocalizedName());
+		EntityUtils.registerEntity(EntityMinecartEnderChest.class, "EntityMinecartEnderChest");
+	}
+
+	@Override
+	public void init(FMLInitializationEvent event)
+	{
 		GameRegistry.addShapelessRecipe(new ItemStack(ITEM_MINECART_ENDERCHEST), Blocks.ender_chest, Items.minecart);
-		EntityRegistry.registerModEntity(EntityMinecartEnderChest.class, "EntityMinecartEnderChest", 0, MoarCarts.instance, 80, 3, true);
 	}
 }
