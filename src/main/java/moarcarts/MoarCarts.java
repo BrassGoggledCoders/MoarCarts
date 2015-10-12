@@ -19,8 +19,11 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import moarcarts.config.ConfigHandler;
+import moarcarts.events.InteractionHandler;
 import moarcarts.mods.railcraft.RailcraftCompat;
 import moarcarts.mods.vanilla.VanillaCompat;
+import net.minecraftforge.common.MinecraftForge;
+
 /*
  * @author SkySom
  */
@@ -31,7 +34,7 @@ public class MoarCarts
 	public static MoarCarts instance;
 	public static final String MODID = "moarcarts";
 	public static final String MODNAME = "MoarCarts";
-	public static final String MODVERSION = "@Version@";
+	public static final String MODVERSION = "@VERSION@";
 	public static final String DEPENDENCIES = "after:boilerplate;after:railcraft;";
 
 	public static CompatibilityHandler compatibilityHandler;
@@ -43,6 +46,7 @@ public class MoarCarts
 		ConfigHandler.setConfigFile(event.getSuggestedConfigurationFile());
 		ConfigHandler.init();
 		compatibilityHandler.preInit(event);
+		MinecraftForge.EVENT_BUS.register(new InteractionHandler());
 	}
 
 	@EventHandler

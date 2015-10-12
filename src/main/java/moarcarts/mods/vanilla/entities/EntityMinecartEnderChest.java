@@ -11,46 +11,25 @@
  */
 package moarcarts.mods.vanilla.entities;
 
-import moarcarts.entities.EntityMinecartBase;
+import moarcarts.entities.EntityMinecartTileEntityBase;
 import moarcarts.mods.vanilla.items.ItemMinecartEnderChest;
-import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.inventory.InventoryEnderChest;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 /**
  * @author SkySom
  */
-public class EntityMinecartEnderChest extends EntityMinecartBase
+public class EntityMinecartEnderChest extends EntityMinecartTileEntityBase
 {
 	public EntityMinecartEnderChest(World world)
 	{
-		super(world, 27, "Ender Chest Cart");
-	}
-
-	@Override
-	public boolean interactFirst(EntityPlayer player)
-	{
-		InventoryEnderChest inventoryenderchest = player.getInventoryEnderChest();
-
-		if (!this.worldObj.isRemote && !player.isSneaking())
-		{
-			player.displayGUIChest(inventoryenderchest);
-		}
-		return true;
+		super(world, Blocks.ender_chest, 27, "Ender Chest Cart");
 	}
 
 	@Override
 	public ItemStack getCartItem()
 	{
 		return new ItemStack(new ItemMinecartEnderChest());
-	}
-
-	@Override
-	public Block getCartBlock()
-	{
-		return Blocks.ender_chest;
 	}
 }

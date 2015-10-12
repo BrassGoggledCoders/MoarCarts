@@ -37,11 +37,13 @@ import net.minecraftforge.event.entity.minecart.MinecartInteractEvent;
 public abstract class EntityMinecartBase extends EntityMinecart implements IMinecart, IItemCart, IInventory
 {
 	protected IInventoryImpl iInventoryImpl;
+	protected Block cartBlock;
 
-	public EntityMinecartBase(World world, int inventorySize, String inventoryName)
+	public EntityMinecartBase(World world, Block block, int inventorySize, String inventoryName)
 	{
 		super(world);
 		iInventoryImpl = new IInventoryImpl(inventorySize, inventoryName);
+		this.setCartBlock(block);
 	}
 
 	public abstract ItemStack getCartItem();
@@ -69,8 +71,6 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	{
 		return 1;
 	}
-
-	public abstract Block getCartBlock();
 
 	@Override
 	public boolean interactFirst(EntityPlayer player)
@@ -205,5 +205,15 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 			return itemStack.isItemEqual(entityMinecart.getCartItem());
 		}
 		return false;
+	}
+
+	public Block getCartBlock()
+	{
+		return cartBlock;
+	}
+
+	public void setCartBlock(Block cartBlock)
+	{
+		this.cartBlock = cartBlock;
 	}
 }
