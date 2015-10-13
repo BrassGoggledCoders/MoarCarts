@@ -24,7 +24,6 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase
 			this.setTileEntity(((ITileEntityProvider)cartBlock).createNewTileEntity(world, getDisplayTileData()));
 			this.getTileEntity().setWorldObj(fakeWorld);
 		}
-
 	}
 
 	public boolean interactFirst(EntityPlayer player)
