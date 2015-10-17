@@ -15,7 +15,6 @@ import java.util.List;
 
 /**
  * @author SkySom
- * @date 10/15/2015
  */
 public class ContainingContainer extends Container
 {
@@ -140,6 +139,6 @@ public class ContainingContainer extends Container
 	@Override
 	public boolean canDragIntoSlot(Slot slotIndex)
 	{
-		return this.canDragIntoSlot(slotIndex);
+		return this.containedContainer.canDragIntoSlot(slotIndex);
 	}
 }
