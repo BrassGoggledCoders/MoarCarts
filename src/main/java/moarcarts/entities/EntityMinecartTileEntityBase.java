@@ -15,13 +15,19 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase
 {
 	protected TileEntity tileEntity;
 	protected FakeWorld fakeWorld;
+
 	public EntityMinecartTileEntityBase(World world, Block cartBlock, int inventorySize, String inventoryName)
 	{
-		super(world, cartBlock, inventorySize, inventoryName);
+		this(world, cartBlock, 0, inventorySize, inventoryName);
+	}
+
+	public EntityMinecartTileEntityBase(World world, Block cartBlock, int metadata, int inventorySize, String inventoryName)
+	{
+		super(world, cartBlock, metadata, inventorySize, inventoryName);
 		if(cartBlock instanceof ITileEntityProvider)
 		{
 			fakeWorld = new FakeWorld(world, this);
-			this.setTileEntity(((ITileEntityProvider)cartBlock).createNewTileEntity(world, getDisplayTileData()));
+			this.setTileEntity(((ITileEntityProvider)cartBlock).createNewTileEntity(world, metadata));
 			this.getTileEntity().setWorldObj(fakeWorld);
 		}
 	}
@@ -29,7 +35,7 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase
 	public boolean interactFirst(EntityPlayer player)
 	{
 		FakePlayer fakePlayer = new FakePlayer(player);
-		return this.getCartBlock().onBlockActivated(fakeWorld, 0, 0, 0, fakePlayer, 0, 0, 0, 0);
+		return this.getCartBlock().onBlockActivated(fakeWorld, 0, 0, 0, fakePlayer, this.metadata, 0, 0, 0);
 	}
 
 	public TileEntity getTileEntity()

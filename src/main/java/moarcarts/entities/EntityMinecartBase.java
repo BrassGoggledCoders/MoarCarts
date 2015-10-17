@@ -38,12 +38,19 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 {
 	protected IInventoryImpl iInventoryImpl;
 	protected Block cartBlock;
+	protected int metadata;
 
-	public EntityMinecartBase(World world, Block block, int inventorySize, String inventoryName)
+	public EntityMinecartBase(World world, Block block, int metadata, int inventorySize, String inventoryName)
 	{
 		super(world);
 		iInventoryImpl = new IInventoryImpl(inventorySize, inventoryName);
+		this.metadata = metadata;
 		this.setCartBlock(block);
+	}
+
+	public EntityMinecartBase(World world, Block block, int inventorySize, String inventoryName)
+	{
+		this(world, block, 0, inventorySize, inventoryName);
 	}
 
 	public abstract ItemStack getCartItem();
@@ -58,6 +65,12 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	public Block func_145817_o()
 	{
 		return getCartBlock();
+	}
+
+	@Override
+	public int getDisplayTileData()
+	{
+		return metadata;
 	}
 
 	@Override

@@ -53,6 +53,10 @@ repositories {
         name "Waila"
         url "http://mobiusstrip.eu/maven"
     }
+    maven {
+        name "Ironchest"
+        url "http://files.minecraftforge.net/maven/"
+    }
 }
 
 dependencies {
@@ -68,17 +72,29 @@ task getLibraries {
         libsFolder.mkdirs()
     }
 
+    def downloads = new ArrayList<Tuple>();
+
     def railcraft = 'Railcraft_' + config.minecraft.version + '-' + config.railcraft.version + '-dev.jar'
     def railcraftSource = 'https://dl.dropboxusercontent.com/u/38558957/Minecraft/Railcraft/' + railcraft
-    def railcraftDest = new File('libs', railcraft)
 
-    if(!railcraftDest.exists()){
-        railcraftDest.withOutputStream { out ->
-            new URL(railcraftSource).withInputStream { from ->  out << from; }
+    def ironchest = 'ironchest-' + config.minecraft.version + '-' + config.ironchest.version + '-deobf.jar'
+    def ironchestSource = 'http://files.minecraftforge.net/maven/cpw/mods/ironchest/' + config.minecraft.version +
+            '-' + config.ironchest.version + '/' + ironchest
+
+    downloads.add(new Tuple(railcraft, railcraftSource));
+    downloads.add(new Tuple(ironchest, ironchestSource));
+
+    downloads.each{download ->
+        def fileLocation = new File('libs', download.get(0).toString())
+        if(!fileLocation.exists())  {
+            fileLocation.withOutputStream { out ->
+                new URL(download.get(1).toString()).withInputStream { from ->
+                    out << from;
+                }
+            }
         }
     }
 }
-
 
 processResources {
     // this will ensure that this task is redone when the versions change.
