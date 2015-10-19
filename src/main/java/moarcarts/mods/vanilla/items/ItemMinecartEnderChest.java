@@ -26,7 +26,7 @@ public class ItemMinecartEnderChest extends ItemMinecartBase
 	public ItemMinecartEnderChest()
 	{
 		super();
-		this.setUnlocalizedName("MinecartEnderChest");
+		this.setUnlocalizedName("minecartenderchest");
 		this.setTextureName(MoarCarts.MODID + ":vanilla/minecartenderchest");
 	}
 

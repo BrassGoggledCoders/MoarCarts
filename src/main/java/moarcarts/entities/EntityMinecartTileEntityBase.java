@@ -2,6 +2,7 @@ package moarcarts.entities;
 
 import moarcarts.fakeworld.FakePlayer;
 import moarcarts.fakeworld.FakeWorld;
+import moarcarts.utils.LoggerMoarCarts;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,7 +29,13 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase
 		{
 			fakeWorld = new FakeWorld(world, this);
 			this.setTileEntity(((ITileEntityProvider)cartBlock).createNewTileEntity(world, metadata));
-			this.getTileEntity().setWorldObj(fakeWorld);
+			if(this.getTileEntity() != null)
+			{
+				this.getTileEntity().setWorldObj(fakeWorld);
+			} else
+			{
+				LoggerMoarCarts.error("Null Tile Entity Reported. THIS IS BAD!");
+			}
 		}
 	}
 

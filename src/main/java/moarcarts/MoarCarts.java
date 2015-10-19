@@ -20,6 +20,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import moarcarts.config.ConfigHandler;
 import moarcarts.events.InteractionHandler;
+import moarcarts.mods.ironchest.IronChestCompat;
 import moarcarts.mods.railcraft.RailcraftCompat;
 import moarcarts.mods.vanilla.VanillaCompat;
 import net.minecraftforge.common.MinecraftForge;
@@ -66,5 +67,6 @@ public class MoarCarts
 		compatibilityHandler = new CompatibilityHandler();
 		compatibilityHandler.addModCompat(new VanillaCompat());
 		compatibilityHandler.addModCompat(new RailcraftCompat());
+		compatibilityHandler.addModCompat(new IronChestCompat());
 	}
 }

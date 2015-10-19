@@ -29,7 +29,7 @@ public class RailcraftCompat extends ModCompat
 	@Override
 	public boolean areRequirementsMet()
 	{
-		return Loader.isModLoaded("railcraft");
+		return Loader.isModLoaded("Railcraft");
 	}
 
 	@Override
