@@ -47,7 +47,7 @@ public class IronChestCompat extends ModCompat
 
 	public void registerEntities()
 	{
-		EntityUtils.registerEntity(EntityMinecartIronChest.class, "EntityMinecartIronChest");
+		EntityUtils.registerEntity(EntityMinecartIronChest.class, "entityminecartironchest");
 	}
 
 	public void registerItems()

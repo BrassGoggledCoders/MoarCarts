@@ -7,6 +7,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSettings;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * @author SkySom
@@ -43,17 +44,22 @@ public class FakeWorld extends World
 	@Override
 	public Block getBlock(int x, int y, int z)
 	{
-		return entityMinecartTileEntityBase.getCartBlock();
+		return this.getEntityMinecartTileEntityBase().getCartBlock();
 	}
 
 	@Override
 	public void addBlockEvent(int x, int y, int z, Block block, int metadata, int p_14745) {}
 
+	@Override
+	public boolean isSideSolid(int x, int y, int z, ForgeDirection blockSide)
+	{
+		return false;
+	}
 
 	@Override
 	public TileEntity getTileEntity(int x, int y, int z)
 	{
-		return entityMinecartTileEntityBase.getTileEntity();
+		return this.getEntityMinecartTileEntityBase().getTileEntity();
 	}
 
 	public EntityMinecartTileEntityBase getEntityMinecartTileEntityBase()

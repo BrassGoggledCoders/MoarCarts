@@ -4,8 +4,9 @@ import moarcarts.fakeworld.FakePlayer;
 import moarcarts.fakeworld.FakeWorld;
 import moarcarts.utils.LoggerMoarCarts;
 import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -25,23 +26,15 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase
 	public EntityMinecartTileEntityBase(World world, Block cartBlock, int metadata, int inventorySize, String inventoryName)
 	{
 		super(world, cartBlock, metadata, inventorySize, inventoryName);
-		if(cartBlock instanceof ITileEntityProvider)
+		if(cartBlock instanceof BlockContainer)
 		{
-			fakeWorld = new FakeWorld(world, this);
-			this.setTileEntity(((ITileEntityProvider)cartBlock).createNewTileEntity(world, metadata));
-			if(this.getTileEntity() != null)
-			{
-				this.getTileEntity().setWorldObj(fakeWorld);
-			} else
-			{
-				LoggerMoarCarts.error("Null Tile Entity Reported. THIS IS BAD!");
-			}
+			this.setTileEntity(cartBlock.createTileEntity(world, metadata));
 		}
 	}
 
 	public boolean interactFirst(EntityPlayer player)
 	{
-		FakePlayer fakePlayer = new FakePlayer(player);
+		FakePlayer fakePlayer = new FakePlayer(player, this);
 		return this.getCartBlock().onBlockActivated(fakeWorld, 0, 0, 0, fakePlayer, this.metadata, 0, 0, 0);
 	}
 
@@ -52,6 +45,27 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase
 
 	public void setTileEntity(TileEntity tileEntity)
 	{
+		if(this.getTileEntity() != null)
+		{
+			try
+			{
+				NBTTagCompound nbtTagCompound = new NBTTagCompound();
+				this.getTileEntity().writeToNBT(nbtTagCompound);
+				tileEntity.readFromNBT(nbtTagCompound);
+			} catch(Exception exception)
+			{
+				LoggerMoarCarts.info("Couldn't transfer Tile NBT.");
+			}
+		}
+
 		this.tileEntity = tileEntity;
+		if(this.getTileEntity() != null)
+		{
+			fakeWorld = new FakeWorld(worldObj, this);
+			this.getTileEntity().setWorldObj(fakeWorld);
+		} else
+		{
+			LoggerMoarCarts.error("Null Tile Entity Reported. THIS IS BAD!");
+		}
 	}
 }

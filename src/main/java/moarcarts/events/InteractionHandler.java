@@ -29,7 +29,7 @@ public class InteractionHandler
 
 		if(container instanceof ContainerChest)
 		{
-			container.canInteractWith(new FakePlayer(entityPlayer));
+			container.canInteractWith(new FakePlayer(entityPlayer, null));
 			playerOpenContainerEvent.setResult(Event.Result.ALLOW);
 		}
 	}

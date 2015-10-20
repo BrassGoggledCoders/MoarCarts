@@ -39,6 +39,14 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	protected IInventoryImpl iInventoryImpl;
 	protected Block cartBlock;
 	protected int metadata;
+	private String inventoryName;
+
+	private static int INVENTORY_NAME_DW = 30;
+	private static int METADATA_DW = 31;
+
+	private static String INVENTORY_NAME = "INVENTORYNAME";
+	private static String METADATA = "METADATA";
+
 
 	public EntityMinecartBase(World world, Block block, int metadata, int inventorySize, String inventoryName)
 	{
@@ -54,6 +62,29 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	}
 
 	public abstract ItemStack getCartItem();
+
+	@Override
+	public void entityInit(){
+		super.entityInit();
+		dataWatcher.addObject(METADATA_DW, 0);
+		dataWatcher.addObject(INVENTORY_NAME_DW, "");
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound nbtTagCompound)
+	{
+		super.readEntityFromNBT(nbtTagCompound);
+		this.setMetadata(nbtTagCompound.getInteger(METADATA));
+		this.setInventoryName(nbtTagCompound.getString(INVENTORY_NAME));
+	}
+
+	@Override
+	protected void writeEntityToNBT(NBTTagCompound nbtTagCompound)
+	{
+		super.writeEntityToNBT(nbtTagCompound);
+		nbtTagCompound.setInteger(METADATA, this.getMetadata());
+		nbtTagCompound.setString(INVENTORY_NAME, this.getInventoryName());
+	}
 
 	@Override
 	public Block func_145820_n()
@@ -118,12 +149,6 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	public boolean hasCustomInventoryName()
 	{
 		return !this.getInventoryName().equals(this.getCartItem().getDisplayName());
-	}
-
-	@Override
-	public String getInventoryName()
-	{
-		return iInventoryImpl.getInventoryName();
 	}
 
 	@Override
@@ -228,5 +253,26 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	public void setCartBlock(Block cartBlock)
 	{
 		this.cartBlock = cartBlock;
+	}
+
+	public int getMetadata()
+	{
+		return this.dataWatcher.getWatchableObjectInt(METADATA_DW);
+	}
+
+	public void setMetadata(int metadata)
+	{
+		this.dataWatcher.addObject(METADATA_DW, metadata);
+	}
+
+	public void setInventoryName(String inventoryName)
+	{
+		this.dataWatcher.addObject(INVENTORY_NAME_DW, inventoryName);
+	}
+
+	@Override
+	public String getInventoryName()
+	{
+		return this.dataWatcher.getWatchableObjectString(INVENTORY_NAME_DW);
 	}
 }
