@@ -1,10 +1,19 @@
 package moarcarts.mods.ironchest.entities;
 
+import boilerplate.api.IOpenableGUI;
+import cpw.mods.ironchest.ContainerIronChest;
 import cpw.mods.ironchest.IronChest;
 import cpw.mods.ironchest.IronChestType;
+import cpw.mods.ironchest.TileEntityIronChest;
+import cpw.mods.ironchest.client.GUIChest;
+import moarcarts.container.ContainingContainer;
 import moarcarts.entities.EntityMinecartTileEntityBase;
+import moarcarts.gui.ContainingGui;
 import moarcarts.mods.ironchest.items.ItemMinecartIronChest;
 import moarcarts.utils.LoggerMoarCarts;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -12,7 +21,7 @@ import net.minecraft.world.World;
 /**
  * @author SkySom
  */
-public class EntityMinecartIronChest extends EntityMinecartTileEntityBase
+public class EntityMinecartIronChest extends EntityMinecartTileEntityBase implements IOpenableGUI
 {
 	private static final int IRON_CHEST_TYPE_DW = 25;
 	private static final String IRON_CHEST_TYPE = "IRONCHESTTYPE";
@@ -83,8 +92,32 @@ public class EntityMinecartIronChest extends EntityMinecartTileEntityBase
 		}
 	}
 
+	public TileEntityIronChest getTileEntityIronChest()
+	{
+		if(this.getTileEntity() instanceof TileEntityIronChest)
+		{
+			return (TileEntityIronChest)this.getTileEntity();
+		}
+		return null;
+	}
+
 	public void setIronChestType(int ironChestType)
 	{
 		this.setIronChestType(IronChestType.values()[ironChestType]);
+	}
+
+	@Override
+	public Object getClientGuiElement(int i, EntityPlayer entityPlayer, World world, int i1, int i2, int i3)
+	{
+		return new ContainingGui((Container)this.getServerGuiElement(i, entityPlayer, world, i1, i2, i3),
+				GUIChest.GUI.buildGUI(this.getIronChestType(), entityPlayer.inventory, this.getTileEntityIronChest()));
+	}
+
+	@Override
+	public Object getServerGuiElement(int i, EntityPlayer entityPlayer, World world, int i1, int i2, int i3)
+	{
+		return new ContainingContainer(entityPlayer.inventory, this, new ContainerIronChest(entityPlayer.inventory,
+				(IInventory)this.getTileEntity(), this.getIronChestType(), this.getIronChestType().getRowLength(),
+				this.getIronChestType().getRowCount()));
 	}
 }

@@ -54,8 +54,8 @@ repositories {
         url "http://mobiusstrip.eu/maven"
     }
     maven {
-        name "Ironchest"
-        url "http://files.minecraftforge.net/maven/"
+        name "API Depot"
+        url "http://dl.tsr.me/artifactory/libs-release-local"
     }
 }
 
@@ -64,6 +64,7 @@ dependencies {
     compile "codechicken:NotEnoughItems:${config.minecraft.version}-${config.nei.version}:dev"
     compile "codechicken:CodeChickenCore:${config.minecraft.version}-${config.codechickencore.version}:dev"
     compile "codechicken:CodeChickenLib:${config.minecraft.version}-${config.codechickenlib.version}:dev"
+    compile "api:invtweaks:${config.invtweaks.version}"
 }
 
 task getLibraries {

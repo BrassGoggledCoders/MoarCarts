@@ -39,6 +39,7 @@ public class MoarCarts
 	public static final String DEPENDENCIES = "after:boilerplate;after:railcraft;";
 
 	public static CompatibilityHandler compatibilityHandler;
+	public static GuiHandler guiHandler;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
@@ -53,6 +54,8 @@ public class MoarCarts
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
+		guiHandler = new GuiHandler();
+
 		compatibilityHandler.init(event);
 	}
 

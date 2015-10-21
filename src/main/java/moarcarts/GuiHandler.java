@@ -1,6 +1,7 @@
 package moarcarts;
 
 import boilerplate.api.IOpenableGUI;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -10,6 +11,10 @@ import net.minecraft.world.World;
  */
 public class GuiHandler extends boilerplate.client.GuiHandler
 {
+	public GuiHandler() {
+		NetworkRegistry.INSTANCE.registerGuiHandler(MoarCarts.instance, this);
+	}
+
 	@Override
 	public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z)
 	{
