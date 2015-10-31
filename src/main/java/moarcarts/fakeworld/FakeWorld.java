@@ -36,12 +36,6 @@ public class FakeWorld extends World
 	}
 
 	@Override
-	public Entity getEntityByID(int p_73045_1_)
-	{
-		return null;
-	}
-
-	@Override
 	public Block getBlock(int x, int y, int z)
 	{
 		return this.getEntityMinecartTileEntityBase().getCartBlock();
@@ -60,6 +54,12 @@ public class FakeWorld extends World
 	public TileEntity getTileEntity(int x, int y, int z)
 	{
 		return this.getEntityMinecartTileEntityBase().getTileEntity();
+	}
+
+	@Override
+	public Entity getEntityByID(int id)
+	{
+		return this.getEntityMinecartTileEntityBase().worldObj.getEntityByID(id);
 	}
 
 	public EntityMinecartTileEntityBase getEntityMinecartTileEntityBase()

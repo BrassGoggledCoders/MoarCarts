@@ -2,7 +2,6 @@ package moarcarts.fakeworld;
 
 import moarcarts.MoarCarts;
 import moarcarts.entities.EntityMinecartTileEntityBase;
-import moarcarts.utils.LoggerMoarCarts;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryEnderChest;
@@ -58,9 +57,8 @@ public class FakePlayer extends EntityPlayer
 	@Override
 	public void openGui(Object mod, int id, World world, int posX, int posY, int poxZ)
 	{
-		LoggerMoarCarts.info(this.getEntityMinecartTileEntityBase().getEntityId() + "");
 		this.getEntityPlayer().openGui(MoarCarts.instance, this.getEntityMinecartTileEntityBase().getEntityId(),
-				world, posX, posY, poxZ);
+				this.getEntityMinecartTileEntityBase().worldObj, posX, posY, poxZ);
 	}
 
 	@Override
