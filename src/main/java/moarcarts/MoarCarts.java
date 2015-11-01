@@ -11,7 +11,9 @@
  */
 package moarcarts;
 
+import boilerplate.common.IBoilerplateMod;
 import boilerplate.common.modcompat.CompatibilityHandler;
+import boilerplate.common.utils.ModLogger;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -29,7 +31,7 @@ import net.minecraftforge.common.MinecraftForge;
  * @author SkySom
  */
 @Mod(modid = MoarCarts.MODID, name = MoarCarts.MODNAME, version = MoarCarts.MODVERSION, dependencies = MoarCarts.DEPENDENCIES)
-public class MoarCarts
+public class MoarCarts implements IBoilerplateMod
 {
 	@Instance("moarcarts")
 	public static MoarCarts instance;
@@ -40,10 +42,12 @@ public class MoarCarts
 
 	public static CompatibilityHandler compatibilityHandler;
 	public static GuiHandler guiHandler;
+	public static ModLogger logger;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
+		logger = new ModLogger(MODID);
 		initModCompatHandler();
 		ConfigHandler.setConfigFile(event.getSuggestedConfigurationFile());
 		ConfigHandler.init();
@@ -67,9 +71,15 @@ public class MoarCarts
 
 	public void initModCompatHandler()
 	{
-		compatibilityHandler = new CompatibilityHandler();
+		compatibilityHandler = new CompatibilityHandler(this.logger);
 		compatibilityHandler.addModCompat(new VanillaCompat());
 		compatibilityHandler.addModCompat(new RailcraftCompat());
 		compatibilityHandler.addModCompat(new IronChestCompat());
+	}
+
+	@Override
+	public String getModID()
+	{
+		return MODID;
 	}
 }

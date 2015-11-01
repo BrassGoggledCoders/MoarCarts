@@ -1,14 +1,14 @@
 package moarcarts.mods.ironchest;
 
 import boilerplate.common.modcompat.ModCompat;
+import boilerplate.common.utils.helpers.RegistryHelper;
+import boilerplate.common.utils.recipe.RecipeUtils;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import moarcarts.MoarCarts;
 import moarcarts.mods.ironchest.entities.EntityMinecartIronChest;
 import moarcarts.mods.ironchest.items.ItemMinecartIronChest;
-import moarcarts.utils.EntityUtils;
-import moarcarts.utils.RecipeUtils;
-import moarcarts.utils.RegistryUtils;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
@@ -47,13 +47,13 @@ public class IronChestCompat extends ModCompat
 
 	public void registerEntities()
 	{
-		EntityUtils.registerEntity(EntityMinecartIronChest.class, "entityminecartironchest");
+		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartIronChest.class, "entityminecartironchest");
 	}
 
 	public void registerItems()
 	{
 		itemMinecartIronChest = new ItemMinecartIronChest();
-		RegistryUtils.registerItem(itemMinecartIronChest);
+		RegistryHelper.registerItem(itemMinecartIronChest, MoarCarts.MODID);
 	}
 
 	public void registerRecipes()

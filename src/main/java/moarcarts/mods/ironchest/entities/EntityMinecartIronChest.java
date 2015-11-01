@@ -6,11 +6,11 @@ import cpw.mods.ironchest.IronChest;
 import cpw.mods.ironchest.IronChestType;
 import cpw.mods.ironchest.TileEntityIronChest;
 import cpw.mods.ironchest.client.GUIChest;
+import moarcarts.MoarCarts;
 import moarcarts.container.ContainingContainer;
 import moarcarts.entities.EntityMinecartTileEntityBase;
 import moarcarts.gui.ContainingGui;
 import moarcarts.mods.ironchest.items.ItemMinecartIronChest;
-import moarcarts.utils.LoggerMoarCarts;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
@@ -88,7 +88,7 @@ public class EntityMinecartIronChest extends EntityMinecartTileEntityBase implem
 			this.setTileEntity(ironChestType.clazz.newInstance());
 		} catch(Exception exception)
 		{
-			LoggerMoarCarts.error("Couldn't set TileEntity");
+			MoarCarts.logger.error("Couldn't set TileEntity");
 		}
 	}
 

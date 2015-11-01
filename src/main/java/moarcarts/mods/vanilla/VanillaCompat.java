@@ -12,13 +12,13 @@
 package moarcarts.mods.vanilla;
 
 import boilerplate.common.modcompat.ModCompat;
+import boilerplate.common.utils.helpers.RegistryHelper;
+import boilerplate.common.utils.recipe.RecipeUtils;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import moarcarts.MoarCarts;
 import moarcarts.mods.vanilla.entities.EntityMinecartEnderChest;
 import moarcarts.mods.vanilla.items.ItemMinecartEnderChest;
-import moarcarts.utils.EntityUtils;
-import moarcarts.utils.RecipeUtils;
-import moarcarts.utils.RegistryUtils;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -40,13 +40,13 @@ public class VanillaCompat extends ModCompat
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		ITEM_MINECART_ENDERCHEST = new ItemMinecartEnderChest();
-		RegistryUtils.registerItem(ITEM_MINECART_ENDERCHEST);
-		EntityUtils.registerEntity(EntityMinecartEnderChest.class, "entityminecartenderchest");
+		RegistryHelper.registerItem(ITEM_MINECART_ENDERCHEST, MoarCarts.MODID);
+		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartEnderChest.class, "entityminecartenderchest");
 	}
 
 	@Override
 	public void init(FMLInitializationEvent event)
 	{
-		RecipeUtils.addMinecartRecipe( new ItemStack(ITEM_MINECART_ENDERCHEST), new ItemStack(Blocks.ender_chest));
+		RecipeUtils.addMinecartRecipe(new ItemStack(ITEM_MINECART_ENDERCHEST), new ItemStack(Blocks.ender_chest));
 	}
 }

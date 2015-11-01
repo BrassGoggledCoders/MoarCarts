@@ -1,8 +1,8 @@
 package moarcarts.entities;
 
+import moarcarts.MoarCarts;
 import moarcarts.fakeworld.FakePlayer;
 import moarcarts.fakeworld.FakeWorld;
-import moarcarts.utils.LoggerMoarCarts;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -54,7 +54,7 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase
 				tileEntity.readFromNBT(nbtTagCompound);
 			} catch(Exception exception)
 			{
-				LoggerMoarCarts.info("Couldn't transfer Tile NBT.");
+				MoarCarts.logger.info("Couldn't transfer Tile NBT.");
 			}
 		}
 
@@ -65,7 +65,7 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase
 			this.getTileEntity().setWorldObj(fakeWorld);
 		} else
 		{
-			LoggerMoarCarts.error("Null Tile Entity Reported. THIS IS BAD!");
+			MoarCarts.logger.error("Null Tile Entity Reported. THIS IS BAD!");
 		}
 	}
 }
