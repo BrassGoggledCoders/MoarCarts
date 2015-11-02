@@ -12,8 +12,8 @@ import moarcarts.entities.EntityMinecartTileEntityBase;
 import moarcarts.gui.ContainingGui;
 import moarcarts.mods.ironchest.items.ItemMinecartIronChest;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -110,8 +110,14 @@ public class EntityMinecartIronChest extends EntityMinecartTileEntityBase implem
 	@Override
 	public Object getServerGuiElement(int i, EntityPlayer entityPlayer, World world, int i1, int i2, int i3)
 	{
-		return new ContainingContainer(entityPlayer.inventory, this, new ContainerIronChest(entityPlayer.inventory,
-				(IInventory)this.getTileEntity(), this.getIronChestType(), this.getIronChestType().getRowLength(),
-				this.getIronChestType().getRowCount()));
+		Container container = this.createIronChestContainer(entityPlayer.inventory);
+		return new ContainingContainer(entityPlayer.inventory, this, container);
+	}
+
+	private ContainerIronChest createIronChestContainer(InventoryPlayer inventoryPlayer)
+	{
+		ContainerIronChest containerIronChest = new ContainerIronChest(inventoryPlayer, this, this.getIronChestType(),
+				this.getIronChestType().getRowLength(), this.getIronChestType().getRowCount());
+		return containerIronChest;
 	}
 }

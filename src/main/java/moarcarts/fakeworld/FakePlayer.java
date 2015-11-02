@@ -73,6 +73,12 @@ public class FakePlayer extends EntityPlayer
 		return this.getEntityPlayer().getInventoryEnderChest();
 	}
 
+	@Override
+	public String getCommandSenderName()
+	{
+		return "MoarCarts FakePlayer";
+	}
+
 	public EntityPlayer getEntityPlayer()
 	{
 		return entityPlayer;

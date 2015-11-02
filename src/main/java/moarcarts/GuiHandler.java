@@ -21,7 +21,7 @@ public class GuiHandler extends boilerplate.client.GuiHandler
 		Entity entity = world.getEntityByID(id);
 		if(entity instanceof IOpenableGUI)
 		{
-			((IOpenableGUI) entity).getClientGuiElement(id, player, world, x, y, z);
+			return ((IOpenableGUI) entity).getClientGuiElement(id, player, world, x, y, z);
 		}
 		return super.getClientGuiElement(id, player, world, x, y, z);
 	}
@@ -32,7 +32,7 @@ public class GuiHandler extends boilerplate.client.GuiHandler
 		Entity entity = world.getEntityByID(id);
 		if(entity instanceof IOpenableGUI)
 		{
-			((IOpenableGUI) entity).getServerGuiElement(id, player, world, x, y, z);
+			return ((IOpenableGUI) entity).getServerGuiElement(id, player, world, x, y, z);
 		}
 		return super.getServerGuiElement(id, player, world, x, y, z);
 	}

@@ -1,5 +1,6 @@
 package moarcarts.gui;
 
+import moarcarts.MoarCarts;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
@@ -28,7 +29,12 @@ public class ContainingGui extends GuiContainer
 	@Override
 	public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
 	{
-		this.containedGui.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
+		try
+		{
+			this.containedGui.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
+		} catch(Exception exception) {
+			MoarCarts.logger.devError(exception.getStackTrace().toString());
+		}
 	}
 
 	@Override
