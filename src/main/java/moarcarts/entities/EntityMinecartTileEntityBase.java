@@ -35,7 +35,7 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase
 	public boolean interactFirst(EntityPlayer player)
 	{
 		FakePlayer fakePlayer = new FakePlayer(player, this);
-		return this.getCartBlock().onBlockActivated(fakeWorld, 0, 0, 0, fakePlayer, this.metadata, 0, 0, 0);
+		return this.getCartBlock().onBlockActivated(fakeWorld, 0, 0, 0, fakePlayer, this.getMetadata(), 0, 0, 0);
 	}
 
 	public TileEntity getTileEntity()

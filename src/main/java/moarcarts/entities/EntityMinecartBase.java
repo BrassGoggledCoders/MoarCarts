@@ -38,8 +38,6 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 {
 	protected IInventoryImpl iInventoryImpl;
 	protected Block cartBlock;
-	protected int metadata;
-	private String inventoryName;
 
 	private static int INVENTORY_NAME_DW = 30;
 	private static int METADATA_DW = 31;
@@ -52,7 +50,7 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	{
 		super(world);
 		iInventoryImpl = new IInventoryImpl(inventorySize, inventoryName);
-		this.metadata = metadata;
+		this.setMetadata(metadata);
 		this.setCartBlock(block);
 	}
 
@@ -89,19 +87,19 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	@Override
 	public Block func_145820_n()
 	{
-		return getCartBlock();
+		return this.getCartBlock();
 	}
 
 	@Override
 	public Block func_145817_o()
 	{
-		return getCartBlock();
+		return this.getCartBlock();
 	}
 
 	@Override
 	public int getDisplayTileData()
 	{
-		return metadata;
+		return this.getMetadata();
 	}
 
 	@Override
@@ -148,7 +146,7 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	@Override
 	public boolean hasCustomInventoryName()
 	{
-		return !this.getInventoryName().equals(this.getCartItem().getDisplayName());
+		return false; //this.getInventoryName() != "";
 	}
 
 	@Override
@@ -262,12 +260,12 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 
 	public void setMetadata(int metadata)
 	{
-		this.dataWatcher.addObject(METADATA_DW, metadata);
+		this.dataWatcher.updateObject(METADATA_DW, metadata);
 	}
 
 	public void setInventoryName(String inventoryName)
 	{
-		this.dataWatcher.addObject(INVENTORY_NAME_DW, inventoryName);
+		this.dataWatcher.updateObject(INVENTORY_NAME_DW, inventoryName);
 	}
 
 	@Override

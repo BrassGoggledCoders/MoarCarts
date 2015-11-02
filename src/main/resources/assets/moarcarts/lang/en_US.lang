@@ -1,6 +1,6 @@
 ## vanilla stuff
 item.minecartenderchest.name=Ender Chest Cart
-entity.moarcarts.entitymincartenderchest.name=Ender Chest Cart
+entity.moarcarts.entityminecartenderchest.name=Ender Chest Cart
 
 ## ironchest stuff
 item.minecartironchest.iron.name=Iron Chest Cart

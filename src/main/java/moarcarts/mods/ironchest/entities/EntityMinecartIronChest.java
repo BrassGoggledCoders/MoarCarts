@@ -70,12 +70,6 @@ public class EntityMinecartIronChest extends EntityMinecartTileEntityBase implem
 		return this.getIronChestType().getRowCount() * this.getIronChestType().getRowLength();
 	}
 
-	@Override
-	public boolean hasCustomInventoryName()
-	{
-		return false;
-	}
-
 	public IronChestType getIronChestType()
 	{
 		return IronChestType.values()[this.getDataWatcher().getWatchableObjectInt(IRON_CHEST_TYPE_DW)];
