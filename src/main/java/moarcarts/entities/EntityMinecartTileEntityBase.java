@@ -6,6 +6,7 @@ import moarcarts.fakeworld.FakeWorld;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -36,9 +37,18 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase
 		}
 	}
 
-	public void onEntityInit()
+	@Override
+	public void entityInit()
 	{
-		dataWatcher.addObject(FAKE_NBT_ITEM_DW, );
+		super.entityInit();
+		dataWatcher.addObject(FAKE_NBT_ITEM_DW, new ItemStack(MoarCarts.FAKE_NBT_ITEM));
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound nbtTagCompound)
+	{
+		super.readEntityFromNBT(nbtTagCompound);
+		//TODO: Finish NBT Reading
 	}
 
 	public boolean interactFirst(EntityPlayer player)
@@ -49,7 +59,9 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase
 
 	public void markDirty()
 	{
-
+		NBTTagCompound nbtTagCompound = new NBTTagCompound();
+		this.getTileEntity().writeToNBT(nbtTagCompound);
+		this.writeNBTToDW(nbtTagCompound);
 	}
 
 	public TileEntity getTileEntity()
@@ -81,5 +93,26 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase
 		{
 			MoarCarts.logger.error("Null Tile Entity Reported. THIS IS BAD!");
 		}
+	}
+
+	public NBTTagCompound readNBTFromDW(NBTTagCompound nbtTagCompound)
+	{
+		dataWatcher.getWatchableObjectItemStack(FAKE_NBT_ITEM_DW).readFromNBT(nbtTagCompound);
+		return nbtTagCompound;
+	}
+
+	public void writeNBTToDW(NBTTagCompound nbtTagCompound)
+	{
+		dataWatcher.getWatchableObjectItemStack(FAKE_NBT_ITEM_DW).writeToNBT(nbtTagCompound);
+	}
+
+	public ItemStack getFakeNBTItem()
+	{
+		return dataWatcher.getWatchableObjectItemStack(FAKE_NBT_ITEM_DW);
+	}
+
+	public void setFakeNBTItem(ItemStack itemStack)
+	{
+		dataWatcher.updateObject(FAKE_NBT_ITEM_DW, itemStack);
 	}
 }

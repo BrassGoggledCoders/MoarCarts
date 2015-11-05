@@ -7,5 +7,9 @@ import net.minecraft.item.Item;
  */
 public class FakeNBTItem extends Item
 {
-
+	public FakeNBTItem()
+	{
+		super();
+		this.setUnlocalizedName("fakenbtitem");
+	}
 }

@@ -58,6 +58,7 @@ public class MoarCarts implements IBoilerplateMod
 		ConfigHandler.init();
 		compatibilityHandler.preInit(event);
 		MinecraftForge.EVENT_BUS.register(new InteractionHandler());
+		FAKE_NBT_ITEM = new FakeNBTItem();
 		RegistryHelper.registerItem(FAKE_NBT_ITEM, MODID);
 	}
 

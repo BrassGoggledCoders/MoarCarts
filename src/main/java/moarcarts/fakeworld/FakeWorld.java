@@ -32,7 +32,7 @@ public class FakeWorld extends World
 	@Override
 	public void markTileEntityChunkModified(int posX, int posY, int posZ, TileEntity tileEntity)
 	{
-		//NO-OP
+		this.getEntityMinecartTileEntityBase().markDirty();
 	}
 
 	@Override
