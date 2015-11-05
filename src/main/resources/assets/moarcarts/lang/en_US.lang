@@ -21,3 +21,8 @@ entity.moarcarts.entityminecartironchest.silver.name=Silver Chest Cart
 entity.moarcarts.entityminecartironchest.crystal.name=Crystal Chest Cart
 entity.moarcarts.entityminecartironchest.obsidian.name=Obsidian Chest Cart
 entity.moarcarts.entityminecartironchest.dirtchest9000.name=DirtChest 9000! Cart
+
+## ie stuff
+item.minecartwoodenbarrel.name=Wooden Barrel Cart
+
+entity.moarcarts.entityminecartwoodenbarrel.name=Wooden Barrel Cart

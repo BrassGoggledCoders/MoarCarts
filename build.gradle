@@ -62,6 +62,7 @@ repositories {
 
 dependencies {
     compile "brassgoggledcoders:boilerplate:${config.minecraft.version}-${config.boilerplate.version}:deobf"
+    compile "mcp.mobius.waila:Waila:${config.waila.version}_${config.minecraft.version}:dev"
     compile "codechicken:NotEnoughItems:${config.minecraft.version}-${config.nei.version}:dev"
     compile "codechicken:CodeChickenCore:${config.minecraft.version}-${config.codechickencore.version}:dev"
     compile "codechicken:CodeChickenLib:${config.minecraft.version}-${config.codechickenlib.version}:dev"
@@ -83,8 +84,12 @@ task getLibraries {
     def ironchestSource = 'http://files.minecraftforge.net/maven/cpw/mods/ironchest/' + config.minecraft.version +
             '-' + config.ironchest.version + '/' + ironchest
 
+    def immersiveengineering = 'immersive-engineering-' + config.immersiveengineering.version + '.jar'
+    def immersiveengineeringSource = 'http://minecraft.curseforge.com/projects/immersive-engineering/files/2264957/download'
+
     downloads.add(new Tuple(railcraft, railcraftSource));
     downloads.add(new Tuple(ironchest, ironchestSource));
+    downloads.add(new Tuple(immersiveengineering, immersiveengineeringSource))
 
     downloads.each{download ->
         def fileLocation = new File('libs', download.get(0).toString())

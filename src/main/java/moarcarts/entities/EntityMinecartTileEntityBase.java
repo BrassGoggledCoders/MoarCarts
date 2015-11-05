@@ -18,6 +18,10 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase
 	protected TileEntity tileEntity;
 	protected FakeWorld fakeWorld;
 
+	private int FAKE_NBT_ITEM_DW = 27;
+
+	private String FAKE_NBT_ITEM_NAME = "NBT STORAGE";
+
 	public EntityMinecartTileEntityBase(World world, Block cartBlock, int inventorySize, String inventoryName)
 	{
 		this(world, cartBlock, 0, inventorySize, inventoryName);
@@ -32,10 +36,20 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase
 		}
 	}
 
+	public void onEntityInit()
+	{
+		dataWatcher.addObject(FAKE_NBT_ITEM_DW, );
+	}
+
 	public boolean interactFirst(EntityPlayer player)
 	{
 		FakePlayer fakePlayer = new FakePlayer(player, this);
 		return this.getCartBlock().onBlockActivated(fakeWorld, 0, 0, 0, fakePlayer, this.getMetadata(), 0, 0, 0);
+	}
+
+	public void markDirty()
+	{
+
 	}
 
 	public TileEntity getTileEntity()
