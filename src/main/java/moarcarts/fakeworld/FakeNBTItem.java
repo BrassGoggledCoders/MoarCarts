@@ -1,5 +1,6 @@
 package moarcarts.fakeworld;
 
+import moarcarts.MoarCarts;
 import net.minecraft.item.Item;
 
 /**
@@ -11,5 +12,6 @@ public class FakeNBTItem extends Item
 	{
 		super();
 		this.setUnlocalizedName("fakenbtitem");
+		this.setTextureName(MoarCarts.MODID + ":vanilla/minecartenderchest");
 	}
 }

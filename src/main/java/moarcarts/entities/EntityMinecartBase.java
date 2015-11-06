@@ -69,7 +69,7 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	}
 
 	@Override
-	public void readEntityFromNBT(NBTTagCompound nbtTagCompound)
+	protected void readEntityFromNBT(NBTTagCompound nbtTagCompound)
 	{
 		super.readEntityFromNBT(nbtTagCompound);
 		this.setMetadata(nbtTagCompound.getInteger(METADATA));

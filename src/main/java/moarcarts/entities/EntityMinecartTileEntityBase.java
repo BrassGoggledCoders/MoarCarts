@@ -11,6 +11,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
 /**
  * @author SkySom
  */
@@ -18,10 +20,11 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase
 {
 	protected TileEntity tileEntity;
 	protected FakeWorld fakeWorld;
+	protected ItemStack fakeNBTItemStack;
+	protected Random random = new Random();
 
-	private int FAKE_NBT_ITEM_DW = 27;
-
-	private String FAKE_NBT_ITEM_NAME = "NBT STORAGE";
+	private static int FAKE_NBT_ITEM_DW = 27;
+	private static String FAKE_NBT_NAME = "TILEENTITYDATA";
 
 	public EntityMinecartTileEntityBase(World world, Block cartBlock, int inventorySize, String inventoryName)
 	{
@@ -38,6 +41,25 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase
 	}
 
 	@Override
+	public void onUpdate()
+	{
+		if(random.nextInt(20) == 0)
+		{
+			NBTTagCompound nbtTagCompound = new NBTTagCompound();
+			if(!worldObj.isRemote)
+			{
+				this.getTileEntity().writeToNBT(nbtTagCompound);
+				this.writeNBTToDW(nbtTagCompound);
+			}
+			if(worldObj.isRemote)
+			{
+				this.readNBTFromDW(nbtTagCompound);
+				this.getTileEntity().readFromNBT(nbtTagCompound);
+			}
+		}
+	}
+
+	@Override
 	public void entityInit()
 	{
 		super.entityInit();
@@ -45,10 +67,21 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase
 	}
 
 	@Override
-	public void readEntityFromNBT(NBTTagCompound nbtTagCompound)
+	protected void readEntityFromNBT(NBTTagCompound nbtTagCompound)
 	{
 		super.readEntityFromNBT(nbtTagCompound);
-		//TODO: Finish NBT Reading
+		this.setFakeNBTItem(ItemStack.loadItemStackFromNBT(this.readNBTFromDW(nbtTagCompound)));
+	}
+
+	@Override
+	protected void writeEntityToNBT(NBTTagCompound nbtTagCompound)
+	{
+		super.writeEntityToNBT(nbtTagCompound);
+		if(this.getFakeNBTItem() != null)
+		{
+			NBTTagCompound fakeNBTCompound = new NBTTagCompound();
+			this.writeNBTToDW(fakeNBTCompound);
+		}
 	}
 
 	public boolean interactFirst(EntityPlayer player)
@@ -62,16 +95,29 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase
 		NBTTagCompound nbtTagCompound = new NBTTagCompound();
 		this.getTileEntity().writeToNBT(nbtTagCompound);
 		this.writeNBTToDW(nbtTagCompound);
+		if(worldObj.isRemote)
+		{
+			this.getTileEntity().readFromNBT(nbtTagCompound);
+		}
+	}
+
+	public TileEntity createTileEntity()
+	{
+		return this.getCartBlock().createTileEntity(worldObj, this.getMetadata());
 	}
 
 	public TileEntity getTileEntity()
 	{
+		if(this.tileEntity == null)
+		{
+			this.setTileEntity(this.createTileEntity());
+		}
 		return tileEntity;
 	}
 
 	public void setTileEntity(TileEntity tileEntity)
 	{
-		if(this.getTileEntity() != null)
+		if(this.tileEntity != null)
 		{
 			try
 			{
@@ -85,10 +131,13 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase
 		}
 
 		this.tileEntity = tileEntity;
-		if(this.getTileEntity() != null)
+		if(this.tileEntity != null)
 		{
 			fakeWorld = new FakeWorld(worldObj, this);
-			this.getTileEntity().setWorldObj(fakeWorld);
+			this.tileEntity.setWorldObj(fakeWorld);
+			NBTTagCompound nbtTagCompound = new NBTTagCompound();
+			this.tileEntity.writeToNBT(nbtTagCompound);
+			this.writeNBTToDW(nbtTagCompound);
 		} else
 		{
 			MoarCarts.logger.error("Null Tile Entity Reported. THIS IS BAD!");
@@ -97,22 +146,31 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase
 
 	public NBTTagCompound readNBTFromDW(NBTTagCompound nbtTagCompound)
 	{
-		dataWatcher.getWatchableObjectItemStack(FAKE_NBT_ITEM_DW).readFromNBT(nbtTagCompound);
+		fakeNBTItemStack = this.getFakeNBTItem();
+		nbtTagCompound.setTag(FAKE_NBT_NAME, fakeNBTItemStack.getTagCompound());
+		this.setFakeNBTItem(fakeNBTItemStack);
 		return nbtTagCompound;
 	}
 
 	public void writeNBTToDW(NBTTagCompound nbtTagCompound)
 	{
-		dataWatcher.getWatchableObjectItemStack(FAKE_NBT_ITEM_DW).writeToNBT(nbtTagCompound);
+		fakeNBTItemStack = this.getFakeNBTItem();
+		fakeNBTItemStack.setTagCompound(nbtTagCompound.getCompoundTag(FAKE_NBT_NAME));
+		this.setFakeNBTItem(fakeNBTItemStack);
 	}
 
 	public ItemStack getFakeNBTItem()
 	{
-		return dataWatcher.getWatchableObjectItemStack(FAKE_NBT_ITEM_DW);
+		return fakeNBTItemStack = dataWatcher.getWatchableObjectItemStack(FAKE_NBT_ITEM_DW);
 	}
 
 	public void setFakeNBTItem(ItemStack itemStack)
 	{
+		if(itemStack == null)
+		{
+			itemStack = new ItemStack(MoarCarts.FAKE_NBT_ITEM);
+		}
+		fakeNBTItemStack = itemStack;
 		dataWatcher.updateObject(FAKE_NBT_ITEM_DW, itemStack);
 	}
 }
