@@ -121,3 +121,51 @@ processResources {
         exclude 'mcmod.info'
     }
 }
+
+task("uploadJars", dependsOn: "reobf") {
+    description = "uploads JARs"
+    if (System.getenv("local_maven") != null) {
+        apply plugin: 'maven'
+        uploadArchives {
+            repositories {
+                mavenDeployer {
+                    repository(url: "file://" + System.getenv("local_maven"))
+                    pom {
+                        groupId = project.group
+                        version = project.version
+                        artifactId = project.archivesBaseName
+                        project {
+                            name project.archivesBaseName
+                            packaging 'jar'
+                            description 'MoarCarts'
+                            url 'http://BrassGoggledCoders.xyz'
+                            scm {
+                                url 'https://github.com/BrassGoggledCoders/MoarCarts.git\''
+                                connection 'scm:git:git@github.com:BrassGoggledCoders/MoarCarts.git\''
+                                developerConnection 'scm:git:git@github.com:BrassGoggledCoders/MoarCarts.git'
+                            }
+                            issueManagement {
+                                system 'github'
+                                url 'https://github.com/BrassGoggledCoders/MoarCarts/issues'
+                            }
+                            licenses {
+                                license {
+                                    name 'MIT'
+                                    url 'https://github.com/BrassGoggledCoders/MoarCarts/blob/master/LICENSE'
+                                    distribution 'repo'
+                                }
+                            }
+                            developers {
+                                developer {
+                                    id 'SkySom'
+                                    name 'SkySom'
+                                    roles { role 'developer' }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
