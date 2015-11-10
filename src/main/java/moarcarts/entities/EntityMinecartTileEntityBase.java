@@ -3,10 +3,10 @@ package moarcarts.entities;
 import moarcarts.MoarCarts;
 import moarcarts.fakeworld.FakePlayer;
 import moarcarts.fakeworld.FakeWorld;
+import moarcarts.network.EntityTileEntityMessage;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -20,11 +20,10 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase
 {
 	protected TileEntity tileEntity;
 	protected FakeWorld fakeWorld;
-	protected ItemStack fakeNBTItemStack;
 	protected Random random = new Random();
 
-	private static int FAKE_NBT_ITEM_DW = 27;
-	private static String FAKE_NBT_NAME = "TILEENTITYDATA";
+	private static int IS_DIRTY_DW = 27;
+	private static int UPDATE_TICKS = 1000;
 
 	public EntityMinecartTileEntityBase(World world, Block cartBlock, int inventorySize, String inventoryName)
 	{
@@ -41,64 +40,54 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase
 	}
 
 	@Override
-	public void onUpdate()
-	{
-		if(random.nextInt(20) == 0)
-		{
-			NBTTagCompound nbtTagCompound = new NBTTagCompound();
-			if(!worldObj.isRemote)
-			{
-				this.getTileEntity().writeToNBT(nbtTagCompound);
-				this.writeNBTToDW(nbtTagCompound);
-			}
-			if(worldObj.isRemote)
-			{
-				this.readNBTFromDW(nbtTagCompound);
-				this.getTileEntity().readFromNBT(nbtTagCompound);
-			}
-		}
-	}
-
-	@Override
 	public void entityInit()
 	{
 		super.entityInit();
-		dataWatcher.addObject(FAKE_NBT_ITEM_DW, new ItemStack(MoarCarts.FAKE_NBT_ITEM));
+		dataWatcher.addObject(IS_DIRTY_DW, Byte.valueOf((byte) 0));
+	}
+
+	@Override
+	public void onUpdate()
+	{
+		super.onUpdate();
+		if(random.nextInt(UPDATE_TICKS) == 0 && this.isDirty())
+		{
+			this.setDirty(false);
+			this.sendUpdate();
+		}
 	}
 
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound nbtTagCompound)
 	{
 		super.readEntityFromNBT(nbtTagCompound);
-		this.setFakeNBTItem(ItemStack.loadItemStackFromNBT(this.readNBTFromDW(nbtTagCompound)));
+		this.setDirty(nbtTagCompound.getBoolean("DIRTY"));
 	}
 
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound nbtTagCompound)
 	{
 		super.writeEntityToNBT(nbtTagCompound);
-		if(this.getFakeNBTItem() != null)
-		{
-			NBTTagCompound fakeNBTCompound = new NBTTagCompound();
-			this.writeNBTToDW(fakeNBTCompound);
-		}
+		nbtTagCompound.setBoolean("DIRTY", this.isDirty());
 	}
 
+	@Override
 	public boolean interactFirst(EntityPlayer player)
 	{
 		FakePlayer fakePlayer = new FakePlayer(player, this);
 		return this.getCartBlock().onBlockActivated(fakeWorld, 0, 0, 0, fakePlayer, this.getMetadata(), 0, 0, 0);
 	}
 
+	@Override
 	public void markDirty()
 	{
-		NBTTagCompound nbtTagCompound = new NBTTagCompound();
-		this.getTileEntity().writeToNBT(nbtTagCompound);
-		this.writeNBTToDW(nbtTagCompound);
-		if(worldObj.isRemote)
-		{
-			this.getTileEntity().readFromNBT(nbtTagCompound);
-		}
+		super.markDirty();
+		this.setDirty(true);
+	}
+
+	public void sendUpdate()
+	{
+		MoarCarts.packetHandler.sendToAllAround(new EntityTileEntityMessage(this), this);
 	}
 
 	public TileEntity createTileEntity()
@@ -137,40 +126,20 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase
 			this.tileEntity.setWorldObj(fakeWorld);
 			NBTTagCompound nbtTagCompound = new NBTTagCompound();
 			this.tileEntity.writeToNBT(nbtTagCompound);
-			this.writeNBTToDW(nbtTagCompound);
+			this.sendUpdate();
 		} else
 		{
 			MoarCarts.logger.error("Null Tile Entity Reported. THIS IS BAD!");
 		}
 	}
 
-	public NBTTagCompound readNBTFromDW(NBTTagCompound nbtTagCompound)
+	public boolean isDirty()
 	{
-		fakeNBTItemStack = this.getFakeNBTItem();
-		nbtTagCompound.setTag(FAKE_NBT_NAME, fakeNBTItemStack.getTagCompound());
-		this.setFakeNBTItem(fakeNBTItemStack);
-		return nbtTagCompound;
+		return dataWatcher.getWatchableObjectByte(IS_DIRTY_DW) != 0;
 	}
 
-	public void writeNBTToDW(NBTTagCompound nbtTagCompound)
+	public void setDirty(boolean isDirty)
 	{
-		fakeNBTItemStack = this.getFakeNBTItem();
-		fakeNBTItemStack.setTagCompound(nbtTagCompound.getCompoundTag(FAKE_NBT_NAME));
-		this.setFakeNBTItem(fakeNBTItemStack);
-	}
-
-	public ItemStack getFakeNBTItem()
-	{
-		return fakeNBTItemStack = dataWatcher.getWatchableObjectItemStack(FAKE_NBT_ITEM_DW);
-	}
-
-	public void setFakeNBTItem(ItemStack itemStack)
-	{
-		if(itemStack == null)
-		{
-			itemStack = new ItemStack(MoarCarts.FAKE_NBT_ITEM);
-		}
-		fakeNBTItemStack = itemStack;
-		dataWatcher.updateObject(FAKE_NBT_ITEM_DW, itemStack);
+		dataWatcher.updateObject(IS_DIRTY_DW, Byte.valueOf(isDirty ? 1 : (byte) 0));
 	}
 }

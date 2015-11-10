@@ -14,7 +14,6 @@ package moarcarts;
 import boilerplate.common.IBoilerplateMod;
 import boilerplate.common.modcompat.CompatibilityHandler;
 import boilerplate.common.utils.ModLogger;
-import boilerplate.common.utils.helpers.RegistryHelper;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -23,11 +22,11 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import moarcarts.config.ConfigHandler;
 import moarcarts.events.InteractionHandler;
-import moarcarts.fakeworld.FakeNBTItem;
 import moarcarts.mods.ie.IEModCompat;
 import moarcarts.mods.ironchest.IronChestCompat;
 import moarcarts.mods.railcraft.RailcraftCompat;
 import moarcarts.mods.vanilla.VanillaCompat;
+import moarcarts.network.PacketHandler;
 import net.minecraftforge.common.MinecraftForge;
 
 /*
@@ -46,20 +45,21 @@ public class MoarCarts implements IBoilerplateMod
 	public static CompatibilityHandler compatibilityHandler;
 	public static GuiHandler guiHandler;
 	public static ModLogger logger;
-
-	public static FakeNBTItem FAKE_NBT_ITEM;
+	public static PacketHandler packetHandler;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		logger = new ModLogger(MODID);
+		packetHandler = new PacketHandler();
+
 		initModCompatHandler();
 		ConfigHandler.setConfigFile(event.getSuggestedConfigurationFile());
 		ConfigHandler.init();
+
 		compatibilityHandler.preInit(event);
+
 		MinecraftForge.EVENT_BUS.register(new InteractionHandler());
-		FAKE_NBT_ITEM = new FakeNBTItem();
-		RegistryHelper.registerItem(FAKE_NBT_ITEM, MODID);
 	}
 
 	@EventHandler

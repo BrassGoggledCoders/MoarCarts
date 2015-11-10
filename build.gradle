@@ -121,8 +121,3 @@ processResources {
         exclude 'mcmod.info'
     }
 }
-
-configurations.all {
-    // check for updates every build
-    resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
-}
