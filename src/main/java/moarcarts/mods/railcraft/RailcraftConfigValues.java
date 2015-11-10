@@ -11,8 +11,8 @@
  */
 package moarcarts.mods.railcraft;
 
+import moarcarts.MoarCarts;
 import moarcarts.config.ConfigSettings;
-import moarcarts.utils.LoggerMoarCarts;
 import mods.railcraft.common.core.RailcraftConfig;
 
 /**
@@ -28,7 +28,7 @@ public class RailcraftConfigValues
 			ConfigSettings.setMinecartStackSize(RailcraftConfig.getMinecartStackSize());
 		} catch(Exception exception)
 		{
-			LoggerMoarCarts.warning("Couldn't grab Railcraft config settings. Warn the author. As this is not good");
+			MoarCarts.logger.warning("Couldn't grab Railcraft config settings. Warn the author, as this is not good");
 		}
 	}
 }

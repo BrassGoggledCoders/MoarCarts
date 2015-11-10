@@ -1,3 +1,28 @@
 ## vanilla stuff
-item.MinecartEnderChest.name=Ender Chest Cart
-entity.moarcarts.EntityMinecartEnderChest.name=Ender Chest Cart
+item.minecartenderchest.name=Ender Chest Cart
+entity.moarcarts.entityminecartenderchest.name=Ender Chest Cart
+
+## ironchest stuff
+item.minecartironchest.iron.name=Iron Chest Cart
+item.minecartironchest.gold.name=Gold Chest Cart
+item.minecartironchest.diamond.name=Diamond Chest Cart
+item.minecartironchest.copper.name=Copper Chest Cart
+item.minecartironchest.silver.name=Silver Chest Cart
+item.minecartironchest.crystal.name=Crystal Chest Cart
+item.minecartironchest.obsidian.name=Obsidian Chest Cart
+item.minecartironchest.dirtchest9000.name=DirtChest 9000! Cart
+
+entity.moarcarts.entityminecartironchest.name=Iron Chest Cart
+entity.moarcarts.entityminecartironchest.iron.name=Iron Chest Cart
+entity.moarcarts.entityminecartironchest.gold.name=Gold Chest Cart
+entity.moarcarts.entityminecartironchest.diamond.name=Diamond Chest Cart
+entity.moarcarts.entityminecartironchest.copper.name=Copper Chest Cart
+entity.moarcarts.entityminecartironchest.silver.name=Silver Chest Cart
+entity.moarcarts.entityminecartironchest.crystal.name=Crystal Chest Cart
+entity.moarcarts.entityminecartironchest.obsidian.name=Obsidian Chest Cart
+entity.moarcarts.entityminecartironchest.dirtchest9000.name=DirtChest 9000! Cart
+
+## ie stuff
+item.minecartwoodenbarrel.name=Wooden Barrel Cart
+
+entity.moarcarts.entityminecartwoodenbarrel.name=Wooden Barrel Cart

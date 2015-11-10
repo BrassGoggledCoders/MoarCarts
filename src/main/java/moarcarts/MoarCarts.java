@@ -11,7 +11,9 @@
  */
 package moarcarts;
 
+import boilerplate.common.IBoilerplateMod;
 import boilerplate.common.modcompat.CompatibilityHandler;
+import boilerplate.common.utils.ModLogger;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -20,15 +22,18 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import moarcarts.config.ConfigHandler;
 import moarcarts.events.InteractionHandler;
+import moarcarts.mods.ie.IEModCompat;
+import moarcarts.mods.ironchest.IronChestCompat;
 import moarcarts.mods.railcraft.RailcraftCompat;
 import moarcarts.mods.vanilla.VanillaCompat;
+import moarcarts.network.PacketHandler;
 import net.minecraftforge.common.MinecraftForge;
 
 /*
  * @author SkySom
  */
 @Mod(modid = MoarCarts.MODID, name = MoarCarts.MODNAME, version = MoarCarts.MODVERSION, dependencies = MoarCarts.DEPENDENCIES)
-public class MoarCarts
+public class MoarCarts implements IBoilerplateMod
 {
 	@Instance("moarcarts")
 	public static MoarCarts instance;
@@ -38,20 +43,30 @@ public class MoarCarts
 	public static final String DEPENDENCIES = "after:boilerplate;after:railcraft;";
 
 	public static CompatibilityHandler compatibilityHandler;
+	public static GuiHandler guiHandler;
+	public static ModLogger logger;
+	public static PacketHandler packetHandler;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
+		logger = new ModLogger(MODID);
+		packetHandler = new PacketHandler();
+
 		initModCompatHandler();
 		ConfigHandler.setConfigFile(event.getSuggestedConfigurationFile());
 		ConfigHandler.init();
+
 		compatibilityHandler.preInit(event);
+
 		MinecraftForge.EVENT_BUS.register(new InteractionHandler());
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
+		guiHandler = new GuiHandler();
+
 		compatibilityHandler.init(event);
 	}
 
@@ -63,8 +78,16 @@ public class MoarCarts
 
 	public void initModCompatHandler()
 	{
-		compatibilityHandler = new CompatibilityHandler();
+		compatibilityHandler = new CompatibilityHandler(this.logger);
 		compatibilityHandler.addModCompat(new VanillaCompat());
 		compatibilityHandler.addModCompat(new RailcraftCompat());
+		compatibilityHandler.addModCompat(new IronChestCompat());
+		compatibilityHandler.addModCompat(new IEModCompat());
+	}
+
+	@Override
+	public String getModID()
+	{
+		return MODID;
 	}
 }

@@ -15,6 +15,7 @@ import moarcarts.MoarCarts;
 import moarcarts.entities.EntityMinecartBase;
 import moarcarts.items.ItemMinecartBase;
 import moarcarts.mods.vanilla.entities.EntityMinecartEnderChest;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 /**
@@ -25,12 +26,12 @@ public class ItemMinecartEnderChest extends ItemMinecartBase
 	public ItemMinecartEnderChest()
 	{
 		super();
-		this.setUnlocalizedName("MinecartEnderChest");
+		this.setUnlocalizedName("minecartenderchest");
 		this.setTextureName(MoarCarts.MODID + ":vanilla/minecartenderchest");
 	}
 
 	@Override
-	public EntityMinecartBase getEntityFromItem(World world)
+	public EntityMinecartBase getEntityFromItem(World world, ItemStack itemStack)
 	{
 		return new EntityMinecartEnderChest(world);
 	}

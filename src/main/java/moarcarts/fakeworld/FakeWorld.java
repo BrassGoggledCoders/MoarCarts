@@ -7,6 +7,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSettings;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * @author SkySom
@@ -29,31 +30,60 @@ public class FakeWorld extends World
 	}
 
 	@Override
+	public void markTileEntityChunkModified(int posX, int posY, int posZ, TileEntity tileEntity)
+	{
+		this.getEntityMinecartTileEntityBase().markDirty();
+	}
+
+	@Override
+	public void markBlockForUpdate(int posX, int posY, int posZ)
+	{
+		//NO-OP
+	}
+
+	@Override
+	public void func_147453_f(int posX, int posY, int posZ, Block block)
+	{
+		//NO-OP
+	}
+
+	@Override
 	protected int func_152379_p()
 	{
 		return 0;
 	}
 
 	@Override
-	public Entity getEntityByID(int p_73045_1_)
-	{
-		return null;
-	}
-
-	@Override
 	public Block getBlock(int x, int y, int z)
 	{
-		return entityMinecartTileEntityBase.getCartBlock();
+		return this.getEntityMinecartTileEntityBase().getCartBlock();
 	}
 
 	@Override
 	public void addBlockEvent(int x, int y, int z, Block block, int metadata, int p_14745) {}
 
+	@Override
+	public boolean isSideSolid(int x, int y, int z, ForgeDirection blockSide)
+	{
+		return false;
+	}
 
 	@Override
 	public TileEntity getTileEntity(int x, int y, int z)
 	{
-		return entityMinecartTileEntityBase.getTileEntity();
+		return this.getEntityMinecartTileEntityBase().getTileEntity();
+	}
+
+	@Override
+	public Entity getEntityByID(int id)
+	{
+		return this.getEntityMinecartTileEntityBase().worldObj.getEntityByID(id);
+	}
+
+	@Override
+	public int getBlockMetadata(int posX, int posY, int posZ)
+	{
+		return this.getEntityMinecartTileEntityBase().getMetadata();
 	}
 
 	public EntityMinecartTileEntityBase getEntityMinecartTileEntityBase()

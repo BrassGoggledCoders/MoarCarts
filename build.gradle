@@ -41,6 +41,7 @@ minecraft {
 }
 
 repositories {
+    mavenLocal()
     maven {
         name "K4Repo"
         url "http://maven.k-4u.nl"
@@ -53,13 +54,19 @@ repositories {
         name "Waila"
         url "http://mobiusstrip.eu/maven"
     }
+    maven {
+        name "API Depot"
+        url "http://dl.tsr.me/artifactory/libs-release-local"
+    }
 }
 
 dependencies {
     compile "brassgoggledcoders:boilerplate:${config.minecraft.version}-${config.boilerplate.version}:deobf"
+    compile "mcp.mobius.waila:Waila:${config.waila.version}_${config.minecraft.version}:dev"
     compile "codechicken:NotEnoughItems:${config.minecraft.version}-${config.nei.version}:dev"
     compile "codechicken:CodeChickenCore:${config.minecraft.version}-${config.codechickencore.version}:dev"
     compile "codechicken:CodeChickenLib:${config.minecraft.version}-${config.codechickenlib.version}:dev"
+    compile "api:invtweaks:${config.invtweaks.version}"
 }
 
 task getLibraries {
@@ -68,17 +75,33 @@ task getLibraries {
         libsFolder.mkdirs()
     }
 
+    def downloads = new ArrayList<Tuple>();
+
     def railcraft = 'Railcraft_' + config.minecraft.version + '-' + config.railcraft.version + '-dev.jar'
     def railcraftSource = 'https://dl.dropboxusercontent.com/u/38558957/Minecraft/Railcraft/' + railcraft
-    def railcraftDest = new File('libs', railcraft)
 
-    if(!railcraftDest.exists()){
-        railcraftDest.withOutputStream { out ->
-            new URL(railcraftSource).withInputStream { from ->  out << from; }
+    def ironchest = 'ironchest-' + config.minecraft.version + '-' + config.ironchest.version + '-deobf.jar'
+    def ironchestSource = 'http://files.minecraftforge.net/maven/cpw/mods/ironchest/' + config.minecraft.version +
+            '-' + config.ironchest.version + '/' + ironchest
+
+    def immersiveengineering = 'immersive-engineering-' + config.immersiveengineering.version + '.jar'
+    def immersiveengineeringSource = 'http://minecraft.curseforge.com/projects/immersive-engineering/files/2264957/download'
+
+    downloads.add(new Tuple(railcraft, railcraftSource));
+    downloads.add(new Tuple(ironchest, ironchestSource));
+    downloads.add(new Tuple(immersiveengineering, immersiveengineeringSource))
+
+    downloads.each{download ->
+        def fileLocation = new File('libs', download.get(0).toString())
+        if(!fileLocation.exists())  {
+            fileLocation.withOutputStream { out ->
+                new URL(download.get(1).toString()).withInputStream { from ->
+                    out << from;
+                }
+            }
         }
     }
 }
-
 
 processResources {
     // this will ensure that this task is redone when the versions change.
@@ -99,7 +122,50 @@ processResources {
     }
 }
 
-configurations.all {
-    // check for updates every build
-    resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
+task("uploadJars", dependsOn: "reobf") {
+    description = "uploads JARs"
+    if (System.getenv("local_maven") != null) {
+        apply plugin: 'maven'
+        uploadArchives {
+            repositories {
+                mavenDeployer {
+                    repository(url: "file://" + System.getenv("local_maven"))
+                    pom {
+                        groupId = project.group
+                        version = project.version
+                        artifactId = project.archivesBaseName
+                        project {
+                            name project.archivesBaseName
+                            packaging 'jar'
+                            description 'MoarCarts'
+                            url 'http://BrassGoggledCoders.xyz'
+                            scm {
+                                url 'https://github.com/BrassGoggledCoders/MoarCarts.git\''
+                                connection 'scm:git:git@github.com:BrassGoggledCoders/MoarCarts.git\''
+                                developerConnection 'scm:git:git@github.com:BrassGoggledCoders/MoarCarts.git'
+                            }
+                            issueManagement {
+                                system 'github'
+                                url 'https://github.com/BrassGoggledCoders/MoarCarts/issues'
+                            }
+                            licenses {
+                                license {
+                                    name 'MIT'
+                                    url 'https://github.com/BrassGoggledCoders/MoarCarts/blob/master/LICENSE'
+                                    distribution 'repo'
+                                }
+                            }
+                            developers {
+                                developer {
+                                    id 'SkySom'
+                                    name 'SkySom'
+                                    roles { role 'developer' }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
