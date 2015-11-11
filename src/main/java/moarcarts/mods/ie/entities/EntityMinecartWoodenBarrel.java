@@ -1,7 +1,6 @@
 package moarcarts.mods.ie.entities;
 
 import blusunrize.immersiveengineering.common.IEContent;
-import moarcarts.MoarCarts;
 import moarcarts.entities.EntityMinecartFluidBase;
 import moarcarts.mods.ie.items.ItemMinecartWoodenBarrel;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,7 +27,12 @@ public class EntityMinecartWoodenBarrel extends EntityMinecartFluidBase
 	public boolean interactFirst(EntityPlayer entityPlayer)
 	{
 		this.markDirty();
-		MoarCarts.logger.devInfo(super.toString());
 		return super.interactFirst(entityPlayer);
+	}
+
+	@Override
+	public RenderMethod getRenderMethod()
+	{
+		return RenderMethod.ISBRH;
 	}
 }

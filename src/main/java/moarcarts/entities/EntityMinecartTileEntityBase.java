@@ -4,6 +4,7 @@ import moarcarts.MoarCarts;
 import moarcarts.fakeworld.FakePlayer;
 import moarcarts.fakeworld.FakeWorld;
 import moarcarts.network.EntityTileEntityMessage;
+import moarcarts.renderers.IRenderBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,7 +17,7 @@ import java.util.Random;
 /**
  * @author SkySom
  */
-public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase
+public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase implements IRenderBlock
 {
 	protected TileEntity tileEntity;
 	protected FakeWorld fakeWorld;
@@ -83,6 +84,12 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase
 	{
 		super.markDirty();
 		this.setDirty(true);
+	}
+
+	@Override
+	public RenderMethod getRenderMethod()
+	{
+		return RenderMethod.VMC;
 	}
 
 	public void sendUpdate()

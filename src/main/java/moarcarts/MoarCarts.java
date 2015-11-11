@@ -17,6 +17,7 @@ import boilerplate.common.utils.ModLogger;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -27,6 +28,7 @@ import moarcarts.mods.ironchest.IronChestCompat;
 import moarcarts.mods.railcraft.RailcraftCompat;
 import moarcarts.mods.vanilla.VanillaCompat;
 import moarcarts.network.PacketHandler;
+import moarcarts.proxies.CommonProxy;
 import net.minecraftforge.common.MinecraftForge;
 
 /*
@@ -47,6 +49,9 @@ public class MoarCarts implements IBoilerplateMod
 	public static ModLogger logger;
 	public static PacketHandler packetHandler;
 
+	@SidedProxy(clientSide = "moarcarts.proxies.ClientProxy", serverSide = "moarcarts.proxies.CommonProxy")
+	public static CommonProxy proxy;
+
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
@@ -66,8 +71,7 @@ public class MoarCarts implements IBoilerplateMod
 	public void init(FMLInitializationEvent event)
 	{
 		guiHandler = new GuiHandler();
-
-		compatibilityHandler.init(event);
+		proxy.init(event);
 	}
 
 	@EventHandler
