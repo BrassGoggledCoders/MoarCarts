@@ -54,10 +54,6 @@ repositories {
         name "Waila"
         url "http://mobiusstrip.eu/maven"
     }
-    maven {
-        name "API Depot"
-        url "http://dl.tsr.me/artifactory/libs-release-local"
-    }
 }
 
 dependencies {
@@ -66,7 +62,6 @@ dependencies {
     compile "codechicken:NotEnoughItems:${config.minecraft.version}-${config.nei.version}:dev"
     compile "codechicken:CodeChickenCore:${config.minecraft.version}-${config.codechickencore.version}:dev"
     compile "codechicken:CodeChickenLib:${config.minecraft.version}-${config.codechickenlib.version}:dev"
-    compile "api:invtweaks:${config.invtweaks.version}"
 }
 
 task getLibraries {
@@ -87,9 +82,13 @@ task getLibraries {
     def immersiveengineering = 'immersive-engineering-' + config.immersiveengineering.version + '.jar'
     def immersiveengineeringSource = 'http://minecraft.curseforge.com/projects/immersive-engineering/files/2264957/download'
 
-    downloads.add(new Tuple(railcraft, railcraftSource));
-    downloads.add(new Tuple(ironchest, ironchestSource));
+    def inventorytweaks = 'inventory-tweaks-' + config.invtweaks.version + '.jar'
+    def inventorytweaksSource = 'http://minecraft.curseforge.com/projects/inventory-tweaks/files/2265093/download'
+
+    downloads.add(new Tuple(railcraft, railcraftSource))
+    downloads.add(new Tuple(ironchest, ironchestSource))
     downloads.add(new Tuple(immersiveengineering, immersiveengineeringSource))
+    downloads.add(new Tuple(inventorytweaks, inventorytweaksSource))
 
     downloads.each{download ->
         def fileLocation = new File('libs', download.get(0).toString())
