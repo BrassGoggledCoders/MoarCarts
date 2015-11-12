@@ -3,10 +3,12 @@ package moarcarts.renderers;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import moarcarts.entities.EntityMinecartTileEntityBase;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderMinecart;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.entity.item.EntityMinecart;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import org.lwjgl.opengl.GL11;
@@ -29,6 +31,7 @@ public class RenderMinecartTEBase extends RenderMinecart
 		if(entityMinecart instanceof EntityMinecartTileEntityBase)
 		{
 			entityMinecartTEBase = (EntityMinecartTileEntityBase) entityMinecart;
+			this.field_94145_f.blockAccess = entityMinecartTEBase.getFakeWorld();
 			GL11.glPushMatrix();
 			this.bindEntityTexture(entityMinecartTEBase);
 			long i = (long) entityMinecartTEBase.getEntityId() * 493286711L;
@@ -104,7 +107,7 @@ public class RenderMinecartTEBase extends RenderMinecart
 					renderTESRMethod(entityMinecartTEBase, k);
 					break;
 				case ISBRH:
-					renderISBRH(entityMinecartTEBase, block, k, j);
+					renderISBRH(entityMinecartTEBase, block, k);
 					break;
 				default:
 					break;
@@ -119,15 +122,16 @@ public class RenderMinecartTEBase extends RenderMinecart
 		}
 	}
 
-	private void renderISBRH(EntityMinecartTileEntityBase entityMinecartTEBase, Block block, int offset, int metadata)
+	private void renderISBRH(EntityMinecartTileEntityBase entityMinecartTEBase, Block block, int offset)
 	{
+		this.bindTexture(TextureMap.locationBlocksTexture);
 		float f6 = 0.75F;
 		GL11.glScalef(f6, f6, f6);
 		GL11.glTranslatef(0.0F, (float) offset / 16.0F, 0.0F);
-		this.field_94145_f.renderFaceYPos(block, entityMinecartTEBase.posX, entityMinecartTEBase.posY,
-		entityMinecartTEBase.posZ, this.field_94145_f.getBlockIcon(block,this.field_94145_f.blockAccess, 0, 0, 0, 6));
+		renderSidesFromTile(block);
 		GL11.glPopMatrix();
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		this.bindEntityTexture(entityMinecartTEBase);
 	}
 
 	private void renderTESRMethod(EntityMinecartTileEntityBase entityMinecartTEBase, int offset)
@@ -155,5 +159,54 @@ public class RenderMinecartTEBase extends RenderMinecart
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			this.bindEntityTexture(entityMinecartTEBase);
 		}
+	}
+
+	private IIcon getBlockIcon(Block block, int side)
+	{
+		return this.field_94145_f.getBlockIcon(block, entityMinecartTEBase.getFakeWorld(), 0, 0, 0, side);
+	}
+
+	private void renderSidesFromTile(Block block)
+	{
+		GL11.glPushMatrix();
+		Tessellator tessellator = Tessellator.instance;
+		block.setBlockBoundsForItemRender();
+		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+		float f1 = 0.00F;
+		tessellator.startDrawingQuads();
+		tessellator.setNormal(0.0F, -1.0F, 0.0F);
+
+		this.field_94145_f.renderFaceYNeg(block, 0.0D, 0.0D, 0.0D, this.getBlockIcon(block, 0));
+		tessellator.draw();
+		tessellator.startDrawingQuads();
+		tessellator.setNormal(0.0F, 1.0F, 0.0F);
+		this.field_94145_f.renderFaceYPos(block, 0.0D, 0.0D, 0.0D, this.getBlockIcon(block, 1));
+		tessellator.draw();
+		tessellator.startDrawingQuads();
+		tessellator.setNormal(0.0F, 0.0F, -1.0F);
+		tessellator.addTranslation(0.0F, 0.0F, f1);
+		this.field_94145_f.renderFaceZNeg(block, 0.0D, 0.0D, 0.0D, this.getBlockIcon(block, 2));
+		tessellator.addTranslation(0.0F, 0.0F, -f1);
+		tessellator.draw();
+		tessellator.startDrawingQuads();
+		tessellator.setNormal(0.0F, 0.0F, 1.0F);
+		tessellator.addTranslation(0.0F, 0.0F, -f1);
+		this.field_94145_f.renderFaceZPos(block, 0.0D, 0.0D, 0.0D, this.getBlockIcon(block, 3));
+		tessellator.addTranslation(0.0F, 0.0F, f1);
+		tessellator.draw();
+		tessellator.startDrawingQuads();
+		tessellator.setNormal(-1.0F, 0.0F, 0.0F);
+		tessellator.addTranslation(f1, 0.0F, 0.0F);
+		this.field_94145_f.renderFaceXNeg(block, 0.0D, 0.0D, 0.0D, this.getBlockIcon(block, 4));
+		tessellator.addTranslation(-f1, 0.0F, 0.0F);
+		tessellator.draw();
+		tessellator.startDrawingQuads();
+		tessellator.setNormal(1.0F, 0.0F, 0.0F);
+		tessellator.addTranslation(-f1, 0.0F, 0.0F);
+		this.field_94145_f.renderFaceXPos(block, 0.0D, 0.0D, 0.0D, this.getBlockIcon(block, 5));
+		tessellator.addTranslation(f1, 0.0F, 0.0F);
+		tessellator.draw();
+		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+		GL11.glPopMatrix();
 	}
 }

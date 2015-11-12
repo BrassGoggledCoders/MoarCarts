@@ -21,4 +21,10 @@ public class EntityMinecartMetalBarrel extends EntityMinecartFluidBase
 	{
 		return new ItemStack(new ItemMinecartMetalBarrel());
 	}
+
+	@Override
+	public RenderMethod getRenderMethod()
+	{
+		return RenderMethod.ISBRH;
+	}
 }
