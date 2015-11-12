@@ -2,7 +2,6 @@ package moarcarts.renderers;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import moarcarts.entities.EntityMinecartTileEntityBase;
-import moarcarts.fakeworld.FakeWorld;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.entity.RenderMinecart;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -125,9 +124,8 @@ public class RenderMinecartTEBase extends RenderMinecart
 		float f6 = 0.75F;
 		GL11.glScalef(f6, f6, f6);
 		GL11.glTranslatef(0.0F, (float) offset / 16.0F, 0.0F);
-		RenderingRegistry.instance().renderWorldBlock(this.field_147909_c, new FakeWorld(entityMinecartTEBase),
-				(int)entityMinecartTEBase.posX, (int)entityMinecartTEBase.posY, (int)entityMinecartTEBase.posZ, block,
-				block.getRenderType());
+		this.field_94145_f.renderFaceYPos(block, entityMinecartTEBase.posX, entityMinecartTEBase.posY,
+		entityMinecartTEBase.posZ, this.field_94145_f.getBlockIcon(block,this.field_94145_f.blockAccess, 0, 0, 0, 6));
 		GL11.glPopMatrix();
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 	}

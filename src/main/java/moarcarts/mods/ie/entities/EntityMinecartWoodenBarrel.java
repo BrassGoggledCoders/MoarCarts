@@ -21,4 +21,10 @@ public class EntityMinecartWoodenBarrel extends EntityMinecartFluidBase
 	{
 		return new ItemStack(new ItemMinecartWoodenBarrel());
 	}
+
+	@Override
+	public RenderMethod getRenderMethod()
+	{
+		return RenderMethod.ISBRH;
+	}
 }
