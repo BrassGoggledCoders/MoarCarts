@@ -16,6 +16,11 @@ public class FakeWorld extends World
 {
 	private EntityMinecartTileEntityBase entityMinecartTileEntityBase;
 
+	public FakeWorld(EntityMinecartTileEntityBase entityMinecartTileEntityBase)
+	{
+		this(entityMinecartTileEntityBase.worldObj, entityMinecartTileEntityBase);
+	}
+
 	public FakeWorld(World world, EntityMinecartTileEntityBase entityMinecartTileEntityBase)
 	{
 		super(world.getSaveHandler(), world.getWorldInfo().getWorldName(), world.provider,

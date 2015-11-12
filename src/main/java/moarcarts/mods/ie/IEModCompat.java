@@ -8,7 +8,9 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import moarcarts.MoarCarts;
+import moarcarts.mods.ie.entities.EntityMinecartMetalBarrel;
 import moarcarts.mods.ie.entities.EntityMinecartWoodenBarrel;
+import moarcarts.mods.ie.items.ItemMinecartMetalBarrel;
 import moarcarts.mods.ie.items.ItemMinecartWoodenBarrel;
 import net.minecraft.item.ItemStack;
 
@@ -18,6 +20,7 @@ import net.minecraft.item.ItemStack;
 public class IEModCompat extends ModCompat
 {
 	public static ItemMinecartWoodenBarrel ITEM_MINECART_WOODENBARREL;
+	public static ItemMinecartMetalBarrel ITEM_MINECART_METALBARREL;
 
 	@Override
 	public String getName()
@@ -37,6 +40,10 @@ public class IEModCompat extends ModCompat
 		ITEM_MINECART_WOODENBARREL = new ItemMinecartWoodenBarrel();
 		RegistryHelper.registerItem(ITEM_MINECART_WOODENBARREL, MoarCarts.MODID);
 		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartWoodenBarrel.class, "entityminecartwoodenbarrel");
+
+		ITEM_MINECART_METALBARREL = new ItemMinecartMetalBarrel();
+		RegistryHelper.registerItem(ITEM_MINECART_METALBARREL, MoarCarts.MODID);
+		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartMetalBarrel.class, "entityminecartmetalbarrel");
 	}
 
 	@Override

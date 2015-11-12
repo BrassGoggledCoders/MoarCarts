@@ -80,10 +80,10 @@ task getLibraries {
             '-' + config.ironchest.version + '/' + ironchest
 
     def immersiveengineering = 'immersive-engineering-' + config.immersiveengineering.version + '.jar'
-    def immersiveengineeringSource = 'http://minecraft.curseforge.com/projects/immersive-engineering/files/2264957/download'
+    def immersiveengineeringSource = 'http://minecraft.curseforge.com/projects/immersive-engineering/files/2265997/download'
 
     def inventorytweaks = 'inventory-tweaks-' + config.invtweaks.version + '.jar'
-    def inventorytweaksSource = 'http://minecraft.curseforge.com/projects/inventory-tweaks/files/2265093/download'
+    def inventorytweaksSource = 'http://minecraft.curseforge.com/projects/inventory-tweaks/files/2210792/download'
 
     downloads.add(new Tuple(railcraft, railcraftSource))
     downloads.add(new Tuple(ironchest, ironchestSource))
@@ -98,6 +98,18 @@ task getLibraries {
                     out << from;
                 }
             }
+        }
+    }
+
+    libsFolder.listFiles().each { file ->
+        def isInDownloadList = false;
+        downloads.each {download ->
+            if(file.name.equals(download.get(0).toString())) {
+                isInDownloadList = true;
+            }
+        }
+        if(!isInDownloadList) {
+            file.delete();
         }
     }
 }
