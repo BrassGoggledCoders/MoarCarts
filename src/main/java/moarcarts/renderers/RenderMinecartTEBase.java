@@ -95,24 +95,30 @@ public class RenderMinecartTEBase extends RenderMinecart
 				GL11.glRotatef(MathHelper.sin(f7) * f7 * f8 / 10.0F * (float) entityMinecartTEBase.getRollingDirection(), 1.0F, 0.0F, 0.0F);
 			}
 
-			int k = entityMinecartTEBase.getDisplayTileOffset();
-			Block block = entityMinecartTEBase.func_145820_n();
-			int j = entityMinecartTEBase.getDisplayTileData();
+			int offset = entityMinecartTEBase.getDisplayTileOffset();
+			Block block = entityMinecartTEBase.getCartBlock();
+			int metadata = entityMinecartTEBase.getDisplayTileData();
 			GL11.glPushMatrix();
+			this.bindTexture(TextureMap.locationBlocksTexture);
+			float f6 = 0.75F;
+			GL11.glScalef(f6, f6, f6);
+			GL11.glTranslatef(0.0F, (float) offset / 16.0F, 0.0F);
 			switch(entityMinecartTEBase.getRenderMethod()) {
 				case VMC:
-					renderVMCMethod(entityMinecartTEBase, block, k, j, p_76986_9_);
+					renderVMCMethod(entityMinecartTEBase, block, offset, metadata, p_76986_9_);
 					break;
 				case TESR:
-					renderTESRMethod(entityMinecartTEBase, k);
+					renderTESRMethod(entityMinecartTEBase, offset);
 					break;
 				case ISBRH:
-					renderISBRH(entityMinecartTEBase, block, k);
+					renderISBRH(entityMinecartTEBase, block, offset);
 					break;
 				default:
 					break;
 			}
-
+			GL11.glPopMatrix();
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			this.bindEntityTexture(entityMinecartTEBase);
 			GL11.glScalef(-1.0F, -1.0F, 1.0F);
 			this.modelMinecart.render(entityMinecartTEBase, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 			GL11.glPopMatrix();
@@ -124,25 +130,13 @@ public class RenderMinecartTEBase extends RenderMinecart
 
 	private void renderISBRH(EntityMinecartTileEntityBase entityMinecartTEBase, Block block, int offset)
 	{
-		this.bindTexture(TextureMap.locationBlocksTexture);
-		float f6 = 0.75F;
-		GL11.glScalef(f6, f6, f6);
-		GL11.glTranslatef(0.0F, (float) offset / 16.0F, 0.0F);
 		renderSidesFromTile(block);
-		GL11.glPopMatrix();
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.bindEntityTexture(entityMinecartTEBase);
 	}
 
 	private void renderTESRMethod(EntityMinecartTileEntityBase entityMinecartTEBase, int offset)
 	{
-		float f6 = 0.75F;
-		GL11.glScalef(f6, f6, f6);
-		GL11.glTranslatef(0.0F, (float) offset / 16.0F, 0.0F);
 		TileEntityRendererDispatcher.instance.renderTileEntityAt(entityMinecartTEBase.getTileEntity(),
 				entityMinecartTEBase.posX, entityMinecartTEBase.posY, entityMinecartTEBase.posZ, 1.0F);
-		GL11.glPopMatrix();
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
 	private void renderVMCMethod(EntityMinecartTileEntityBase entityMinecartTEBase, Block block, int offset,
@@ -150,14 +144,7 @@ public class RenderMinecartTEBase extends RenderMinecart
 	{
 		if(block.getRenderType() != -1)
 		{
-			this.bindTexture(TextureMap.locationBlocksTexture);
-			float f6 = 0.75F;
-			GL11.glScalef(f6, f6, f6);
-			GL11.glTranslatef(0.0F, (float) offset / 16.0F, 0.0F);
 			this.func_147910_a(entityMinecartTEBase, p_76986_9_, block, data);
-			GL11.glPopMatrix();
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			this.bindEntityTexture(entityMinecartTEBase);
 		}
 	}
 

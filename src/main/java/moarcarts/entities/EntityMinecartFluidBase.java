@@ -34,13 +34,13 @@ public abstract class EntityMinecartFluidBase extends EntityMinecartTileEntityBa
 	@Override
 	public boolean canAcceptPushedFluid(EntityMinecart entityMinecart, Fluid fluid)
 	{
-		return this.getFluidTileEntity().canFill(ForgeDirection.NORTH, fluid);
+		return this.getFluidTileEntity().canFill(ForgeDirection.UNKNOWN, fluid);
 	}
 
 	@Override
 	public boolean canProvidePulledFluid(EntityMinecart entityMinecart, Fluid fluid)
 	{
-		return this.getFluidTileEntity().canDrain(ForgeDirection.NORTH, fluid);
+		return this.getFluidTileEntity().canDrain(ForgeDirection.UNKNOWN, fluid);
 	}
 
 	@Override
