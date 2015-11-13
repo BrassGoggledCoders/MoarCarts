@@ -17,7 +17,6 @@ public class EntityTileEntityMessageHandler implements IMessageHandler<EntityTil
 	@Override
 	public EntityTileEntityMessage onMessage(EntityTileEntityMessage message, MessageContext ctx)
 	{
-		MoarCarts.logger.devInfo("On message called");
 		World world = getWorld(ctx);
 		if(world != null)
 		{
@@ -26,10 +25,6 @@ public class EntityTileEntityMessageHandler implements IMessageHandler<EntityTil
 			{
 				EntityMinecartTileEntityBase entityMinecartTileEntityBase = (EntityMinecartTileEntityBase)entity;
 				entityMinecartTileEntityBase.getTileEntity().readFromNBT(message.getNbtTagCompound());
-				MoarCarts.logger.devInfo("Just set NBT");
-			} else
-			{
-				MoarCarts.logger.devInfo("Did not set NBT");
 			}
 		} else
 		{

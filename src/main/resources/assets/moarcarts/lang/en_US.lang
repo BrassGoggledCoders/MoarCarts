@@ -13,14 +13,13 @@ item.minecartironchest.obsidian.name=Obsidian Chest Cart
 item.minecartironchest.dirtchest9000.name=DirtChest 9000! Cart
 
 entity.moarcarts.entityminecartironchest.name=Iron Chest Cart
-entity.moarcarts.entityminecartironchest.iron.name=Iron Chest Cart
-entity.moarcarts.entityminecartironchest.gold.name=Gold Chest Cart
-entity.moarcarts.entityminecartironchest.diamond.name=Diamond Chest Cart
-entity.moarcarts.entityminecartironchest.copper.name=Copper Chest Cart
-entity.moarcarts.entityminecartironchest.silver.name=Silver Chest Cart
-entity.moarcarts.entityminecartironchest.crystal.name=Crystal Chest Cart
-entity.moarcarts.entityminecartironchest.obsidian.name=Obsidian Chest Cart
-entity.moarcarts.entityminecartironchest.dirtchest9000.name=DirtChest 9000! Cart
+entity.moarcarts.entityminecartgoldchest.name=Gold Chest Cart
+entity.moarcarts.entityminecartdiamondchest.name=Diamond Chest Cart
+entity.moarcarts.entityminecartcopperchest.name=Copper Chest Cart
+entity.moarcarts.entityminecartsilverchest.name=Silver Chest Cart
+entity.moarcarts.entityminecartcrystalchest.name=Crystal Chest Cart
+entity.moarcarts.entityminecartobsidianchest.name=Obsidian Chest Cart
+entity.moarcarts.entityminecartdirtchest.name=DirtChest 9000! Cart
 
 ## ie stuff
 item.minecartwoodenbarrel.name=Wooden Barrel Cart

@@ -39,6 +39,7 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase im
 		if(cartBlock instanceof BlockContainer)
 		{
 			this.setTileEntity(cartBlock.createTileEntity(world, metadata));
+			MoarCarts.logger.devInfo(this.getTileEntity().toString());
 		}
 	}
 
@@ -205,7 +206,11 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase im
 
 	public TileEntity createTileEntity()
 	{
-		return this.getCartBlock().createTileEntity(worldObj, this.getMetadata());
+		if(worldObj != null && this.getCartBlock() != null)
+		{
+			return this.getCartBlock().createTileEntity(worldObj, this.getMetadata());
+		}
+		return null;
 	}
 
 	public TileEntity getTileEntity()
@@ -239,6 +244,18 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase im
 		} else
 		{
 			MoarCarts.logger.error("Null Tile Entity Reported. THIS IS BAD!");
+		}
+	}
+
+	@Override
+	public void setMetadata(int metadata)
+	{
+		super.setMetadata(metadata);
+
+		TileEntity tileEntity = this.createTileEntity();
+		if(tileEntity != null)
+		{
+			this.setTileEntity(tileEntity);
 		}
 	}
 

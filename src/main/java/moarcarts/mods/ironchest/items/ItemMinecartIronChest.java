@@ -6,7 +6,7 @@ import cpw.mods.ironchest.IronChestType;
 import moarcarts.MoarCarts;
 import moarcarts.entities.EntityMinecartBase;
 import moarcarts.items.ItemMinecartBase;
-import moarcarts.mods.ironchest.entities.EntityMinecartIronChest;
+import moarcarts.mods.ironchest.entities.*;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -80,6 +80,32 @@ public class ItemMinecartIronChest extends ItemMinecartBase
 	@Override
 	public EntityMinecartBase getEntityFromItem(World world, ItemStack itemStack)
 	{
-		return new EntityMinecartIronChest(world, this.getIronChestType(itemStack));
+		EntityMinecartIronChest entityMinecartIronChest;
+		switch(itemStack.getItemDamage()) {
+			case 1:
+				entityMinecartIronChest = new EntityMinecartGoldChest(world);
+				break;
+			case 2:
+				entityMinecartIronChest = new EntityMinecartDiamondChest(world);
+				break;
+			case 3:
+				entityMinecartIronChest = new EntityMinecartCopperChest(world);
+				break;
+			case 4:
+				entityMinecartIronChest = new EntityMinecartSilverChest(world);
+				break;
+			case 5:
+				entityMinecartIronChest = new EntityMinecartCrystalChest(world);
+				break;
+			case 6:
+				entityMinecartIronChest = new EntityMinecartObsidianChest(world);
+				break;
+			case 7:
+				entityMinecartIronChest = new EntityMinecartDirtChest(world);
+				break;
+			default:
+				entityMinecartIronChest = new EntityMinecartIronChest(world, itemStack.getItemDamage());
+		}
+		return entityMinecartIronChest;
 	}
 }
