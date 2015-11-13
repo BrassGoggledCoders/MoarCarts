@@ -1,58 +1,33 @@
 package moarcarts.mods.ironchest.entities;
 
 import boilerplate.api.IOpenableGUI;
-import cpw.mods.ironchest.ContainerIronChest;
 import cpw.mods.ironchest.IronChest;
 import cpw.mods.ironchest.IronChestType;
-import cpw.mods.ironchest.TileEntityIronChest;
-import moarcarts.MoarCarts;
+import cpw.mods.ironchest.client.GUIChest;
 import moarcarts.entities.EntityMinecartTileEntityBase;
+import moarcarts.mods.ironchest.containers.ContainerMinecartIronChest;
 import moarcarts.mods.ironchest.items.ItemMinecartIronChest;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+
+import java.lang.reflect.Constructor;
 
 /**
  * @author SkySom
  */
 public class EntityMinecartIronChest extends EntityMinecartTileEntityBase implements IOpenableGUI
 {
-	private static final int IRON_CHEST_TYPE_DW = 25;
-	private static final String IRON_CHEST_TYPE = "IRONCHESTTYPE";
-
 	public EntityMinecartIronChest(World world)
 	{
-		this(world, IronChestType.IRON);
+		this(world, 0);
 	}
 
-	public EntityMinecartIronChest(World world, IronChestType ironChestType)
+	public EntityMinecartIronChest(World world, int metadata)
 	{
-		super(world, IronChest.ironChestBlock, ironChestType.ordinal(), ironChestType.getRowCount() *
-						ironChestType.getRowLength(), "Iron chest cart");
-		this.setIronChestType(ironChestType);
-	}
-
-	@Override
-	public void entityInit(){
-		super.entityInit();
-		dataWatcher.addObject(IRON_CHEST_TYPE_DW, 0);
-	}
-
-	@Override
-	public void readEntityFromNBT(NBTTagCompound nbtTagCompound)
-	{
-		super.readEntityFromNBT(nbtTagCompound);
-		this.setIronChestType(nbtTagCompound.getInteger(IRON_CHEST_TYPE));
-	}
-
-	@Override
-	protected void writeEntityToNBT(NBTTagCompound nbtTagCompound)
-	{
-		super.writeEntityToNBT(nbtTagCompound);
-		nbtTagCompound.setInteger(IRON_CHEST_TYPE, this.getIronChestType().ordinal());
+		super(world, IronChest.ironChestBlock, metadata, IronChestType.values()[metadata].getRowCount() *
+				IronChestType.values()[metadata].getRowLength(), "Iron chest cart");
 	}
 
 	@Override
@@ -61,60 +36,28 @@ public class EntityMinecartIronChest extends EntityMinecartTileEntityBase implem
 		return new ItemStack(new ItemMinecartIronChest());
 	}
 
-	@Override
-	public int getSizeInventory()
-	{
-		return this.getIronChestType().getRowCount() * this.getIronChestType().getRowLength();
-	}
-
 	public IronChestType getIronChestType()
 	{
-		return IronChestType.values()[this.getDataWatcher().getWatchableObjectInt(IRON_CHEST_TYPE_DW)];
-	}
-
-	public void setIronChestType(IronChestType ironChestType)
-	{
-		this.getDataWatcher().updateObject(IRON_CHEST_TYPE_DW, ironChestType.ordinal());
-		try {
-			this.setTileEntity(ironChestType.clazz.newInstance());
-		} catch(Exception exception)
-		{
-			MoarCarts.logger.error("Couldn't set TileEntity");
-		}
-	}
-
-	public TileEntityIronChest getTileEntityIronChest()
-	{
-		if(this.getTileEntity() instanceof TileEntityIronChest)
-		{
-			return (TileEntityIronChest)this.getTileEntity();
-		}
-		return null;
-	}
-
-	public void setIronChestType(int ironChestType)
-	{
-		this.setIronChestType(IronChestType.values()[ironChestType]);
+		return IronChestType.values()[this.getMetadata()];
 	}
 
 	@Override
 	public Object getClientGuiElement(int i, EntityPlayer entityPlayer, World world, int i1, int i2, int i3)
 	{
-		return null;//new ContainingGui((Container)this.getServerGuiElement(i, entityPlayer, world, i1, i2, i3),
-				//GUIChest.GUI.buildGUI(this.getIronChestType(), entityPlayer.inventory, this.getTileEntityIronChest()));
+		try {
+			Constructor<GUIChest>
+					constructor = GUIChest.class.getDeclaredConstructor(GUIChest.GUI.class, IInventory.class, IInventory.class);
+			constructor.setAccessible(true);
+			this.setTileEntity(this.createTileEntity());
+			return constructor.newInstance(GUIChest.GUI.values()[this.getMetadata()], entityPlayer.inventory, this);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
 	public Object getServerGuiElement(int i, EntityPlayer entityPlayer, World world, int i1, int i2, int i3)
 	{
-		Container container = this.createIronChestContainer(entityPlayer.inventory);
-		return null;//new ContainingContainer(entityPlayer.inventory, this, container);
-	}
-
-	private ContainerIronChest createIronChestContainer(InventoryPlayer inventoryPlayer)
-	{
-		ContainerIronChest containerIronChest = new ContainerIronChest(inventoryPlayer, this, this.getIronChestType(),
-				this.getIronChestType().getRowLength(), this.getIronChestType().getRowCount());
-		return containerIronChest;
+		return new ContainerMinecartIronChest(entityPlayer.inventory, this);
 	}
 }

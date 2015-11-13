@@ -8,6 +8,8 @@ import moarcarts.renderers.IRenderBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -37,6 +39,7 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase im
 		if(cartBlock instanceof BlockContainer)
 		{
 			this.setTileEntity(cartBlock.createTileEntity(world, metadata));
+			MoarCarts.logger.devInfo(this.getTileEntity().toString());
 		}
 	}
 
@@ -76,6 +79,15 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase im
 		nbtTagCompound.setBoolean("DIRTY", this.isDirty());
 	}
 
+	public IInventory getIInventoryTileEntity()
+	{
+		if(this.getTileEntity() instanceof IInventory)
+		{
+			return (IInventory)this.getTileEntity();
+		}
+		return null;
+	}
+
 	@Override
 	public boolean interactFirst(EntityPlayer player)
 	{
@@ -92,6 +104,96 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase im
 	}
 
 	@Override
+	public int getInventoryStackLimit()
+	{
+		if(this.getIInventoryTileEntity() != null)
+		{
+			return this.getIInventoryTileEntity().getInventoryStackLimit();
+		}
+		return super.getInventoryStackLimit();
+	}
+
+	@Override
+	public void openInventory()
+	{
+		if(this.getIInventoryTileEntity() != null)
+		{
+			this.getIInventoryTileEntity().openInventory();
+		}
+		super.openInventory();
+	}
+
+	@Override
+	public void closeInventory()
+	{
+		if(this.getIInventoryTileEntity() != null)
+		{
+			this.getIInventoryTileEntity().closeInventory();
+		}
+		super.closeInventory();
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack)
+	{
+		if(this.getIInventoryTileEntity() != null)
+		{
+			return this.getIInventoryTileEntity().isItemValidForSlot(slotIndex, itemStack);
+		}
+		return super.isItemValidForSlot(slotIndex, itemStack);
+	}
+
+	@Override
+	public int getSizeInventory()
+	{
+		if(this.getIInventoryTileEntity() != null)
+		{
+			return this.getIInventoryTileEntity().getSizeInventory();
+		}
+		return super.getSizeInventory();
+	}
+
+	@Override
+	public ItemStack getStackInSlot(int slotIndex)
+	{
+		if(this.getIInventoryTileEntity() != null)
+		{
+			return this.getIInventoryTileEntity().getStackInSlot(slotIndex);
+		}
+		return super.getStackInSlot(slotIndex);
+	}
+
+	@Override
+	public ItemStack decrStackSize(int slotIndex, int decreaseAmount)
+	{
+		if(this.getIInventoryTileEntity() != null)
+		{
+			return this.getIInventoryTileEntity().decrStackSize(slotIndex, decreaseAmount);
+		}
+		return super.decrStackSize(slotIndex, decreaseAmount);
+	}
+
+	@Override
+	public ItemStack getStackInSlotOnClosing(int slotIndex)
+	{
+		if(this.getIInventoryTileEntity() != null)
+		{
+			return this.getIInventoryTileEntity().getStackInSlotOnClosing(slotIndex);
+		}
+		return super.getStackInSlotOnClosing(slotIndex);
+	}
+
+	@Override
+	public void setInventorySlotContents(int slotIndex, ItemStack itemStack)
+	{
+		if(this.getIInventoryTileEntity() != null)
+		{
+			this.getIInventoryTileEntity().setInventorySlotContents(slotIndex, itemStack);
+		}
+		super.setInventorySlotContents(slotIndex, itemStack);
+	}
+
+	@Override
 	public 	RenderMethod getRenderMethod()
 	{
 		return RenderMethod.VMC;
@@ -104,7 +206,11 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase im
 
 	public TileEntity createTileEntity()
 	{
-		return this.getCartBlock().createTileEntity(worldObj, this.getMetadata());
+		if(worldObj != null && this.getCartBlock() != null)
+		{
+			return this.getCartBlock().createTileEntity(worldObj, this.getMetadata());
+		}
+		return null;
 	}
 
 	public TileEntity getTileEntity()
@@ -138,6 +244,18 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase im
 		} else
 		{
 			MoarCarts.logger.error("Null Tile Entity Reported. THIS IS BAD!");
+		}
+	}
+
+	@Override
+	public void setMetadata(int metadata)
+	{
+		super.setMetadata(metadata);
+
+		TileEntity tileEntity = this.createTileEntity();
+		if(tileEntity != null)
+		{
+			this.setTileEntity(tileEntity);
 		}
 	}
 
