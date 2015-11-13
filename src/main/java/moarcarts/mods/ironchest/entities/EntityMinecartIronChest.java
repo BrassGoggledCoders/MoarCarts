@@ -5,11 +5,8 @@ import cpw.mods.ironchest.ContainerIronChest;
 import cpw.mods.ironchest.IronChest;
 import cpw.mods.ironchest.IronChestType;
 import cpw.mods.ironchest.TileEntityIronChest;
-import cpw.mods.ironchest.client.GUIChest;
 import moarcarts.MoarCarts;
-import moarcarts.container.ContainingContainer;
 import moarcarts.entities.EntityMinecartTileEntityBase;
-import moarcarts.gui.ContainingGui;
 import moarcarts.mods.ironchest.items.ItemMinecartIronChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -103,15 +100,15 @@ public class EntityMinecartIronChest extends EntityMinecartTileEntityBase implem
 	@Override
 	public Object getClientGuiElement(int i, EntityPlayer entityPlayer, World world, int i1, int i2, int i3)
 	{
-		return new ContainingGui((Container)this.getServerGuiElement(i, entityPlayer, world, i1, i2, i3),
-				GUIChest.GUI.buildGUI(this.getIronChestType(), entityPlayer.inventory, this.getTileEntityIronChest()));
+		return null;//new ContainingGui((Container)this.getServerGuiElement(i, entityPlayer, world, i1, i2, i3),
+				//GUIChest.GUI.buildGUI(this.getIronChestType(), entityPlayer.inventory, this.getTileEntityIronChest()));
 	}
 
 	@Override
 	public Object getServerGuiElement(int i, EntityPlayer entityPlayer, World world, int i1, int i2, int i3)
 	{
 		Container container = this.createIronChestContainer(entityPlayer.inventory);
-		return new ContainingContainer(entityPlayer.inventory, this, container);
+		return null;//new ContainingContainer(entityPlayer.inventory, this, container);
 	}
 
 	private ContainerIronChest createIronChestContainer(InventoryPlayer inventoryPlayer)
