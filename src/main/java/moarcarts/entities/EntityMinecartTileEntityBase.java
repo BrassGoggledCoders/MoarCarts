@@ -8,6 +8,8 @@ import moarcarts.renderers.IRenderBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -76,6 +78,15 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase im
 		nbtTagCompound.setBoolean("DIRTY", this.isDirty());
 	}
 
+	public IInventory getIInventoryTileEntity()
+	{
+		if(this.getTileEntity() instanceof IInventory)
+		{
+			return (IInventory)this.getTileEntity();
+		}
+		return null;
+	}
+
 	@Override
 	public boolean interactFirst(EntityPlayer player)
 	{
@@ -89,6 +100,96 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase im
 	{
 		super.markDirty();
 		this.setDirty(true);
+	}
+
+	@Override
+	public int getInventoryStackLimit()
+	{
+		if(this.getIInventoryTileEntity() != null)
+		{
+			return this.getIInventoryTileEntity().getInventoryStackLimit();
+		}
+		return super.getInventoryStackLimit();
+	}
+
+	@Override
+	public void openInventory()
+	{
+		if(this.getIInventoryTileEntity() != null)
+		{
+			this.getIInventoryTileEntity().openInventory();
+		}
+		super.openInventory();
+	}
+
+	@Override
+	public void closeInventory()
+	{
+		if(this.getIInventoryTileEntity() != null)
+		{
+			this.getIInventoryTileEntity().closeInventory();
+		}
+		super.closeInventory();
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack)
+	{
+		if(this.getIInventoryTileEntity() != null)
+		{
+			return this.getIInventoryTileEntity().isItemValidForSlot(slotIndex, itemStack);
+		}
+		return super.isItemValidForSlot(slotIndex, itemStack);
+	}
+
+	@Override
+	public int getSizeInventory()
+	{
+		if(this.getIInventoryTileEntity() != null)
+		{
+			return this.getIInventoryTileEntity().getSizeInventory();
+		}
+		return super.getSizeInventory();
+	}
+
+	@Override
+	public ItemStack getStackInSlot(int slotIndex)
+	{
+		if(this.getIInventoryTileEntity() != null)
+		{
+			return this.getIInventoryTileEntity().getStackInSlot(slotIndex);
+		}
+		return super.getStackInSlot(slotIndex);
+	}
+
+	@Override
+	public ItemStack decrStackSize(int slotIndex, int decreaseAmount)
+	{
+		if(this.getIInventoryTileEntity() != null)
+		{
+			return this.getIInventoryTileEntity().decrStackSize(slotIndex, decreaseAmount);
+		}
+		return super.decrStackSize(slotIndex, decreaseAmount);
+	}
+
+	@Override
+	public ItemStack getStackInSlotOnClosing(int slotIndex)
+	{
+		if(this.getIInventoryTileEntity() != null)
+		{
+			return this.getIInventoryTileEntity().getStackInSlotOnClosing(slotIndex);
+		}
+		return super.getStackInSlotOnClosing(slotIndex);
+	}
+
+	@Override
+	public void setInventorySlotContents(int slotIndex, ItemStack itemStack)
+	{
+		if(this.getIInventoryTileEntity() != null)
+		{
+			this.getIInventoryTileEntity().setInventorySlotContents(slotIndex, itemStack);
+		}
+		super.setInventorySlotContents(slotIndex, itemStack);
 	}
 
 	@Override
