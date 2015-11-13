@@ -26,6 +26,7 @@ public class ItemMinecartIronChest extends ItemMinecartBase
 	public ItemMinecartIronChest()
 	{
 		super();
+		this.setUnlocalizedName("minecartironchests");
 		this.setHasSubtypes(true);
 	}
 
@@ -66,6 +67,7 @@ public class ItemMinecartIronChest extends ItemMinecartBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
+	@SuppressWarnings("unchecked")
 	public void getSubItems(Item item, CreativeTabs tab, List list)
 	{
 		for (int i = 0; i < 8; i++)

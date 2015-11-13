@@ -25,6 +25,8 @@ entity.moarcarts.entityminecartironchest.dirtchest9000.name=DirtChest 9000! Cart
 ## ie stuff
 item.minecartwoodenbarrel.name=Wooden Barrel Cart
 item.minecartmetalbarrel.name=Metal Barrel Cart
+item.minecartwoodencrate.name=Wooden Storage Crate Cart
 
 entity.moarcarts.entityminecartwoodenbarrel.name=Wooden Barrel Cart
 entity.moarcarts.entityminecartmetalbarrel.name=Metal Barrel Cart
+entity.moarcarts.entityminecartwoodencrate.name=Wooden Storage Crate Cart
