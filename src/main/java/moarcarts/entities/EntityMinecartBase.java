@@ -11,16 +11,13 @@
  */
 package moarcarts.entities;
 
-import boilerplate.common.utils.interfaceimpl.IInventoryImpl;
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import moarcarts.MoarCarts;
-import mods.railcraft.api.carts.IItemCart;
 import mods.railcraft.api.carts.IMinecart;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -30,33 +27,19 @@ import net.minecraftforge.event.entity.minecart.MinecartInteractEvent;
 /**
  * @author SkySom
  */
-@Optional.InterfaceList({
-		@Optional.Interface(iface = "mods.railcraft.api.carts.IItemCart", modid = "RailcraftAPI|carts"),
-		@Optional.Interface(iface = "mods.railcraft.api.carts.IMinecart", modid = "RailcraftAPI|carts")
-})
-public abstract class EntityMinecartBase extends EntityMinecart implements IMinecart, IItemCart, IInventory
+@Optional.Interface(iface = "mods.railcraft.api.carts.IMinecart", modid = "RailcraftAPI|carts")
+public abstract class EntityMinecartBase extends EntityMinecart implements IMinecart
 {
-	protected IInventoryImpl iInventoryImpl;
 	protected Block cartBlock;
 
-	private static int INVENTORY_NAME_DW = 30;
 	private static int METADATA_DW = 31;
-
-	private static String INVENTORY_NAME = "INVENTORYNAME";
 	private static String METADATA = "METADATA";
 
-
-	public EntityMinecartBase(World world, Block block, int metadata, int inventorySize, String inventoryName)
+	public EntityMinecartBase(World world, Block block, int metadata)
 	{
 		super(world);
-		iInventoryImpl = new IInventoryImpl(inventorySize, inventoryName);
 		this.setMetadata(metadata);
 		this.setCartBlock(block);
-	}
-
-	public EntityMinecartBase(World world, Block block, int inventorySize, String inventoryName)
-	{
-		this(world, block, 0, inventorySize, inventoryName);
 	}
 
 	public abstract ItemStack getCartItem();
@@ -65,7 +48,6 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	public void entityInit(){
 		super.entityInit();
 		dataWatcher.addObject(METADATA_DW, 0);
-		dataWatcher.addObject(INVENTORY_NAME_DW, "");
 	}
 
 	@Override
@@ -73,7 +55,6 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	{
 		super.readEntityFromNBT(nbtTagCompound);
 		this.setMetadata(nbtTagCompound.getInteger(METADATA));
-		this.setInventoryName(nbtTagCompound.getString(INVENTORY_NAME));
 	}
 
 	@Override
@@ -81,7 +62,6 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	{
 		super.writeEntityToNBT(nbtTagCompound);
 		nbtTagCompound.setInteger(METADATA, this.getMetadata());
-		nbtTagCompound.setString(INVENTORY_NAME, this.getInventoryName());
 	}
 
 	@Override
@@ -133,104 +113,18 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	@Override
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {
 		super.readFromNBT(nbtTagCompound);
-		iInventoryImpl.readFromNBT(nbtTagCompound);
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbtTagCompound)
 	{
 		super.writeToNBT(nbtTagCompound);
-		iInventoryImpl.writeToNBT(nbtTagCompound);
 	}
 
 	@Override
 	public boolean hasCustomInventoryName()
 	{
-		return false; //this.getInventoryName() != "";
-	}
-
-	@Override
-	public int getInventoryStackLimit()
-	{
-		return iInventoryImpl.getInventoryStackLimit();
-	}
-
-	@Override
-	public void markDirty()
-	{
-		iInventoryImpl.markDirty();
-	}
-
-	@Override
-	public boolean isUseableByPlayer(EntityPlayer entityPlayer)
-	{
-		return !this.isDead && entityPlayer.getDistanceSqToEntity(this) <= 64.0D;
-	}
-
-	@Override
-	public void openInventory()
-	{
-		iInventoryImpl.openInventory();
-	}
-
-	@Override
-	public void closeInventory()
-	{
-		iInventoryImpl.closeInventory();
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack)
-	{
-		return iInventoryImpl.isItemValidForSlot(slotIndex, itemStack);
-	}
-
-	@Override
-	public int getSizeInventory()
-	{
-		return iInventoryImpl.getSizeInventory();
-	}
-
-	@Override
-	public ItemStack getStackInSlot(int slotIndex)
-	{
-		return iInventoryImpl.getStackInSlot(slotIndex);
-	}
-
-	@Override
-	public ItemStack decrStackSize(int slotIndex, int decreaseAmount)
-	{
-		return iInventoryImpl.decrStackSize(slotIndex, decreaseAmount);
-	}
-
-	@Override
-	public ItemStack getStackInSlotOnClosing(int slotIndex)
-	{
-		return iInventoryImpl.getStackInSlotOnClosing(slotIndex);
-	}
-
-	@Override
-	public void setInventorySlotContents(int slotIndex, ItemStack itemStack)
-	{
-		iInventoryImpl.setInventorySlotContents(slotIndex, itemStack);
-	}
-
-	@Override
-	public boolean canPassItemRequests()
-	{
-		return true;
-	}
-
-	@Override
-	public boolean canAcceptPushedItem(EntityMinecart entityMinecart, ItemStack itemStack)
-	{
-		return true;
-	}
-
-	@Override
-	public boolean canProvidePulledItem(EntityMinecart entityMinecart, ItemStack itemStack)
-	{
-		return true;
+		return false;
 	}
 
 	@Override
@@ -261,16 +155,5 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	public void setMetadata(int metadata)
 	{
 		this.dataWatcher.updateObject(METADATA_DW, metadata);
-	}
-
-	public void setInventoryName(String inventoryName)
-	{
-		this.dataWatcher.updateObject(INVENTORY_NAME_DW, inventoryName);
-	}
-
-	@Override
-	public String getInventoryName()
-	{
-		return this.dataWatcher.getWatchableObjectString(INVENTORY_NAME_DW);
 	}
 }

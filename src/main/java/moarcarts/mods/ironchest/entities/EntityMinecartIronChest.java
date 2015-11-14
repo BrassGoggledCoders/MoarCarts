@@ -4,7 +4,7 @@ import boilerplate.api.IOpenableGUI;
 import cpw.mods.ironchest.IronChest;
 import cpw.mods.ironchest.IronChestType;
 import cpw.mods.ironchest.client.GUIChest;
-import moarcarts.entities.EntityMinecartTileEntityBase;
+import moarcarts.entities.EntityMinecartInventoryTEBase;
 import moarcarts.mods.ironchest.containers.ContainerMinecartIronChest;
 import moarcarts.mods.ironchest.items.ItemMinecartIronChest;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,7 +17,7 @@ import java.lang.reflect.Constructor;
 /**
  * @author SkySom
  */
-public class EntityMinecartIronChest extends EntityMinecartTileEntityBase implements IOpenableGUI
+public class EntityMinecartIronChest extends EntityMinecartInventoryTEBase implements IOpenableGUI
 {
 	public EntityMinecartIronChest(World world)
 	{
@@ -26,8 +26,7 @@ public class EntityMinecartIronChest extends EntityMinecartTileEntityBase implem
 
 	public EntityMinecartIronChest(World world, int metadata)
 	{
-		super(world, IronChest.ironChestBlock, metadata, IronChestType.values()[metadata].getRowCount() *
-				IronChestType.values()[metadata].getRowLength(), "Iron chest cart");
+		super(world, IronChest.ironChestBlock, metadata);
 	}
 
 	@Override

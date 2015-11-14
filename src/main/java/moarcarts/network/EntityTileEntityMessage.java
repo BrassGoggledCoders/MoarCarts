@@ -3,7 +3,7 @@ package moarcarts.network;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import io.netty.buffer.ByteBuf;
 import moarcarts.MoarCarts;
-import moarcarts.entities.EntityMinecartTileEntityBase;
+import moarcarts.entities.EntityMinecartTEBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 
@@ -14,18 +14,16 @@ import java.io.IOException;
  */
 public class EntityTileEntityMessage implements IMessage
 {
-	private EntityMinecartTileEntityBase entityMinecartTileEntityBase;
 	private int entityID;
 	private NBTTagCompound nbtTagCompound;
 
 	public EntityTileEntityMessage() {}
 
-	public EntityTileEntityMessage(EntityMinecartTileEntityBase minecartTileEntityBase)
+	public EntityTileEntityMessage(EntityMinecartTEBase entityMinecartTEBase)
 	{
-		this.entityMinecartTileEntityBase = minecartTileEntityBase;
-		this.setEntityID(entityMinecartTileEntityBase.getEntityId());
+		this.setEntityID(entityMinecartTEBase.getEntityId());
 		this.setNbtTagCompound(new NBTTagCompound());
-		minecartTileEntityBase.getTileEntity().writeToNBT(getNbtTagCompound());
+		entityMinecartTEBase.getTileEntity().writeToNBT(getNbtTagCompound());
 	}
 
 	@Override

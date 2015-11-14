@@ -3,7 +3,7 @@ package moarcarts.proxies;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import moarcarts.MoarCarts;
-import moarcarts.entities.EntityMinecartTileEntityBase;
+import moarcarts.entities.EntityMinecartTEBase;
 import moarcarts.renderers.RenderMinecartTEBase;
 
 /**
@@ -21,6 +21,6 @@ public class ClientProxy extends CommonProxy
 
 	private void registerRenderers()
 	{
-		RenderingRegistry.registerEntityRenderingHandler(EntityMinecartTileEntityBase.class, new RenderMinecartTEBase());
+		RenderingRegistry.registerEntityRenderingHandler(EntityMinecartTEBase.class, new RenderMinecartTEBase());
 	}
 }

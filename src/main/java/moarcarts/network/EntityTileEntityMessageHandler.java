@@ -4,7 +4,7 @@ import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
 import moarcarts.MoarCarts;
-import moarcarts.entities.EntityMinecartTileEntityBase;
+import moarcarts.entities.EntityMinecartTEBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
@@ -21,9 +21,9 @@ public class EntityTileEntityMessageHandler implements IMessageHandler<EntityTil
 		if(world != null)
 		{
 			Entity entity = world.getEntityByID(message.getEntityID());
-			if(entity instanceof EntityMinecartTileEntityBase)
+			if(entity instanceof EntityMinecartTEBase)
 			{
-				EntityMinecartTileEntityBase entityMinecartTileEntityBase = (EntityMinecartTileEntityBase)entity;
+				EntityMinecartTEBase entityMinecartTileEntityBase = (EntityMinecartTEBase)entity;
 				entityMinecartTileEntityBase.getTileEntity().readFromNBT(message.getNbtTagCompound());
 			}
 		} else

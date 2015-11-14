@@ -11,7 +11,7 @@
  */
 package moarcarts.mods.vanilla.entities;
 
-import moarcarts.entities.EntityMinecartTileEntityBase;
+import moarcarts.entities.EntityMinecartInventoryTEBase;
 import moarcarts.mods.vanilla.items.ItemMinecartEnderChest;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -20,11 +20,11 @@ import net.minecraft.world.World;
 /**
  * @author SkySom
  */
-public class EntityMinecartEnderChest extends EntityMinecartTileEntityBase
+public class EntityMinecartEnderChest extends EntityMinecartInventoryTEBase
 {
 	public EntityMinecartEnderChest(World world)
 	{
-		super(world, Blocks.ender_chest, 27, "Ender Chest Cart");
+		super(world, Blocks.ender_chest, 0);
 	}
 
 	@Override

@@ -57,5 +57,7 @@ public class IEModCompat extends ModCompat
 	public void init(FMLInitializationEvent event)
 	{
 		RecipeUtils.addMinecartRecipe(new ItemStack(ITEM_MINECART_WOODENBARREL), new ItemStack(IEContent.blockWoodenDevice, 6));
+		RecipeUtils.addMinecartRecipe(new ItemStack(ITEM_MINECART_METALBARREL), new ItemStack(IEContent.blockMetalDevice2, 7));
+		RecipeUtils.addMinecartRecipe(new ItemStack(ITEM_MINECART_WOODENCRATE), new ItemStack(IEContent.blockWoodenDevice, 4));
 	}
 }

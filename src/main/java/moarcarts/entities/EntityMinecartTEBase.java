@@ -8,8 +8,6 @@ import moarcarts.renderers.IRenderBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -19,27 +17,21 @@ import java.util.Random;
 /**
  * @author SkySom
  */
-public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase implements IRenderBlock
+public abstract class EntityMinecartTEBase extends EntityMinecartBase implements IRenderBlock
 {
 	protected TileEntity tileEntity;
 	protected FakeWorld fakeWorld;
 	protected Random random = new Random();
 
-	private static int IS_DIRTY_DW = 27;
+	private static int IS_DIRTY_DW = 30;
 	private static int UPDATE_TICKS = 200;
 
-	public EntityMinecartTileEntityBase(World world, Block cartBlock, int inventorySize, String inventoryName)
+	public EntityMinecartTEBase(World world, Block block, int metadata)
 	{
-		this(world, cartBlock, 0, inventorySize, inventoryName);
-	}
-
-	public EntityMinecartTileEntityBase(World world, Block cartBlock, int metadata, int inventorySize, String inventoryName)
-	{
-		super(world, cartBlock, metadata, inventorySize, inventoryName);
+		super(world, block, metadata);
 		if(cartBlock instanceof BlockContainer)
 		{
 			this.setTileEntity(cartBlock.createTileEntity(world, metadata));
-			MoarCarts.logger.devInfo(this.getTileEntity().toString());
 		}
 	}
 
@@ -62,6 +54,14 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase im
 	}
 
 	@Override
+	public boolean interactFirst(EntityPlayer player)
+	{
+		this.sendUpdate();
+		FakePlayer fakePlayer = new FakePlayer(player, this);
+		return this.getCartBlock().onBlockActivated(this.getFakeWorld(), 0, 0, 0, fakePlayer, this.getMetadata(), 0, 0, 0);
+	}
+
+	@Override
 	protected void readEntityFromNBT(NBTTagCompound nbtTagCompound)
 	{
 		super.readEntityFromNBT(nbtTagCompound);
@@ -79,122 +79,13 @@ public abstract class EntityMinecartTileEntityBase extends EntityMinecartBase im
 		nbtTagCompound.setBoolean("DIRTY", this.isDirty());
 	}
 
-	public IInventory getIInventoryTileEntity()
-	{
-		if(this.getTileEntity() instanceof IInventory)
-		{
-			return (IInventory)this.getTileEntity();
-		}
-		return null;
-	}
-
-	@Override
-	public boolean interactFirst(EntityPlayer player)
-	{
-		this.sendUpdate();
-		FakePlayer fakePlayer = new FakePlayer(player, this);
-		return this.getCartBlock().onBlockActivated(getFakeWorld(), 0, 0, 0, fakePlayer, this.getMetadata(), 0, 0, 0);
-	}
-
-	@Override
 	public void markDirty()
 	{
-		super.markDirty();
 		this.setDirty(true);
 	}
 
 	@Override
-	public int getInventoryStackLimit()
-	{
-		if(this.getIInventoryTileEntity() != null)
-		{
-			return this.getIInventoryTileEntity().getInventoryStackLimit();
-		}
-		return super.getInventoryStackLimit();
-	}
-
-	@Override
-	public void openInventory()
-	{
-		if(this.getIInventoryTileEntity() != null)
-		{
-			this.getIInventoryTileEntity().openInventory();
-		}
-		super.openInventory();
-	}
-
-	@Override
-	public void closeInventory()
-	{
-		if(this.getIInventoryTileEntity() != null)
-		{
-			this.getIInventoryTileEntity().closeInventory();
-		}
-		super.closeInventory();
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack)
-	{
-		if(this.getIInventoryTileEntity() != null)
-		{
-			return this.getIInventoryTileEntity().isItemValidForSlot(slotIndex, itemStack);
-		}
-		return super.isItemValidForSlot(slotIndex, itemStack);
-	}
-
-	@Override
-	public int getSizeInventory()
-	{
-		if(this.getIInventoryTileEntity() != null)
-		{
-			return this.getIInventoryTileEntity().getSizeInventory();
-		}
-		return super.getSizeInventory();
-	}
-
-	@Override
-	public ItemStack getStackInSlot(int slotIndex)
-	{
-		if(this.getIInventoryTileEntity() != null)
-		{
-			return this.getIInventoryTileEntity().getStackInSlot(slotIndex);
-		}
-		return super.getStackInSlot(slotIndex);
-	}
-
-	@Override
-	public ItemStack decrStackSize(int slotIndex, int decreaseAmount)
-	{
-		if(this.getIInventoryTileEntity() != null)
-		{
-			return this.getIInventoryTileEntity().decrStackSize(slotIndex, decreaseAmount);
-		}
-		return super.decrStackSize(slotIndex, decreaseAmount);
-	}
-
-	@Override
-	public ItemStack getStackInSlotOnClosing(int slotIndex)
-	{
-		if(this.getIInventoryTileEntity() != null)
-		{
-			return this.getIInventoryTileEntity().getStackInSlotOnClosing(slotIndex);
-		}
-		return super.getStackInSlotOnClosing(slotIndex);
-	}
-
-	@Override
-	public void setInventorySlotContents(int slotIndex, ItemStack itemStack)
-	{
-		if(this.getIInventoryTileEntity() != null)
-		{
-			this.getIInventoryTileEntity().setInventorySlotContents(slotIndex, itemStack);
-		}
-		super.setInventorySlotContents(slotIndex, itemStack);
-	}
-
-	@Override
-	public 	RenderMethod getRenderMethod()
+	public RenderMethod getRenderMethod()
 	{
 		return RenderMethod.VMC;
 	}

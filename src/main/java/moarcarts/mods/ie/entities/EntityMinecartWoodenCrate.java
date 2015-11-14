@@ -1,10 +1,11 @@
 package moarcarts.mods.ie.entities;
 
+import blusunrize.immersiveengineering.client.gui.GuiCrate;
 import blusunrize.immersiveengineering.common.IEContent;
+import blusunrize.immersiveengineering.common.blocks.wooden.TileEntityWoodenCrate;
 import boilerplate.api.IOpenableGUI;
-import moarcarts.entities.EntityMinecartTileEntityBase;
+import moarcarts.entities.EntityMinecartInventoryTEBase;
 import moarcarts.mods.ie.container.ContainerMinecartWoodenCrate;
-import moarcarts.mods.ie.gui.GuiMinecartWoodenCrate;
 import moarcarts.mods.ie.items.ItemMinecartWoodenCrate;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -13,11 +14,11 @@ import net.minecraft.world.World;
 /**
  * @author SkySom
  */
-public class EntityMinecartWoodenCrate extends EntityMinecartTileEntityBase implements IOpenableGUI
+public class EntityMinecartWoodenCrate extends EntityMinecartInventoryTEBase implements IOpenableGUI
 {
 	public EntityMinecartWoodenCrate(World world)
 	{
-		super(world, IEContent.blockWoodenDevice, 4, 27, "Wooden Crate Cart");
+		super(world, IEContent.blockWoodenDevice, 4);
 	}
 
 	@Override
@@ -29,7 +30,9 @@ public class EntityMinecartWoodenCrate extends EntityMinecartTileEntityBase impl
 	@Override
 	public Object getClientGuiElement(int i, EntityPlayer entityPlayer, World world, int i1, int i2, int i3)
 	{
-		return new GuiMinecartWoodenCrate(entityPlayer.inventory, this);
+		GuiCrate guiCrate = new GuiCrate(entityPlayer.inventory, (TileEntityWoodenCrate)this.getTileEntity());
+		guiCrate.inventorySlots = new ContainerMinecartWoodenCrate(entityPlayer.inventory, this);
+		return guiCrate;
 	}
 
 	@Override

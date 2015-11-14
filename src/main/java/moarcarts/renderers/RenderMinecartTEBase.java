@@ -1,7 +1,7 @@
 package moarcarts.renderers;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import moarcarts.entities.EntityMinecartTileEntityBase;
+import moarcarts.entities.EntityMinecartTEBase;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderMinecart;
@@ -18,7 +18,7 @@ import org.lwjgl.opengl.GL11;
  */
 public class RenderMinecartTEBase extends RenderMinecart
 {
-	protected EntityMinecartTileEntityBase entityMinecartTEBase;
+	protected EntityMinecartTEBase entityMinecartTEBase;
 	protected RenderingRegistry renderingRegistry;
 
 	public RenderMinecartTEBase()
@@ -28,9 +28,9 @@ public class RenderMinecartTEBase extends RenderMinecart
 
 	public void doRender(EntityMinecart entityMinecart, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
 	{
-		if(entityMinecart instanceof EntityMinecartTileEntityBase)
+		if(entityMinecart instanceof EntityMinecartTEBase)
 		{
-			entityMinecartTEBase = (EntityMinecartTileEntityBase) entityMinecart;
+			entityMinecartTEBase = (EntityMinecartTEBase) entityMinecart;
 			this.field_94145_f.blockAccess = entityMinecartTEBase.getFakeWorld();
 			GL11.glPushMatrix();
 			this.bindEntityTexture(entityMinecartTEBase);
@@ -128,18 +128,18 @@ public class RenderMinecartTEBase extends RenderMinecart
 		}
 	}
 
-	private void renderISBRH(EntityMinecartTileEntityBase entityMinecartTEBase, Block block, int offset)
+	private void renderISBRH(EntityMinecartTEBase entityMinecartTEBase, Block block, int offset)
 	{
 		renderSidesFromTile(block);
 	}
 
-	private void renderTESRMethod(EntityMinecartTileEntityBase entityMinecartTEBase, int offset)
+	private void renderTESRMethod(EntityMinecartTEBase entityMinecartTEBase, int offset)
 	{
 		TileEntityRendererDispatcher.instance.renderTileEntityAt(entityMinecartTEBase.getTileEntity(),
 				entityMinecartTEBase.posX, entityMinecartTEBase.posY, entityMinecartTEBase.posZ, 1.0F);
 	}
 
-	private void renderVMCMethod(EntityMinecartTileEntityBase entityMinecartTEBase, Block block, int offset,
+	private void renderVMCMethod(EntityMinecartTEBase entityMinecartTEBase, Block block, int offset,
 			int data, float p_76986_9_)
 	{
 		if(block.getRenderType() != -1)

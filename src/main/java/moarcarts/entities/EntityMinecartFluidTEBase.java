@@ -13,16 +13,25 @@ import net.minecraftforge.fluids.IFluidHandler;
 /**
  * @author SkySom
  */
-public abstract class EntityMinecartFluidBase extends EntityMinecartTileEntityBase implements IFluidCart, IFluidHandler
+public abstract class EntityMinecartFluidTEBase extends EntityMinecartTEBase implements IFluidHandler, IFluidCart
 {
-	public EntityMinecartFluidBase(World world, Block cartBlock, int metadata, int inventorySize, String inventoryName)
+	private static int IS_FILLING = 29;
+
+	public EntityMinecartFluidTEBase(World world, Block block, int metadata)
 	{
-		super(world, cartBlock, metadata, inventorySize, inventoryName);
+		super(world, block, metadata);
 	}
-	
-	public IFluidHandler getFluidTileEntity() 
+
+	public IFluidHandler getFluidTileEntity()
 	{
-		return (IFluidHandler)this.getTileEntity();	
+		return (IFluidHandler)this.getTileEntity();
+	}
+
+	@Override
+	public void entityInit()
+	{
+		super.entityInit();
+		dataWatcher.addObject(IS_FILLING, Byte.valueOf((byte) 0));
 	}
 
 	@Override
@@ -41,12 +50,6 @@ public abstract class EntityMinecartFluidBase extends EntityMinecartTileEntityBa
 	public boolean canProvidePulledFluid(EntityMinecart entityMinecart, Fluid fluid)
 	{
 		return this.getFluidTileEntity().canDrain(ForgeDirection.UNKNOWN, fluid);
-	}
-
-	@Override
-	public void setFilling(boolean b)
-	{
-		//NO-OP
 	}
 
 	@Override
@@ -85,19 +88,14 @@ public abstract class EntityMinecartFluidBase extends EntityMinecartTileEntityBa
 		return this.getFluidTileEntity().getTankInfo(from);
 	}
 
-	@Override
-	public String toString()
+	public boolean isFilling()
 	{
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("Side: " + worldObj.isRemote + "\n");
+		return dataWatcher.getWatchableObjectByte(IS_FILLING) != 0;
+	}
 
-		if(this.getTankInfo(ForgeDirection.NORTH)[0].fluid != null)
-		{
-			stringBuilder.append("Fluid: ");
-			stringBuilder.append(this.getTankInfo(ForgeDirection.NORTH)[0].fluid.getLocalizedName() + "\n");
-			stringBuilder.append("Amount: ");
-			stringBuilder.append(this.getTankInfo(ForgeDirection.NORTH)[0].fluid.amount + "\n");
-		}
-		return stringBuilder.toString();
+	@Override
+	public void setFilling(boolean isFilling)
+	{
+		dataWatcher.updateObject(IS_FILLING, Byte.valueOf(isFilling ? 1 : (byte) 0));
 	}
 }

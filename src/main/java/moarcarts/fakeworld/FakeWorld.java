@@ -1,6 +1,6 @@
 package moarcarts.fakeworld;
 
-import moarcarts.entities.EntityMinecartTileEntityBase;
+import moarcarts.entities.EntityMinecartTEBase;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
@@ -14,18 +14,18 @@ import net.minecraftforge.common.util.ForgeDirection;
  */
 public class FakeWorld extends World
 {
-	private EntityMinecartTileEntityBase entityMinecartTileEntityBase;
+	private EntityMinecartTEBase entityMinecartTEBase;
 
-	public FakeWorld(EntityMinecartTileEntityBase entityMinecartTileEntityBase)
+	public FakeWorld(EntityMinecartTEBase entityMinecartTEBase)
 	{
-		this(entityMinecartTileEntityBase.worldObj, entityMinecartTileEntityBase);
+		this(entityMinecartTEBase.worldObj, entityMinecartTEBase);
 	}
 
-	public FakeWorld(World world, EntityMinecartTileEntityBase entityMinecartTileEntityBase)
+	public FakeWorld(World world, EntityMinecartTEBase entityMinecartTEBase)
 	{
 		super(world.getSaveHandler(), world.getWorldInfo().getWorldName(), world.provider,
 				new WorldSettings(world.getWorldInfo()), world.theProfiler);
-		this.setEntityMinecartTileEntityBase(entityMinecartTileEntityBase);
+		this.setEntityMinecartTEBase(entityMinecartTEBase);
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class FakeWorld extends World
 	@Override
 	public void markTileEntityChunkModified(int posX, int posY, int posZ, TileEntity tileEntity)
 	{
-		this.getEntityMinecartTileEntityBase().markDirty();
+		this.getEntityMinecartTEBase().markDirty();
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class FakeWorld extends World
 	@Override
 	public Block getBlock(int x, int y, int z)
 	{
-		return this.getEntityMinecartTileEntityBase().getCartBlock();
+		return this.getEntityMinecartTEBase().getCartBlock();
 	}
 
 	@Override
@@ -76,28 +76,28 @@ public class FakeWorld extends World
 	@Override
 	public TileEntity getTileEntity(int x, int y, int z)
 	{
-		return this.getEntityMinecartTileEntityBase().getTileEntity();
+		return this.getEntityMinecartTEBase().getTileEntity();
 	}
 
 	@Override
 	public Entity getEntityByID(int id)
 	{
-		return this.getEntityMinecartTileEntityBase().worldObj.getEntityByID(id);
+		return this.getEntityMinecartTEBase().worldObj.getEntityByID(id);
 	}
 
 	@Override
 	public int getBlockMetadata(int posX, int posY, int posZ)
 	{
-		return this.getEntityMinecartTileEntityBase().getMetadata();
+		return this.getEntityMinecartTEBase().getMetadata();
 	}
 
-	public EntityMinecartTileEntityBase getEntityMinecartTileEntityBase()
+	public EntityMinecartTEBase getEntityMinecartTEBase()
 	{
-		return entityMinecartTileEntityBase;
+		return entityMinecartTEBase;
 	}
 
-	public void setEntityMinecartTileEntityBase(EntityMinecartTileEntityBase entityMinecartTileEntityBase)
+	public void setEntityMinecartTEBase(EntityMinecartTEBase entityMinecartTEBase)
 	{
-		this.entityMinecartTileEntityBase = entityMinecartTileEntityBase;
+		this.entityMinecartTEBase = entityMinecartTEBase;
 	}
 }

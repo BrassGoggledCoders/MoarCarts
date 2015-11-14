@@ -1,7 +1,7 @@
 package moarcarts.fakeworld;
 
 import moarcarts.MoarCarts;
-import moarcarts.entities.EntityMinecartTileEntityBase;
+import moarcarts.entities.EntityMinecartTEBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryEnderChest;
@@ -15,13 +15,13 @@ import net.minecraft.world.World;
 public class FakePlayer extends EntityPlayer
 {
 	protected EntityPlayer entityPlayer;
-	private EntityMinecartTileEntityBase entityMinecartTileEntityBase;
+	private EntityMinecartTEBase entityMinecartTEBase;
 
-	public FakePlayer(EntityPlayer entityPlayer, EntityMinecartTileEntityBase entityMinecartTileEntityBase)
+	public FakePlayer(EntityPlayer entityPlayer, EntityMinecartTEBase entityMinecartTEBase)
 	{
 		super(entityPlayer.getEntityWorld(), entityPlayer.getGameProfile());
 		this.setEntityPlayer(entityPlayer);
-		this.setEntityMinecartTileEntityBase(entityMinecartTileEntityBase);
+		this.setEntityMinecartTEBase(entityMinecartTEBase);
 	}
 
 	@Override
@@ -45,9 +45,9 @@ public class FakePlayer extends EntityPlayer
 	@Override
 	public double getDistanceSq(double x, double y, double z)
 	{
-		if(this.getEntityMinecartTileEntityBase() != null) {
-			return this.entityPlayer.getDistanceSq(this.getEntityMinecartTileEntityBase().posX,
-				this.getEntityMinecartTileEntityBase().posY, this.getEntityMinecartTileEntityBase().posZ);
+		if(this.getEntityMinecartTEBase() != null) {
+			return this.entityPlayer.getDistanceSq(this.getEntityMinecartTEBase().posX,
+				this.getEntityMinecartTEBase().posY, this.getEntityMinecartTEBase().posZ);
 		} else
 		{
 			return 64;
@@ -57,8 +57,8 @@ public class FakePlayer extends EntityPlayer
 	@Override
 	public void openGui(Object mod, int id, World world, int posX, int posY, int poxZ)
 	{
-		this.getEntityPlayer().openGui(MoarCarts.instance, this.getEntityMinecartTileEntityBase().getEntityId(),
-				this.getEntityMinecartTileEntityBase().worldObj, posX, posY, poxZ);
+		this.getEntityPlayer().openGui(MoarCarts.instance, this.getEntityMinecartTEBase().getEntityId(),
+				this.getEntityMinecartTEBase().worldObj, posX, posY, poxZ);
 	}
 
 	@Override
@@ -89,13 +89,13 @@ public class FakePlayer extends EntityPlayer
 		this.entityPlayer = entityPlayer;
 	}
 
-	public EntityMinecartTileEntityBase getEntityMinecartTileEntityBase()
+	public EntityMinecartTEBase getEntityMinecartTEBase()
 	{
-		return entityMinecartTileEntityBase;
+		return entityMinecartTEBase;
 	}
 
-	public void setEntityMinecartTileEntityBase(EntityMinecartTileEntityBase entityMinecartTileEntityBase)
+	public void setEntityMinecartTEBase(EntityMinecartTEBase entityMinecartTEBase)
 	{
-		this.entityMinecartTileEntityBase = entityMinecartTileEntityBase;
+		this.entityMinecartTEBase = entityMinecartTEBase;
 	}
 }

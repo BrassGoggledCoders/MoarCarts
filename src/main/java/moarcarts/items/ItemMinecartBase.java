@@ -14,7 +14,6 @@ package moarcarts.items;
 import boilerplate.common.utils.BlockUtils;
 import com.mojang.authlib.GameProfile;
 import cpw.mods.fml.common.Optional;
-import moarcarts.MoarCarts;
 import moarcarts.config.ConfigSettings;
 import moarcarts.entities.EntityMinecartBase;
 import mods.railcraft.api.carts.CartTools;
@@ -70,8 +69,6 @@ public abstract class ItemMinecartBase extends ItemMinecart implements IMinecart
 		{
 			if(itemStack.hasDisplayName())
 			{
-				MoarCarts.logger.devInfo(itemStack.getDisplayName());
-				entityMinecart.setInventoryName(itemStack.getDisplayName());
 				entityMinecart.setMinecartName(itemStack.getDisplayName());
 			}
 
