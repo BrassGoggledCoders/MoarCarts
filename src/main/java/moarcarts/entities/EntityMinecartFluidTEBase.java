@@ -1,5 +1,6 @@
 package moarcarts.entities;
 
+import cpw.mods.fml.common.Optional;
 import mods.railcraft.api.carts.IFluidCart;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityMinecart;
@@ -13,6 +14,7 @@ import net.minecraftforge.fluids.IFluidHandler;
 /**
  * @author SkySom
  */
+@Optional.Interface(iface = "mods.railcraft.api.carts.IFluidCart", modid = "RailcraftAPI|carts")
 public abstract class EntityMinecartFluidTEBase extends EntityMinecartTEBase implements IFluidHandler, IFluidCart
 {
 	private static int IS_FILLING = 29;
@@ -35,18 +37,21 @@ public abstract class EntityMinecartFluidTEBase extends EntityMinecartTEBase imp
 	}
 
 	@Override
+	@Optional.Method(modid = "RailcraftAPI|carts")
 	public boolean canPassFluidRequests(Fluid fluid)
 	{
 		return true;
 	}
 
 	@Override
+	@Optional.Method(modid = "RailcraftAPI|carts")
 	public boolean canAcceptPushedFluid(EntityMinecart entityMinecart, Fluid fluid)
 	{
 		return this.getFluidTileEntity().canFill(ForgeDirection.UNKNOWN, fluid);
 	}
 
 	@Override
+	@Optional.Method(modid = "RailcraftAPI|carts")
 	public boolean canProvidePulledFluid(EntityMinecart entityMinecart, Fluid fluid)
 	{
 		return this.getFluidTileEntity().canDrain(ForgeDirection.UNKNOWN, fluid);
@@ -94,6 +99,7 @@ public abstract class EntityMinecartFluidTEBase extends EntityMinecartTEBase imp
 	}
 
 	@Override
+	@Optional.Method(modid = "RailcraftAPI|carts")
 	public void setFilling(boolean isFilling)
 	{
 		dataWatcher.updateObject(IS_FILLING, Byte.valueOf(isFilling ? 1 : (byte) 0));

@@ -1,5 +1,6 @@
 package moarcarts.entities;
 
+import cpw.mods.fml.common.Optional;
 import moarcarts.renderers.IRenderBlock;
 import mods.railcraft.api.carts.IItemCart;
 import net.minecraft.block.Block;
@@ -12,6 +13,7 @@ import net.minecraft.world.World;
 /**
  * @author SkySom
  */
+@Optional.Interface(iface = "mods.railcraft.api.carts.IItemCart", modid = "RailcraftAPI|carts")
 public abstract class EntityMinecartInventoryTEBase extends EntityMinecartTEBase implements IRenderBlock, IInventory,
 		IItemCart
 {

@@ -128,6 +128,7 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	}
 
 	@Override
+	@Optional.Method(modid = "RailcraftAPI|carts")
 	public boolean doesCartMatchFilter(ItemStack itemStack, EntityMinecart entityMinecart)
 	{
 		if(itemStack != null && entityMinecart instanceof EntityMinecartBase)
