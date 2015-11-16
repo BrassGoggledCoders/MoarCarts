@@ -6,6 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSettings;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -15,6 +16,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class FakeWorld extends World
 {
 	private EntityMinecartTEBase entityMinecartTEBase;
+	private FakeChunk fakeChunk;
 
 	public FakeWorld(EntityMinecartTEBase entityMinecartTEBase)
 	{
@@ -38,6 +40,16 @@ public class FakeWorld extends World
 	public void markTileEntityChunkModified(int posX, int posY, int posZ, TileEntity tileEntity)
 	{
 		this.getEntityMinecartTEBase().markDirty();
+	}
+
+	@Override
+	public Chunk getChunkFromBlockCoords(int x, int z)
+	{
+		if(this.fakeChunk == null)
+		{
+			this.fakeChunk = new FakeChunk(this);
+		}
+		return this.fakeChunk;
 	}
 
 	@Override

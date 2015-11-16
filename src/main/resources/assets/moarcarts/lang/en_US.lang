@@ -29,3 +29,8 @@ item.minecartwoodencrate.name=Wooden Storage Crate Cart
 entity.moarcarts.entityminecartwoodenbarrel.name=Wooden Barrel Cart
 entity.moarcarts.entityminecartmetalbarrel.name=Metal Barrel Cart
 entity.moarcarts.entityminecartwoodencrate.name=Wooden Storage Crate Cart
+
+## mfr stuff
+item.minecartdsu.name=Deep Storage Unit Cart
+
+entity.moarcarts.entityminecartdsu.name Deep Storage Unit Cart

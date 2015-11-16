@@ -85,10 +85,18 @@ task getLibraries {
     def inventorytweaks = 'inventory-tweaks-' + config.invtweaks.version + '.jar'
     def inventorytweaksSource = 'http://minecraft.curseforge.com/projects/inventory-tweaks/files/2210792/download'
 
+    def cofhcore = 'cofhcore-' + config.cofhcore.version + '.jar'
+    def cofhcoreSource = 'http://minecraft.curseforge.com/projects/cofhcore/files/2246920/download'
+
+    def minefactory = 'minefactory-' + config.minefactory.version + '.jar'
+    def minefactorySource = 'http://minecraft.curseforge.com/projects/minefactory-reloaded/files/2233907/download'
+
     downloads.add(new Tuple(railcraft, railcraftSource))
     downloads.add(new Tuple(ironchest, ironchestSource))
     downloads.add(new Tuple(immersiveengineering, immersiveengineeringSource))
     downloads.add(new Tuple(inventorytweaks, inventorytweaksSource))
+    downloads.add(new Tuple(cofhcore, cofhcoreSource))
+    downloads.add(new Tuple(minefactory, minefactorySource))
 
     downloads.each{download ->
         def fileLocation = new File('libs', download.get(0).toString())
