@@ -30,7 +30,9 @@ import moarcarts.mods.railcraft.RailcraftCompat;
 import moarcarts.mods.vanilla.VanillaCompat;
 import moarcarts.network.PacketHandler;
 import moarcarts.proxies.CommonProxy;
+import moarcarts.recipes.NBTCartRecipe;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.oredict.RecipeSorter;
 
 /*
  * @author SkySom
@@ -73,6 +75,9 @@ public class MoarCarts implements IBoilerplateMod
 	{
 		guiHandler = new GuiHandler();
 		proxy.init(event);
+
+		RecipeSorter.register("moarcarts:nbtcartrecipe", NBTCartRecipe.class, RecipeSorter.Category.SHAPELESS,
+				"after:minecraft:shapeless");
 	}
 
 	@EventHandler

@@ -3,10 +3,10 @@ package moarcarts.mods.ie;
 import blusunrize.immersiveengineering.common.IEContent;
 import boilerplate.common.modcompat.ModCompat;
 import boilerplate.common.utils.helpers.RegistryHelper;
-import boilerplate.common.utils.recipe.RecipeUtils;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
 import moarcarts.MoarCarts;
 import moarcarts.mods.ie.entities.EntityMinecartMetalBarrel;
 import moarcarts.mods.ie.entities.EntityMinecartWoodenBarrel;
@@ -14,7 +14,7 @@ import moarcarts.mods.ie.entities.EntityMinecartWoodenCrate;
 import moarcarts.mods.ie.items.ItemMinecartMetalBarrel;
 import moarcarts.mods.ie.items.ItemMinecartWoodenBarrel;
 import moarcarts.mods.ie.items.ItemMinecartWoodenCrate;
-import net.minecraft.item.ItemStack;
+import moarcarts.recipes.NBTCartRecipe;
 
 /**
  * @author SkySom
@@ -56,8 +56,8 @@ public class IEModCompat extends ModCompat
 	@Override
 	public void init(FMLInitializationEvent event)
 	{
-		RecipeUtils.addMinecartRecipe(new ItemStack(ITEM_MINECART_WOODENBARREL), new ItemStack(IEContent.blockWoodenDevice, 6));
-		RecipeUtils.addMinecartRecipe(new ItemStack(ITEM_MINECART_METALBARREL), new ItemStack(IEContent.blockMetalDevice2, 7));
-		RecipeUtils.addMinecartRecipe(new ItemStack(ITEM_MINECART_WOODENCRATE), new ItemStack(IEContent.blockWoodenDevice, 4));
+		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_WOODENBARREL, IEContent.blockWoodenDevice, 6));
+		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_METALBARREL, IEContent.blockMetalDevice2, 7));
+		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_WOODENCRATE, IEContent.blockWoodenDevice, 4));
 	}
 }

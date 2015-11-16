@@ -2,23 +2,22 @@ package moarcarts.mods.ironchest;
 
 import boilerplate.common.modcompat.ModCompat;
 import boilerplate.common.utils.helpers.RegistryHelper;
-import boilerplate.common.utils.recipe.RecipeUtils;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
 import moarcarts.MoarCarts;
 import moarcarts.mods.ironchest.entities.*;
 import moarcarts.mods.ironchest.items.ItemMinecartIronChest;
+import moarcarts.recipes.NBTCartRecipe;
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
 
 /**
  * @author SkySom
  */
 public class IronChestCompat extends ModCompat
 {
-	public static Block blockIronChest;
-	public static ItemMinecartIronChest itemMinecartIronChest;
+	public static ItemMinecartIronChest ITEM_MINECART_IRONCHEST;
 
 	@Override
 	public String getName()
@@ -59,16 +58,16 @@ public class IronChestCompat extends ModCompat
 
 	public void registerItems()
 	{
-		itemMinecartIronChest = new ItemMinecartIronChest();
-		RegistryHelper.registerItem(itemMinecartIronChest, MoarCarts.MODID);
+		ITEM_MINECART_IRONCHEST = new ItemMinecartIronChest();
+		RegistryHelper.registerItem(ITEM_MINECART_IRONCHEST, MoarCarts.MODID);
 	}
 
 	public void registerRecipes()
 	{
-		blockIronChest = Block.getBlockFromName("IronChest:BlockIronChest");
+		Block blockIronChest = Block.getBlockFromName("IronChest:BlockIronChest");
 		for (int i = 0; i < 8; i++)
 		{
-			RecipeUtils.addMinecartRecipe(new ItemStack(itemMinecartIronChest, 1, i), new ItemStack(blockIronChest, 1, i));
+			GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_IRONCHEST, i, blockIronChest, i));
 		}
 	}
 }

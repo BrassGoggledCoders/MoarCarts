@@ -17,7 +17,7 @@ import powercrystals.minefactoryreloaded.tile.machine.TileEntityDeepStorageUnit;
  */
 public class EntityMinecartDSU extends EntityMinecartDeepStorageTEBase implements IOpenableGUI
 {
-	private static Block dsu = GameRegistry.findBlock("MineFactoryReloaded", "machine.1");
+	public static Block dsu = GameRegistry.findBlock("MineFactoryReloaded", "machine.1");
 
 	public EntityMinecartDSU(World world)
 	{
