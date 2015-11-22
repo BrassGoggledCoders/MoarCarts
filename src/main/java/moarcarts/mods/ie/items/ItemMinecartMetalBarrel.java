@@ -1,6 +1,5 @@
 package moarcarts.mods.ie.items;
 
-import moarcarts.MoarCarts;
 import moarcarts.entities.EntityMinecartBase;
 import moarcarts.items.ItemMinecartBase;
 import moarcarts.mods.ie.entities.EntityMinecartMetalBarrel;
@@ -14,9 +13,7 @@ public class ItemMinecartMetalBarrel extends ItemMinecartBase
 {
 	public ItemMinecartMetalBarrel()
 	{
-		super();
-		this.setUnlocalizedName("minecartmetalbarrel");
-		this.setTextureName(MoarCarts.MODID + ":defaultcart");
+		super("ie", "minecartmetalbarrel");
 	}
 
 	@Override

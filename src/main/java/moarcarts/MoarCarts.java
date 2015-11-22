@@ -26,6 +26,7 @@ import moarcarts.events.InteractionHandler;
 import moarcarts.mods.ie.IEModCompat;
 import moarcarts.mods.ironchest.IronChestCompat;
 import moarcarts.mods.mfr.MFRCompat;
+import moarcarts.mods.minechem.MinechemCompat;
 import moarcarts.mods.railcraft.RailcraftCompat;
 import moarcarts.mods.vanilla.VanillaCompat;
 import moarcarts.network.PacketHandler;
@@ -94,6 +95,7 @@ public class MoarCarts implements IBoilerplateMod
 		compatibilityHandler.addModCompat(new IronChestCompat());
 		compatibilityHandler.addModCompat(new IEModCompat());
 		compatibilityHandler.addModCompat(new MFRCompat());
+		compatibilityHandler.addModCompat(new MinechemCompat());
 	}
 
 	@Override

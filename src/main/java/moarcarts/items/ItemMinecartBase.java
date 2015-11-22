@@ -14,6 +14,7 @@ package moarcarts.items;
 import boilerplate.common.utils.BlockUtils;
 import com.mojang.authlib.GameProfile;
 import cpw.mods.fml.common.Optional;
+import moarcarts.MoarCarts;
 import moarcarts.config.ConfigSettings;
 import moarcarts.entities.EntityMinecartBase;
 import mods.railcraft.api.carts.CartTools;
@@ -31,9 +32,11 @@ import net.minecraft.world.World;
 @Optional.Interface(modid = "RailcraftAPI|items", iface = "mods.railcraft.api.core.items.IMinecartItem")
 public abstract class ItemMinecartBase extends ItemMinecart implements IMinecartItem
 {
-	public ItemMinecartBase()
+	public ItemMinecartBase(String mod, String name)
 	{
 		super(0);
+		this.setUnlocalizedName(name);
+		this.setTextureName(MoarCarts.MODID + ":" + mod + "/" + name);
 		this.setCreativeTab(CreativeTabs.tabTransport);
 		this.setMaxStackSize(ConfigSettings.getMinecartStackSize());
 	}

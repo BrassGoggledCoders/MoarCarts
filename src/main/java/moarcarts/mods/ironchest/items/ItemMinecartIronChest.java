@@ -25,8 +25,7 @@ public class ItemMinecartIronChest extends ItemMinecartBase
 
 	public ItemMinecartIronChest()
 	{
-		super();
-		this.setUnlocalizedName("minecartironchests");
+		super("ironchest", "minecartironchest");
 		this.setHasSubtypes(true);
 	}
 

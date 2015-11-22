@@ -11,7 +11,6 @@
  */
 package moarcarts.mods.vanilla.items;
 
-import moarcarts.MoarCarts;
 import moarcarts.entities.EntityMinecartBase;
 import moarcarts.items.ItemMinecartBase;
 import moarcarts.mods.vanilla.entities.EntityMinecartEnderChest;
@@ -25,9 +24,7 @@ public class ItemMinecartEnderChest extends ItemMinecartBase
 {
 	public ItemMinecartEnderChest()
 	{
-		super();
-		this.setUnlocalizedName("minecartenderchest");
-		this.setTextureName(MoarCarts.MODID + ":vanilla/minecartenderchest");
+		super("vanilla", "minecartenderchest");
 	}
 
 	@Override

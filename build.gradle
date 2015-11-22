@@ -91,12 +91,16 @@ task getLibraries {
     def minefactory = 'minefactory-' + config.minefactory.version + '.jar'
     def minefactorySource = 'http://minecraft.curseforge.com/projects/minefactory-reloaded/files/2233907/download'
 
+    def minechem = 'Minechem-' + config.minecraft.version + '-' + config.minechem.version + '.jar'
+    def minechemSource = 'http://minecraft.curseforge.com/projects/minechem/files/2251057/download'
+
     downloads.add(new Tuple(railcraft, railcraftSource))
     downloads.add(new Tuple(ironchest, ironchestSource))
     downloads.add(new Tuple(immersiveengineering, immersiveengineeringSource))
     downloads.add(new Tuple(inventorytweaks, inventorytweaksSource))
     downloads.add(new Tuple(cofhcore, cofhcoreSource))
     downloads.add(new Tuple(minefactory, minefactorySource))
+    downloads.add(new Tuple(minechem, minechemSource))
 
     downloads.each{download ->
         def fileLocation = new File('libs', download.get(0).toString())

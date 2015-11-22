@@ -2,6 +2,13 @@
 build/
 run/
 libs/
+saves/
+config/
+logs/
+crash-reports/
+asm/
+options.txt
+usernamecache.json
 
 #Gradle
 .gradle

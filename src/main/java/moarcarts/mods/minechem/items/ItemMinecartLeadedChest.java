@@ -1,24 +1,24 @@
-package moarcarts.mods.mfr.items;
+package moarcarts.mods.minechem.items;
 
 import moarcarts.entities.EntityMinecartBase;
 import moarcarts.items.ItemMinecartBase;
-import moarcarts.mods.mfr.entities.EntityMinecartDSU;
+import moarcarts.mods.minechem.entities.EntityMinecartLeadedChest;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 /**
  * @author SkySom
  */
-public class ItemMinecartDSU extends ItemMinecartBase
+public class ItemMinecartLeadedChest extends ItemMinecartBase
 {
-	public ItemMinecartDSU()
+	public ItemMinecartLeadedChest()
 	{
-		super("mfr", "minecartdsu");
+		super("minechem", "minecartleadedchest");
 	}
 
 	@Override
 	public EntityMinecartBase getEntityFromItem(World world, ItemStack itemStack)
 	{
-		return new EntityMinecartDSU(world);
+		return new EntityMinecartLeadedChest(world);
 	}
 }
