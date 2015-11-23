@@ -54,6 +54,7 @@ public class NBTCartRecipe extends ShapelessRecipes
 		return output;
 	}
 
+	@SuppressWarnings("unchecked")
 	public static List getInputList(ItemStack cartBlock)
 	{
 		List<ItemStack> list = new ArrayList();

@@ -34,3 +34,8 @@ entity.moarcarts.entityminecartwoodencrate.name=Wooden Storage Crate Cart
 item.minecartdsu.name=Deep Storage Unit Cart
 
 entity.moarcarts.entityminecartdsu.name Deep Storage Unit Cart
+
+## minechem stuff
+item.minecartleadedchest.name=Leaded Chest Cart
+
+entity.moarcarts.entityminecartleadedchest.name=Leaded Chest Cart
