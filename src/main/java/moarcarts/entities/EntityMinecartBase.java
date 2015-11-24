@@ -14,10 +14,12 @@ package moarcarts.entities;
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import moarcarts.MoarCarts;
+import moarcarts.config.ConfigSettings;
 import mods.railcraft.api.carts.IMinecart;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -85,7 +87,22 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	@Override
 	public void killMinecart(DamageSource damageSource)
 	{
-		super.killMinecart(damageSource);
+		this.setDead();
+
+		if(ConfigSettings.doMinecartsBreakOnDrop())
+		{
+			ItemStack cartItemStack = new ItemStack(Items.minecart, 1);
+			ItemStack cartBlockItemStack = new ItemStack(this.getCartBlock());
+			this.entityDropItem(cartItemStack, 0.0F);
+			this.entityDropItem(cartBlockItemStack, 0.0F);
+		} else {
+			ItemStack cartItemStack = this.getCartItem();
+			if (this.func_95999_t() != null)
+			{
+				cartItemStack.setStackDisplayName(this.func_95999_t());
+				this.entityDropItem(cartItemStack, 0.0F);
+			}
+		}
 	}
 
 	@Override
