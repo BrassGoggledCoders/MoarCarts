@@ -24,9 +24,6 @@ public class RenderMinecartTEBase extends RenderMinecart
 	{
 		if(entityMinecart instanceof EntityMinecartTEBase)
 		{
-			double oldX = posX;
-			double oldY = posY;
-			double oldZ = posZ;
 			entityMinecartTEBase = (EntityMinecartTEBase) entityMinecart;
 			this.field_94145_f.blockAccess = entityMinecartTEBase.getFakeWorld();
 			GL11.glPushMatrix();
@@ -102,10 +99,10 @@ public class RenderMinecartTEBase extends RenderMinecart
 			GL11.glTranslatef(0.0F, (float) offset / 16.0F, 0.0F);
 			switch(entityMinecartTEBase.getRenderMethod()) {
 				case VMC:
-					renderVMCMethod(entityMinecartTEBase, block, offset, metadata, p_76986_9_);
+					renderVMCMethod(entityMinecartTEBase, block, metadata, p_76986_9_);
 					break;
 				case TESR:
-					renderTESRMethod(entityMinecartTEBase, oldX, oldY, oldZ);
+					renderTESRMethod(entityMinecartTEBase);
 					break;
 				case ISBRH:
 					renderISBRH(entityMinecartTEBase, block, offset);
@@ -130,15 +127,15 @@ public class RenderMinecartTEBase extends RenderMinecart
 		renderSidesFromTile(block);
 	}
 
-	private void renderTESRMethod(EntityMinecartTEBase entityMinecartTEBase, double posX, double posY, double posZ)
+	private void renderTESRMethod(EntityMinecartTEBase entityMinecartTEBase)
 	{
-		TileEntityRendererDispatcher.instance.renderTileEntityAt(entityMinecartTEBase.getTileEntity(),
-				posX, posY, posZ, 0.0F);
+		GL11.glRotated(90D, 0D, 1D, 0D);
+		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+		TileEntityRendererDispatcher.instance.renderTileEntityAt(entityMinecartTEBase.getTileEntity(), 0, 0, 0, 0.0F);
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 	}
 
-	private void renderVMCMethod(EntityMinecartTEBase entityMinecartTEBase, Block block, int offset,
-			int data, float p_76986_9_)
+	private void renderVMCMethod(EntityMinecartTEBase entityMinecartTEBase, Block block, int data, float p_76986_9_)
 	{
 		if(block.getRenderType() != -1)
 		{
