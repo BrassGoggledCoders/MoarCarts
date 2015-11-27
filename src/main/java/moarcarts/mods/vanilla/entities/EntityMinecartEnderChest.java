@@ -16,7 +16,7 @@ import moarcarts.mods.vanilla.items.ItemMinecartEnderChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.InventoryEnderChest;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
 /**
@@ -30,9 +30,9 @@ public class EntityMinecartEnderChest extends EntityMinecartBase
 	}
 
 	@Override
-	public ItemStack getCartItem()
+	public Item getItem()
 	{
-		return new ItemStack(new ItemMinecartEnderChest());
+		return new ItemMinecartEnderChest();
 	}
 
 	@Override

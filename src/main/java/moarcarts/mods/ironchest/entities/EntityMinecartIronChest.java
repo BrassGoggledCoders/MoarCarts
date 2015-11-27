@@ -9,7 +9,7 @@ import moarcarts.mods.ironchest.containers.ContainerMinecartIronChest;
 import moarcarts.mods.ironchest.items.ItemMinecartIronChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
 import java.lang.reflect.Constructor;
@@ -30,9 +30,9 @@ public class EntityMinecartIronChest extends EntityMinecartInventoryTEBase imple
 	}
 
 	@Override
-	public ItemStack getCartItem()
+	public Item getItem()
 	{
-		return new ItemStack(new ItemMinecartIronChest(), 1, this.getMetadata());
+		return new ItemMinecartIronChest();
 	}
 
 	public IronChestType getIronChestType()
@@ -58,4 +58,6 @@ public class EntityMinecartIronChest extends EntityMinecartInventoryTEBase imple
 	{
 		return new ContainerMinecartIronChest(entityPlayer.inventory, this);
 	}
+
+
 }

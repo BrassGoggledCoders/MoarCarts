@@ -18,6 +18,7 @@ import mods.railcraft.api.carts.IMinecart;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -42,7 +43,12 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 		this.setCartBlock(block);
 	}
 
-	public abstract ItemStack getCartItem();
+	public abstract Item getItem();
+
+	public ItemStack getCartItem()
+	{
+		return new ItemStack(this.getItem(), 1, this.getMetadata());
+	}
 
 	@Override
 	public void entityInit(){

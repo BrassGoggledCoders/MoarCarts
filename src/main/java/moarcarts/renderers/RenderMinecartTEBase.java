@@ -150,45 +150,39 @@ public class RenderMinecartTEBase extends RenderMinecart
 
 	private void renderSidesFromTile(Block block)
 	{
-		GL11.glPushMatrix();
 		Tessellator tessellator = Tessellator.instance;
-		block.setBlockBoundsForItemRender();
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-		float f1 = 0.00F;
+
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, -1.0F, 0.0F);
-
 		this.field_94145_f.renderFaceYNeg(block, 0.0D, 0.0D, 0.0D, this.getBlockIcon(block, 0));
 		tessellator.draw();
+
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, 1.0F, 0.0F);
 		this.field_94145_f.renderFaceYPos(block, 0.0D, 0.0D, 0.0D, this.getBlockIcon(block, 1));
 		tessellator.draw();
+
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, 0.0F, -1.0F);
-		tessellator.addTranslation(0.0F, 0.0F, f1);
 		this.field_94145_f.renderFaceZNeg(block, 0.0D, 0.0D, 0.0D, this.getBlockIcon(block, 2));
-		tessellator.addTranslation(0.0F, 0.0F, -f1);
+
 		tessellator.draw();
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, 0.0F, 1.0F);
-		tessellator.addTranslation(0.0F, 0.0F, -f1);
 		this.field_94145_f.renderFaceZPos(block, 0.0D, 0.0D, 0.0D, this.getBlockIcon(block, 3));
-		tessellator.addTranslation(0.0F, 0.0F, f1);
 		tessellator.draw();
+
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(-1.0F, 0.0F, 0.0F);
-		tessellator.addTranslation(f1, 0.0F, 0.0F);
 		this.field_94145_f.renderFaceXNeg(block, 0.0D, 0.0D, 0.0D, this.getBlockIcon(block, 4));
-		tessellator.addTranslation(-f1, 0.0F, 0.0F);
 		tessellator.draw();
+
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(1.0F, 0.0F, 0.0F);
-		tessellator.addTranslation(-f1, 0.0F, 0.0F);
 		this.field_94145_f.renderFaceXPos(block, 0.0D, 0.0D, 0.0D, this.getBlockIcon(block, 5));
-		tessellator.addTranslation(f1, 0.0F, 0.0F);
 		tessellator.draw();
+
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-		GL11.glPopMatrix();
 	}
 }

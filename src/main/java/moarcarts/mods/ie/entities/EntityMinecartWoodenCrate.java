@@ -8,7 +8,7 @@ import moarcarts.entities.EntityMinecartInventoryTEBase;
 import moarcarts.mods.ie.container.ContainerMinecartWoodenCrate;
 import moarcarts.mods.ie.items.ItemMinecartWoodenCrate;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
 /**
@@ -19,12 +19,6 @@ public class EntityMinecartWoodenCrate extends EntityMinecartInventoryTEBase imp
 	public EntityMinecartWoodenCrate(World world)
 	{
 		super(world, IEContent.blockWoodenDevice, 4);
-	}
-
-	@Override
-	public ItemStack getCartItem()
-	{
-		return new ItemStack(new ItemMinecartWoodenCrate());
 	}
 
 	@Override
@@ -39,5 +33,11 @@ public class EntityMinecartWoodenCrate extends EntityMinecartInventoryTEBase imp
 	public Object getServerGuiElement(int i, EntityPlayer entityPlayer, World world, int i1, int i2, int i3)
 	{
 		return new ContainerMinecartWoodenCrate(entityPlayer.inventory, this);
+	}
+
+	@Override
+	public Item getItem()
+	{
+		return new ItemMinecartWoodenCrate();
 	}
 }

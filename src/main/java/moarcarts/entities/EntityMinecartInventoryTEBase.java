@@ -1,7 +1,6 @@
 package moarcarts.entities;
 
 import cpw.mods.fml.common.Optional;
-import moarcarts.MoarCarts;
 import moarcarts.renderers.IRenderBlock;
 import mods.railcraft.api.carts.IItemCart;
 import net.minecraft.block.Block;
@@ -39,8 +38,6 @@ public abstract class EntityMinecartInventoryTEBase extends EntityMinecartTEBase
 	@Override
 	public void setDead()
 	{
-		MoarCarts.logger.devInfo(this.dropContentsWhenDead() + "");
-		MoarCarts.logger.devInfo(!this.shouldSaveDataToItem() + "");
 		if (this.dropContentsWhenDead() && !this.shouldSaveDataToItem())
 		{
 			for (int i = 0; i < this.getSizeInventory(); ++i)

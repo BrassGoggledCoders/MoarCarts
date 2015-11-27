@@ -7,7 +7,7 @@ import moarcarts.mods.mfr.containers.ContainerMinecartDSU;
 import moarcarts.mods.mfr.items.ItemMinecartDSU;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import powercrystals.minefactoryreloaded.gui.client.GuiDeepStorageUnit;
 import powercrystals.minefactoryreloaded.tile.machine.TileEntityDeepStorageUnit;
@@ -25,9 +25,9 @@ public class EntityMinecartDSU extends EntityMinecartDeepStorageTEBase implement
 	}
 
 	@Override
-	public ItemStack getCartItem()
+	public Item getItem()
 	{
-		return new ItemStack(new ItemMinecartDSU());
+		return new ItemMinecartDSU();
 	}
 
 	@Override

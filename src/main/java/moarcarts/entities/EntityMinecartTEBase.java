@@ -120,10 +120,10 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 		} else {
 			if(this.shouldSaveDataToItem())
 			{
-				itemStack = this.getCartItem();
+				itemStack = this.getCartItem().copy();
 			} else
 			{
-				itemStack = this.getItemStackWithSavedData();
+				itemStack = this.getItemStackWithSavedData().copy();
 			}
 			if(!worldObj.isRemote)
 			{

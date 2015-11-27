@@ -8,7 +8,7 @@ import moarcarts.entities.EntityMinecartInventoryTEBase;
 import moarcarts.mods.minechem.containers.ContainerMinecartLeadedChest;
 import moarcarts.mods.minechem.items.ItemMinecartLeadedChest;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
 /**
@@ -22,15 +22,15 @@ public class EntityMinecartLeadedChest extends EntityMinecartInventoryTEBase imp
 	}
 
 	@Override
-	public ItemStack getCartItem()
-	{
-		return new ItemStack(new ItemMinecartLeadedChest());
-	}
-
-	@Override
 	public RenderMethod getRenderMethod()
 	{
 		return RenderMethod.TESR;
+	}
+
+	@Override
+	public Item getItem()
+	{
+		return new ItemMinecartLeadedChest();
 	}
 
 	@Override
@@ -46,4 +46,6 @@ public class EntityMinecartLeadedChest extends EntityMinecartInventoryTEBase imp
 	{
 		return new ContainerMinecartLeadedChest(entityPlayer.inventory, this);
 	}
+
+
 }

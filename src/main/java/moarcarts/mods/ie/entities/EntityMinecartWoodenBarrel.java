@@ -3,7 +3,7 @@ package moarcarts.mods.ie.entities;
 import blusunrize.immersiveengineering.common.IEContent;
 import moarcarts.entities.EntityMinecartFluidTEBase;
 import moarcarts.mods.ie.items.ItemMinecartWoodenBarrel;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
 /**
@@ -17,14 +17,14 @@ public class EntityMinecartWoodenBarrel extends EntityMinecartFluidTEBase
 	}
 
 	@Override
-	public ItemStack getCartItem()
-	{
-		return new ItemStack(new ItemMinecartWoodenBarrel());
-	}
-
-	@Override
 	public RenderMethod getRenderMethod()
 	{
 		return RenderMethod.ISBRH;
+	}
+
+	@Override
+	public Item getItem()
+	{
+		return new ItemMinecartWoodenBarrel();
 	}
 }
