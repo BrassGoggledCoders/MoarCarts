@@ -15,10 +15,13 @@ import boilerplate.common.utils.BlockUtils;
 import com.mojang.authlib.GameProfile;
 import cpw.mods.fml.common.Optional;
 import moarcarts.MoarCarts;
+import moarcarts.behaviors.CartDispenserBehavior;
 import moarcarts.config.ConfigSettings;
 import moarcarts.entities.EntityMinecartBase;
+import moarcarts.entities.EntityMinecartTEBase;
 import mods.railcraft.api.carts.CartTools;
 import mods.railcraft.api.core.items.IMinecartItem;
+import net.minecraft.block.BlockDispenser;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,6 +42,7 @@ public abstract class ItemMinecartBase extends ItemMinecart implements IMinecart
 		this.setTextureName(MoarCarts.MODID + ":" + mod + "/" + name);
 		this.setCreativeTab(CreativeTabs.tabTransport);
 		this.setMaxStackSize(ConfigSettings.getMinecartStackSize());
+		BlockDispenser.dispenseBehaviorRegistry.putObject(this, new CartDispenserBehavior());
 	}
 
 	@Override
@@ -80,8 +84,19 @@ public abstract class ItemMinecartBase extends ItemMinecart implements IMinecart
 				entityMinecart.posX = (float)posX + 0.5F;
 				entityMinecart.posY = (float)posY + 0.5F;
 				entityMinecart.posZ = (float)posZ + 0.5F;
+				if(entityMinecart instanceof EntityMinecartTEBase)
+				{
+					EntityMinecartTEBase entityMinecartTEBase = (EntityMinecartTEBase)entityMinecart;
+					if(itemStack.hasTagCompound() && entityMinecartTEBase.shouldSaveDataToItem())
+					{
+						entityMinecartTEBase.getTileEntity().readFromNBT(itemStack.getTagCompound());
+						world.spawnEntityInWorld(entityMinecartTEBase);
+					}
+				} else
+				{
+					world.spawnEntityInWorld(entityMinecart);
+				}
 
-				world.spawnEntityInWorld(entityMinecart);
 			}
 			--itemStack.stackSize;
 			return true;

@@ -1,13 +1,17 @@
 package moarcarts.entities;
 
 import moarcarts.MoarCarts;
+import moarcarts.config.ConfigSettings;
 import moarcarts.fakeworld.FakePlayer;
 import moarcarts.fakeworld.FakeWorld;
 import moarcarts.network.EntityTileEntityMessage;
 import moarcarts.renderers.IRenderBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -93,6 +97,51 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 	public void sendUpdate()
 	{
 		MoarCarts.packetHandler.sendToAllAround(new EntityTileEntityMessage(this), this);
+	}
+
+	public boolean shouldSaveDataToItem()
+	{
+		return false;
+	}
+
+	public void setDead()
+	{
+		EntityItem entityitem;
+		ItemStack itemStack;
+
+		if(ConfigSettings.doMinecartsBreakOnDrop())
+		{
+			ItemStack cartItemStack = new ItemStack(Items.minecart, 1);
+			ItemStack cartBlockItemStack = new ItemStack(this.getCartBlock());
+			EntityItem entityItemCart = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, cartItemStack);
+			EntityItem entityBlockItemStack = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, cartBlockItemStack);
+			this.worldObj.spawnEntityInWorld(entityItemCart);
+			this.worldObj.spawnEntityInWorld(entityBlockItemStack);
+		} else {
+			if(this.shouldSaveDataToItem())
+			{
+				itemStack = this.getCartItem();
+			} else
+			{
+				itemStack = this.getItemStackWithSavedData();
+			}
+			if(!worldObj.isRemote)
+			{
+				entityitem = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, itemStack);
+				this.worldObj.spawnEntityInWorld(entityitem);
+			}
+		}
+
+		super.setDead();
+	}
+
+	public ItemStack getItemStackWithSavedData()
+	{
+		ItemStack cartItemStack = this.getCartItem();
+		NBTTagCompound nbtTagCompound = new NBTTagCompound();
+		this.getTileEntity().writeToNBT(nbtTagCompound);
+		cartItemStack.setTagCompound(nbtTagCompound);
+		return cartItemStack;
 	}
 
 	public TileEntity createTileEntity()

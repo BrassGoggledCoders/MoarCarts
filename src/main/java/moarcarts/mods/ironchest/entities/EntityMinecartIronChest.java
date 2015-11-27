@@ -32,7 +32,7 @@ public class EntityMinecartIronChest extends EntityMinecartInventoryTEBase imple
 	@Override
 	public ItemStack getCartItem()
 	{
-		return new ItemStack(new ItemMinecartIronChest());
+		return new ItemStack(new ItemMinecartIronChest(), 1, this.getMetadata());
 	}
 
 	public IronChestType getIronChestType()
@@ -44,10 +44,9 @@ public class EntityMinecartIronChest extends EntityMinecartInventoryTEBase imple
 	public Object getClientGuiElement(int i, EntityPlayer entityPlayer, World world, int i1, int i2, int i3)
 	{
 		try {
-			Constructor<GUIChest>
-					constructor = GUIChest.class.getDeclaredConstructor(GUIChest.GUI.class, IInventory.class, IInventory.class);
+			Constructor<GUIChest> constructor = GUIChest.class.getDeclaredConstructor(GUIChest.GUI.class,
+					IInventory.class, IInventory.class);
 			constructor.setAccessible(true);
-			this.setTileEntity(this.createTileEntity());
 			return constructor.newInstance(GUIChest.GUI.values()[this.getMetadata()], entityPlayer.inventory, this);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
