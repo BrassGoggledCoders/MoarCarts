@@ -22,7 +22,6 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import moarcarts.config.ConfigHandler;
-import moarcarts.events.InteractionHandler;
 import moarcarts.mods.ie.IEModCompat;
 import moarcarts.mods.ironchest.IronChestCompat;
 import moarcarts.mods.mfr.MFRCompat;
@@ -32,7 +31,6 @@ import moarcarts.mods.vanilla.VanillaCompat;
 import moarcarts.network.PacketHandler;
 import moarcarts.proxies.CommonProxy;
 import moarcarts.recipes.NBTCartRecipe;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.RecipeSorter;
 
 /*
@@ -67,8 +65,6 @@ public class MoarCarts implements IBoilerplateMod
 		ConfigHandler.init();
 
 		compatibilityHandler.preInit(event);
-
-		MinecraftForge.EVENT_BUS.register(new InteractionHandler());
 	}
 
 	@EventHandler
