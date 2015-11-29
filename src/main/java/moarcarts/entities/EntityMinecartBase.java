@@ -14,10 +14,12 @@ package moarcarts.entities;
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import moarcarts.MoarCarts;
+import moarcarts.config.ConfigSettings;
 import mods.railcraft.api.carts.IMinecart;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -116,6 +118,7 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 		return true;
 	}
 
+
 	@Override
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {
 		super.readFromNBT(nbtTagCompound);
@@ -131,6 +134,31 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	public boolean hasCustomInventoryName()
 	{
 		return false;
+	}
+
+	@Override
+	public void setDead()
+	{
+		super.setDead();
+		ItemStack blockCartItemStack;
+
+		if(ConfigSettings.doMinecartsBreakOnDrop())
+		{
+			blockCartItemStack = new ItemStack(getCartBlock());
+			ItemStack cartItemStack = new ItemStack(Items.minecart, 1);
+			this.entityDropItem(cartItemStack, 0.1F);
+		} else
+		{
+			blockCartItemStack = new ItemStack(this.getItem(), 1, this.getMetadata());
+		}
+		this.dropCart(blockCartItemStack);
+	}
+
+	public void dropCart(ItemStack cartItem)
+	{
+		if(!worldObj.isRemote) {
+			this.entityDropItem(cartItem, 0.1F);
+		}
 	}
 
 	@Override

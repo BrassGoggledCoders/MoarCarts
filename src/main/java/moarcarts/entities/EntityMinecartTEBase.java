@@ -1,16 +1,13 @@
 package moarcarts.entities;
 
 import moarcarts.MoarCarts;
-import moarcarts.config.ConfigSettings;
 import moarcarts.fakeworld.FakePlayer;
 import moarcarts.fakeworld.FakeWorld;
 import moarcarts.network.EntityTileEntityMessage;
 import moarcarts.renderers.IRenderBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -104,44 +101,24 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 		return false;
 	}
 
-	public void setDead()
+	public void dropCart(ItemStack cartItem)
 	{
-		EntityItem entityitem;
-		ItemStack itemStack;
-
-		if(ConfigSettings.doMinecartsBreakOnDrop())
+		if(this.shouldSaveDataToItem())
 		{
-			ItemStack cartItemStack = new ItemStack(Items.minecart, 1);
-			ItemStack cartBlockItemStack = new ItemStack(this.getCartBlock());
-			EntityItem entityItemCart = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, cartItemStack);
-			EntityItem entityBlockItemStack = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, cartBlockItemStack);
-			this.worldObj.spawnEntityInWorld(entityItemCart);
-			this.worldObj.spawnEntityInWorld(entityBlockItemStack);
-		} else {
-			if(this.shouldSaveDataToItem())
+			NBTTagCompound nbtTagCompound = new NBTTagCompound();
+			NBTTagCompound itemNBTTagCompound;
+			this.getTileEntity().writeToNBT(nbtTagCompound);
+			if(cartItem.hasTagCompound())
 			{
-				itemStack = this.getCartItem().copy();
+				itemNBTTagCompound = cartItem.getTagCompound();
 			} else
 			{
-				itemStack = this.getItemStackWithSavedData().copy();
+				itemNBTTagCompound = new NBTTagCompound();
 			}
-			if(!worldObj.isRemote)
-			{
-				entityitem = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, itemStack);
-				this.worldObj.spawnEntityInWorld(entityitem);
-			}
+			this.getTileEntity().writeToNBT(nbtTagCompound);
+			itemNBTTagCompound.setTag("tilenbt", nbtTagCompound);
 		}
-
-		super.setDead();
-	}
-
-	public ItemStack getItemStackWithSavedData()
-	{
-		ItemStack cartItemStack = this.getCartItem();
-		NBTTagCompound nbtTagCompound = new NBTTagCompound();
-		this.getTileEntity().writeToNBT(nbtTagCompound);
-		cartItemStack.setTagCompound(nbtTagCompound);
-		return cartItemStack;
+		super.dropCart(cartItem);
 	}
 
 	public TileEntity createTileEntity()

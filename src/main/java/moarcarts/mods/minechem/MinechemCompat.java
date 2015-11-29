@@ -17,7 +17,7 @@ import moarcarts.recipes.NBTCartRecipe;
  */
 public class MinechemCompat extends ModCompat
 {
-	public ItemMinecartLeadedChest ITEM_MINECART_LEADEDCHEST;
+	public static ItemMinecartLeadedChest ITEM_MINECART_LEADEDCHEST;
 
 	@Override
 	public String getName()

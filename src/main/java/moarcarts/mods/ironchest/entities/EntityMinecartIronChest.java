@@ -5,8 +5,8 @@ import cpw.mods.ironchest.IronChest;
 import cpw.mods.ironchest.IronChestType;
 import cpw.mods.ironchest.client.GUIChest;
 import moarcarts.entities.EntityMinecartInventoryTEBase;
+import moarcarts.mods.ironchest.IronChestCompat;
 import moarcarts.mods.ironchest.containers.ContainerMinecartIronChest;
-import moarcarts.mods.ironchest.items.ItemMinecartIronChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -32,7 +32,7 @@ public class EntityMinecartIronChest extends EntityMinecartInventoryTEBase imple
 	@Override
 	public Item getItem()
 	{
-		return new ItemMinecartIronChest();
+		return IronChestCompat.ITEM_MINECART_IRONCHEST;
 	}
 
 	public IronChestType getIronChestType()

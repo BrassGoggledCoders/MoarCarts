@@ -2,7 +2,7 @@ package moarcarts.mods.ie.entities;
 
 import blusunrize.immersiveengineering.common.IEContent;
 import moarcarts.entities.EntityMinecartFluidTEBase;
-import moarcarts.mods.ie.items.ItemMinecartWoodenBarrel;
+import moarcarts.mods.ie.IEModCompat;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
@@ -25,6 +25,6 @@ public class EntityMinecartWoodenBarrel extends EntityMinecartFluidTEBase
 	@Override
 	public Item getItem()
 	{
-		return new ItemMinecartWoodenBarrel();
+		return IEModCompat.ITEM_MINECART_WOODENBARREL;
 	}
 }

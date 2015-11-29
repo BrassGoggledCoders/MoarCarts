@@ -5,8 +5,8 @@ import blusunrize.immersiveengineering.common.IEContent;
 import blusunrize.immersiveengineering.common.blocks.wooden.TileEntityWoodenCrate;
 import boilerplate.api.IOpenableGUI;
 import moarcarts.entities.EntityMinecartInventoryTEBase;
+import moarcarts.mods.ie.IEModCompat;
 import moarcarts.mods.ie.container.ContainerMinecartWoodenCrate;
-import moarcarts.mods.ie.items.ItemMinecartWoodenCrate;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
@@ -38,6 +38,6 @@ public class EntityMinecartWoodenCrate extends EntityMinecartInventoryTEBase imp
 	@Override
 	public Item getItem()
 	{
-		return new ItemMinecartWoodenCrate();
+		return IEModCompat.ITEM_MINECART_WOODENCRATE;
 	}
 }
