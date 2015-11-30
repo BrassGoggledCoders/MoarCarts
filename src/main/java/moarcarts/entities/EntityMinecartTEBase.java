@@ -13,16 +13,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
 /**
  * @author SkySom
  */
 public abstract class EntityMinecartTEBase extends EntityMinecartBase implements IRenderBlock
 {
 	protected TileEntity tileEntity;
-	protected FakeWorld fakeWorld;
-	protected Random random = new Random();
 
 	private static int IS_DIRTY_DW = 30;
 	private static int UPDATE_TICKS = 200;
@@ -40,7 +36,7 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 	public void entityInit()
 	{
 		super.entityInit();
-		dataWatcher.addObject(IS_DIRTY_DW, Byte.valueOf((byte) 0));
+		dataWatcher.addObject(IS_DIRTY_DW, (byte) 0);
 	}
 
 	@Override
@@ -51,6 +47,10 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 		{
 			this.setDirty(false);
 			this.sendUpdate();
+		}
+		if(shouldTileUpdate())
+		{
+			this.getTileEntity().updateEntity();
 		}
 	}
 
@@ -176,6 +176,11 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 		}
 	}
 
+	public boolean shouldTileUpdate()
+	{
+		return false;
+	}
+
 	public boolean isDirty()
 	{
 		return dataWatcher.getWatchableObjectByte(IS_DIRTY_DW) != 0;
@@ -183,20 +188,6 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 
 	public void setDirty(boolean isDirty)
 	{
-		dataWatcher.updateObject(IS_DIRTY_DW, Byte.valueOf(isDirty ? 1 : (byte) 0));
-	}
-
-	public FakeWorld getFakeWorld()
-	{
-		if(fakeWorld == null)
-		{
-			fakeWorld = new FakeWorld(this);
-		}
-		return fakeWorld;
-	}
-
-	public void setFakeWorld(FakeWorld fakeWorld)
-	{
-		this.fakeWorld = fakeWorld;
+		dataWatcher.updateObject(IS_DIRTY_DW, isDirty ? 1 : (byte) 0);
 	}
 }

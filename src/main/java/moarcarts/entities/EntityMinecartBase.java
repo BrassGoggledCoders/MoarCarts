@@ -15,6 +15,7 @@ import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import moarcarts.MoarCarts;
 import moarcarts.config.ConfigSettings;
+import moarcarts.fakeworld.FakeWorld;
 import mods.railcraft.api.carts.IMinecart;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityMinecart;
@@ -27,6 +28,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.minecart.MinecartInteractEvent;
 
+import java.util.Random;
+
 /**
  * @author SkySom
  */
@@ -34,6 +37,8 @@ import net.minecraftforge.event.entity.minecart.MinecartInteractEvent;
 public abstract class EntityMinecartBase extends EntityMinecart implements IMinecart
 {
 	protected Block cartBlock;
+	protected Random random;
+	protected FakeWorld fakeWorld;
 
 	private static int METADATA_DW = 31;
 	private static String METADATA = "METADATA";
@@ -43,6 +48,8 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 		super(world);
 		this.setMetadata(metadata);
 		this.setCartBlock(block);
+		this.fakeWorld = new FakeWorld(this);
+		this.random = new Random();
 	}
 
 	public abstract Item getItem();
@@ -118,6 +125,15 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 		return true;
 	}
 
+	@Override
+	public void onUpdate()
+	{
+		super.onUpdate();
+		if(this.shouldDoDisplayTick() && this.worldObj.isRemote)
+		{
+			this.doDisplayTick();
+		}
+	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {
@@ -156,7 +172,8 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 
 	public void dropCart(ItemStack cartItem)
 	{
-		if(!worldObj.isRemote) {
+		if(!worldObj.isRemote)
+		{
 			this.entityDropItem(cartItem, 0.1F);
 		}
 	}
@@ -170,6 +187,19 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 			return itemStack.isItemEqual(entityMinecart.getCartItem());
 		}
 		return false;
+	}
+
+	public boolean shouldDoDisplayTick()
+	{
+		return false;
+	}
+
+	public void doDisplayTick()
+	{
+		int intPosX = (int)Math.floor(this.posX);
+		int intPosY = (int)Math.floor(this.posY);
+		int intPosZ = (int)Math.floor(this.posZ);
+		this.getCartBlock().randomDisplayTick(this.fakeWorld, intPosX, intPosY, intPosZ, random);
 	}
 
 	public Block getCartBlock()
@@ -190,5 +220,19 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	public void setMetadata(int metadata)
 	{
 		this.dataWatcher.updateObject(METADATA_DW, metadata);
+	}
+
+	public FakeWorld getFakeWorld()
+	{
+		if(fakeWorld == null)
+		{
+			fakeWorld = new FakeWorld(this);
+		}
+		return fakeWorld;
+	}
+
+	public void setFakeWorld(FakeWorld fakeWorld)
+	{
+		this.fakeWorld = fakeWorld;
 	}
 }

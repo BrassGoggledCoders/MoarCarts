@@ -44,4 +44,10 @@ public class EntityMinecartEnderChest extends EntityMinecartBase
 		}
 		return true;
 	}
+
+	@Override
+	public boolean shouldDoDisplayTick()
+	{
+		return true;
+	}
 }
