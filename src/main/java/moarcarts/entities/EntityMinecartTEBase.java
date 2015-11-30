@@ -58,8 +58,12 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 	public boolean interactFirst(EntityPlayer player)
 	{
 		this.sendUpdate();
-		FakePlayer fakePlayer = new FakePlayer(player, this);
-		return this.getCartBlock().onBlockActivated(this.getFakeWorld(), 0, 0, 0, fakePlayer, this.getMetadata(), 0, 0, 0);
+		if(!player.isSneaking())
+		{
+			FakePlayer fakePlayer = new FakePlayer(player, this);
+			return this.getCartBlock().onBlockActivated(this.getFakeWorld(), 0, 0, 0, fakePlayer, this.getMetadata(), 0, 0, 0);
+		}
+		return false;
 	}
 
 	@Override

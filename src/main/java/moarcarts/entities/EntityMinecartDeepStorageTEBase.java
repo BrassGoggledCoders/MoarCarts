@@ -1,6 +1,7 @@
 package moarcarts.entities;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import powercrystals.minefactoryreloaded.api.IDeepStorageUnit;
@@ -8,7 +9,7 @@ import powercrystals.minefactoryreloaded.api.IDeepStorageUnit;
 /**
  * @author SkySom
  */
-public abstract class EntityMinecartDeepStorageTEBase extends EntityMinecartTEBase implements IDeepStorageUnit
+public abstract class EntityMinecartDeepStorageTEBase extends EntityMinecartInventoryTEBase implements IDeepStorageUnit
 {
 	public EntityMinecartDeepStorageTEBase(World world, Block block, int metadata)
 	{
@@ -42,5 +43,12 @@ public abstract class EntityMinecartDeepStorageTEBase extends EntityMinecartTEBa
 	public IDeepStorageUnit getIDeepStorageUnitEntity()
 	{
 		return (IDeepStorageUnit)this.getTileEntity();
+	}
+
+	@Override
+	public boolean canAcceptPushedItem(EntityMinecart entityMinecart, ItemStack itemStack)
+	{
+		return itemStack != null && (this.getStoredItemType() == null ||
+				itemStack.getItem() == this.getStoredItemType().getItem());
 	}
 }
