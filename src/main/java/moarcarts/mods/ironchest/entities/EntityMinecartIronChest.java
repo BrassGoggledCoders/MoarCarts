@@ -58,6 +58,4 @@ public class EntityMinecartIronChest extends EntityMinecartInventoryTEBase imple
 	{
 		return new ContainerMinecartIronChest(entityPlayer.inventory, this);
 	}
-
-
 }

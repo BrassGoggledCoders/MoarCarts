@@ -117,6 +117,7 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 			}
 			this.getTileEntity().writeToNBT(nbtTagCompound);
 			itemNBTTagCompound.setTag("tilenbt", nbtTagCompound);
+			cartItem.setTagCompound(itemNBTTagCompound);
 		}
 		super.dropCart(cartItem);
 	}

@@ -40,4 +40,10 @@ public class EntityMinecartWoodenCrate extends EntityMinecartInventoryTEBase imp
 	{
 		return IEModCompat.ITEM_MINECART_WOODENCRATE;
 	}
+
+	@Override
+	public boolean shouldSaveDataToItem()
+	{
+		return true;
+	}
 }

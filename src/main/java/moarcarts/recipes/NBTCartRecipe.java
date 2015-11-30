@@ -6,6 +6,7 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ShapelessRecipes;
+import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +48,16 @@ public class NBTCartRecipe extends ShapelessRecipes
 			ItemStack currentSlotStack = inventoryCrafting.getStackInSlot(slot);
 			if(currentSlotStack.hasTagCompound())
 			{
-				output.setTagCompound(currentSlotStack.getTagCompound());
+				NBTTagCompound outputTagCompound;
+				if(output.hasTagCompound())
+				{
+					outputTagCompound = output.getTagCompound();
+				} else
+				{
+					outputTagCompound = new NBTTagCompound();
+				}
+				outputTagCompound.setTag("tilenbt", currentSlotStack.getTagCompound());
+				output.setTagCompound(outputTagCompound);
 				break;
 			}
 		}
