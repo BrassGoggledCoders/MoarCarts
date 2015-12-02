@@ -3,5 +3,7 @@
 
 A rewrite/fork of ExtraCarts intended to bring it into the BGC Family of mods.
 
+http://www.curse.com/mc-mods/minecraft/238471-moarcarts
+
 Special Thanks to:
 K-4U - Jenkins/Maven Support
