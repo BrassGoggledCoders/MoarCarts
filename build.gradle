@@ -80,7 +80,7 @@ task getLibraries {
             '-' + config.ironchest.version + '/' + ironchest
 
     def immersiveengineering = 'immersive-engineering-' + config.immersiveengineering.version + '.jar'
-    def immersiveengineeringSource = 'http://minecraft.curseforge.com/projects/immersive-engineering/files/2265997/download'
+    def immersiveengineeringSource = 'http://minecraft.curseforge.com/projects/immersive-engineering/files/2266789/download'
 
     def inventorytweaks = 'inventory-tweaks-' + config.invtweaks.version + '.jar'
     def inventorytweaksSource = 'http://minecraft.curseforge.com/projects/inventory-tweaks/files/2210792/download'
@@ -122,6 +122,7 @@ task getLibraries {
             }
         }
         if(!isInDownloadList) {
+            println "Deleting file " + file.name
             file.delete();
         }
     }
