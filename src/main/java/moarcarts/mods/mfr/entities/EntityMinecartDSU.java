@@ -3,8 +3,8 @@ package moarcarts.mods.mfr.entities;
 import boilerplate.api.IOpenableGUI;
 import cpw.mods.fml.common.registry.GameRegistry;
 import moarcarts.entities.EntityMinecartDeepStorageTEBase;
+import moarcarts.mods.mfr.MFRCompat;
 import moarcarts.mods.mfr.containers.ContainerMinecartDSU;
-import moarcarts.mods.mfr.items.ItemMinecartDSU;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -27,7 +27,13 @@ public class EntityMinecartDSU extends EntityMinecartDeepStorageTEBase implement
 	@Override
 	public Item getItem()
 	{
-		return new ItemMinecartDSU();
+		return MFRCompat.ITEM_MINECART_DSU;
+	}
+
+	@Override
+	public boolean shouldSaveDataToItem()
+	{
+		return true;
 	}
 
 	@Override

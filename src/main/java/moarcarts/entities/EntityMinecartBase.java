@@ -56,7 +56,8 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 
 	public ItemStack getCartItem()
 	{
-		return new ItemStack(this.getItem(), 1, this.getMetadata());
+		int metaData = (this.getItem().getHasSubtypes()) ? this.getMetadata() : 0;
+		return new ItemStack(this.getItem(), 1, metaData);
 	}
 
 	@Override

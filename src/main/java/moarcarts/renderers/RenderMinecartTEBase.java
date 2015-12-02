@@ -150,7 +150,7 @@ public class RenderMinecartTEBase extends RenderMinecart
 
 	private void renderSidesFromTile(Block block)
 	{
-		this.field_94145_f.setRenderBoundsFromBlock(block);
+		this.field_94145_f.setRenderBounds(0,0,0,1,1,1);
 
 		Tessellator tessellator = Tessellator.instance;
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
