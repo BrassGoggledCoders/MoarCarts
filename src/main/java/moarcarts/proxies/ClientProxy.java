@@ -5,6 +5,8 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import moarcarts.MoarCarts;
 import moarcarts.entities.EntityMinecartTEBase;
 import moarcarts.renderers.RenderMinecartTEBase;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.World;
 
 /**
  * @author SkySom
@@ -22,5 +24,10 @@ public class ClientProxy extends CommonProxy
 	private void registerRenderers()
 	{
 		RenderingRegistry.registerEntityRenderingHandler(EntityMinecartTEBase.class, new RenderMinecartTEBase());
+	}
+
+	public World getWorld()
+	{
+		return Minecraft.getMinecraft().theWorld;
 	}
 }

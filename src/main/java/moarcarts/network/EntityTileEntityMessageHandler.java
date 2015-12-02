@@ -5,7 +5,6 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
 import moarcarts.MoarCarts;
 import moarcarts.entities.EntityMinecartTEBase;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 
@@ -39,7 +38,7 @@ public class EntityTileEntityMessageHandler implements IMessageHandler<EntityTil
 		if(ctx.side == Side.SERVER) {
 			return ctx.getServerHandler().playerEntity.worldObj;
 		} else {
-			return Minecraft.getMinecraft().theWorld;
+			return MoarCarts.proxy.getWorld();
 		}
 	}
 }
