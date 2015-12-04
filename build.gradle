@@ -38,6 +38,9 @@ minecraft {
 
     replace "@VERSION@", project.version
     replaceIn "MoarCarts.java"
+
+    replace "@VERSION@", project.version
+    replaceIn "mcmod.info"
 }
 
 repositories {
