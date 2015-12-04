@@ -10,6 +10,7 @@ import moarcarts.MoarCarts;
 import moarcarts.mods.mfr.entities.EntityMinecartDSU;
 import moarcarts.mods.mfr.items.ItemMinecartDSU;
 import moarcarts.recipes.NBTCartRecipe;
+import net.minecraft.block.Block;
 
 /**
  * @author SkySom
@@ -17,6 +18,8 @@ import moarcarts.recipes.NBTCartRecipe;
 public class MFRCompat extends ModCompat
 {
 	public static ItemMinecartDSU ITEM_MINECART_DSU;
+	public static Block DSU = GameRegistry.findBlock("MineFactoryReloaded", "machine.1");
+
 	@Override
 	public String getName()
 	{
@@ -46,6 +49,6 @@ public class MFRCompat extends ModCompat
 	@Override
 	public void init(FMLInitializationEvent event)
 	{
-		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_DSU, EntityMinecartDSU.dsu, 3));
+		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_DSU, DSU, 3));
 	}
 }

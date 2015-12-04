@@ -3,7 +3,7 @@
     "modid": "moarcarts",
     "name": "MoarCarts",
     "description": "A Rewrite and Continuation of ExtraCarts",
-    "version": "0.0.1",
+    "version": "@VERSION@",
     "mcversion": "1.7.10",
     "url": "",
     "updateUrl": "",

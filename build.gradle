@@ -29,7 +29,7 @@ project.ext {
     mcVersion = "${config.minecraft.version}"
 }
 
-version = "${config.minecraft.version}-${config.moarcarts.version}-project.ext.buildNum"
+version = "${config.minecraft.version}-${config.moarcarts.version}-${project.ext.buildNum}"
 group = "brassgoggledcoders"
 archivesBaseName = "moarcarts"
 
@@ -38,6 +38,9 @@ minecraft {
 
     replace "@VERSION@", project.version
     replaceIn "MoarCarts.java"
+
+    replace "@VERSION@", project.version
+    replaceIn "mcmod.info"
 }
 
 repositories {
