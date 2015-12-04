@@ -1,6 +1,5 @@
 package moarcarts.mods.ie;
 
-import blusunrize.immersiveengineering.common.IEContent;
 import boilerplate.common.modcompat.ModCompat;
 import boilerplate.common.utils.helpers.RegistryHelper;
 import cpw.mods.fml.common.Loader;
@@ -15,6 +14,7 @@ import moarcarts.mods.ie.items.ItemMinecartMetalBarrel;
 import moarcarts.mods.ie.items.ItemMinecartWoodenBarrel;
 import moarcarts.mods.ie.items.ItemMinecartWoodenCrate;
 import moarcarts.recipes.NBTCartRecipe;
+import net.minecraft.block.Block;
 
 /**
  * @author SkySom
@@ -24,6 +24,9 @@ public class IEModCompat extends ModCompat
 	public static ItemMinecartWoodenBarrel ITEM_MINECART_WOODENBARREL;
 	public static ItemMinecartMetalBarrel ITEM_MINECART_METALBARREL;
 	public static ItemMinecartWoodenCrate ITEM_MINECART_WOODENCRATE;
+
+	public static Block woodenDevice = GameRegistry.findBlock("ImmersiveEngineering", "blockWoodenDevice");
+	public static Block metalDevice2 = GameRegistry.findBlock("ImmersiveEngineering", "blockMetalDevice2");
 
 	@Override
 	public String getName()
@@ -56,8 +59,8 @@ public class IEModCompat extends ModCompat
 	@Override
 	public void init(FMLInitializationEvent event)
 	{
-		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_WOODENBARREL, IEContent.blockWoodenDevice, 6));
-		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_METALBARREL, IEContent.blockMetalDevice2, 7));
-		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_WOODENCRATE, IEContent.blockWoodenDevice, 4));
+		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_WOODENBARREL, woodenDevice, 6));
+		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_METALBARREL, metalDevice2, 7));
+		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_WOODENCRATE, woodenDevice, 4));
 	}
 }

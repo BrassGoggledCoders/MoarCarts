@@ -6,11 +6,11 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
-import minechem.MinechemBlocksGeneration;
 import moarcarts.MoarCarts;
 import moarcarts.mods.minechem.entities.EntityMinecartLeadedChest;
 import moarcarts.mods.minechem.items.ItemMinecartLeadedChest;
 import moarcarts.recipes.NBTCartRecipe;
+import net.minecraft.block.Block;
 
 /**
  * @author SkySom
@@ -18,6 +18,8 @@ import moarcarts.recipes.NBTCartRecipe;
 public class MinechemCompat extends ModCompat
 {
 	public static ItemMinecartLeadedChest ITEM_MINECART_LEADEDCHEST;
+
+	public static Block leadedChest = GameRegistry.findBlock("minechem", "leadchest");
 
 	@Override
 	public String getName()
@@ -42,6 +44,6 @@ public class MinechemCompat extends ModCompat
 	@Override
 	public void init(FMLInitializationEvent event)
 	{
-		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_LEADEDCHEST, MinechemBlocksGeneration.leadChest));
+		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_LEADEDCHEST, leadedChest));
 	}
 }
