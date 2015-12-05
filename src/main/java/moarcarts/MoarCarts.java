@@ -27,6 +27,7 @@ import moarcarts.mods.ironchest.IronChestCompat;
 import moarcarts.mods.mfr.MFRCompat;
 import moarcarts.mods.minechem.MinechemCompat;
 import moarcarts.mods.railcraft.RailcraftCompat;
+import moarcarts.mods.rf.RFCompat;
 import moarcarts.mods.vanilla.VanillaCompat;
 import moarcarts.network.PacketHandler;
 import moarcarts.proxies.CommonProxy;
@@ -85,9 +86,10 @@ public class MoarCarts implements IBoilerplateMod
 
 	public void initModCompatHandler()
 	{
-		compatibilityHandler = new CompatibilityHandler(this.logger);
+		compatibilityHandler = new CompatibilityHandler(MoarCarts.logger);
 		compatibilityHandler.addModCompat(new VanillaCompat());
 		compatibilityHandler.addModCompat(new RailcraftCompat());
+		compatibilityHandler.addModCompat(new RFCompat());
 		compatibilityHandler.addModCompat(new IronChestCompat());
 		compatibilityHandler.addModCompat(new IEModCompat());
 		compatibilityHandler.addModCompat(new MFRCompat());
