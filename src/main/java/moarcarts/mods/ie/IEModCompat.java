@@ -7,9 +7,11 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import moarcarts.MoarCarts;
+import moarcarts.mods.ie.entities.EntityMinecartLVCapacitor;
 import moarcarts.mods.ie.entities.EntityMinecartMetalBarrel;
 import moarcarts.mods.ie.entities.EntityMinecartWoodenBarrel;
 import moarcarts.mods.ie.entities.EntityMinecartWoodenCrate;
+import moarcarts.mods.ie.items.ItemMinecartCapacitor;
 import moarcarts.mods.ie.items.ItemMinecartMetalBarrel;
 import moarcarts.mods.ie.items.ItemMinecartWoodenBarrel;
 import moarcarts.mods.ie.items.ItemMinecartWoodenCrate;
@@ -24,8 +26,10 @@ public class IEModCompat extends ModCompat
 	public static ItemMinecartWoodenBarrel ITEM_MINECART_WOODENBARREL;
 	public static ItemMinecartMetalBarrel ITEM_MINECART_METALBARREL;
 	public static ItemMinecartWoodenCrate ITEM_MINECART_WOODENCRATE;
+	public static ItemMinecartCapacitor ITEM_MINECART_CAPACITOR;
 
 	public static Block woodenDevice = GameRegistry.findBlock("ImmersiveEngineering", "blockWoodenDevice");
+	public static Block metalDevice = GameRegistry.findBlock("ImmersiveEngineering", "blockMetalDevice");
 	public static Block metalDevice2 = GameRegistry.findBlock("ImmersiveEngineering", "blockMetalDevice2");
 
 	@Override
@@ -54,6 +58,10 @@ public class IEModCompat extends ModCompat
 		ITEM_MINECART_WOODENCRATE = new ItemMinecartWoodenCrate();
 		RegistryHelper.registerItem(ITEM_MINECART_WOODENCRATE, MoarCarts.MODID);
 		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartWoodenCrate.class, "entityminecartwoodencrate");
+
+		ITEM_MINECART_CAPACITOR = new ItemMinecartCapacitor();
+		RegistryHelper.registerItem(ITEM_MINECART_CAPACITOR, MoarCarts.MODID);
+		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartLVCapacitor.class, "entityminecartlvcapacitor");
 	}
 
 	@Override
@@ -62,5 +70,6 @@ public class IEModCompat extends ModCompat
 		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_WOODENBARREL, woodenDevice, 6));
 		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_METALBARREL, metalDevice2, 7));
 		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_WOODENCRATE, woodenDevice, 4));
+		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_CAPACITOR, metalDevice, 1));
 	}
 }

@@ -34,6 +34,7 @@ public class FakeWorld extends World
 		{
 			this.setEntityMinecartTEBase((EntityMinecartTEBase)entityMinecartBase);
 		}
+		this.isRemote = world.isRemote;
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package moarcarts.mods.rf.tileentities;
 import boilerplate.common.utils.BlockUtils;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
+import moarcarts.MoarCarts;
 import mods.railcraft.api.carts.CartTools;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,7 +18,7 @@ import net.minecraftforge.common.util.ForgeDirection;
  */
 public class TileRFLoader extends TileEntity implements IEnergyHandler
 {
-	protected int[] sideConfig={-1,0,-1,-1,-1,-1};
+	protected int[] sideConfig={0,0,0,0,0,0};
 	protected EnergyStorage energyStorage;
 
 	public TileRFLoader()
@@ -41,15 +42,23 @@ public class TileRFLoader extends TileEntity implements IEnergyHandler
 				{
 					EntityMinecart entityMinecart = CartTools.getMinecartOnSide(this.worldObj, xCoord, yCoord, zCoord,
 							1F, direction);
+					MoarCarts.logger.devInfo(entityMinecart.toString());
 					if(entityMinecart instanceof IEnergyHandler)
 					{
 						IEnergyHandler energyCart = (IEnergyHandler)entityMinecart;
 						if(this.sideConfig[direction.ordinal()] == -1)
 						{
-							unLoadCart(direction, energyCart);
-						} else
+							if(energyCart.canConnectEnergy(direction.getOpposite()))
+							{
+								MoarCarts.logger.devInfo(direction.getOpposite().toString());
+								this.unLoadCart(direction, energyCart);
+							}
+						} else if(this.sideConfig[direction.ordinal()] == 1)
 						{
-							loadCart(direction, energyCart);
+							if(energyCart.canConnectEnergy(direction.getOpposite()))
+							{
+								this.loadCart(direction, energyCart);
+							}
 						}
 					}
 				}
