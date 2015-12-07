@@ -130,10 +130,15 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	public void onUpdate()
 	{
 		super.onUpdate();
-		if(this.shouldDoDisplayTick() && this.worldObj.isRemote)
+		if(this.shouldDoDisplayTick() && this.worldObj.isRemote && random.nextInt(10) == 0)
 		{
 			this.doDisplayTick();
 		}
+	}
+
+	public void afterEntitySpawned()
+	{
+
 	}
 
 	@Override

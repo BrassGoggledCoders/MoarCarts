@@ -100,6 +100,12 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 		MoarCarts.packetHandler.sendToAllAround(new EntityTileEntityMessage(this), this);
 	}
 
+	@Override
+	public void afterEntitySpawned()
+	{
+		this.sendUpdate();
+	}
+
 	public boolean shouldSaveDataToItem()
 	{
 		return false;

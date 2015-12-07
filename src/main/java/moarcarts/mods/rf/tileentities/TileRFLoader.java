@@ -23,7 +23,7 @@ public class TileRFLoader extends TileEntity implements IEnergyHandler
 
 	public TileRFLoader()
 	{
-		this.energyStorage = new EnergyStorage(10000, 1000, 1000);
+		this.energyStorage = new EnergyStorage(100000, 1000, 1000);
 	}
 
 	@Override
@@ -34,9 +34,9 @@ public class TileRFLoader extends TileEntity implements IEnergyHandler
 		{
 			if(this.getSideValue(direction.ordinal()) != 0)
 			{
-				int blockPosX = direction.offsetX;
-				int blockPosY = direction.offsetY;
-				int blockPosZ = direction.offsetZ;
+				int blockPosX = this.xCoord + direction.offsetX;
+				int blockPosY = this.yCoord + direction.offsetY;
+				int blockPosZ = this.zCoord + direction.offsetZ;
 
 				if(BlockUtils.isRailBlock(this.worldObj.getBlock(blockPosX, blockPosY, blockPosZ)))
 				{
@@ -132,6 +132,11 @@ public class TileRFLoader extends TileEntity implements IEnergyHandler
 			return true;
 		}
 		return false;
+	}
+
+	public int scaleStoredEnergyTo(int scale)
+	{
+		return (int)(scale*(energyStorage.getEnergyStored()/(float)energyStorage.getMaxEnergyStored()));
 	}
 
 	@Override

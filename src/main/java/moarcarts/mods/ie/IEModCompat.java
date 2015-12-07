@@ -7,10 +7,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import moarcarts.MoarCarts;
-import moarcarts.mods.ie.entities.EntityMinecartLVCapacitor;
-import moarcarts.mods.ie.entities.EntityMinecartMetalBarrel;
-import moarcarts.mods.ie.entities.EntityMinecartWoodenBarrel;
-import moarcarts.mods.ie.entities.EntityMinecartWoodenCrate;
+import moarcarts.mods.ie.entities.*;
 import moarcarts.mods.ie.items.ItemMinecartCapacitor;
 import moarcarts.mods.ie.items.ItemMinecartMetalBarrel;
 import moarcarts.mods.ie.items.ItemMinecartWoodenBarrel;
@@ -61,7 +58,10 @@ public class IEModCompat extends ModCompat
 
 		ITEM_MINECART_CAPACITOR = new ItemMinecartCapacitor();
 		RegistryHelper.registerItem(ITEM_MINECART_CAPACITOR, MoarCarts.MODID);
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartLVCapacitor.class, "entityminecartlvcapacitor");
+		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartCapacitorLV.class, "entityminecartcapacitorlv");
+		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartCapacitorMV.class, "entityminecartcapacitormv");
+		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartCapacitorHV.class, "entityminecartcapacitorhv");
+		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartCapacitorCreative.class, "entityminecartcapacitorcreative");
 	}
 
 	@Override
@@ -70,6 +70,9 @@ public class IEModCompat extends ModCompat
 		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_WOODENBARREL, woodenDevice, 6));
 		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_METALBARREL, metalDevice2, 7));
 		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_WOODENCRATE, woodenDevice, 4));
-		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_CAPACITOR, metalDevice, 1));
+		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_CAPACITOR, 0, metalDevice, 1));
+		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_CAPACITOR, 1, metalDevice, 4));
+		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_CAPACITOR, 2, metalDevice, 7));
+		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_CAPACITOR, 3, metalDevice2, 8));
 	}
 }

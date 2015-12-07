@@ -97,6 +97,17 @@ public class BlockRFLoader extends BlockContainer
 	}
 
 	@Override
+	public int getComparatorInputOverride(World world, int posX, int posY, int posZ, int metadata)
+	{
+		TileEntity tileEntity = world.getTileEntity(posX, posY, posZ);
+		if(tileEntity instanceof TileRFLoader)
+		{
+			return ((TileRFLoader) tileEntity).scaleStoredEnergyTo(15);
+		}
+		return 0;
+	}
+
+	@Override
 	public TileEntity createNewTileEntity(World world, int metaData)
 	{
 		return new TileRFLoader();

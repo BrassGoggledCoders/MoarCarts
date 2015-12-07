@@ -97,6 +97,7 @@ public abstract class ItemMinecartBase extends ItemMinecart implements IMinecart
 				{
 					world.spawnEntityInWorld(entityMinecart);
 				}
+				entityMinecart.afterEntitySpawned();
 			}
 			--itemStack.stackSize;
 			return true;
