@@ -19,7 +19,7 @@ import org.lwjgl.opengl.GL12;
 /**
  * @author SkySom
  */
-public class RenderItemMinecraftTEBase implements IItemRenderer
+public class RenderItemMinecartBase implements IItemRenderer
 {
 	TileEntity renderTileEntity;
 

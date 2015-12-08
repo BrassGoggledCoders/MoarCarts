@@ -20,7 +20,7 @@ import moarcarts.MoarCarts;
 import moarcarts.mods.vanilla.entities.EntityMinecartEnderChest;
 import moarcarts.mods.vanilla.items.ItemMinecartEnderChest;
 import moarcarts.recipes.NBTCartRecipe;
-import moarcarts.renderers.RenderItemMinecraftTEBase;
+import moarcarts.renderers.RenderItemMinecartTEBase;
 import net.minecraft.init.Blocks;
 import net.minecraftforge.client.MinecraftForgeClient;
 
@@ -54,6 +54,6 @@ public class VanillaCompat extends ModCompat
 	@Override
 	public void clientInit(FMLInitializationEvent event)
 	{
-		MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_ENDERCHEST, new RenderItemMinecraftTEBase());
+		MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_ENDERCHEST, new RenderItemMinecartTEBase());
 	}
 }
