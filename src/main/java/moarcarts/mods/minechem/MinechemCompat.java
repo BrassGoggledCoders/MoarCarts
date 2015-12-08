@@ -10,7 +10,7 @@ import moarcarts.MoarCarts;
 import moarcarts.mods.minechem.entities.EntityMinecartLeadedChest;
 import moarcarts.mods.minechem.items.ItemMinecartLeadedChest;
 import moarcarts.recipes.NBTCartRecipe;
-import moarcarts.renderers.RenderItemMinecartTEBase;
+import moarcarts.renderers.RenderItemMinecartBase;
 import net.minecraft.block.Block;
 import net.minecraftforge.client.MinecraftForgeClient;
 
@@ -52,7 +52,7 @@ public class MinechemCompat extends ModCompat
 	@Override
 	public void clientInit(FMLInitializationEvent event)
 	{
-		MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_LEADEDCHEST, new RenderItemMinecartTEBase());
+		MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_LEADEDCHEST, new RenderItemMinecartBase());
 
 	}
 }

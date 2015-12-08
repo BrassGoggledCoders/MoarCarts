@@ -14,7 +14,7 @@ import moarcarts.mods.ie.items.ItemMinecartMetalBarrel;
 import moarcarts.mods.ie.items.ItemMinecartWoodenBarrel;
 import moarcarts.mods.ie.items.ItemMinecartWoodenCrate;
 import moarcarts.recipes.NBTCartRecipe;
-import moarcarts.renderers.RenderItemMinecartTEBase;
+import moarcarts.renderers.RenderItemMinecartBase;
 import net.minecraft.block.Block;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
@@ -86,9 +86,9 @@ public class IEModCompat extends ModCompat
 		ClientEvents clientEvents = new ClientEvents();
 		MinecraftForge.EVENT_BUS.register(clientEvents);
 
-		MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_CAPACITOR, new RenderItemMinecartTEBase());
-		MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_WOODENBARREL, new RenderItemMinecartTEBase());
-		MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_METALBARREL, new RenderItemMinecartTEBase());
-		MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_WOODENCRATE, new RenderItemMinecartTEBase());
+		MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_CAPACITOR, new RenderItemMinecartBase());
+		MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_WOODENBARREL, new RenderItemMinecartBase());
+		MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_METALBARREL, new RenderItemMinecartBase());
+		MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_WOODENCRATE, new RenderItemMinecartBase());
 	}
 }

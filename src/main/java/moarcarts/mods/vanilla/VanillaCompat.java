@@ -17,10 +17,11 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import moarcarts.MoarCarts;
+import moarcarts.mods.vanilla.blocks.BlockComparatorTrack;
 import moarcarts.mods.vanilla.entities.EntityMinecartEnderChest;
 import moarcarts.mods.vanilla.items.ItemMinecartEnderChest;
 import moarcarts.recipes.NBTCartRecipe;
-import moarcarts.renderers.RenderItemMinecartTEBase;
+import moarcarts.renderers.RenderItemMinecartBase;
 import net.minecraft.init.Blocks;
 import net.minecraftforge.client.MinecraftForgeClient;
 
@@ -30,6 +31,7 @@ import net.minecraftforge.client.MinecraftForgeClient;
 public class VanillaCompat extends ModCompat
 {
 	public static ItemMinecartEnderChest ITEM_MINECART_ENDERCHEST;
+	public static BlockComparatorTrack BLOCK_COMPARATOR_TRACK;
 
 	@Override
 	public String getName()
@@ -40,6 +42,9 @@ public class VanillaCompat extends ModCompat
 	@Override
 	public void preInit(FMLPreInitializationEvent event)
 	{
+		BLOCK_COMPARATOR_TRACK = new BlockComparatorTrack();
+		RegistryHelper.registerBlockWithDesc(BLOCK_COMPARATOR_TRACK, "Comparator Track");
+
 		ITEM_MINECART_ENDERCHEST = new ItemMinecartEnderChest();
 		RegistryHelper.registerItem(ITEM_MINECART_ENDERCHEST, MoarCarts.MODID);
 		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartEnderChest.class, "entityminecartenderchest");
@@ -54,6 +59,6 @@ public class VanillaCompat extends ModCompat
 	@Override
 	public void clientInit(FMLInitializationEvent event)
 	{
-		MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_ENDERCHEST, new RenderItemMinecartTEBase());
+		MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_ENDERCHEST, new RenderItemMinecartBase());
 	}
 }

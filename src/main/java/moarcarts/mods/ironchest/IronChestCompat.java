@@ -10,7 +10,7 @@ import moarcarts.MoarCarts;
 import moarcarts.mods.ironchest.entities.*;
 import moarcarts.mods.ironchest.items.ItemMinecartIronChest;
 import moarcarts.recipes.NBTCartRecipe;
-import moarcarts.renderers.RenderItemMinecartTEBase;
+import moarcarts.renderers.RenderItemMinecartBase;
 import net.minecraft.block.Block;
 import net.minecraftforge.client.MinecraftForgeClient;
 
@@ -49,7 +49,7 @@ public class IronChestCompat extends ModCompat
 	@Override
 	public void clientInit(FMLInitializationEvent event)
 	{
-		MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_IRONCHEST, new RenderItemMinecartTEBase());
+		MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_IRONCHEST, new RenderItemMinecartBase());
 	}
 
 	public void registerEntities()

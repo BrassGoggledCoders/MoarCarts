@@ -10,7 +10,7 @@ import moarcarts.MoarCarts;
 import moarcarts.mods.mfr.entities.EntityMinecartDSU;
 import moarcarts.mods.mfr.items.ItemMinecartDSU;
 import moarcarts.recipes.NBTCartRecipe;
-import moarcarts.renderers.RenderItemMinecartTEBase;
+import moarcarts.renderers.RenderItemMinecartBase;
 import net.minecraft.block.Block;
 import net.minecraftforge.client.MinecraftForgeClient;
 
@@ -57,6 +57,6 @@ public class MFRCompat extends ModCompat
 	@Override
 	public void clientInit(FMLInitializationEvent event)
 	{
-		MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_DSU, new RenderItemMinecartTEBase());
+		MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_DSU, new RenderItemMinecartBase());
 	}
 }
