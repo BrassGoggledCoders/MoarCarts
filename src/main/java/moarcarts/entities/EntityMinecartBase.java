@@ -16,12 +16,12 @@ import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import moarcarts.MoarCarts;
 import moarcarts.config.ConfigSettings;
 import moarcarts.fakeworld.FakeWorld;
+import moarcarts.items.ItemMinecartBase;
 import mods.railcraft.api.carts.IMinecart;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -43,16 +43,15 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	private static int METADATA_DW = 31;
 	private static String METADATA = "METADATA";
 
-	public EntityMinecartBase(World world, Block block, int metadata)
+	public EntityMinecartBase(World world, int metadata)
 	{
 		super(world);
 		this.setMetadata(metadata);
-		this.setCartBlock(block);
 		this.fakeWorld = new FakeWorld(this);
 		this.random = new Random();
 	}
 
-	public abstract Item getItem();
+	public abstract ItemMinecartBase getItem();
 
 	public ItemStack getCartItem()
 	{
@@ -210,7 +209,7 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 
 	public Block getCartBlock()
 	{
-		return cartBlock;
+		return this.getItem().getCartBlock(this.getCartItem());
 	}
 
 	public void setCartBlock(Block cartBlock)

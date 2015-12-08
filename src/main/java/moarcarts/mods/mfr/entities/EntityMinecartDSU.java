@@ -1,13 +1,11 @@
 package moarcarts.mods.mfr.entities;
 
 import boilerplate.api.IOpenableGUI;
-import cpw.mods.fml.common.registry.GameRegistry;
 import moarcarts.entities.EntityMinecartDeepStorageTEBase;
+import moarcarts.items.ItemMinecartBase;
 import moarcarts.mods.mfr.MFRCompat;
 import moarcarts.mods.mfr.containers.ContainerMinecartDSU;
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import powercrystals.minefactoryreloaded.gui.client.GuiDeepStorageUnit;
 import powercrystals.minefactoryreloaded.tile.machine.TileEntityDeepStorageUnit;
@@ -17,15 +15,13 @@ import powercrystals.minefactoryreloaded.tile.machine.TileEntityDeepStorageUnit;
  */
 public class EntityMinecartDSU extends EntityMinecartDeepStorageTEBase implements IOpenableGUI
 {
-	public static Block dsu = GameRegistry.findBlock("MineFactoryReloaded", "machine.1");
-
 	public EntityMinecartDSU(World world)
 	{
-		super(world, dsu, 3);
+		super(world, 3);
 	}
 
 	@Override
-	public Item getItem()
+	public ItemMinecartBase getItem()
 	{
 		return MFRCompat.ITEM_MINECART_DSU;
 	}

@@ -19,9 +19,9 @@ public abstract class EntityMinecartFluidTEBase extends EntityMinecartTEBase imp
 {
 	private static int IS_FILLING = 29;
 
-	public EntityMinecartFluidTEBase(World world, Block block, int metadata)
+	public EntityMinecartFluidTEBase(World world, int metadata)
 	{
-		super(world, block, metadata);
+		super(world, metadata);
 	}
 
 	public IFluidHandler getFluidTileEntity()

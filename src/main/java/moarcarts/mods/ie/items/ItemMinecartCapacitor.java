@@ -1,5 +1,6 @@
 package moarcarts.mods.ie.items;
 
+import blusunrize.immersiveengineering.common.IEContent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import moarcarts.entities.EntityMinecartBase;
@@ -8,6 +9,7 @@ import moarcarts.mods.ie.entities.EntityMinecartCapacitorCreative;
 import moarcarts.mods.ie.entities.EntityMinecartCapacitorHV;
 import moarcarts.mods.ie.entities.EntityMinecartCapacitorLV;
 import moarcarts.mods.ie.entities.EntityMinecartCapacitorMV;
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -31,7 +33,7 @@ public class ItemMinecartCapacitor extends ItemMinecartBase
 	@SuppressWarnings("unchecked")
 	public void getSubItems(Item item, CreativeTabs tab, List list)
 	{
-		for (int i = 0; i < 4; i++)
+		for(int i = 0; i < 4; i++)
 		{
 			ItemStack stack = new ItemStack(item, 1, i);
 			list.add(stack);
@@ -60,6 +62,41 @@ public class ItemMinecartCapacitor extends ItemMinecartBase
 				break;
 		}
 		return unlocalizedName;
+	}
+
+	@Override
+	public Block getCartBlock(ItemStack itemStack)
+	{
+		if(itemStack.getItemDamage() == 3)
+		{
+			return IEContent.blockMetalDevice2;
+		}
+		return IEContent.blockMetalDevice;
+	}
+
+	@Override
+	public int getCartBlockMetadata(ItemStack itemStack)
+	{
+		int metadata;
+		switch(itemStack.getItemDamage())
+		{
+			case 0:
+				metadata = 1;
+				break;
+			case 1:
+				metadata = 3;
+				break;
+			case 2:
+				metadata = 7;
+				break;
+			case 3:
+				metadata = 8;
+				break;
+			default:
+				metadata = 0;
+				break;
+		}
+		return metadata;
 	}
 
 	@Override

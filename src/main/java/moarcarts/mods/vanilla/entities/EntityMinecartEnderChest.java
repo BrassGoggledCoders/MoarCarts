@@ -12,6 +12,7 @@
 package moarcarts.mods.vanilla.entities;
 
 import moarcarts.entities.EntityMinecartBase;
+import moarcarts.items.ItemMinecartBase;
 import moarcarts.mods.vanilla.VanillaCompat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -26,11 +27,11 @@ public class EntityMinecartEnderChest extends EntityMinecartBase
 {
 	public EntityMinecartEnderChest(World world)
 	{
-		super(world, Blocks.ender_chest, 0);
+		super(world, 0);
 	}
 
 	@Override
-	public Item getItem()
+	public ItemMinecartBase getItem()
 	{
 		return VanillaCompat.ITEM_MINECART_ENDERCHEST;
 	}

@@ -21,9 +21,9 @@ public abstract class EntityMinecartInventoryTEBase extends EntityMinecartTEBase
 {
 	private boolean dropContentsWhenDead = true;
 
-	public EntityMinecartInventoryTEBase(World world, Block cartBlock, int metadata)
+	public EntityMinecartInventoryTEBase(World world, int metadata)
 	{
-		super(world, cartBlock, metadata);
+		super(world, metadata);
 	}
 
 	public IInventory getIInventoryTileEntity()

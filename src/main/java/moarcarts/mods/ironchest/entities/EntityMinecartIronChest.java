@@ -1,15 +1,14 @@
 package moarcarts.mods.ironchest.entities;
 
 import boilerplate.api.IOpenableGUI;
-import cpw.mods.ironchest.IronChest;
 import cpw.mods.ironchest.IronChestType;
 import cpw.mods.ironchest.client.GUIChest;
 import moarcarts.entities.EntityMinecartInventoryTEBase;
+import moarcarts.items.ItemMinecartBase;
 import moarcarts.mods.ironchest.IronChestCompat;
 import moarcarts.mods.ironchest.containers.ContainerMinecartIronChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
 import java.lang.reflect.Constructor;
@@ -26,11 +25,11 @@ public class EntityMinecartIronChest extends EntityMinecartInventoryTEBase imple
 
 	public EntityMinecartIronChest(World world, int metadata)
 	{
-		super(world, IronChest.ironChestBlock, metadata);
+		super(world, metadata);
 	}
 
 	@Override
-	public Item getItem()
+	public ItemMinecartBase getItem()
 	{
 		return IronChestCompat.ITEM_MINECART_IRONCHEST;
 	}

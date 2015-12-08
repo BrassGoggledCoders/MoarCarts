@@ -2,11 +2,13 @@ package moarcarts.mods.ironchest.items;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import cpw.mods.ironchest.IronChest;
 import cpw.mods.ironchest.IronChestType;
 import moarcarts.MoarCarts;
 import moarcarts.entities.EntityMinecartBase;
 import moarcarts.items.ItemMinecartBase;
 import moarcarts.mods.ironchest.entities.*;
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -74,6 +76,18 @@ public class ItemMinecartIronChest extends ItemMinecartBase
 			ItemStack stack = new ItemStack(item, 1, i);
 			list.add(stack);
 		}
+	}
+
+	@Override
+	public Block getCartBlock(ItemStack itemStack)
+	{
+		return IronChest.ironChestBlock;
+	}
+
+	@Override
+	public int getCartBlockMetadata(ItemStack itemStack)
+	{
+		return itemStack.getItemDamage();
 	}
 
 	@Override

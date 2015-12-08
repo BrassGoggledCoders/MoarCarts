@@ -99,13 +99,13 @@ public class RenderMinecartTEBase extends RenderMinecart
 			GL11.glTranslatef(0.0F, (float) offset / 16.0F, 0.0F);
 			switch(entityMinecartTEBase.getRenderMethod()) {
 				case VMC:
-					renderVMCMethod(entityMinecartTEBase, block, metadata, p_76986_9_);
+					this.renderVMCMethod(entityMinecartTEBase, block, metadata, p_76986_9_);
 					break;
 				case TESR:
-					renderTESRMethod(entityMinecartTEBase);
+					this.renderTESRMethod(entityMinecartTEBase);
 					break;
 				case ISBRH:
-					renderISBRH(entityMinecartTEBase, block, offset);
+					this.renderISBRH(entityMinecartTEBase, block, offset);
 					break;
 				default:
 					break;

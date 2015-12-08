@@ -5,7 +5,6 @@ import moarcarts.fakeworld.FakePlayer;
 import moarcarts.fakeworld.FakeWorld;
 import moarcarts.network.EntityTileEntityMessage;
 import moarcarts.renderers.IRenderBlock;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -23,9 +22,9 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 	private static int IS_DIRTY_DW = 30;
 	private static int UPDATE_TICKS = 200;
 
-	public EntityMinecartTEBase(World world, Block block, int metadata)
+	public EntityMinecartTEBase(World world, int metadata)
 	{
-		super(world, block, metadata);
+		super(world, metadata);
 		if(cartBlock instanceof BlockContainer)
 		{
 			this.setTileEntity(cartBlock.createTileEntity(world, metadata));
@@ -92,7 +91,7 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 	@Override
 	public RenderMethod getRenderMethod()
 	{
-		return RenderMethod.VMC;
+		return this.getItem().getCartBlockRenderMethod(this.getCartItem());
 	}
 
 	public void sendUpdateToAll()

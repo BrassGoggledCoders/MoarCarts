@@ -10,9 +10,9 @@ import net.minecraftforge.common.util.ForgeDirection;
  */
 public abstract class EntityMinecartEnergyHandlerTEBase extends EntityMinecartTEBase implements IEnergyHandler
 {
-	public EntityMinecartEnergyHandlerTEBase(World world, Block block, int metadata)
+	public EntityMinecartEnergyHandlerTEBase(World world, int metadata)
 	{
-		super(world, block, metadata);
+		super(world, metadata);
 	}
 
 	@Override

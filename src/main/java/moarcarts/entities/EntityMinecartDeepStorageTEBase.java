@@ -11,9 +11,9 @@ import powercrystals.minefactoryreloaded.api.IDeepStorageUnit;
  */
 public abstract class EntityMinecartDeepStorageTEBase extends EntityMinecartInventoryTEBase implements IDeepStorageUnit
 {
-	public EntityMinecartDeepStorageTEBase(World world, Block block, int metadata)
+	public EntityMinecartDeepStorageTEBase(World world, int metadata)
 	{
-		super(world, block, metadata);
+		super(world, metadata);
 	}
 
 	@Override

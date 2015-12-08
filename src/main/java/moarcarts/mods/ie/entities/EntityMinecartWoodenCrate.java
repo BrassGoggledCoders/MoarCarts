@@ -1,15 +1,14 @@
 package moarcarts.mods.ie.entities;
 
 import blusunrize.immersiveengineering.client.gui.GuiCrate;
-import blusunrize.immersiveengineering.common.IEContent;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IBlockOverlayText;
 import blusunrize.immersiveengineering.common.blocks.wooden.TileEntityWoodenCrate;
 import boilerplate.api.IOpenableGUI;
 import moarcarts.entities.EntityMinecartInventoryTEBase;
+import moarcarts.items.ItemMinecartBase;
 import moarcarts.mods.ie.IEModCompat;
 import moarcarts.mods.ie.container.ContainerMinecartWoodenCrate;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
@@ -20,7 +19,7 @@ public class EntityMinecartWoodenCrate extends EntityMinecartInventoryTEBase imp
 {
 	public EntityMinecartWoodenCrate(World world)
 	{
-		super(world, IEContent.blockWoodenDevice, 4);
+		super(world, 4);
 	}
 
 	@Override
@@ -38,7 +37,7 @@ public class EntityMinecartWoodenCrate extends EntityMinecartInventoryTEBase imp
 	}
 
 	@Override
-	public Item getItem()
+	public ItemMinecartBase getItem()
 	{
 		return IEModCompat.ITEM_MINECART_WOODENCRATE;
 	}

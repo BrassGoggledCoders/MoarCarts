@@ -1,14 +1,13 @@
 package moarcarts.mods.minechem.entities;
 
 import boilerplate.api.IOpenableGUI;
-import minechem.MinechemBlocksGeneration;
 import minechem.tileentity.leadedchest.LeadedChestGui;
 import minechem.tileentity.leadedchest.LeadedChestTileEntity;
 import moarcarts.entities.EntityMinecartInventoryTEBase;
+import moarcarts.items.ItemMinecartBase;
 import moarcarts.mods.minechem.MinechemCompat;
 import moarcarts.mods.minechem.containers.ContainerMinecartLeadedChest;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
 /**
@@ -18,17 +17,11 @@ public class EntityMinecartLeadedChest extends EntityMinecartInventoryTEBase imp
 {
 	public EntityMinecartLeadedChest(World world)
 	{
-		super(world, MinechemBlocksGeneration.leadChest, 0);
+		super(world, 0);
 	}
 
 	@Override
-	public RenderMethod getRenderMethod()
-	{
-		return RenderMethod.TESR;
-	}
-
-	@Override
-	public Item getItem()
+	public ItemMinecartBase getItem()
 	{
 		return MinechemCompat.ITEM_MINECART_LEADEDCHEST;
 	}

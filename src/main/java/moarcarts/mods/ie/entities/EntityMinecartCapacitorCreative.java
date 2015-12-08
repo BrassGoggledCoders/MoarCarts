@@ -1,6 +1,5 @@
 package moarcarts.mods.ie.entities;
 
-import blusunrize.immersiveengineering.common.IEContent;
 import net.minecraft.world.World;
 
 /**
@@ -10,6 +9,6 @@ public class EntityMinecartCapacitorCreative extends EntityMinecartCapacitorLV
 {
 	public EntityMinecartCapacitorCreative(World world)
 	{
-		super(world, IEContent.blockMetalDevice2, 8);
+		super(world, 8);
 	}
 }

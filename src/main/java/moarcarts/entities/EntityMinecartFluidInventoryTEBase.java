@@ -20,9 +20,9 @@ public abstract class EntityMinecartFluidInventoryTEBase extends EntityMinecartI
 {
 	private static int IS_FILLING = 29;
 
-	public EntityMinecartFluidInventoryTEBase(World world, Block cartBlock, int metadata)
+	public EntityMinecartFluidInventoryTEBase(World world, int metadata)
 	{
-		super(world, cartBlock, metadata);
+		super(world, metadata);
 	}
 	
 	public IFluidHandler getFluidTileEntity() 
