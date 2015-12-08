@@ -2,6 +2,7 @@ package moarcarts.mods.ie;
 
 import boilerplate.common.modcompat.ModCompat;
 import boilerplate.common.utils.helpers.RegistryHelper;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -81,6 +82,8 @@ public class IEModCompat extends ModCompat
 	@Override
 	public void clientInit(FMLInitializationEvent event)
 	{
-		MinecraftForge.EVENT_BUS.register(new ClientEvents());
+		ClientEvents clientEvents = new ClientEvents();
+		MinecraftForge.EVENT_BUS.register(clientEvents);
+		FMLCommonHandler.instance().bus().register(clientEvents);
 	}
 }

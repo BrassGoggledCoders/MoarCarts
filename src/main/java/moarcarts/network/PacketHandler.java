@@ -12,16 +12,17 @@ import moarcarts.entities.EntityMinecartTEBase;
  */
 public class PacketHandler
 {
+	private SimpleNetworkWrapper networkWrapper;
+
 	public PacketHandler()
 	{
-		INSTANCE.registerMessage(EntityTileEntityMessageHandler.class, EntityTileEntityMessage.class, 0, Side.CLIENT);
+		networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(MoarCarts.MODID);
+		networkWrapper.registerMessage(EntityTileEntityMessageHandler.class, EntityTileEntityMessage.class, 0, Side.CLIENT);
 	}
-
-	public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(MoarCarts.MODID);
 
 	public void sendToAllAround(IMessage message, EntityMinecartTEBase minecartTEBase)
 	{
-		INSTANCE.sendToAllAround(message, new NetworkRegistry.TargetPoint(minecartTEBase.worldObj.provider
+		networkWrapper.sendToAllAround(message, new NetworkRegistry.TargetPoint(minecartTEBase.worldObj.provider
 				.dimensionId, minecartTEBase.posX, minecartTEBase.posY, minecartTEBase.posZ, 64));
 	}
 }

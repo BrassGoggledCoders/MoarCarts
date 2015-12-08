@@ -37,10 +37,14 @@ public class ClientEvents
 						{
 							int i = 0;
 							for(String s : text)
+							{
 								if(s != null)
+								{
 									ClientUtils.font().drawString(s, event.resolution.getScaledWidth() / 2 + 8,
-									event.resolution.getScaledHeight() / 2 + 8 + (i++) * ClientUtils.font().FONT_HEIGHT,
-									0xcccccc, true);
+										event.resolution.getScaledHeight() / 2 + 8 + (i++) *
+										ClientUtils.font().FONT_HEIGHT, 0xcccccc, true);
+								}
+							}
 						}
 					}
 				}

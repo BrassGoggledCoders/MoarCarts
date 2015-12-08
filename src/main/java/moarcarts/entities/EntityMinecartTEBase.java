@@ -46,7 +46,7 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 		if(random.nextInt(UPDATE_TICKS) == 0 && this.isDirty())
 		{
 			this.setDirty(false);
-			this.sendUpdate();
+			this.sendUpdateToAll();
 		}
 		if(shouldTileUpdate())
 		{
@@ -57,7 +57,7 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 	@Override
 	public boolean interactFirst(EntityPlayer player)
 	{
-		this.sendUpdate();
+		this.sendUpdateToAll();
 		if(!player.isSneaking())
 		{
 			FakePlayer fakePlayer = new FakePlayer(player, this);
@@ -95,7 +95,7 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 		return RenderMethod.VMC;
 	}
 
-	public void sendUpdate()
+	public void sendUpdateToAll()
 	{
 		MoarCarts.packetHandler.sendToAllAround(new EntityTileEntityMessage(this), this);
 	}
@@ -103,7 +103,7 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 	@Override
 	public void afterEntitySpawned()
 	{
-		this.sendUpdate();
+		this.sendUpdateToAll();
 	}
 
 	public boolean shouldSaveDataToItem()
@@ -168,7 +168,7 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 			{
 				this.tileEntity.readFromNBT(nbtTagCompound);
 			}
-			this.sendUpdate();
+			this.sendUpdateToAll();
 		} else
 		{
 			MoarCarts.logger.error("Null Tile Entity Reported. THIS IS BAD!");

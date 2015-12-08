@@ -43,6 +43,7 @@ public class EntityMinecartMetalBarrel extends EntityMinecartFluidTEBase impleme
 	@Override
 	public String[] getOverlayText(EntityPlayer entityPlayer, MovingObjectPosition movingObjectPosition, boolean b)
 	{
+
 		return ((IBlockOverlayText)this.getTileEntity()).getOverlayText(entityPlayer, movingObjectPosition, b);
 	}
 }
