@@ -8,12 +8,14 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import moarcarts.MoarCarts;
 import moarcarts.mods.ie.entities.*;
+import moarcarts.mods.ie.events.ClientEvents;
 import moarcarts.mods.ie.items.ItemMinecartCapacitor;
 import moarcarts.mods.ie.items.ItemMinecartMetalBarrel;
 import moarcarts.mods.ie.items.ItemMinecartWoodenBarrel;
 import moarcarts.mods.ie.items.ItemMinecartWoodenCrate;
 import moarcarts.recipes.NBTCartRecipe;
 import net.minecraft.block.Block;
+import net.minecraftforge.common.MinecraftForge;
 
 /**
  * @author SkySom
@@ -74,5 +76,11 @@ public class IEModCompat extends ModCompat
 		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_CAPACITOR, 1, metalDevice, 4));
 		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_CAPACITOR, 2, metalDevice, 7));
 		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_CAPACITOR, 3, metalDevice2, 8));
+	}
+
+	@Override
+	public void clientInit(FMLInitializationEvent event)
+	{
+		MinecraftForge.EVENT_BUS.register(new ClientEvents());
 	}
 }
