@@ -42,7 +42,6 @@ public class TileRFLoader extends TileEntity implements IEnergyHandler
 				{
 					EntityMinecart entityMinecart = CartTools.getMinecartOnSide(this.worldObj, xCoord, yCoord, zCoord,
 							1F, direction);
-					MoarCarts.logger.devInfo(entityMinecart.toString());
 					if(entityMinecart instanceof IEnergyHandler)
 					{
 						IEnergyHandler energyCart = (IEnergyHandler)entityMinecart;
@@ -134,11 +133,6 @@ public class TileRFLoader extends TileEntity implements IEnergyHandler
 		return false;
 	}
 
-	public int scaleStoredEnergyTo(int scale)
-	{
-		return (int)(scale*(energyStorage.getEnergyStored()/(float)energyStorage.getMaxEnergyStored()));
-	}
-
 	@Override
 	public int receiveEnergy(ForgeDirection forgeDirection, int amount, boolean simulate)
 	{
@@ -166,6 +160,7 @@ public class TileRFLoader extends TileEntity implements IEnergyHandler
 	@Override
 	public boolean canConnectEnergy(ForgeDirection forgeDirection)
 	{
+		MoarCarts.logger.devInfo(forgeDirection.name());
 		return this.sideConfig[forgeDirection.ordinal()] == 0;
 	}
 }

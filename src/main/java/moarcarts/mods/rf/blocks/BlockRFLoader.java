@@ -1,10 +1,12 @@
 package moarcarts.mods.rf.blocks;
 
 import blusunrize.immersiveengineering.common.util.Utils;
+import cofh.api.energy.IEnergyHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import moarcarts.MoarCarts;
 import moarcarts.mods.rf.tileentities.TileRFLoader;
+import moarcarts.utils.EnergyUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -102,7 +104,7 @@ public class BlockRFLoader extends BlockContainer
 		TileEntity tileEntity = world.getTileEntity(posX, posY, posZ);
 		if(tileEntity instanceof TileRFLoader)
 		{
-			return ((TileRFLoader) tileEntity).scaleStoredEnergyTo(15);
+			return EnergyUtils.scaleStoredEnergyTo(15, (IEnergyHandler)tileEntity);
 		}
 		return 0;
 	}

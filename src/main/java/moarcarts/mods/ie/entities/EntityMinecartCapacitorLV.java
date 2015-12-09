@@ -32,7 +32,25 @@ public class EntityMinecartCapacitorLV extends EntityMinecartEnergyHandlerTEBase
 	@Override
 	public ItemStack getCartItem()
 	{
-		return new ItemStack(this.getItem(), 1, this.getMetadata() - 1);
+		int itemDamage = 0;
+		switch(this.getMetadata())
+		{
+			case 1:
+				itemDamage = 0;
+				break;
+			case 3:
+				itemDamage = 1;
+				break;
+			case 7:
+				itemDamage = 2;
+				break;
+			case 8:
+				itemDamage = 3;
+				break;
+			default:
+				break;
+		}
+		return new ItemStack(this.getItem(), 1, itemDamage);
 	}
 
 	@Override

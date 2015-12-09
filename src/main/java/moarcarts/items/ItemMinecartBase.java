@@ -41,7 +41,7 @@ public abstract class ItemMinecartBase extends ItemMinecart implements IMinecart
 	{
 		super(0);
 		this.setUnlocalizedName(name);
-		this.setTextureName(MoarCarts.MODID + ":" + mod + "/" + name);
+		this.setTextureName(MoarCarts.MODID + ":" + "defaultcart");
 		this.setCreativeTab(CreativeTabs.tabTransport);
 		this.setMaxStackSize(ConfigSettings.getMinecartStackSize());
 		BlockDispenser.dispenseBehaviorRegistry.putObject(this, new CartDispenserBehavior());
