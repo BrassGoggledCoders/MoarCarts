@@ -25,12 +25,18 @@ entity.moarcarts.entityminecartdirtchest.name=DirtChest 9000! Cart
 item.minecartwoodenbarrel.name=Wooden Barrel Cart
 item.minecartmetalbarrel.name=Metal Barrel Cart
 item.minecartwoodencrate.name=Wooden Storage Crate Cart
-item.minecartlvcapacitor.name=LV Capacitor Cart
+item.minecartcapacitorlv.name=LV Capacitor Cart
+item.minecartcapacitormv.name=MV Capacitor Cart
+item.minecartcapacitorhv.name=HV Capacitor Cart
+item.minecartcapacitorcreative.name=Creative Capacitor Cart
 
 entity.moarcarts.entityminecartwoodenbarrel.name=Wooden Barrel Cart
 entity.moarcarts.entityminecartmetalbarrel.name=Metal Barrel Cart
 entity.moarcarts.entityminecartwoodencrate.name=Wooden Storage Crate Cart
-entity.moarcarts.entityminecartlvcapacitor.name=LV Capacitor Cart
+entity.moarcarts.entityminecartcapacitorlv.name=LV Capacitor Cart
+entity.moarcarts.entityminecartcapacitormv.name=MV Capacitor Cart
+entity.moarcarts.entityminecartcapacitorhv.name=HV Capacitor Cart
+entity.moarcarts.entityminecartcapacitorcreative.name=Creative Capacitor Cart
 
 ## mfr stuff
 item.minecartdsu.name=Deep Storage Unit Cart

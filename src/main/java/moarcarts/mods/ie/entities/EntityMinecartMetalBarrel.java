@@ -38,4 +38,10 @@ public class EntityMinecartMetalBarrel extends EntityMinecartFluidTEBase impleme
 	{
 		return ((IBlockOverlayText)this.getTileEntity()).getOverlayText(entityPlayer, movingObjectPosition, b);
 	}
+
+	@Override
+	public boolean useNixieFont(EntityPlayer entityPlayer, MovingObjectPosition movingObjectPosition)
+	{
+		return ((IBlockOverlayText)this.getTileEntity()).useNixieFont(entityPlayer, movingObjectPosition);
+	}
 }

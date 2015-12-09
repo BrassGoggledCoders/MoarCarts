@@ -58,4 +58,10 @@ public class EntityMinecartCapacitorLV extends EntityMinecartEnergyHandlerTEBase
 	{
 		return ((IBlockOverlayText)this.getTileEntity()).getOverlayText(entityPlayer, movingObjectPosition, b);
 	}
+
+	@Override
+	public boolean useNixieFont(EntityPlayer entityPlayer, MovingObjectPosition movingObjectPosition)
+	{
+		return ((IBlockOverlayText)this.getTileEntity()).useNixieFont(entityPlayer, movingObjectPosition);
+	}
 }
