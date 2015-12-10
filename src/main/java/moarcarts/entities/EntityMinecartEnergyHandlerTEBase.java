@@ -1,7 +1,6 @@
 package moarcarts.entities;
 
 import cofh.api.energy.IEnergyHandler;
-import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 

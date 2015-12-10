@@ -19,12 +19,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class TileRFLoader extends TileEntity implements IEnergyHandler
 {
 	protected int[] sideConfig={0,0,0,0,0,0};
-	protected EnergyStorage energyStorage;
-
-	public TileRFLoader()
-	{
-		this.energyStorage = new EnergyStorage(100000, 1000, 1000);
-	}
+	protected EnergyStorage energyStorage = new EnergyStorage(100000, 1000, 1000);
 
 	@Override
 	public void updateEntity()

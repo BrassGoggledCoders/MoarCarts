@@ -23,10 +23,9 @@ public class EntityMinecartCapacitorLV extends EntityMinecartEnergyHandlerTEBase
 	public EntityMinecartCapacitorLV(World world, int metadata)
 	{
 		super(world, metadata);
-		TileEntityCapacitorLV tileEntityCapacitorLV = (TileEntityCapacitorLV)this.getTileEntity();
-		tileEntityCapacitorLV.toggleSide(0);
-		tileEntityCapacitorLV.toggleSide(1);
-		tileEntityCapacitorLV.toggleSide(1);
+		TileEntityCapacitorLV tileEntityCapacitorLV = (TileEntityCapacitorLV)this.getIEnergyHandler();
+		tileEntityCapacitorLV.sideConfig[1] = 0;
+		tileEntityCapacitorLV.sideConfig[0] = 1;
 	}
 
 	@Override

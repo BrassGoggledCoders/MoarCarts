@@ -165,12 +165,15 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 
 		if(ConfigSettings.doMinecartsBreakOnDrop())
 		{
-			blockCartItemStack = new ItemStack(getCartBlock());
+			blockCartItemStack = new ItemStack(this.getCartBlock());
 			ItemStack cartItemStack = new ItemStack(Items.minecart, 1);
-			this.entityDropItem(cartItemStack, 0.1F);
+			if(!worldObj.isRemote)
+			{
+				this.entityDropItem(cartItemStack, 0.1F);
+			}
 		} else
 		{
-			blockCartItemStack = new ItemStack(this.getItem(), 1, this.getMetadata());
+			blockCartItemStack = this.getCartItem();
 		}
 		this.dropCart(blockCartItemStack);
 	}

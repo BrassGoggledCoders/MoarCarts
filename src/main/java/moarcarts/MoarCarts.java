@@ -29,6 +29,7 @@ import moarcarts.mods.minechem.MinechemCompat;
 import moarcarts.mods.railcraft.RailcraftCompat;
 import moarcarts.mods.rf.RFCompat;
 import moarcarts.mods.vanilla.VanillaCompat;
+import moarcarts.mods.waila.WailaCompat;
 import moarcarts.network.PacketHandler;
 import moarcarts.proxies.CommonProxy;
 import moarcarts.recipes.NBTCartRecipe;
@@ -94,6 +95,7 @@ public class MoarCarts implements IBoilerplateMod
 		compatibilityHandler.addModCompat(new IEModCompat());
 		compatibilityHandler.addModCompat(new MFRCompat());
 		compatibilityHandler.addModCompat(new MinechemCompat());
+		compatibilityHandler.addModCompat(new WailaCompat());
 	}
 
 	@Override
