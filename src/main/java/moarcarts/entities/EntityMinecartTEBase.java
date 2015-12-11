@@ -3,7 +3,7 @@ package moarcarts.entities;
 import moarcarts.MoarCarts;
 import moarcarts.fakeworld.FakePlayer;
 import moarcarts.fakeworld.FakeWorld;
-import moarcarts.network.EntityTileEntityMessage;
+import moarcarts.network.EntityTileEntityUpdateMessage;
 import moarcarts.renderers.IRenderBlock;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -96,7 +96,12 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 
 	public void sendUpdateToAll()
 	{
-		MoarCarts.packetHandler.sendToAllAround(new EntityTileEntityMessage(this), this);
+		MoarCarts.packetHandler.sendToAllAround(new EntityTileEntityUpdateMessage(this), this);
+	}
+
+	public void requestClientUpdate()
+	{
+
 	}
 
 	@Override

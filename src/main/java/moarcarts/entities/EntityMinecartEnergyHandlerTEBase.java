@@ -35,7 +35,7 @@ public abstract class EntityMinecartEnergyHandlerTEBase extends EntityMinecartTE
 	@Override
 	public int getMaxEnergyStored(ForgeDirection forgeDirection)
 	{
-		return this.getIEnergyHandler().getEnergyStored(forgeDirection);
+		return this.getIEnergyHandler().getMaxEnergyStored(forgeDirection);
 	}
 
 	@Override

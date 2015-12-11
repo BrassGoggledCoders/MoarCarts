@@ -64,19 +64,20 @@ public class TileRFLoader extends TileEntity implements IEnergyHandler
 	{
 		int amountToUnload = this.energyStorage.receiveEnergy(this.energyStorage.getMaxReceive(), true);
 		int amountRemovedFromCart = energyCart.extractEnergy(direction.getOpposite(), amountToUnload, false);
-		this.energyStorage.receiveEnergy(amountRemovedFromCart, true);
+		this.energyStorage.receiveEnergy(amountRemovedFromCart, false);
 	}
 
 	public void loadCart(ForgeDirection direction, IEnergyHandler energyCart)
 	{
 		int amountToLoad = this.energyStorage.extractEnergy(this.energyStorage.getMaxExtract(), true);
 		int amountLoadedIntoCart = energyCart.receiveEnergy(direction.getOpposite(), amountToLoad, false);
-		this.energyStorage.extractEnergy(amountLoadedIntoCart, true);
+		this.energyStorage.extractEnergy(amountLoadedIntoCart, false);
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbtTagCompound)
 	{
+		super.readFromNBT(nbtTagCompound);
 		this.sideConfig = nbtTagCompound.getIntArray("sideConfig");
 		this.energyStorage.readFromNBT(nbtTagCompound);
 	}
@@ -84,7 +85,10 @@ public class TileRFLoader extends TileEntity implements IEnergyHandler
 	@Override
 	public void writeToNBT(NBTTagCompound nbtTagCompound)
 	{
+		super.writeToNBT(nbtTagCompound);
 		nbtTagCompound.setIntArray("sideConfig", this.sideConfig);
+		if(sideConfig==null || sideConfig.length<6)
+			sideConfig = new int[6];
 		this.energyStorage.writeToNBT(nbtTagCompound);
 	}
 
@@ -131,13 +135,18 @@ public class TileRFLoader extends TileEntity implements IEnergyHandler
 	@Override
 	public int receiveEnergy(ForgeDirection forgeDirection, int amount, boolean simulate)
 	{
-		return (this.canConnectEnergy(forgeDirection)) ? this.energyStorage.receiveEnergy(amount, simulate) : 0;
+		int received = (!worldObj.isRemote && this.canConnectEnergy(forgeDirection)) ?
+				this.energyStorage.receiveEnergy(amount, simulate) : 0;
+		this.sendBlockUpdate();
+		return received;
 	}
 
 	@Override
 	public int extractEnergy(ForgeDirection forgeDirection, int amount, boolean simulate)
 	{
-		return (this.canConnectEnergy(forgeDirection)) ? this.energyStorage.extractEnergy(amount, simulate) : 0;
+		int extracted = (this.canConnectEnergy(forgeDirection)) ? this.energyStorage.extractEnergy(amount, simulate) : 0;
+		this.sendBlockUpdate();
+		return extracted;
 	}
 
 	@Override
@@ -155,7 +164,14 @@ public class TileRFLoader extends TileEntity implements IEnergyHandler
 	@Override
 	public boolean canConnectEnergy(ForgeDirection forgeDirection)
 	{
-		MoarCarts.logger.devInfo(forgeDirection.name());
 		return this.sideConfig[forgeDirection.ordinal()] == 0;
+	}
+
+	public void sendBlockUpdate()
+	{
+		if(!worldObj.isRemote)
+		{
+			this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		}
 	}
 }
