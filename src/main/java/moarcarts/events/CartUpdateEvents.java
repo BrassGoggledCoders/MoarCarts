@@ -1,9 +1,7 @@
 package moarcarts.events;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import moarcarts.MoarCarts;
 import moarcarts.entities.EntityMinecartTEBase;
-import moarcarts.network.EntityTileEntityUpdateRequestMessage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
@@ -14,7 +12,7 @@ import java.util.Random;
 /**
  * @author SkySom
  */
-public class ClientEvents
+public class CartUpdateEvents
 {
 	Random random = new Random();
 
@@ -27,9 +25,9 @@ public class ClientEvents
 			if(movingObjectPosition.entityHit instanceof EntityMinecartTEBase)
 			{
 				EntityMinecartTEBase minecartTEBase = (EntityMinecartTEBase)movingObjectPosition.entityHit;
-				if(minecartTEBase.isDirty() && random.nextInt(5) == 0)
+				if(random.nextInt(20) == 0 || minecartTEBase.isDirty())
 				{
-					MoarCarts.packetHandler.sendToServer(new EntityTileEntityUpdateRequestMessage(minecartTEBase));
+					minecartTEBase.requestClientUpdate();
 				}
 			}
 		}

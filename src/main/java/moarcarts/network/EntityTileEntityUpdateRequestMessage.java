@@ -2,7 +2,6 @@ package moarcarts.network;
 
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import moarcarts.MoarCarts;
 import moarcarts.entities.EntityMinecartTEBase;
 
 /**
@@ -25,7 +24,6 @@ public class EntityTileEntityUpdateRequestMessage extends EntityTileEntityBaseMe
 				MessageContext ctx)
 		{
 			EntityMinecartTEBase minecartTEBase = message.getEntityMinecartTEBaseFromMessage(ctx);
-			MoarCarts.logger.devInfo(minecartTEBase.toString());
 			if(minecartTEBase != null)
 			{
 				return new EntityTileEntityUpdateMessage(minecartTEBase);

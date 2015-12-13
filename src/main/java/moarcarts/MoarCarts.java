@@ -23,6 +23,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import moarcarts.config.ConfigHandler;
 import moarcarts.mods.ie.IEModCompat;
+import moarcarts.events.CartUpdateEvents;
 import moarcarts.mods.ironchest.IronChestCompat;
 import moarcarts.mods.mfr.MFRCompat;
 import moarcarts.mods.minechem.MinechemCompat;
@@ -33,6 +34,7 @@ import moarcarts.mods.waila.WailaCompat;
 import moarcarts.network.PacketHandler;
 import moarcarts.proxies.CommonProxy;
 import moarcarts.recipes.NBTCartRecipe;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.RecipeSorter;
 
 /*
@@ -43,6 +45,7 @@ public class MoarCarts implements IBoilerplateMod
 {
 	@Instance("moarcarts")
 	public static MoarCarts instance;
+
 	public static final String MODID = "moarcarts";
 	public static final String MODNAME = "MoarCarts";
 	public static final String MODVERSION = "@VERSION@";
@@ -74,6 +77,8 @@ public class MoarCarts implements IBoilerplateMod
 	{
 		guiHandler = new GuiHandler();
 		proxy.init(event);
+
+		MinecraftForge.EVENT_BUS.register(new CartUpdateEvents());
 
 		RecipeSorter.register("moarcarts:nbtcartrecipe", NBTCartRecipe.class, RecipeSorter.Category.SHAPELESS,
 				"after:minecraft:shapeless");

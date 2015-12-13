@@ -13,14 +13,14 @@ import moarcarts.entities.EntityMinecartTEBase;
 public class PacketHandler
 {
 	private SimpleNetworkWrapper networkWrapper;
-
+	private int id = -1;
 	public PacketHandler()
 	{
 		networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(MoarCarts.MODID);
 		networkWrapper.registerMessage(EntityTileEntityUpdateMessage.Handler.class,
-				EntityTileEntityUpdateMessage.class, 0, Side.CLIENT);
+				EntityTileEntityUpdateMessage.class, ++id, Side.CLIENT);
 		networkWrapper.registerMessage(EntityTileEntityUpdateRequestMessage.Handler.class,
-				EntityTileEntityUpdateRequestMessage.class, 0, Side.SERVER);
+				EntityTileEntityUpdateRequestMessage.class, ++id, Side.SERVER);
 	}
 
 	public void sendToAllAround(IMessage message, EntityMinecartTEBase minecartTEBase)

@@ -53,6 +53,4 @@ public class EntityTileEntityBaseMessage implements IMessage
 
 		return null;
 	}
-
-
 }

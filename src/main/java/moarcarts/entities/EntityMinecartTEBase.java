@@ -4,6 +4,7 @@ import moarcarts.MoarCarts;
 import moarcarts.fakeworld.FakePlayer;
 import moarcarts.fakeworld.FakeWorld;
 import moarcarts.network.EntityTileEntityUpdateMessage;
+import moarcarts.network.EntityTileEntityUpdateRequestMessage;
 import moarcarts.renderers.IRenderBlock;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,6 +30,7 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 		{
 			this.setTileEntity(cartBlock.createTileEntity(world, metadata));
 		}
+		this.setDirty(true);
 	}
 
 	@Override
@@ -45,7 +47,7 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 		if(random.nextInt(UPDATE_TICKS) == 0 && this.isDirty())
 		{
 			this.setDirty(false);
-			this.sendUpdateToAll();
+			this.sendUpdateToAllAround();
 		}
 		if(shouldTileUpdate())
 		{
@@ -56,7 +58,7 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 	@Override
 	public boolean interactFirst(EntityPlayer player)
 	{
-		this.sendUpdateToAll();
+		this.sendUpdateToAllAround();
 		if(!player.isSneaking())
 		{
 			FakePlayer fakePlayer = new FakePlayer(player, this);
@@ -94,20 +96,20 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 		return this.getItem().getCartBlockRenderMethod(this.getCartItem());
 	}
 
-	public void sendUpdateToAll()
+	public void sendUpdateToAllAround()
 	{
 		MoarCarts.packetHandler.sendToAllAround(new EntityTileEntityUpdateMessage(this), this);
 	}
 
 	public void requestClientUpdate()
 	{
-
+		MoarCarts.packetHandler.sendToServer(new EntityTileEntityUpdateRequestMessage(this));
 	}
 
 	@Override
 	public void afterEntitySpawned()
 	{
-		this.sendUpdateToAll();
+		this.sendUpdateToAllAround();
 	}
 
 	public boolean shouldSaveDataToItem()
@@ -172,7 +174,7 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 			{
 				this.tileEntity.readFromNBT(nbtTagCompound);
 			}
-			this.sendUpdateToAll();
+			this.sendUpdateToAllAround();
 		} else
 		{
 			MoarCarts.logger.error("Null Tile Entity Reported. THIS IS BAD!");
