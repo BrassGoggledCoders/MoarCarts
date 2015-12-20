@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 
 import java.util.Random;
 
@@ -27,9 +28,19 @@ public class CartUpdateEvents
 				EntityMinecartTEBase minecartTEBase = (EntityMinecartTEBase)movingObjectPosition.entityHit;
 				if(random.nextInt(20) == 0 || minecartTEBase.isDirty())
 				{
-					minecartTEBase.requestClientUpdate();
+					minecartTEBase.setClientNeedy(true);
+					minecartTEBase.markDirty();
 				}
 			}
+		}
+	}
+
+	@SubscribeEvent
+	public void cartJoinWorld(EntityJoinWorldEvent entityJoinWorldEvent)
+	{
+		if(!entityJoinWorldEvent.world.isRemote && entityJoinWorldEvent.entity instanceof EntityMinecartTEBase)
+		{
+			((EntityMinecartTEBase) entityJoinWorldEvent.entity).sendUpdateToAllAround();
 		}
 	}
 }

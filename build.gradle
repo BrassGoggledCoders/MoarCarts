@@ -82,8 +82,8 @@ task getLibraries {
     def ironchestSource = 'http://files.minecraftforge.net/maven/cpw/mods/ironchest/' + config.minecraft.version +
             '-' + config.ironchest.version + '/' + ironchest
 
-    def immersiveengineering = 'immersive-engineering-' + config.immersiveengineering.version + '.jar'
-    def immersiveengineeringSource = ''
+    def immersiveengineering = 'ImmersiveEngineering-' + config.immersiveengineering.version + '.jar'
+    def immersiveengineeringSource = 'http://minecraft.curseforge.com/projects/immersive-engineering/files/2270176/download'
 
     def inventorytweaks = 'inventory-tweaks-' + config.invtweaks.version + '.jar'
     def inventorytweaksSource = 'http://minecraft.curseforge.com/projects/inventory-tweaks/files/2210792/download'
@@ -155,6 +155,10 @@ processResources {
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+}
+
+sourceSets {
+    main { output.resourcesDir = output.classesDir }
 }
 
 task("uploadJars", dependsOn: "reobf") {

@@ -21,6 +21,7 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 	protected TileEntity tileEntity;
 
 	private static int IS_DIRTY_DW = 30;
+	private static int IS_CLIENT_NEEDY = 28;
 	private static int UPDATE_TICKS = 200;
 
 	public EntityMinecartTEBase(World world, int metadata)
@@ -37,16 +38,19 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 	public void entityInit()
 	{
 		super.entityInit();
-		dataWatcher.addObject(IS_DIRTY_DW, (byte) 0);
+		dataWatcher.addObject(IS_DIRTY_DW, (byte) 1);
+		dataWatcher.addObject(IS_CLIENT_NEEDY, (byte) 1);
 	}
 
 	@Override
 	public void onUpdate()
 	{
 		super.onUpdate();
-		if(random.nextInt(UPDATE_TICKS) == 0 && this.isDirty())
+		if(!this.worldObj.isRemote && (this.isClientNeedy() ||
+				(this.isDirty() && random.nextInt(UPDATE_TICKS) == 0)))
 		{
 			this.setDirty(false);
+			this.setClientNeedy(false);
 			this.sendUpdateToAllAround();
 		}
 		if(shouldTileUpdate())
@@ -73,6 +77,7 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 		super.readEntityFromNBT(nbtTagCompound);
 		this.getTileEntity().readFromNBT(nbtTagCompound.getCompoundTag("TILEENTITY"));
 		this.setDirty(nbtTagCompound.getBoolean("DIRTY"));
+		this.setClientNeedy(nbtTagCompound.getBoolean("NEEDY"));
 	}
 
 	@Override
@@ -83,6 +88,7 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 		this.getTileEntity().writeToNBT(tileEntityNBTTagCompound);
 		nbtTagCompound.setTag("TILEENTITY", tileEntityNBTTagCompound);
 		nbtTagCompound.setBoolean("DIRTY", this.isDirty());
+		nbtTagCompound.setBoolean("NEEDY", this.isClientNeedy());
 	}
 
 	public void markDirty()
@@ -206,5 +212,15 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 	public void setDirty(boolean isDirty)
 	{
 		dataWatcher.updateObject(IS_DIRTY_DW, isDirty ? 1 : (byte) 0);
+	}
+
+	public boolean isClientNeedy()
+	{
+		return dataWatcher.getWatchableObjectByte(IS_CLIENT_NEEDY) != 0;
+	}
+
+	public void setClientNeedy(boolean needy)
+	{
+		dataWatcher.updateObject(IS_CLIENT_NEEDY, needy ? 1 : (byte) 0);
 	}
 }
