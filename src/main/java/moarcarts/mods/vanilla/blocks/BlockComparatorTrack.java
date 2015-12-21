@@ -6,7 +6,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import moarcarts.MoarCarts;
 import moarcarts.api.ComparatorTrackEvent;
 import moarcarts.api.IComparatorCart;
-import moarcarts.utils.EnergyUtils;
+import moarcarts.utils.ComparatorUtils;
 import net.minecraft.block.BlockRailDetector;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -17,8 +17,6 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
 import java.util.List;
@@ -71,20 +69,16 @@ public class BlockComparatorTrack extends BlockRailDetector
 					comparatorOutput = ((IComparatorCart) list.get(0)).getComparatorInputOverride();
 				} else if(minecart instanceof IEnergyHandler)
 				{
-					comparatorOutput = EnergyUtils.scaleStoredEnergyTo(15, (IEnergyHandler)list.get(0));
+					comparatorOutput = ComparatorUtils.scaleStoredEnergyTo(15, (IEnergyHandler)list.get(0));
 				} else if(minecart instanceof IFluidHandler)
 				{
-					if(((IFluidHandler) list.get(0)).getTankInfo(ForgeDirection.UNKNOWN)[0] != null)
-					{
-						FluidTankInfo tankInfo = ((IFluidHandler) list.get(0)).getTankInfo(ForgeDirection.UNKNOWN)[0];
-						if(tankInfo.fluid != null)
-						{
-							comparatorOutput = (int)(tankInfo.fluid.amount / (float)tankInfo.capacity);
-						}
-					}
+					comparatorOutput = ComparatorUtils.scaleSingleFluidLevelTo(15, (IFluidHandler)list.get(0));
 				} else if(minecart instanceof IInventory)
 				{
 					comparatorOutput = Container.calcRedstoneFromInventory((IInventory)list.get(0));
+				} else if(minecart.canBeRidden())
+				{
+					comparatorOutput = (minecart.riddenByEntity != null) ? 15 : 0;
 				} else
 				{
 					ComparatorTrackEvent comparatorTrackEvent = new ComparatorTrackEvent(minecart);

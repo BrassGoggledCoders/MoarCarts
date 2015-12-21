@@ -22,7 +22,8 @@ public class EntityMinecartFluidProvider extends EntityMinecartTEBaseProvider
 		if(entity instanceof IFluidHandler)
 		{
 			IFluidHandler iFluidHandler = (IFluidHandler)entity;
-			if(iFluidHandler.getTankInfo(ForgeDirection.UNKNOWN)[0] != null)
+			if(iFluidHandler.getTankInfo(ForgeDirection.UNKNOWN).length > 0 &&
+					iFluidHandler.getTankInfo(ForgeDirection.UNKNOWN)[0] != null)
 			{
 				FluidTankInfo fluidTankInfo = iFluidHandler.getTankInfo(ForgeDirection.UNKNOWN)[0];
 				if(fluidTankInfo.fluid != null)

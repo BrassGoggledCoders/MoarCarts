@@ -2,7 +2,6 @@ package moarcarts.entities;
 
 import cpw.mods.fml.common.Optional;
 import mods.railcraft.api.carts.IFluidCart;
-import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -33,7 +32,7 @@ public abstract class EntityMinecartFluidTEBase extends EntityMinecartTEBase imp
 	public void entityInit()
 	{
 		super.entityInit();
-		dataWatcher.addObject(IS_FILLING, Byte.valueOf((byte) 0));
+		dataWatcher.addObject(IS_FILLING, (byte) 0);
 	}
 
 	@Override
@@ -102,6 +101,6 @@ public abstract class EntityMinecartFluidTEBase extends EntityMinecartTEBase imp
 	@Optional.Method(modid = "RailcraftAPI|carts")
 	public void setFilling(boolean isFilling)
 	{
-		dataWatcher.updateObject(IS_FILLING, Byte.valueOf(isFilling ? 1 : (byte) 0));
+		dataWatcher.updateObject(IS_FILLING, isFilling ? 1 : (byte) 0);
 	}
 }

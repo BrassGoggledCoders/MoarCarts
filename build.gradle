@@ -97,6 +97,12 @@ task getLibraries {
     def minechem = 'Minechem-' + config.minecraft.version + '-' + config.minechem.version + '.jar'
     def minechemSource = 'http://minecraft.curseforge.com/projects/minechem/files/2251057/download'
 
+    def botania = 'Botania ' + config.botania.version + '-deobf.jar'
+    def botaniaSource = 'http://botaniamod.net/files/deobf/' + botania
+
+    def baubles = 'Baubles-' + config.minecraft.version + '-' + config.baubles.version + '.jar'
+    def baublesSource = 'https://dl.dropboxusercontent.com/u/47135879/' + baubles
+
     downloads.add(new Tuple(railcraft, railcraftSource))
     downloads.add(new Tuple(ironchest, ironchestSource))
     downloads.add(new Tuple(immersiveengineering, immersiveengineeringSource))
@@ -104,13 +110,19 @@ task getLibraries {
     downloads.add(new Tuple(cofhcore, cofhcoreSource))
     downloads.add(new Tuple(minefactory, minefactorySource))
     downloads.add(new Tuple(minechem, minechemSource))
+    downloads.add(new Tuple(botania, botaniaSource))
+    downloads.add(new Tuple(baubles, baublesSource))
 
     downloads.each{download ->
         def fileLocation = new File('libs', download.get(0).toString())
         if(!fileLocation.exists())  {
+            def downloadString = download.get(1).toString()
+            if(downloadString.contains(" ")) {
+                downloadString = downloadString.replace(" ", "%20");
+            }
             println "Downloading " + download.get(0).toString()
             fileLocation.withOutputStream { out ->
-                new URL(download.get(1).toString()).withInputStream { from ->
+                new URL(downloadString).withInputStream { from ->
                     out << from;
                 }
             }

@@ -22,6 +22,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import moarcarts.config.ConfigHandler;
+import moarcarts.mods.botania.BotaniaModCompat;
 import moarcarts.mods.ie.IEModCompat;
 import moarcarts.events.CartUpdateEvents;
 import moarcarts.mods.ironchest.IronChestCompat;
@@ -100,6 +101,7 @@ public class MoarCarts implements IBoilerplateMod
 		compatibilityHandler.addModCompat(new IEModCompat());
 		compatibilityHandler.addModCompat(new MFRCompat());
 		compatibilityHandler.addModCompat(new MinechemCompat());
+		compatibilityHandler.addModCompat(new BotaniaModCompat());
 		compatibilityHandler.addModCompat(new WailaCompat());
 	}
 

@@ -10,6 +10,7 @@ import net.minecraft.item.EnumRarity;
 public class Shaders
 {
 	public static ShaderRegistryEntry superChief;
+	public static ShaderRegistryEntry empireBuilder;
 
 	public static void initShaders()
 	{
@@ -19,8 +20,9 @@ public class Shaders
 		int[] orange = {255, 102, 0, 255};
 		int[] green = {43, 58, 61, 255};
 
-		ShaderRegistry.registerShader("Super Chief", "0", EnumRarity.epic, grey, red, yellow, grey, null, false, false);
-		ShaderRegistry.registerShader("Empire Builder", "0", EnumRarity.common, green, orange, green, green, null,
-				true, true);
+		superChief = ShaderRegistry.registerShader("Super Chief", "0", EnumRarity.epic, grey, red, yellow, grey, null,
+				false, false);
+		empireBuilder = ShaderRegistry.registerShader("Empire Builder", "0", EnumRarity.common, green, orange, green,
+				green, null, true, true);
 	}
 }

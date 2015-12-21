@@ -14,6 +14,7 @@ package moarcarts.entities;
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import moarcarts.MoarCarts;
+import moarcarts.api.IComparatorCart;
 import moarcarts.config.ConfigSettings;
 import moarcarts.fakeworld.FakeWorld;
 import moarcarts.items.ItemMinecartBase;
@@ -34,7 +35,7 @@ import java.util.Random;
  * @author SkySom
  */
 @Optional.Interface(iface = "mods.railcraft.api.carts.IMinecart", modid = "RailcraftAPI|carts")
-public abstract class EntityMinecartBase extends EntityMinecart implements IMinecart
+public abstract class EntityMinecartBase extends EntityMinecart implements IMinecart, IComparatorCart
 {
 	protected Block cartBlock;
 	protected Random random;
@@ -190,10 +191,22 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	@Optional.Method(modid = "RailcraftAPI|carts")
 	public boolean doesCartMatchFilter(ItemStack itemStack, EntityMinecart entityMinecart)
 	{
-		if(itemStack != null && entityMinecart instanceof EntityMinecartBase)
+		return itemStack != null && entityMinecart instanceof EntityMinecartBase &&
+				itemStack.isItemEqual(entityMinecart.getCartItem());
+	}
+
+	public int getComparatorInputOverride()
+	{
+		if(this.getCartBlock().hasComparatorInputOverride())
 		{
-			return itemStack.isItemEqual(entityMinecart.getCartItem());
+			return this.getCartBlock().getComparatorInputOverride(this.getFakeWorld(), 0, 0, 0, this.getMetadata());
 		}
+		return 0;
+	}
+
+	@Override
+	public boolean canBeRidden()
+	{
 		return false;
 	}
 
@@ -207,7 +220,7 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 		int intPosX = (int)Math.floor(this.posX);
 		int intPosY = (int)Math.floor(this.posY);
 		int intPosZ = (int)Math.floor(this.posZ);
-		this.getCartBlock().randomDisplayTick(this.fakeWorld, intPosX, intPosY, intPosZ, random);
+		this.getCartBlock().randomDisplayTick(this.getFakeWorld(), intPosX, intPosY, intPosZ, random);
 	}
 
 	public Block getCartBlock()

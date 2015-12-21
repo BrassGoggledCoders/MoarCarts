@@ -2,7 +2,6 @@ package moarcarts.entities;
 
 import cpw.mods.fml.common.Optional;
 import mods.railcraft.api.carts.IFluidCart;
-import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;

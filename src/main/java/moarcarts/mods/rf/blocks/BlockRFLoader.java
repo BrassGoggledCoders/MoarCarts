@@ -6,7 +6,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import moarcarts.MoarCarts;
 import moarcarts.mods.rf.tileentities.TileRFLoader;
-import moarcarts.utils.EnergyUtils;
+import moarcarts.utils.ComparatorUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -103,7 +103,7 @@ public class BlockRFLoader extends BlockContainer
 		TileEntity tileEntity = world.getTileEntity(posX, posY, posZ);
 		if(tileEntity instanceof TileRFLoader)
 		{
-			return EnergyUtils.scaleStoredEnergyTo(15, (IEnergyHandler)tileEntity);
+			return ComparatorUtils.scaleStoredEnergyTo(15, (IEnergyHandler)tileEntity);
 		}
 		return 0;
 	}
