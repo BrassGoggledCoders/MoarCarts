@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "moarcarts",
+    "name": "MoarCarts",
+    "description": "A Rewrite and Continuation of ExtraCarts",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authors": ["SkySom"],
+    "credits": "ScottDTA and SkySom for the original ExtraCarts",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": ["boilerplate"]
+  }
+]
