@@ -1,9 +1,13 @@
 package moarcarts.mods.botania;
 
 import boilerplate.common.modcompat.ModCompat;
+import boilerplate.common.utils.helpers.RegistryHelper;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import moarcarts.MoarCarts;
+import moarcarts.mods.botania.entities.EntityMinecartTinyPotato;
 import moarcarts.mods.botania.events.ManaCartComparatorEvent;
+import moarcarts.mods.botania.items.ItemTinyPotatoMinecart;
 import net.minecraftforge.common.MinecraftForge;
 
 /**
@@ -11,6 +15,9 @@ import net.minecraftforge.common.MinecraftForge;
  */
 public class BotaniaModCompat extends ModCompat
 {
+	public static ItemTinyPotatoMinecart ITEM_MINECART_TINYPOTATO;
+
+
 	@Override
 	public String getName()
 	{
@@ -20,12 +27,15 @@ public class BotaniaModCompat extends ModCompat
 	@Override
 	public boolean areRequirementsMet()
 	{
-		return Loader.isModLoaded("botania");
+		return Loader.isModLoaded("Botania");
 	}
 
 	@Override
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		MinecraftForge.EVENT_BUS.register(new ManaCartComparatorEvent());
+		ITEM_MINECART_TINYPOTATO = new ItemTinyPotatoMinecart();
+		RegistryHelper.registerItem(ITEM_MINECART_TINYPOTATO, MoarCarts.MODID);
+		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartTinyPotato.class, "entityminecarttinypotato");
 	}
 }

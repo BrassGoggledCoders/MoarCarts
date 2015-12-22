@@ -1,5 +1,6 @@
 package moarcarts.mods.botania.events;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import moarcarts.api.ComparatorTrackEvent;
 import vazkii.botania.common.entity.EntityPoolMinecart;
 
@@ -8,6 +9,7 @@ import vazkii.botania.common.entity.EntityPoolMinecart;
  */
 public class ManaCartComparatorEvent
 {
+	@SubscribeEvent
 	public void onManaCartCompared(ComparatorTrackEvent event)
 	{
 		if(event.minecart instanceof EntityPoolMinecart)
