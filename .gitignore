@@ -12,6 +12,7 @@ usernamecache.json
 
 #Gradle
 .gradle
+!gradle-wrapper.jar
 
 #Java
 *.class
