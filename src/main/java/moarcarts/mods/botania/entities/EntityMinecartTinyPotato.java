@@ -20,4 +20,16 @@ public class EntityMinecartTinyPotato extends EntityMinecartTEBase
 	{
 		return BotaniaModCompat.ITEM_MINECART_TINYPOTATO;
 	}
+
+	@Override
+	public boolean shouldTileUpdate()
+	{
+		return true;
+	}
+
+	@Override
+	public boolean shouldSaveDataToItem()
+	{
+		return true;
+	}
 }

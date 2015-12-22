@@ -46,7 +46,7 @@ public class NBTCartRecipe extends ShapelessRecipes
 		for(int slot = 0; slot < inventoryCrafting.getSizeInventory(); slot++)
 		{
 			ItemStack currentSlotStack = inventoryCrafting.getStackInSlot(slot);
-			if(currentSlotStack.hasTagCompound())
+			if(currentSlotStack != null && currentSlotStack.hasTagCompound())
 			{
 				NBTTagCompound outputTagCompound;
 				if(output.hasTagCompound())
