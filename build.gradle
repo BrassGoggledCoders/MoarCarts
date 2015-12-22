@@ -15,32 +15,22 @@ buildscript {
     }
 }
 
-apply plugin: 'java'
 apply plugin: 'forge'
-
-file "gradle.properties" withReader {
-    def prop = new Properties()
-    prop.load(it)
-    ext.config = new ConfigSlurper().parse prop
-}
 
 project.ext {
     buildNum = System.getenv("BUILD_NUMBER")
     mcVersion = "${config.minecraft.version}"
 }
 
-version = "${config.minecraft.version}-${config.moarcarts.version}-${project.ext.buildNum}"
+version = "${minecraft.version}-${moarcarts.version}-${project.ext.buildNum}"
 group = "brassgoggledcoders"
 archivesBaseName = "moarcarts"
 
 minecraft {
-    version = "${config.minecraft.version}-${config.forge.version}-${config.minecraft.version}"
+    version = "${minecraft.version}-${forge.version}-${minecraft.version}"
 
     replace "@VERSION@", project.version
     replaceIn "MoarCarts.java"
-
-    replace "@VERSION@", project.version
-    replaceIn "mcmod.info"
 }
 
 repositories {
