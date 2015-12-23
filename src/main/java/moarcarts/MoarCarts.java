@@ -22,7 +22,8 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import moarcarts.config.ConfigHandler;
-import moarcarts.mods.botania.BotaniaModCompat;
+import moarcarts.mods.avaritia.AvaritiaCompat;
+import moarcarts.mods.botania.BotaniaCompat;
 import moarcarts.mods.ie.IEModCompat;
 import moarcarts.events.CartUpdateEvents;
 import moarcarts.mods.ironchest.IronChestCompat;
@@ -50,7 +51,7 @@ public class MoarCarts implements IBoilerplateMod
 	public static final String MODID = "moarcarts";
 	public static final String MODNAME = "MoarCarts";
 	public static final String MODVERSION = "@VERSION@";
-	public static final String DEPENDENCIES = "after:boilerplate;after:railcraft;";
+	public static final String DEPENDENCIES = "after:boilerplate;after:railcraft;after:Avaritia;";
 
 	public static CompatibilityHandler compatibilityHandler;
 	public static GuiHandler guiHandler;
@@ -101,7 +102,8 @@ public class MoarCarts implements IBoilerplateMod
 		compatibilityHandler.addModCompat(new IEModCompat());
 		compatibilityHandler.addModCompat(new MFRCompat());
 		compatibilityHandler.addModCompat(new MinechemCompat());
-		compatibilityHandler.addModCompat(new BotaniaModCompat());
+		compatibilityHandler.addModCompat(new BotaniaCompat());
+		compatibilityHandler.addModCompat(new AvaritiaCompat());
 		compatibilityHandler.addModCompat(new WailaCompat());
 	}
 

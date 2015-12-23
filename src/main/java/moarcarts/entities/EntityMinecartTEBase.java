@@ -112,12 +112,18 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 
 	public void sendUpdateToAllAround()
 	{
-		MoarCarts.packetHandler.sendToAllAround(new EntityTileEntityUpdateMessage(this), this);
+		if(!worldObj.isRemote)
+		{
+			MoarCarts.packetHandler.sendToAllAround(new EntityTileEntityUpdateMessage(this), this);
+		}
 	}
 
 	public void requestClientUpdate()
 	{
-		MoarCarts.packetHandler.sendToServer(new EntityTileEntityUpdateRequestMessage(this));
+		if(worldObj.isRemote)
+		{
+			MoarCarts.packetHandler.sendToServer(new EntityTileEntityUpdateRequestMessage(this));
+		}
 	}
 
 	@Override

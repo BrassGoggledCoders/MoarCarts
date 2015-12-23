@@ -17,10 +17,10 @@ import net.minecraftforge.common.MinecraftForge;
 /**
  * @author SkySom
  */
-public class BotaniaModCompat extends ModCompat
+public class BotaniaCompat extends ModCompat
 {
 	public static ItemTinyPotatoMinecart ITEM_MINECART_TINYPOTATO;
-
+	public static Block TINYPOTATO;
 
 	@Override
 	public String getName()
@@ -46,7 +46,7 @@ public class BotaniaModCompat extends ModCompat
 	@Override
 	public void init(FMLInitializationEvent event)
 	{
-		Block tinyPotato = GameRegistry.findBlock("Botania", "tinyPotato");
-		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_TINYPOTATO, tinyPotato));
+		TINYPOTATO = GameRegistry.findBlock("Botania", "tinyPotato");
+		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_TINYPOTATO, TINYPOTATO));
 	}
 }

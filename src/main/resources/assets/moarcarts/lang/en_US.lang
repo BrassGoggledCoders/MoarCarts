@@ -58,3 +58,8 @@ tile.moarcarts.blockrfloader.name=RF Loader
 item.minecarttinypotato.name=Tiny Potato Cart
 
 entity.moarcarts.entityminecarttinypotato.name=Tiny Potato Cart
+
+## avaritia stuff
+item.minecartinfinitato.name=Infinitato Cart
+
+entity.moarcarts.entityminecartinfinitato.name=Infinitato Cart

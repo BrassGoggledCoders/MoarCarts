@@ -50,11 +50,11 @@ repositories {
 }
 
 dependencies {
-    compile "brassgoggledcoders:boilerplate:${project.minecraft.version}-${boilerplateversion}:deobf"
+    compile "brassgoggledcoders:boilerplate:${project.minecraftversion}-${boilerplateversion}:deobf"
     compile "mcp.mobius.waila:Waila:${wailaversion}_${project.minecraft.version}:dev"
-    compile "codechicken:NotEnoughItems:${project.minecraft.version}-${neiversion}:dev"
-    compile "codechicken:CodeChickenCore:${project.minecraft.version}-${codechickencoreversion}:dev"
-    compile "codechicken:CodeChickenLib:${project.minecraft.version}-${codechickenlibversion}:dev"
+    compile "codechicken:NotEnoughItems:${project.minecraftversion}-${neiversion}:dev"
+    compile "codechicken:CodeChickenCore:${project.minecraftversion}-${codechickencoreversion}:dev"
+    compile "codechicken:CodeChickenLib:${project.minecraftversion}-${codechickenlibversion}:dev"
 }
 
 task getLibraries {
@@ -65,10 +65,10 @@ task getLibraries {
 
     def downloads = new ArrayList<Tuple>();
 
-    def railcraft = 'Railcraft_' + project.minecraft.version + '-' + railcraftversion + '-dev.jar'
+    def railcraft = 'Railcraft_' + project.minecraftversion + '-' + railcraftversion + '-dev.jar'
     def railcraftSource = 'https://dl.dropboxusercontent.com/u/38558957/Minecraft/Railcraft/' + railcraft
 
-    def ironchest = 'ironchest-' + project.minecraft.version + '-' + ironchestversion + '-deobf.jar'
+    def ironchest = 'ironchest-' + project.minecraftversion + '-' + ironchestversion + '-deobf.jar'
     def ironchestSource = 'http://files.minecraftforge.net/maven/cpw/mods/ironchest/' + project.minecraft.version +
             '-' + ironchestversion + '/' + ironchest
 
@@ -84,14 +84,17 @@ task getLibraries {
     def minefactory = 'minefactory-' + minefactoryversion + '.jar'
     def minefactorySource = 'http://minecraft.curseforge.com/projects/minefactory-reloaded/files/2233907/download'
 
-    def minechem = 'Minechem-' + project.minecraft.version + '-' + minechemversion + '.jar'
+    def minechem = 'Minechem-' + project.minecraftversion + '-' + minechemversion + '.jar'
     def minechemSource = 'http://minecraft.curseforge.com/projects/minechem/files/2251057/download'
 
     def botania = 'Botania ' + botaniaversion + '-deobf.jar'
     def botaniaSource = 'http://botaniamod.net/files/deobf/' + botania
 
-    def baubles = 'Baubles-' + project.minecraft.version + '-' + baublesversion + '.jar'
+    def baubles = 'Baubles-' + project.minecraftversion + '-' + baublesversion + '.jar'
     def baublesSource = 'https://dl.dropboxusercontent.com/u/47135879/' + baubles
+
+    def avaritia = 'avaritia-' + project.avaritiaversion + '.jar'
+    def avaritiaSource = 'http://minecraft.curseforge.com/projects/avaritia/files/2268137/download'
 
     downloads.add(new Tuple(railcraft, railcraftSource))
     downloads.add(new Tuple(ironchest, ironchestSource))
@@ -102,6 +105,20 @@ task getLibraries {
     downloads.add(new Tuple(minechem, minechemSource))
     downloads.add(new Tuple(botania, botaniaSource))
     downloads.add(new Tuple(baubles, baublesSource))
+    downloads.add(new Tuple(avaritia, avaritiaSource))
+
+    libsFolder.listFiles().each { file ->
+        def isInDownloadList = false;
+        downloads.each {download ->
+            if(file.name.equals(download.get(0).toString())) {
+                isInDownloadList = true;
+            }
+        }
+        if(!isInDownloadList || file.size() < 5) {
+            println "Deleting file " + file.name
+            file.delete();
+        }
+    }
 
     downloads.each{download ->
         def fileLocation = new File('libs', download.get(0).toString())
@@ -119,18 +136,7 @@ task getLibraries {
         }
     }
 
-    libsFolder.listFiles().each { file ->
-        def isInDownloadList = false;
-        downloads.each {download ->
-            if(file.name.equals(download.get(0).toString())) {
-                isInDownloadList = true;
-            }
-        }
-        if(!isInDownloadList) {
-            println "Deleting file " + file.name
-            file.delete();
-        }
-    }
+
 }
 
 runClient {

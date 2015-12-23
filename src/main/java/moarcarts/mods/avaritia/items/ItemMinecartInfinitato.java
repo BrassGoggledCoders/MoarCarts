@@ -1,9 +1,9 @@
-package moarcarts.mods.botania.items;
+package moarcarts.mods.avaritia.items;
 
 import moarcarts.entities.EntityMinecartBase;
 import moarcarts.items.ItemMinecartBase;
-import moarcarts.mods.botania.BotaniaCompat;
-import moarcarts.mods.botania.entities.EntityMinecartTinyPotato;
+import moarcarts.mods.avaritia.AvaritiaCompat;
+import moarcarts.mods.avaritia.entities.EntityMinecartInfinitato;
 import moarcarts.renderers.IRenderBlock.RenderMethod;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -12,23 +12,23 @@ import net.minecraft.world.World;
 /**
  * @author SkySom
  */
-public class ItemTinyPotatoMinecart extends ItemMinecartBase
+public class ItemMinecartInfinitato extends ItemMinecartBase
 {
-	public ItemTinyPotatoMinecart()
+	public ItemMinecartInfinitato()
 	{
-		super("botania", "minecarttinypotato");
+		super("avaritia", "minecartinfinitato");
 	}
 
 	@Override
 	public Block getCartBlock(ItemStack itemStack)
 	{
-		return BotaniaCompat.TINYPOTATO;
+		return AvaritiaCompat.INFINITATO;
 	}
 
 	@Override
 	public EntityMinecartBase getEntityFromItem(World world, ItemStack itemStack)
 	{
-		return new EntityMinecartTinyPotato(world);
+		return new EntityMinecartInfinitato(world);
 	}
 
 	@Override

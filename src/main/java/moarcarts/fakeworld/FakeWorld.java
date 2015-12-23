@@ -5,11 +5,15 @@ import moarcarts.entities.EntityMinecartTEBase;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSettings;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import java.util.List;
 
 /**
  * @author SkySom
@@ -135,6 +139,24 @@ public class FakeWorld extends World
 		double changeInY = (this.getCartY() - (double)intCartY) / 2.0;
 		double changeInZ = (this.getCartZ() - (double)intCartZ) / 2.0;
 		this.getCartWorld().spawnParticle(name, posX - changeInX, posY - changeInY, posZ - changeInZ, velX, velY, velZ);
+	}
+
+	@Override
+	public List getEntitiesWithinAABB(Class entityClass, AxisAlignedBB axisAlignedBB)
+	{
+		axisAlignedBB.minX += this.getCartX();
+		axisAlignedBB.maxX += this.getCartX();
+		axisAlignedBB.minY += this.getCartY();
+		axisAlignedBB.maxY += this.getCartY();
+		axisAlignedBB.minZ += this.getCartZ();
+		axisAlignedBB.maxZ += this.getCartZ();
+
+		return this.getCartWorld().getEntitiesWithinAABB(entityClass, axisAlignedBB);
+	}
+
+	public Explosion createExplosion(Entity entity, double posX, double posY, double posZ, float size, boolean damage)
+	{
+		return this.getCartWorld().createExplosion(entity, this.getCartX(), this.getCartY(), this.getCartZ(), size, damage);
 	}
 
 	public EntityMinecartTEBase getEntityMinecartTEBase()
