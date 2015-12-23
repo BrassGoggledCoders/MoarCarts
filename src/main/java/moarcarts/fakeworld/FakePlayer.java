@@ -5,6 +5,7 @@ import moarcarts.entities.EntityMinecartTEBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryEnderChest;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
@@ -16,10 +17,16 @@ public class FakePlayer extends EntityPlayer
 {
 	protected EntityPlayer entityPlayer;
 	private EntityMinecartTEBase entityMinecartTEBase;
+	private boolean accessInventory;
 
-	public FakePlayer(EntityPlayer entityPlayer, EntityMinecartTEBase entityMinecartTEBase)
+	public FakePlayer(EntityPlayer entityPlayer, EntityMinecartTEBase entityMinecartTEBase, boolean accessInventory)
 	{
 		super(entityPlayer.getEntityWorld(), entityPlayer.getGameProfile());
+		this.accessInventory = accessInventory;
+		if(this.accessInventory)
+		{
+			this.inventory = entityPlayer.inventory;
+		}
 		this.setEntityPlayer(entityPlayer);
 		this.setEntityMinecartTEBase(entityMinecartTEBase);
 	}
@@ -59,6 +66,31 @@ public class FakePlayer extends EntityPlayer
 	{
 		this.getEntityPlayer().openGui(MoarCarts.instance, this.getEntityMinecartTEBase().getEntityId(),
 				this.getEntityMinecartTEBase().worldObj, posX, posY, poxZ);
+	}
+
+	@Override
+	public ItemStack getEquipmentInSlot(int slot)
+	{
+		return this.getEntityPlayer().getEquipmentInSlot(slot);
+	}
+
+	@Override
+	public ItemStack getHeldItem()
+	{
+		if(this.accessInventory)
+		{
+			return this.getEntityPlayer().getHeldItem();
+		}
+		return null;
+	}
+
+	@Override
+	public void setCurrentItemOrArmor(int slot, ItemStack itemStack)
+	{
+		if(this.accessInventory)
+		{
+			this.getEntityPlayer().setCurrentItemOrArmor(slot, itemStack);
+		}
 	}
 
 	@Override

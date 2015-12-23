@@ -154,9 +154,16 @@ public class FakeWorld extends World
 		return this.getCartWorld().getEntitiesWithinAABB(entityClass, axisAlignedBB);
 	}
 
+	@Override
 	public Explosion createExplosion(Entity entity, double posX, double posY, double posZ, float size, boolean damage)
 	{
 		return this.getCartWorld().createExplosion(entity, this.getCartX(), this.getCartY(), this.getCartZ(), size, damage);
+	}
+
+	@Override
+	public void playSoundEffect(double posX, double posY, double posZ, String sound, float noice, float soundTimes)
+	{
+		this.getCartWorld().playSoundAtEntity(this.getEntityMinecartBase(), sound, noice, soundTimes);
 	}
 
 	public EntityMinecartTEBase getEntityMinecartTEBase()

@@ -65,11 +65,17 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 		this.sendUpdateToAllAround();
 		if(!player.isSneaking())
 		{
-			FakePlayer fakePlayer = new FakePlayer(player, this);
+			EntityPlayer fakePlayer = new FakePlayer(player, this, this.shouldAccessPlayerInventory());
 			return this.getCartBlock().onBlockActivated(this.getFakeWorld(), 0, 0, 0, fakePlayer, this.getMetadata(), 0, 0, 0);
 		}
 		return false;
 	}
+
+	public boolean shouldAccessPlayerInventory()
+	{
+		return true;
+	}
+
 
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound nbtTagCompound)

@@ -16,10 +16,14 @@ public class EntityMinecartWoodenBarrel extends EntityMinecartFluidTEBase implem
 {
 	public EntityMinecartWoodenBarrel(World world)
 	{
-		super(world, 6);
+		this(world, 6);
+	}
+
+	public EntityMinecartWoodenBarrel(World world, int metadata)
+	{
+		super(world, metadata);
 		TileEntityWoodenBarrel tileEntityWoodenBarrel = (TileEntityWoodenBarrel)this.getFluidTileEntity();
 		tileEntityWoodenBarrel.sideConfig[0] = 1;
-
 	}
 
 	@Override
@@ -32,6 +36,12 @@ public class EntityMinecartWoodenBarrel extends EntityMinecartFluidTEBase implem
 	public boolean shouldSaveDataToItem()
 	{
 		return true;
+	}
+
+	@Override
+	public boolean shouldAccessPlayerInventory()
+	{
+		return false;
 	}
 
 	@Override

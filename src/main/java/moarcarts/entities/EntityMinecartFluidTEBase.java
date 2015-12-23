@@ -1,8 +1,10 @@
 package moarcarts.entities;
 
 import cpw.mods.fml.common.Optional;
+import moarcarts.utils.FluidUtils;
 import mods.railcraft.api.carts.IFluidCart;
 import net.minecraft.entity.item.EntityMinecart;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
@@ -33,6 +35,13 @@ public abstract class EntityMinecartFluidTEBase extends EntityMinecartTEBase imp
 	{
 		super.entityInit();
 		dataWatcher.addObject(IS_FILLING, (byte) 0);
+	}
+
+	@Override
+	public boolean interactFirst(EntityPlayer player)
+	{
+		FluidUtils.fillFluidHandlerWithPlayerItem(this.worldObj, this, player);
+		return super.interactFirst(player);
 	}
 
 	@Override
