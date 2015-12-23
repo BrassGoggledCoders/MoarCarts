@@ -3,7 +3,10 @@ package moarcarts.mods.botania.entities;
 import moarcarts.entities.EntityMinecartTEBase;
 import moarcarts.items.ItemMinecartBase;
 import moarcarts.mods.botania.BotaniaModCompat;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import vazkii.botania.common.block.tile.TileTinyPotato;
 
 /**
  * @author SkySom
@@ -28,8 +31,17 @@ public class EntityMinecartTinyPotato extends EntityMinecartTEBase
 	}
 
 	@Override
-	public boolean shouldSaveDataToItem()
+	public void setTileEntityNBT(ItemStack itemStack)
 	{
-		return true;
+		TileTinyPotato tileTinyPotato = (TileTinyPotato)this.getTileEntity();
+		if(itemStack != null && itemStack.hasDisplayName())
+		{
+			NBTTagCompound tagCompound = new NBTTagCompound();
+			tagCompound.setString("name", itemStack.getDisplayName());
+			this.getTileEntity().readFromNBT(tagCompound);
+		}  else
+		{
+			super.setTileEntityNBT(itemStack);
+		}
 	}
 }

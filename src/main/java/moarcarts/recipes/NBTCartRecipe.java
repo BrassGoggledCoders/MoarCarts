@@ -17,6 +17,7 @@ import java.util.List;
 public class NBTCartRecipe extends ShapelessRecipes
 {
 	protected ItemStack recipeOutput;
+	protected ItemStack inputItem;
 
 	public NBTCartRecipe(Item outputCartItem, Block cartBlock)
 	{
@@ -37,6 +38,7 @@ public class NBTCartRecipe extends ShapelessRecipes
 	{
 		super(outputCartItem, getInputList(cartBlock));
 
+		this.inputItem = cartBlock;
 		this.recipeOutput = outputCartItem;
 	}
 
@@ -46,20 +48,34 @@ public class NBTCartRecipe extends ShapelessRecipes
 		for(int slot = 0; slot < inventoryCrafting.getSizeInventory(); slot++)
 		{
 			ItemStack currentSlotStack = inventoryCrafting.getStackInSlot(slot);
-			if(currentSlotStack != null && currentSlotStack.hasTagCompound())
+			if(currentSlotStack != null && currentSlotStack.getItem() != null)
 			{
-				NBTTagCompound outputTagCompound;
-				if(output.hasTagCompound())
+				if(inputItem != null && inputItem.getItem() != null)
 				{
-					outputTagCompound = output.getTagCompound();
-				} else
-				{
-					outputTagCompound = new NBTTagCompound();
+					if(currentSlotStack.getItem().equals(inputItem.getItem()))
+					{
+						if(currentSlotStack.hasTagCompound())
+						{
+							NBTTagCompound outputTagCompound;
+							if(output.hasTagCompound())
+							{
+								outputTagCompound = output.getTagCompound();
+							} else
+							{
+								outputTagCompound = new NBTTagCompound();
+							}
+							outputTagCompound.setTag("tilenbt", currentSlotStack.getTagCompound());
+							output.setTagCompound(outputTagCompound);
+						}
+						if(currentSlotStack.hasDisplayName())
+						{
+							output = output.setStackDisplayName(currentSlotStack.getDisplayName());
+						}
+					}
 				}
-				outputTagCompound.setTag("tilenbt", currentSlotStack.getTagCompound());
-				output.setTagCompound(outputTagCompound);
-				break;
+
 			}
+
 		}
 		return output;
 	}

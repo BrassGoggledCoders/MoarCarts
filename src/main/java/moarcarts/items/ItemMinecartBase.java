@@ -89,11 +89,7 @@ public abstract class ItemMinecartBase extends ItemMinecart implements IMinecart
 				if(entityMinecart instanceof EntityMinecartTEBase)
 				{
 					EntityMinecartTEBase entityMinecartTEBase = (EntityMinecartTEBase)entityMinecart;
-					if(itemStack.hasTagCompound() && entityMinecartTEBase.shouldSaveDataToItem())
-					{
-						entityMinecartTEBase.getTileEntity().readFromNBT(itemStack.getTagCompound()
-								.getCompoundTag("tilenbt"));
-					}
+					entityMinecartTEBase.setTileEntityNBT(itemStack);
 					world.spawnEntityInWorld(entityMinecartTEBase);
 				} else
 				{

@@ -96,6 +96,14 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 		this.setDirty(true);
 	}
 
+	public void setTileEntityNBT(ItemStack itemStack)
+	{
+		if(itemStack.hasTagCompound() && this.shouldSaveDataToItem())
+		{
+			this.getTileEntity().readFromNBT(itemStack.getTagCompound().getCompoundTag("tilenbt"));
+		}
+	}
+
 	@Override
 	public RenderMethod getRenderMethod()
 	{
