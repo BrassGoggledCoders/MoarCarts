@@ -243,4 +243,14 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 	{
 		dataWatcher.updateObject(IS_CLIENT_NEEDY, needy ? 1 : (byte) 0);
 	}
+
+	public boolean showHalo()
+	{
+		return false;
+	}
+
+	public String getHaloString()
+	{
+		return "";
+	}
 }

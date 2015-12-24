@@ -6,6 +6,7 @@ import moarcarts.mods.botania.BotaniaCompat;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import vazkii.botania.common.block.tile.TileTinyPotato;
 
 /**
  * @author SkySom
@@ -47,5 +48,17 @@ public class EntityMinecartTinyPotato extends EntityMinecartTEBase
 	public RenderMethod getRenderMethod()
 	{
 		return RenderMethod.CUSTOM;
+	}
+
+	@Override
+	public String getHaloString()
+	{
+		return ((TileTinyPotato)this.getTileEntity()).name;
+	}
+
+	@Override
+	public boolean showHalo()
+	{
+		return true;
 	}
 }

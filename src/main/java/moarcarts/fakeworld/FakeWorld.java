@@ -41,12 +41,14 @@ public class FakeWorld extends World
 		this.isRemote = world.isRemote;
 	}
 
+	//MFR grabs TE's just a bit different than most
 	@Override
 	protected IChunkProvider createChunkProvider()
 	{
 		return chunkProvider;
 	}
 
+	//MFR grabs TE's just a bit different than most
 	@Override
 	public void markTileEntityChunkModified(int posX, int posY, int posZ, TileEntity tileEntity)
 	{
@@ -56,6 +58,7 @@ public class FakeWorld extends World
 		}
 	}
 
+	//MFR grabs TE's just a bit different than most
 	@Override
 	public Chunk getChunkFromBlockCoords(int x, int z)
 	{
@@ -66,10 +69,14 @@ public class FakeWorld extends World
 		return this.fakeChunk;
 	}
 
+	//Pretty sure this for IE's blocks originally though other use it.
 	@Override
 	public void markBlockForUpdate(int posX, int posY, int posZ)
 	{
-		//NO-OP
+		if(this.getEntityMinecartTEBase() != null)
+		{
+			this.getEntityMinecartTEBase().setDirty(true);
+		}
 	}
 
 	@Override
@@ -84,16 +91,14 @@ public class FakeWorld extends World
 		return 0;
 	}
 
+	//Most blocks use this
 	@Override
 	public Block getBlock(int x, int y, int z)
 	{
-		if(this.getEntityMinecartBase() == null)
-		{
-			this.setEntityMinecartBase(this.getEntityMinecartTEBase());
-		}
 		return this.getEntityMinecartBase().getCartBlock();
 	}
 
+	//Enderchest use this for open and close
 	@Override
 	public void addBlockEvent(int x, int y, int z, Block block, int metadata, int p_14745) {}
 
@@ -119,16 +124,14 @@ public class FakeWorld extends World
 		return this.getEntityMinecartBase().worldObj.getEntityByID(id);
 	}
 
+	//Most Blocks use this.
 	@Override
 	public int getBlockMetadata(int posX, int posY, int posZ)
 	{
-		if(this.getEntityMinecartBase() == null)
-		{
-			this.setEntityMinecartBase(this.getEntityMinecartTEBase());
-		}
 		return this.getEntityMinecartBase().getMetadata();
 	}
 
+	//Enderchest Particles
 	@Override
 	public void spawnParticle(String name, double posX, double posY, double posZ, double velX, double velY, double velZ)
 	{
@@ -141,6 +144,7 @@ public class FakeWorld extends World
 		this.getCartWorld().spawnParticle(name, posX - changeInX, posY - changeInY, posZ - changeInZ, velX, velY, velZ);
 	}
 
+	//Infinitato tries to get Entities and add potion effects
 	@Override
 	public List getEntitiesWithinAABB(Class entityClass, AxisAlignedBB axisAlignedBB)
 	{
@@ -154,16 +158,32 @@ public class FakeWorld extends World
 		return this.getCartWorld().getEntitiesWithinAABB(entityClass, axisAlignedBB);
 	}
 
+	//Infinitato creates explosions when it lands
 	@Override
 	public Explosion createExplosion(Entity entity, double posX, double posY, double posZ, float size, boolean damage)
 	{
 		return this.getCartWorld().createExplosion(entity, this.getCartX(), this.getCartY(), this.getCartZ(), size, damage);
 	}
 
+	//Shia Labouef tiny potato screams "Just do it"
 	@Override
 	public void playSoundEffect(double posX, double posY, double posZ, String sound, float noice, float soundTimes)
 	{
 		this.getCartWorld().playSoundAtEntity(this.getEntityMinecartBase(), sound, noice, soundTimes);
+	}
+
+	//EntityMinecartEmpty calls when rendered within a tiny potato (Skytato)
+	@Override
+	public boolean blockExists(int posX, int posY, int posZ)
+	{
+		return true;
+	}
+
+	//EntityMinecartEmpty calls when rendered within a tiny potato (Skytato)
+	@Override
+	public int getBlockLightValue(int posX, int posY, int posZ)
+	{
+		return 15;
 	}
 
 	public EntityMinecartTEBase getEntityMinecartTEBase()

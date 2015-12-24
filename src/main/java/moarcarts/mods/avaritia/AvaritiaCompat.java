@@ -13,7 +13,9 @@ import moarcarts.mods.avaritia.entities.EntityMinecartInfinitato;
 import moarcarts.mods.avaritia.items.ItemMinecartInfinitato;
 import moarcarts.mods.avaritia.renderers.RenderMinecartInfinatato;
 import moarcarts.recipes.NBTCartRecipe;
+import moarcarts.renderers.RenderItemMinecartBase;
 import net.minecraft.block.Block;
+import net.minecraftforge.client.MinecraftForgeClient;
 
 /**
  * @author SkySom
@@ -62,6 +64,7 @@ public class AvaritiaCompat extends ModCompat
 		if(isBotaniaModuleLoaded)
 		{
 			GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_INFINITATO, INFINITATO));
+			MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_INFINITATO, new RenderItemMinecartBase());
 		}
 	}
 }

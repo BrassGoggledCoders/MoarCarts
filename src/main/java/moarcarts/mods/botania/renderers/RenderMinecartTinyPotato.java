@@ -5,15 +5,12 @@ import moarcarts.renderers.RenderMinecartTEBase;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import org.lwjgl.opengl.GL11;
@@ -322,61 +319,6 @@ public class RenderMinecartTinyPotato extends RenderMinecartTEBase
 		GL11.glRotatef(-rotY, 0F, 1F, 0F);
 		GL11.glColor3f(1F, 1F, 1F);
 		GL11.glScalef(1F, -1F, -1F);
-
-		MovingObjectPosition pos = mc.objectMouseOver;
-		if(!name.isEmpty() && pos != null && pos.blockX == potato.xCoord && pos.blockY == potato.yCoord && pos.blockZ == potato.zCoord) {
-			GL11.glPushMatrix();
-			GL11.glTranslatef(0F, -0.6F, 0F);
-			GL11.glRotatef(-RenderManager.instance.playerViewY, 0.0F, 1.0F, 0.0F);
-			GL11.glRotatef(RenderManager.instance.playerViewX, 1.0F, 0.0F, 0.0F);
-			GL11.glRotatef(entityMinecartTEBase.getRotationYawHead(), 0.0F, 1.0F, 0.0F);
-			float f = 1.6F;
-			float f1 = 0.016666668F * f;
-			GL11.glScalef(-f1, -f1, f1);
-			GL11.glDisable(GL11.GL_LIGHTING);
-			GL11.glTranslatef(0.0F, 0F / f1, 0.0F);
-			GL11.glDepthMask(false);
-			GL11.glEnable(GL11.GL_BLEND);
-			OpenGlHelper.glBlendFunc(770, 771, 1, 0);
-			Tessellator tessellator = Tessellator.instance;
-			GL11.glDisable(GL11.GL_TEXTURE_2D);
-			tessellator.startDrawingQuads();
-			int i = mc.fontRenderer.getStringWidth(potato.name) / 2;
-			tessellator.setColorRGBA_F(0.0F, 0.0F, 0.0F, 0.25F);
-			tessellator.addVertex(-i - 1, -1.0D, 0.0D);
-			tessellator.addVertex(-i - 1, 8.0D, 0.0D);
-			tessellator.addVertex(i + 1, 8.0D, 0.0D);
-			tessellator.addVertex(i + 1, -1.0D, 0.0D);
-			tessellator.draw();
-			GL11.glEnable(GL11.GL_TEXTURE_2D);
-			GL11.glDepthMask(true);
-			mc.fontRenderer.drawString(potato.name, -mc.fontRenderer.getStringWidth(potato.name) / 2, 0, 0xFFFFFF);
-			if(name.equals("pahimar") || name.equals("soaryn")) {
-				GL11.glTranslatef(0F, 14F, 0F);
-				String s = name.equals("pahimar") ? "[WIP]" : "(soon)";
-				GL11.glDepthMask(false);
-				GL11.glEnable(GL11.GL_BLEND);
-				OpenGlHelper.glBlendFunc(770, 771, 1, 0);
-				GL11.glDisable(GL11.GL_TEXTURE_2D);
-				tessellator.startDrawingQuads();
-				i = mc.fontRenderer.getStringWidth(s) / 2;
-				tessellator.setColorRGBA_F(0.0F, 0.0F, 0.0F, 0.25F);
-				tessellator.addVertex(-i - 1, -1.0D, 0.0D);
-				tessellator.addVertex(-i - 1, 8.0D, 0.0D);
-				tessellator.addVertex(i + 1, 8.0D, 0.0D);
-				tessellator.addVertex(i + 1, -1.0D, 0.0D);
-				tessellator.draw();
-				GL11.glEnable(GL11.GL_TEXTURE_2D);
-				GL11.glDepthMask(true);
-				mc.fontRenderer.drawString(s, -mc.fontRenderer.getStringWidth(s) / 2, 0, 0xFFFFFF);
-			}
-
-			GL11.glEnable(GL11.GL_LIGHTING);
-			GL11.glDisable(GL11.GL_BLEND);
-			GL11.glColor4f(1F, 1F, 1F, 1F);
-			GL11.glScalef(1F / -f1, 1F / -f1, 1F / f1);
-			GL11.glPopMatrix();
-		}
 
 		GL11.glPopMatrix();
 	}

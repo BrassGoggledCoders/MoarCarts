@@ -10,10 +10,13 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import moarcarts.MoarCarts;
 import moarcarts.mods.botania.entities.EntityMinecartTinyPotato;
 import moarcarts.mods.botania.events.ManaCartComparatorEvent;
+import moarcarts.mods.botania.events.PotatoMinecartEventHandler;
 import moarcarts.mods.botania.items.ItemTinyPotatoMinecart;
 import moarcarts.mods.botania.renderers.RenderMinecartTinyPotato;
 import moarcarts.recipes.NBTCartRecipe;
+import moarcarts.renderers.RenderItemMinecartBase;
 import net.minecraft.block.Block;
+import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 
 /**
@@ -50,11 +53,13 @@ public class BotaniaCompat extends ModCompat
 	{
 		TINYPOTATO = GameRegistry.findBlock("Botania", "tinyPotato");
 		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_TINYPOTATO, TINYPOTATO));
+		MinecraftForge.EVENT_BUS.register(new PotatoMinecartEventHandler());
 	}
 
 	@Override
 	public void clientInit(FMLInitializationEvent event)
 	{
 		RenderingRegistry.registerEntityRenderingHandler(EntityMinecartTinyPotato.class, new RenderMinecartTinyPotato());
+		MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_TINYPOTATO, new RenderItemMinecartBase());
 	}
 }

@@ -2,13 +2,17 @@ package moarcarts.renderers;
 
 import moarcarts.entities.EntityMinecartTEBase;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderMinecart;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -19,6 +23,8 @@ import org.lwjgl.opengl.GL12;
 public class RenderMinecartTEBase extends RenderMinecart
 {
 	protected EntityMinecartTEBase entityMinecartTEBase;
+	protected String haloString;
+	private Minecraft mc = Minecraft.getMinecraft();
 
 	public void doRender(EntityMinecart entityMinecart, double posX, double posY, double posZ, float p_76986_8_, float p_76986_9_)
 	{
@@ -108,7 +114,10 @@ public class RenderMinecartTEBase extends RenderMinecart
 					this.renderISBRH(entityMinecartTEBase, block, offset);
 					break;
 				case CUSTOM:
+					GL11.glRotated(90D, 0D, 1D, 0D);
+					GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 					this.renderCustom(entityMinecartTEBase, block);
+					GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 					break;
 				default:
 					break;
@@ -118,12 +127,16 @@ public class RenderMinecartTEBase extends RenderMinecart
 			this.bindEntityTexture(entityMinecartTEBase);
 			GL11.glScalef(-1.0F, -1.0F, 1.0F);
 			this.modelMinecart.render(entityMinecartTEBase, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+
+			this.renderHalo(entityMinecartTEBase);
+
 			GL11.glPopMatrix();
 		} else
 		{
 			super.doRender(entityMinecart, posX, posY, posZ, p_76986_8_, p_76986_9_);
 		}
 	}
+
 
 	protected void renderCustom(EntityMinecartTEBase entityMinecart, Block block)
 	{
@@ -192,5 +205,43 @@ public class RenderMinecartTEBase extends RenderMinecart
 		tessellator.draw();
 
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+	}
+
+	private void renderHalo(EntityMinecartTEBase entityMinecartTEBase)
+	{
+		MovingObjectPosition pos = mc.objectMouseOver;
+		if(pos != null && entityMinecartTEBase.showHalo() &&
+				!entityMinecartTEBase.getHaloString().isEmpty())
+		{
+			haloString = entityMinecartTEBase.getHaloString();
+			GL11.glPushMatrix();
+			GL11.glRotatef(180, 1F, 0F, 0F);
+			GL11.glTranslatef(0F, -0.6F, 0F);
+			GL11.glRotatef(-RenderManager.instance.playerViewY, 0.0F, 1.0F, 0.0F);
+			GL11.glRotatef(RenderManager.instance.playerViewX, 1.0F, 0.0F, 0.0F);
+			float f = 1.6F;
+			float f1 = 0.016666668F * f;
+			GL11.glScalef(-f1, -f1, f1);
+			GL11.glDisable(GL11.GL_LIGHTING);
+			GL11.glTranslatef(0.0F, 0F / f1, 0.0F);
+			GL11.glDepthMask(false);
+			GL11.glEnable(GL11.GL_BLEND);
+			OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+			Tessellator tessellator = Tessellator.instance;
+			GL11.glDisable(GL11.GL_TEXTURE_2D);
+			tessellator.startDrawingQuads();
+			int i = mc.fontRenderer.getStringWidth(haloString) / 2;
+			tessellator.setColorRGBA_F(0.0F, 0.0F, 0.0F, 0.25F);
+			tessellator.addVertex(-i - 1, -1.0D, 0.0D);
+			tessellator.addVertex(-i - 1, 8.0D, 0.0D);
+			tessellator.addVertex(i + 1, 8.0D, 0.0D);
+			tessellator.addVertex(i + 1, -1.0D, 0.0D);
+			tessellator.draw();
+			GL11.glEnable(GL11.GL_TEXTURE_2D);
+			GL11.glDepthMask(true);
+			mc.fontRenderer.drawString(haloString, -mc.fontRenderer.getStringWidth(haloString) / 2, 0, 0xFFFFFF);
+			GL11.glPopMatrix();
+		}
+		haloString = "";
 	}
 }
