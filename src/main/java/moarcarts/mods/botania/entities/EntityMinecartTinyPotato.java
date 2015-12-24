@@ -42,4 +42,10 @@ public class EntityMinecartTinyPotato extends EntityMinecartTEBase
 			super.setTileEntityNBT(itemStack);
 		}
 	}
+
+	@Override
+	public RenderMethod getRenderMethod()
+	{
+		return RenderMethod.CUSTOM;
+	}
 }

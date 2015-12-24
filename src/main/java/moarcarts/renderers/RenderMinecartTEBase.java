@@ -107,6 +107,9 @@ public class RenderMinecartTEBase extends RenderMinecart
 				case ISBRH:
 					this.renderISBRH(entityMinecartTEBase, block, offset);
 					break;
+				case CUSTOM:
+					this.renderCustom(entityMinecartTEBase, block);
+					break;
 				default:
 					break;
 			}
@@ -120,6 +123,10 @@ public class RenderMinecartTEBase extends RenderMinecart
 		{
 			super.doRender(entityMinecart, posX, posY, posZ, p_76986_8_, p_76986_9_);
 		}
+	}
+
+	protected void renderCustom(EntityMinecartTEBase entityMinecart, Block block)
+	{
 	}
 
 	private void renderISBRH(EntityMinecartTEBase entityMinecartTEBase, Block block, int offset)

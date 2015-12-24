@@ -68,7 +68,7 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 			EntityPlayer fakePlayer = new FakePlayer(player, this, this.shouldAccessPlayerInventory());
 			return this.getCartBlock().onBlockActivated(this.getFakeWorld(), 0, 0, 0, fakePlayer, this.getMetadata(), 0, 0, 0);
 		}
-		return false;
+		return true;
 	}
 
 	public boolean shouldAccessPlayerInventory()
