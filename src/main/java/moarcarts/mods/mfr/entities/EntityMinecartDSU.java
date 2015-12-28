@@ -44,4 +44,10 @@ public class EntityMinecartDSU extends EntityMinecartDeepStorageTEBase implement
 	{
 		return new ContainerMinecartDSU(entityPlayer.inventory, this);
 	}
+
+	@Override
+	public int getItemQuantity()
+	{
+		return ((TileEntityDeepStorageUnit)this.getTileEntity()).getQuantity();
+	}
 }

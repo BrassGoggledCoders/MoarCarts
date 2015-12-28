@@ -5,7 +5,6 @@ import moarcarts.entities.EntityMinecartDeepStorageTEBase;
 import moarcarts.entities.EntityMinecartEnergyHandlerTEBase;
 import moarcarts.entities.EntityMinecartFluidInventoryTEBase;
 import moarcarts.entities.EntityMinecartFluidTEBase;
-import moarcarts.mods.mfr.entities.EntityMinecartDSU;
 import moarcarts.mods.waila.providers.EntityMinecartDSUProvider;
 import moarcarts.mods.waila.providers.EntityMinecartFluidProvider;
 import moarcarts.mods.waila.providers.EntityMinecartRFProvider;
@@ -17,7 +16,6 @@ import moarcarts.mods.waila.providers.EntityMinecartTEBaseProvider;
 public class Register
 {
 	public static void callback(IWailaRegistrar registrar) {
-
 		registrar.registerNBTProvider(new EntityMinecartTEBaseProvider(), EntityMinecartTEBaseProvider.class);
 		registrar.registerBodyProvider(new EntityMinecartFluidProvider(), EntityMinecartFluidInventoryTEBase.class);
 		registrar.registerBodyProvider(new EntityMinecartFluidProvider(), EntityMinecartFluidTEBase.class);

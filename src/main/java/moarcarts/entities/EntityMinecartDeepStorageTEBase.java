@@ -50,4 +50,6 @@ public abstract class EntityMinecartDeepStorageTEBase extends EntityMinecartInve
 		return itemStack != null && (this.getStoredItemType() == null ||
 				itemStack.getItem() == this.getStoredItemType().getItem());
 	}
+
+	public abstract int getItemQuantity();
 }
