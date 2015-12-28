@@ -20,6 +20,7 @@ import net.minecraftforge.client.MinecraftForgeClient;
 public class IronChestCompat extends ModCompat
 {
 	public static ItemMinecartIronChest ITEM_MINECART_IRONCHEST;
+	public static Block IRON_CHEST;
 
 	@Override
 	public String getName()
@@ -72,10 +73,10 @@ public class IronChestCompat extends ModCompat
 
 	public void registerRecipes()
 	{
-		Block blockIronChest = Block.getBlockFromName("IronChest:BlockIronChest");
+		IRON_CHEST = GameRegistry.findBlock("IronChest", "BlockIronChest");
 		for (int i = 0; i < 8; i++)
 		{
-			GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_IRONCHEST, i, blockIronChest, i));
+			GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_IRONCHEST, i, IRON_CHEST, i));
 		}
 	}
 }

@@ -23,6 +23,12 @@ public class EntityMinecartInfinitato extends EntityMinecartTinyPotato
 	}
 
 	@Override
+	public boolean showHalo()
+	{
+		return !((TileInfinitato)this.getTileEntity()).name.isEmpty();
+	}
+
+	@Override
 	public String getHaloString()
 	{
 		return ((TileInfinitato)this.getTileEntity()).name;

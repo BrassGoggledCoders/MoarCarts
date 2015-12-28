@@ -21,7 +21,7 @@ public class MinechemCompat extends ModCompat
 {
 	public static ItemMinecartLeadedChest ITEM_MINECART_LEADEDCHEST;
 
-	public static Block leadedChest = GameRegistry.findBlock("minechem", "leadchest");
+	public static Block LEADED_CHEST;
 
 	@Override
 	public String getName()
@@ -46,13 +46,13 @@ public class MinechemCompat extends ModCompat
 	@Override
 	public void init(FMLInitializationEvent event)
 	{
-		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_LEADEDCHEST, leadedChest));
+		LEADED_CHEST = GameRegistry.findBlock("minechem", "tile.leadchest");
+		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_LEADEDCHEST, LEADED_CHEST));
 	}
 
 	@Override
 	public void clientInit(FMLInitializationEvent event)
 	{
 		MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_LEADEDCHEST, new RenderItemMinecartBase());
-
 	}
 }

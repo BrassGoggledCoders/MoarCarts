@@ -20,7 +20,7 @@ import net.minecraftforge.client.MinecraftForgeClient;
 public class MFRCompat extends ModCompat
 {
 	public static ItemMinecartDSU ITEM_MINECART_DSU;
-	public static Block DSU = GameRegistry.findBlock("MineFactoryReloaded", "machine.1");
+	public static Block DSU;
 
 	@Override
 	public String getName()
@@ -51,6 +51,7 @@ public class MFRCompat extends ModCompat
 	@Override
 	public void init(FMLInitializationEvent event)
 	{
+		DSU = GameRegistry.findBlock("MineFactoryReloaded", "machine.1");
 		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_DSU, DSU, 3));
 	}
 

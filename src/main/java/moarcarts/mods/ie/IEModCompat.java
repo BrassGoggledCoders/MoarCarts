@@ -29,9 +29,9 @@ public class IEModCompat extends ModCompat
 	public static ItemMinecartWoodenCrate ITEM_MINECART_WOODENCRATE;
 	public static ItemMinecartCapacitor ITEM_MINECART_CAPACITOR;
 
-	public static Block woodenDevice = GameRegistry.findBlock("ImmersiveEngineering", "blockWoodenDevice");
-	public static Block metalDevice = GameRegistry.findBlock("ImmersiveEngineering", "blockMetalDevice");
-	public static Block metalDevice2 = GameRegistry.findBlock("ImmersiveEngineering", "blockMetalDevice2");
+	public static Block WOODEN_DEVICE;
+	public static Block METAL_DEVICE;
+	public static Block METAL_DEVICE2;
 
 	@Override
 	public String getName()
@@ -73,13 +73,17 @@ public class IEModCompat extends ModCompat
 	@Override
 	public void init(FMLInitializationEvent event)
 	{
-		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_WOODENBARREL, woodenDevice, 6));
-		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_METALBARREL, metalDevice2, 7));
-		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_WOODENCRATE, woodenDevice, 4));
-		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_CAPACITOR, 0, metalDevice, 1));
-		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_CAPACITOR, 1, metalDevice, 4));
-		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_CAPACITOR, 2, metalDevice, 7));
-		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_CAPACITOR, 3, metalDevice2, 8));
+		WOODEN_DEVICE = GameRegistry.findBlock("ImmersiveEngineering", "woodenDevice");
+		METAL_DEVICE = GameRegistry.findBlock("ImmersiveEngineering", "metalDevice");
+		METAL_DEVICE2 = GameRegistry.findBlock("ImmersiveEngineering", "metalDevice2");
+
+		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_WOODENBARREL, WOODEN_DEVICE, 6));
+		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_METALBARREL, METAL_DEVICE2, 7));
+		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_WOODENCRATE, WOODEN_DEVICE, 4));
+		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_CAPACITOR, 0, METAL_DEVICE, 1));
+		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_CAPACITOR, 1, METAL_DEVICE, 4));
+		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_CAPACITOR, 2, METAL_DEVICE, 7));
+		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_CAPACITOR, 3, METAL_DEVICE2, 8));
 	}
 
 	@Override

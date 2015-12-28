@@ -59,6 +59,6 @@ public class EntityMinecartTinyPotato extends EntityMinecartTEBase
 	@Override
 	public boolean showHalo()
 	{
-		return true;
+		return !((TileTinyPotato)this.getTileEntity()).name.isEmpty();
 	}
 }
