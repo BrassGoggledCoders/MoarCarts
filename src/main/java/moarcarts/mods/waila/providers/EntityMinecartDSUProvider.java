@@ -19,8 +19,9 @@ public class EntityMinecartDSUProvider extends EntityMinecartTEBaseProvider
 		if(entity instanceof EntityMinecartDeepStorageTEBase)
 		{
 			EntityMinecartDeepStorageTEBase deepStorageTEBase = (EntityMinecartDeepStorageTEBase) entity;
-			currenttip.add(String.format("%d stacks of %s", deepStorageTEBase.getItemQuantity(),
-					deepStorageTEBase.getStoredItemType().getItem().getItemStackDisplayName(deepStorageTEBase.getStoredItemType())));
+			currenttip.add(String.format("Quantity: %d", deepStorageTEBase.getItemQuantity()));
+			currenttip.add(String.format("Itemstack: %s", deepStorageTEBase.getStoredItemType().getItem()
+					.getItemStackDisplayName(deepStorageTEBase.getStoredItemType())));
 		}
 		return currenttip;
 	}
