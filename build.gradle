@@ -171,6 +171,7 @@ sourceSets {
 
 task("uploadJars", dependsOn: "reobf") {
     description = "uploads JARs"
+    println System.getenv("local_maven")
     if (System.getenv("local_maven") != null) {
         apply plugin: 'maven'
         uploadArchives {
@@ -187,8 +188,8 @@ task("uploadJars", dependsOn: "reobf") {
                             description 'MoarCarts'
                             url 'http://BrassGoggledCoders.xyz'
                             scm {
-                                url 'https://github.com/BrassGoggledCoders/MoarCarts.git\''
-                                connection 'scm:git:git@github.com:BrassGoggledCoders/MoarCarts.git\''
+                                url 'https://github.com/BrassGoggledCoders/MoarCarts.git'
+                                connection 'scm:git:git@github.com:BrassGoggledCoders/MoarCarts.git'
                                 developerConnection 'scm:git:git@github.com:BrassGoggledCoders/MoarCarts.git'
                             }
                             issueManagement {
