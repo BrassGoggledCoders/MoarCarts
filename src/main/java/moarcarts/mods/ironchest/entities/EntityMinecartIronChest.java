@@ -46,7 +46,10 @@ public class EntityMinecartIronChest extends EntityMinecartInventoryTEBase imple
 			Constructor<GUIChest> constructor = GUIChest.class.getDeclaredConstructor(GUIChest.GUI.class,
 					IInventory.class, IInventory.class);
 			constructor.setAccessible(true);
-			return constructor.newInstance(GUIChest.GUI.values()[this.getMetadata()], entityPlayer.inventory, this);
+			GUIChest guiChest = constructor.newInstance(GUIChest.GUI.values()[this.getMetadata()],
+					entityPlayer.inventory, this);
+			guiChest.inventorySlots = new ContainerMinecartIronChest(entityPlayer.inventory, this);
+			return guiChest;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
