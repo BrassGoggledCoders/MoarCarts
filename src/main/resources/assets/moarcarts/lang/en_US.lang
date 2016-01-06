@@ -63,3 +63,10 @@ entity.moarcarts.entityminecarttinypotato.name=Tiny Potato Cart
 item.minecartinfinitato.name=Infinitato Cart
 
 entity.moarcarts.entityminecartinfinitato.name=Infinitato Cart
+
+## railcraft stuf
+item.minecartmachinebeta.void.name=Void Chest Cart
+item.minecartmachinebeta.metals.name=Metals Chest Cart
+
+entity.moarcarts.entityminecartvoidchest.name=Void Chest Cart
+entity.moarcarts.entityminecartmetalschest.name=Metals Chest Cart

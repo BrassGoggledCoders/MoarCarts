@@ -76,8 +76,6 @@ public class RenderMinecartTEBase extends RenderMinecart
 				}
 			}
 
-
-
 			GL11.glTranslatef((float) posX, (float) posY, (float) posZ);
 			GL11.glRotatef(180.0F - p_76986_8_, 0.0F, 1.0F, 0.0F);
 			GL11.glRotatef(-f5, 0.0F, 0.0F, 1.0F);
@@ -117,8 +115,6 @@ public class RenderMinecartTEBase extends RenderMinecart
 					this.renderISBRH(entityMinecartTEBase, block, offset);
 					break;
 				case CUSTOM:
-					GL11.glRotated(90D, 0D, 1D, 0D);
-					GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 					this.renderCustom(entityMinecartTEBase, block);
 					GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 					break;
@@ -143,12 +139,12 @@ public class RenderMinecartTEBase extends RenderMinecart
 	{
 	}
 
-	private void renderISBRH(EntityMinecartTEBase entityMinecartTEBase, Block block, int offset)
+	protected void renderISBRH(EntityMinecartTEBase entityMinecartTEBase, Block block, int offset)
 	{
 		renderSidesFromTile(block);
 	}
 
-	private void renderTESRMethod(EntityMinecartTEBase entityMinecartTEBase)
+	protected void renderTESRMethod(EntityMinecartTEBase entityMinecartTEBase)
 	{
 		GL11.glRotated(90D, 0D, 1D, 0D);
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
@@ -156,7 +152,7 @@ public class RenderMinecartTEBase extends RenderMinecart
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 	}
 
-	private void renderVMCMethod(EntityMinecartTEBase entityMinecartTEBase, Block block, int data, float p_76986_9_)
+	protected void renderVMCMethod(EntityMinecartTEBase entityMinecartTEBase, Block block, int data, float p_76986_9_)
 	{
 		if(block.getRenderType() != -1)
 		{

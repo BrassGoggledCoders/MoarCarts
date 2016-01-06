@@ -4,12 +4,10 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import cpw.mods.ironchest.IronChest;
 import cpw.mods.ironchest.IronChestType;
-import moarcarts.MoarCarts;
 import moarcarts.entities.EntityMinecartBase;
 import moarcarts.items.ItemMinecartBase;
 import moarcarts.mods.ironchest.entities.*;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -45,25 +43,6 @@ public class ItemMinecartIronChest extends ItemMinecartBase
 	public String getUnlocalizedName(ItemStack itemstack)
 	{
 		return "item.minecartironchest." + IronChestType.values()[itemstack.getItemDamage()].name().toLowerCase();
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister register)
-	{
-		ironChestIcons = new IIcon[IronChestType.values().length];
-		for(int x = 0; x < ironChestIcons.length; x++)
-		{
-			ironChestIcons[x] = register.registerIcon(MoarCarts.MODID + ":ironchest/minecartironchest" +
-					IronChestType.values()[x].name().toLowerCase());
-		}
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamage(int damage)
-	{
-		return this.ironChestIcons[damage];
 	}
 
 	@Override

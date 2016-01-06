@@ -21,10 +21,10 @@ import org.lwjgl.opengl.GL12;
  */
 public class RenderItemMinecartBase implements IItemRenderer
 {
-	TileEntity renderTileEntity;
-
 	public static ResourceLocation TEXTURE = new ResourceLocation("textures/entity/minecart.png");
+
 	public ModelBase model = new ModelMinecart();
+	public TileEntity renderTileEntity;
 
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type)
@@ -90,6 +90,9 @@ public class RenderItemMinecartBase implements IItemRenderer
 				case TESR:
 					this.renderTESRMethod(stack, itemMinecartBase);
 					break;
+				case CUSTOM:
+					this.renderCustom(stack, itemMinecartBase);
+					break;
 				default:
 					break;
 			}
@@ -128,5 +131,10 @@ public class RenderItemMinecartBase implements IItemRenderer
 			TileEntityRendererDispatcher.instance.renderTileEntityAt(renderTileEntity, 0, 0, 0, 0.0F);
 			GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		}
+	}
+
+	protected void renderCustom(ItemStack itemStack, ItemMinecartBase itemMinecartBase)
+	{
+
 	}
 }
