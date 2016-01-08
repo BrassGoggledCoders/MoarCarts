@@ -8,15 +8,11 @@ import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 
-import java.util.Random;
-
 /**
  * @author SkySom
  */
 public class CartUpdateEvents
 {
-	Random random = new Random();
-
 	@SubscribeEvent
 	public void renderOverLay(RenderGameOverlayEvent.Pre event)
 	{
@@ -26,11 +22,8 @@ public class CartUpdateEvents
 			if(movingObjectPosition.entityHit instanceof EntityMinecartTEBase)
 			{
 				EntityMinecartTEBase minecartTEBase = (EntityMinecartTEBase)movingObjectPosition.entityHit;
-				if(random.nextInt(20) == 0 || minecartTEBase.isDirty())
-				{
-					minecartTEBase.setClientNeedy(true);
-					minecartTEBase.markDirty();
-				}
+				minecartTEBase.setClientNeedy(true);
+				minecartTEBase.markDirty();
 			}
 		}
 	}

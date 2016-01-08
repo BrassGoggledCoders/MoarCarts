@@ -38,6 +38,9 @@ public class RenderMinecartTinyPotato extends RenderMinecartTEBase
 	@Override
 	protected void renderCustom(EntityMinecartTEBase entityMinecartTEBase, Block block)
 	{
+		GL11.glRotated(90D, 0D, 1D, 0D);
+		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+
 		TileTinyPotato potato = (TileTinyPotato)entityMinecartTEBase.getTileEntity();
 		GL11.glPushMatrix();
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);

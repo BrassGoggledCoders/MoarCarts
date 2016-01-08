@@ -76,11 +76,14 @@ public class RenderMinecartTEBase extends RenderMinecart
 				}
 			}
 
+
 			GL11.glTranslatef((float) posX, (float) posY, (float) posZ);
+			this.renderHalo(entityMinecartTEBase);
 			GL11.glRotatef(180.0F - p_76986_8_, 0.0F, 1.0F, 0.0F);
 			GL11.glRotatef(-f5, 0.0F, 0.0F, 1.0F);
 			float f7 = (float) entityMinecartTEBase.getRollingAmplitude() - p_76986_9_;
 			float f8 = entityMinecartTEBase.getDamage() - p_76986_9_;
+
 
 			if(f8 < 0.0F)
 			{
@@ -92,13 +95,10 @@ public class RenderMinecartTEBase extends RenderMinecart
 				GL11.glRotatef(MathHelper.sin(f7) * f7 * f8 / 10.0F * (float) entityMinecartTEBase.getRollingDirection(), 1.0F, 0.0F, 0.0F);
 			}
 
-			GL11.glPushMatrix();
-			this.renderHalo(entityMinecartTEBase);
-			GL11.glPopMatrix();
-
 			int offset = entityMinecartTEBase.getDisplayTileOffset();
 			Block block = entityMinecartTEBase.getCartBlock();
 			int metadata = entityMinecartTEBase.getDisplayTileData();
+
 			GL11.glPushMatrix();
 			this.bindTexture(TextureMap.locationBlocksTexture);
 			float f6 = 0.75F;
@@ -121,6 +121,7 @@ public class RenderMinecartTEBase extends RenderMinecart
 				default:
 					break;
 			}
+
 			GL11.glPopMatrix();
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			this.bindEntityTexture(entityMinecartTEBase);
@@ -206,11 +207,10 @@ public class RenderMinecartTEBase extends RenderMinecart
 
 	private void renderHalo(EntityMinecartTEBase entityMinecartTEBase)
 	{
-		if(entityMinecartTEBase.showHalo() && !entityMinecartTEBase.getHaloString().isEmpty())
-		{
-			haloString = entityMinecartTEBase.getHaloString();
-			func_147906_a(entityMinecartTEBase, haloString, 0, 0, 0, 64);
+		GL11.glPushMatrix();
+		if(entityMinecartTEBase.showHalo() && !entityMinecartTEBase.getHaloString().isEmpty()) {
+			func_147906_a(entityMinecartTEBase, entityMinecartTEBase.getHaloString(), 0, 0, 0, 64);
 		}
-		haloString = "";
+		GL11.glPopMatrix();
 	}
 }

@@ -169,6 +169,12 @@ sourceSets {
     main { output.resourcesDir = output.classesDir }
 }
 
+idea {
+    module {
+        inheritOutputDirs = true
+    }
+}
+
 task("uploadJars", dependsOn: "reobf") {
     description = "uploads JARs"
     println System.getenv("local_maven")
