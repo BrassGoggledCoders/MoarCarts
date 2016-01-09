@@ -175,6 +175,10 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 		} else
 		{
 			blockCartItemStack = this.getCartItem();
+			if(func_95999_t() != null && !func_95999_t().isEmpty())
+			{
+				blockCartItemStack.setStackDisplayName(func_95999_t());
+			}
 		}
 		this.dropCart(blockCartItemStack);
 	}

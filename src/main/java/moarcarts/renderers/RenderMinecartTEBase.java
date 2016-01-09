@@ -78,7 +78,9 @@ public class RenderMinecartTEBase extends RenderMinecart
 
 
 			GL11.glTranslatef((float) posX, (float) posY, (float) posZ);
-			this.renderHalo(entityMinecartTEBase);
+			if(entityMinecartTEBase.showHalo() && !entityMinecartTEBase.getHaloString().isEmpty()) {
+				this.renderHalo(entityMinecartTEBase, entityMinecartTEBase.getHaloString());
+			}
 			GL11.glRotatef(180.0F - p_76986_8_, 0.0F, 1.0F, 0.0F);
 			GL11.glRotatef(-f5, 0.0F, 0.0F, 1.0F);
 			float f7 = (float) entityMinecartTEBase.getRollingAmplitude() - p_76986_9_;
@@ -205,12 +207,8 @@ public class RenderMinecartTEBase extends RenderMinecart
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 	}
 
-	private void renderHalo(EntityMinecartTEBase entityMinecartTEBase)
+	public void renderHalo(EntityMinecartTEBase entityMinecartTEBase, String text)
 	{
-		GL11.glPushMatrix();
-		if(entityMinecartTEBase.showHalo() && !entityMinecartTEBase.getHaloString().isEmpty()) {
-			func_147906_a(entityMinecartTEBase, entityMinecartTEBase.getHaloString(), 0, 0, 0, 64);
-		}
-		GL11.glPopMatrix();
+		func_147906_a(entityMinecartTEBase, text, 0, 0, 0, 64);
 	}
 }

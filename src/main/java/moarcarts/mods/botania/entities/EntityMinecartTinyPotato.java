@@ -31,6 +31,12 @@ public class EntityMinecartTinyPotato extends EntityMinecartTEBase
 	}
 
 	@Override
+	public boolean shouldSaveDataToItem()
+	{
+		return true;
+	}
+
+	@Override
 	public void setTileEntityNBT(ItemStack itemStack)
 	{
 		if(itemStack != null && itemStack.hasDisplayName())

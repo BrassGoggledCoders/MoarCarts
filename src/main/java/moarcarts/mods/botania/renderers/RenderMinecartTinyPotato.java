@@ -41,6 +41,14 @@ public class RenderMinecartTinyPotato extends RenderMinecartTEBase
 		GL11.glRotated(90D, 0D, 1D, 0D);
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 
+		GL11.glPushMatrix();
+		GL11.glTranslatef(0.5F, 0.2F, 0.5F);
+		GL11.glScalef(0.5F, 0.5F, 0.5F);
+		this.func_147910_a(entityMinecartTEBase, 0, Blocks.quartz_block, 1);
+		GL11.glPopMatrix();
+
+		GL11.glTranslatef(0F, 0.45F, 0F);
+
 		TileTinyPotato potato = (TileTinyPotato)entityMinecartTEBase.getTileEntity();
 		GL11.glPushMatrix();
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
@@ -332,5 +340,16 @@ public class RenderMinecartTinyPotato extends RenderMinecartTEBase
 		float f2 = icon.getMinV();
 		float f3 = icon.getMaxV();
 		ItemRenderer.renderItemIn2D(Tessellator.instance, f1, f2, f, f3, icon.getIconWidth(), icon.getIconHeight(), 1F / 16F);
+	}
+
+	@Override
+	public void renderHalo(EntityMinecartTEBase entityMinecartTEBase, String text)
+	{
+		super.renderHalo(entityMinecartTEBase, text);
+		text = text.toLowerCase();
+		if(text.equals("pahamir") || text.equals("soaryn")) {
+			String additionalText = text.equals("pahimar") ? "[WIP]" : "(soon)";
+			func_147906_a(entityMinecartTEBase, additionalText, 0, -0.3, 0, 64);
+		}
 	}
 }
