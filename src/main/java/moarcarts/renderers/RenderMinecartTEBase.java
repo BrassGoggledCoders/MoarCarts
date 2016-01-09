@@ -23,7 +23,7 @@ public class RenderMinecartTEBase extends RenderMinecart
 	protected String haloString;
 	private Minecraft mc = Minecraft.getMinecraft();
 
-	public void doRender(EntityMinecart entityMinecart, double posX, double posY, double posZ, float p_76986_8_, float p_76986_9_)
+	public void doRender(EntityMinecart entityMinecart, double posX, double posY, double posZ, float p_76986_8_, float partial)
 	{
 		if(entityMinecart instanceof EntityMinecartTEBase)
 		{
@@ -38,15 +38,15 @@ public class RenderMinecartTEBase extends RenderMinecart
 			float f4 = (((float) (i >> 24 & 7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
 			GL11.glTranslatef(f2, f3, f4);
 			double d3 = entityMinecartTEBase.lastTickPosX
-					+ (entityMinecartTEBase.posX - entityMinecartTEBase.lastTickPosX) * (double) p_76986_9_;
+					+ (entityMinecartTEBase.posX - entityMinecartTEBase.lastTickPosX) * (double) partial;
 			double d4 = entityMinecartTEBase.lastTickPosY
-					+ (entityMinecartTEBase.posY - entityMinecartTEBase.lastTickPosY) * (double) p_76986_9_;
+					+ (entityMinecartTEBase.posY - entityMinecartTEBase.lastTickPosY) * (double) partial;
 			double d5 = entityMinecartTEBase.lastTickPosZ
-					+ (entityMinecartTEBase.posZ - entityMinecartTEBase.lastTickPosZ) * (double) p_76986_9_;
+					+ (entityMinecartTEBase.posZ - entityMinecartTEBase.lastTickPosZ) * (double) partial;
 			double d6 = 0.30000001192092896D;
 			Vec3 vec3 = entityMinecartTEBase.func_70489_a(d3, d4, d5);
 			float f5 = entityMinecartTEBase.prevRotationPitch
-					+ (entityMinecartTEBase.rotationPitch - entityMinecartTEBase.prevRotationPitch) * p_76986_9_;
+					+ (entityMinecartTEBase.rotationPitch - entityMinecartTEBase.prevRotationPitch) * partial;
 
 			if(vec3 != null)
 			{
@@ -81,10 +81,11 @@ public class RenderMinecartTEBase extends RenderMinecart
 			if(entityMinecartTEBase.showHalo() && !entityMinecartTEBase.getHaloString().isEmpty()) {
 				this.renderHalo(entityMinecartTEBase, entityMinecartTEBase.getHaloString());
 			}
+			preRenderEffects(entityMinecartTEBase);
 			GL11.glRotatef(180.0F - p_76986_8_, 0.0F, 1.0F, 0.0F);
 			GL11.glRotatef(-f5, 0.0F, 0.0F, 1.0F);
-			float f7 = (float) entityMinecartTEBase.getRollingAmplitude() - p_76986_9_;
-			float f8 = entityMinecartTEBase.getDamage() - p_76986_9_;
+			float f7 = (float) entityMinecartTEBase.getRollingAmplitude() - partial;
+			float f8 = entityMinecartTEBase.getDamage() - partial;
 
 
 			if(f8 < 0.0F)
@@ -108,7 +109,7 @@ public class RenderMinecartTEBase extends RenderMinecart
 			GL11.glTranslatef(0.0F, (float) offset / 16.0F, 0.0F);
 			switch(entityMinecartTEBase.getRenderMethod()) {
 				case VMC:
-					this.renderVMCMethod(entityMinecartTEBase, block, metadata, p_76986_9_);
+					this.renderVMCMethod(entityMinecartTEBase, block, metadata, partial);
 					break;
 				case TESR:
 					this.renderTESRMethod(entityMinecartTEBase);
@@ -117,7 +118,7 @@ public class RenderMinecartTEBase extends RenderMinecart
 					this.renderISBRH(entityMinecartTEBase, block, offset);
 					break;
 				case CUSTOM:
-					this.renderCustom(entityMinecartTEBase, block);
+					this.renderCustom(entityMinecartTEBase, block, partial);
 					GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 					break;
 				default:
@@ -133,12 +134,15 @@ public class RenderMinecartTEBase extends RenderMinecart
 			GL11.glPopMatrix();
 		} else
 		{
-			super.doRender(entityMinecart, posX, posY, posZ, p_76986_8_, p_76986_9_);
+			super.doRender(entityMinecart, posX, posY, posZ, p_76986_8_, partial);
 		}
 	}
 
+	protected void preRenderEffects(EntityMinecartTEBase entityMinecartTEBase)
+	{
+	}
 
-	protected void renderCustom(EntityMinecartTEBase entityMinecart, Block block)
+	protected void renderCustom(EntityMinecartTEBase entityMinecart, Block block, float partial)
 	{
 	}
 

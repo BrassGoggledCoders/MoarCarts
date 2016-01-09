@@ -36,7 +36,7 @@ public class RenderMinecartTinyPotato extends RenderMinecartTEBase
 	private static final ModelTinyPotato model = new ModelTinyPotato();
 
 	@Override
-	protected void renderCustom(EntityMinecartTEBase entityMinecartTEBase, Block block)
+	protected void renderCustom(EntityMinecartTEBase entityMinecartTEBase, Block block, float partial)
 	{
 		GL11.glRotated(90D, 0D, 1D, 0D);
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);

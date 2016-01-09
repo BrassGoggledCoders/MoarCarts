@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11;
 public class RenderMinecartMachineBeta extends RenderMinecartTEBase
 {
 	@Override
-	protected void renderCustom(EntityMinecartTEBase entityMinecart, Block block)
+	protected void renderCustom(EntityMinecartTEBase entityMinecart, Block block, float partial)
 	{
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 		TileEntityRendererDispatcher.instance.renderTileEntityAt(entityMinecartTEBase.getTileEntity(), 0, 0, 0, 0.0F);
