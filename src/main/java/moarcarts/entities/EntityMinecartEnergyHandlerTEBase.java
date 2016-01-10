@@ -1,6 +1,7 @@
 package moarcarts.entities;
 
 import cofh.api.energy.IEnergyHandler;
+import moarcarts.utils.ComparatorUtils;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -47,5 +48,15 @@ public abstract class EntityMinecartEnergyHandlerTEBase extends EntityMinecartTE
 	public IEnergyHandler getIEnergyHandler()
 	{
 		return (IEnergyHandler)this.getTileEntity();
+	}
+
+	@Override
+	public int getComparatorInputOverride()
+	{
+		if(!this.cartBlock.hasComparatorInputOverride())
+		{
+			return ComparatorUtils.scaleStoredEnergyTo(15, this);
+		}
+		return super.getComparatorInputOverride();
 	}
 }

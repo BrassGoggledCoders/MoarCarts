@@ -21,7 +21,7 @@ public class Shaders
 		int[] green = {43, 58, 61, 255};
 
 		superChief = ShaderRegistry.registerShader("Super Chief", "0", EnumRarity.epic, grey, red, yellow, grey, null,
-				false, false);
+				true, true);
 		empireBuilder = ShaderRegistry.registerShader("Empire Builder", "0", EnumRarity.common, green, orange, green,
 				green, null, true, true);
 	}

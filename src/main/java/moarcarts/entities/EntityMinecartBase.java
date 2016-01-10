@@ -199,6 +199,7 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 				itemStack.isItemEqual(entityMinecart.getCartItem());
 	}
 
+	@Override
 	public int getComparatorInputOverride()
 	{
 		if(this.getCartBlock().hasComparatorInputOverride())

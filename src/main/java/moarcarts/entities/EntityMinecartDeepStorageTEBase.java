@@ -52,4 +52,6 @@ public abstract class EntityMinecartDeepStorageTEBase extends EntityMinecartInve
 	}
 
 	public abstract int getItemQuantity();
+
+
 }

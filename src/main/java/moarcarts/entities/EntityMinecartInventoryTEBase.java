@@ -6,6 +6,7 @@ import mods.railcraft.api.carts.IItemCart;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -181,5 +182,15 @@ public abstract class EntityMinecartInventoryTEBase extends EntityMinecartTEBase
 	public void setDropContentsWhenDead(boolean drop)
 	{
 		this.dropContentsWhenDead = drop;
+	}
+
+	@Override
+	public int getComparatorInputOverride()
+	{
+		if(!this.cartBlock.hasComparatorInputOverride())
+		{
+			return Container.calcRedstoneFromInventory(this);
+		}
+		return super.getComparatorInputOverride();
 	}
 }

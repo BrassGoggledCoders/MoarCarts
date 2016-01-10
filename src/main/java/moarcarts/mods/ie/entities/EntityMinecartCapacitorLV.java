@@ -71,6 +71,12 @@ public class EntityMinecartCapacitorLV extends EntityMinecartEnergyHandlerTEBase
 	}
 
 	@Override
+	public boolean shouldTileUpdate()
+	{
+		return true;
+	}
+
+	@Override
 	public String[] getOverlayText(EntityPlayer entityPlayer, MovingObjectPosition movingObjectPosition, boolean b)
 	{
 		return ((IBlockOverlayText)this.getTileEntity()).getOverlayText(entityPlayer, movingObjectPosition, b);

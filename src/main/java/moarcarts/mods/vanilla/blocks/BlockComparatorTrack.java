@@ -1,6 +1,5 @@
 package moarcarts.mods.vanilla.blocks;
 
-import cofh.api.energy.IEnergyHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import moarcarts.MoarCarts;
@@ -67,9 +66,6 @@ public class BlockComparatorTrack extends BlockRailDetector
 				if(minecart instanceof IComparatorCart)
 				{
 					comparatorOutput = ((IComparatorCart) list.get(0)).getComparatorInputOverride();
-				} else if(minecart instanceof IEnergyHandler)
-				{
-					comparatorOutput = ComparatorUtils.scaleStoredEnergyTo(15, (IEnergyHandler)list.get(0));
 				} else if(minecart instanceof IFluidHandler)
 				{
 					comparatorOutput = ComparatorUtils.scaleSingleFluidLevelTo(15, (IFluidHandler)list.get(0));

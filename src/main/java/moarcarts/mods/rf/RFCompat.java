@@ -5,7 +5,9 @@ import cpw.mods.fml.common.ModAPIManager;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import moarcarts.mods.rf.blocks.BlockRFLoader;
+import moarcarts.mods.rf.events.RFComparatorTrackHandler;
 import moarcarts.mods.rf.tileentities.TileRFLoader;
+import net.minecraftforge.common.MinecraftForge;
 
 /**
  * @author SkySom
@@ -29,5 +31,6 @@ public class RFCompat extends ModCompat
 	{
 		GameRegistry.registerBlock(new BlockRFLoader(), "blockrfloader");
 		GameRegistry.registerTileEntity(TileRFLoader.class, "tilerfloader");
+		MinecraftForge.EVENT_BUS.register(new RFComparatorTrackHandler());
 	}
 }

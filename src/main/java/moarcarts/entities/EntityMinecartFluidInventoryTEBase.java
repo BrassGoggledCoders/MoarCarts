@@ -1,6 +1,7 @@
 package moarcarts.entities;
 
 import cpw.mods.fml.common.Optional;
+import moarcarts.utils.ComparatorUtils;
 import moarcarts.utils.FluidUtils;
 import mods.railcraft.api.carts.IFluidCart;
 import net.minecraft.entity.item.EntityMinecart;
@@ -112,5 +113,15 @@ public abstract class EntityMinecartFluidInventoryTEBase extends EntityMinecartI
 	public void setFilling(boolean isFilling)
 	{
 		dataWatcher.updateObject(IS_FILLING, Byte.valueOf(isFilling ? 1 : (byte) 0));
+	}
+
+	@Override
+	public int getComparatorInputOverride()
+	{
+		if(!this.cartBlock.hasComparatorInputOverride())
+		{
+			return ComparatorUtils.scaleSingleFluidLevelTo(15, this);
+		}
+		return super.getComparatorInputOverride();
 	}
 }
