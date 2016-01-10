@@ -11,6 +11,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import moarcarts.MoarCarts;
 import moarcarts.mods.avaritia.entities.EntityMinecartInfinitato;
 import moarcarts.mods.avaritia.items.ItemMinecartInfinitato;
+import moarcarts.mods.avaritia.renderers.RenderItemMinecartInfinitato;
 import moarcarts.mods.avaritia.renderers.RenderMinecartInfinatato;
 import moarcarts.recipes.NBTCartRecipe;
 import moarcarts.renderers.RenderItemMinecartBase;
@@ -55,6 +56,10 @@ public class AvaritiaCompat extends ModCompat
 	public void clientInit(FMLInitializationEvent event)
 	{
 		RenderingRegistry.registerEntityRenderingHandler(EntityMinecartInfinitato.class, new RenderMinecartInfinatato());
+		if(isBotaniaModuleLoaded)
+		{
+			MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_INFINITATO, new RenderItemMinecartInfinitato());
+		}
 	}
 
 	@Override

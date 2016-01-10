@@ -34,6 +34,6 @@ public class ItemMinecartInfinitato extends ItemMinecartBase
 	@Override
 	public RenderMethod getCartBlockRenderMethod(ItemStack itemStack)
 	{
-		return RenderMethod.TESR;
+		return RenderMethod.CUSTOM;
 	}
 }
