@@ -65,13 +65,13 @@ public class BlockComparatorTrack extends BlockRailDetector
 				EntityMinecart minecart = (EntityMinecart)list.get(0);
 				if(minecart instanceof IComparatorCart)
 				{
-					comparatorOutput = ((IComparatorCart) list.get(0)).getComparatorInputOverride();
+					comparatorOutput = ((IComparatorCart)minecart).getComparatorInputOverride();
 				} else if(minecart instanceof IFluidHandler)
 				{
-					comparatorOutput = ComparatorUtils.scaleSingleFluidLevelTo(15, (IFluidHandler)list.get(0));
+					comparatorOutput = ComparatorUtils.scaleSingleFluidLevelTo(15, (IFluidHandler)minecart);
 				} else if(minecart instanceof IInventory)
 				{
-					comparatorOutput = Container.calcRedstoneFromInventory((IInventory)list.get(0));
+					comparatorOutput = Container.calcRedstoneFromInventory((IInventory)minecart);
 				} else if(minecart.canBeRidden())
 				{
 					comparatorOutput = (minecart.riddenByEntity != null) ? 15 : 0;
