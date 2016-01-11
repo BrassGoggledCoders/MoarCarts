@@ -11,6 +11,7 @@
  */
 package moarcarts;
 
+import boilerplate.client.GuiHandler;
 import boilerplate.common.IBoilerplateMod;
 import boilerplate.common.modcompat.CompatibilityHandler;
 import boilerplate.common.utils.ModLogger;
@@ -22,10 +23,10 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import moarcarts.config.ConfigHandler;
+import moarcarts.events.CartUpdateEvents;
 import moarcarts.mods.avaritia.AvaritiaCompat;
 import moarcarts.mods.botania.BotaniaCompat;
 import moarcarts.mods.ie.IEModCompat;
-import moarcarts.events.CartUpdateEvents;
 import moarcarts.mods.ironchest.IronChestCompat;
 import moarcarts.mods.mfr.MFRCompat;
 import moarcarts.mods.minechem.MinechemCompat;

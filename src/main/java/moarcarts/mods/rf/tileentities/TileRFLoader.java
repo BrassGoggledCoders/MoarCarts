@@ -1,24 +1,20 @@
 package moarcarts.mods.rf.tileentities;
 
+import boilerplate.common.blocks.SideType;
+import boilerplate.common.tiles.TileEntitySided;
 import boilerplate.common.utils.BlockUtils;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
-import moarcarts.MoarCarts;
 import mods.railcraft.api.carts.CartTools;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * @author SkySom
  */
-public class TileRFLoader extends TileEntity implements IEnergyHandler
+public class TileRFLoader extends TileEntitySided implements IEnergyHandler
 {
-	protected int[] sideConfig={0,0,0,0,0,0};
 	protected EnergyStorage energyStorage = new EnergyStorage(100000, 1000, 1000);
 
 	@Override
@@ -27,7 +23,7 @@ public class TileRFLoader extends TileEntity implements IEnergyHandler
 		super.updateEntity();
 		for(ForgeDirection direction: ForgeDirection.VALID_DIRECTIONS)
 		{
-			if(this.getSideValue(direction.ordinal()) != 0)
+			if(this.getSideValue(direction.ordinal()) != SideType.NONE)
 			{
 				int blockPosX = this.xCoord + direction.offsetX;
 				int blockPosY = this.yCoord + direction.offsetY;
@@ -40,14 +36,13 @@ public class TileRFLoader extends TileEntity implements IEnergyHandler
 					if(entityMinecart instanceof IEnergyHandler)
 					{
 						IEnergyHandler energyCart = (IEnergyHandler)entityMinecart;
-						if(this.sideConfig[direction.ordinal()] == -1)
+						if(this.getSideValue(direction.ordinal()) == SideType.INPUT)
 						{
 							if(energyCart.canConnectEnergy(direction.getOpposite()))
 							{
-								MoarCarts.logger.devInfo(direction.getOpposite().toString());
 								this.unLoadCart(direction, energyCart);
 							}
-						} else if(this.sideConfig[direction.ordinal()] == 1)
+						} else if(this.getSideValue(direction.ordinal()) == SideType.INPUT)
 						{
 							if(energyCart.canConnectEnergy(direction.getOpposite()))
 							{
@@ -75,61 +70,17 @@ public class TileRFLoader extends TileEntity implements IEnergyHandler
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbtTagCompound)
+	public void readFromNBTCustom(NBTTagCompound nbtTagCompound)
 	{
 		super.readFromNBT(nbtTagCompound);
-		this.sideConfig = nbtTagCompound.getIntArray("sideConfig");
 		this.energyStorage.readFromNBT(nbtTagCompound);
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbtTagCompound)
+	public void writeToNBTCustom(NBTTagCompound nbtTagCompound)
 	{
 		super.writeToNBT(nbtTagCompound);
-		nbtTagCompound.setIntArray("sideConfig", this.sideConfig);
-		if(sideConfig==null || sideConfig.length<6)
-			sideConfig = new int[6];
 		this.energyStorage.writeToNBT(nbtTagCompound);
-	}
-
-	@Override
-	public Packet getDescriptionPacket()
-	{
-		NBTTagCompound nbttagcompound = new NBTTagCompound();
-		this.writeToNBT(nbttagcompound);
-		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 3, nbttagcompound);
-	}
-
-	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
-	{
-		this.readFromNBT(pkt.func_148857_g());
-	}
-
-	public void toggleSide(int side)
-	{
-		this.sideConfig[side]++;
-		if(this.sideConfig[side]>1)
-		{
-			this.sideConfig[side]=-1;
-		}
-		worldObj.addBlockEvent(xCoord, yCoord, zCoord, getBlockType(), 0, 0);
-	}
-
-	public int getSideValue(int side)
-	{
-		return sideConfig[side];
-	}
-
-	@Override
-	public boolean receiveClientEvent(int id, int arg)
-	{
-		if(id==0)
-		{
-			this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-			return true;
-		}
-		return false;
 	}
 
 	@Override
@@ -164,14 +115,6 @@ public class TileRFLoader extends TileEntity implements IEnergyHandler
 	@Override
 	public boolean canConnectEnergy(ForgeDirection forgeDirection)
 	{
-		return this.sideConfig[forgeDirection.ordinal()] == 0;
-	}
-
-	public void sendBlockUpdate()
-	{
-		if(!worldObj.isRemote)
-		{
-			this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-		}
+		return this.getSideValue(forgeDirection.ordinal()) != SideType.NONE;
 	}
 }

@@ -11,7 +11,6 @@
  */
 package moarcarts.config;
 
-import boilerplate.common.modcompat.ModCompat;
 import moarcarts.MoarCarts;
 import net.minecraftforge.common.config.Configuration;
 
@@ -29,9 +28,7 @@ public class ConfigHandler
 		configuration= new Configuration(configFile);
 		configuration.load();
 		configuration = ConfigSettings.init(configuration);
-		for(ModCompat modCompat: MoarCarts.compatibilityHandler.getModCompat()) {
-			modCompat.setIsActive(configuration.get("Modules", modCompat.getName() + " Enabled", true).getBoolean(true));
-		}
+		MoarCarts.compatibilityHandler.configureModCompat(configuration);
 		configuration.save();
 	}
 

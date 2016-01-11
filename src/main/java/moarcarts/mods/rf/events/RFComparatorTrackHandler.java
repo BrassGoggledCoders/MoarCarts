@@ -1,8 +1,8 @@
 package moarcarts.mods.rf.events;
 
+import boilerplate.common.utils.ComparatorUtils;
 import cofh.api.energy.IEnergyHandler;
 import moarcarts.api.ComparatorTrackEvent;
-import moarcarts.utils.ComparatorUtils;
 
 /**
  * @author SkySom

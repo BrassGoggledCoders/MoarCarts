@@ -1,11 +1,11 @@
 package moarcarts.mods.vanilla.blocks;
 
+import boilerplate.common.utils.ComparatorUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import moarcarts.MoarCarts;
 import moarcarts.api.ComparatorTrackEvent;
 import moarcarts.api.IComparatorCart;
-import moarcarts.utils.ComparatorUtils;
 import net.minecraft.block.BlockRailDetector;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;

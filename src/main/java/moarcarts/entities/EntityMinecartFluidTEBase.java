@@ -1,8 +1,8 @@
 package moarcarts.entities;
 
+import boilerplate.common.utils.ComparatorUtils;
+import boilerplate.common.utils.FluidUtils;
 import cpw.mods.fml.common.Optional;
-import moarcarts.utils.ComparatorUtils;
-import moarcarts.utils.FluidUtils;
 import mods.railcraft.api.carts.IFluidCart;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;

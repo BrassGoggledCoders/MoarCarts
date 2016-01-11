@@ -1,7 +1,7 @@
 package moarcarts.entities;
 
+import boilerplate.common.utils.ComparatorUtils;
 import cofh.api.energy.IEnergyHandler;
-import moarcarts.utils.ComparatorUtils;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 

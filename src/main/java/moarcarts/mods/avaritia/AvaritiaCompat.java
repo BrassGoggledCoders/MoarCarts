@@ -43,7 +43,8 @@ public class AvaritiaCompat extends ModCompat
 	@Override
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		isBotaniaModuleLoaded = Loader.isModLoaded("Botania");
+		ModCompat botania = MoarCarts.compatibilityHandler.getModCompatEnabled().get("Botania");
+		isBotaniaModuleLoaded = (botania != null && botania.getIsActive());
 		if(isBotaniaModuleLoaded)
 		{
 			ITEM_MINECART_INFINITATO = new ItemMinecartInfinitato();
@@ -55,9 +56,9 @@ public class AvaritiaCompat extends ModCompat
 	@Override
 	public void clientInit(FMLInitializationEvent event)
 	{
-		RenderingRegistry.registerEntityRenderingHandler(EntityMinecartInfinitato.class, new RenderMinecartInfinatato());
 		if(isBotaniaModuleLoaded)
 		{
+			RenderingRegistry.registerEntityRenderingHandler(EntityMinecartInfinitato.class, new RenderMinecartInfinatato());
 			MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_INFINITATO, new RenderItemMinecartInfinitato());
 		}
 	}
@@ -65,9 +66,9 @@ public class AvaritiaCompat extends ModCompat
 	@Override
 	public void postInit(FMLPostInitializationEvent event)
 	{
-		INFINITATO = GameRegistry.findBlock("Avaritia", "infinitato");
 		if(isBotaniaModuleLoaded)
 		{
+			INFINITATO = GameRegistry.findBlock("Avaritia", "infinitato");
 			GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_INFINITATO, INFINITATO));
 			MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_INFINITATO, new RenderItemMinecartBase());
 		}
