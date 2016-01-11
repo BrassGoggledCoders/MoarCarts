@@ -190,6 +190,7 @@ task apiJar(type: Jar) {
 
 artifacts {
     archives deobfJar
+    archives apiJar
 }
 
 task("uploadJars", dependsOn: "reobf") {
