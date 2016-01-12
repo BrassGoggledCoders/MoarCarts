@@ -3,6 +3,7 @@ package moarcarts.mods.mfr.items;
 import cpw.mods.fml.common.registry.GameRegistry;
 import moarcarts.entities.EntityMinecartBase;
 import moarcarts.items.ItemMinecartBase;
+import moarcarts.mods.mfr.MFRCompat;
 import moarcarts.mods.mfr.entities.EntityMinecartDSU;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -23,7 +24,7 @@ public class ItemMinecartDSU extends ItemMinecartBase
 	@Override
 	public Block getCartBlock(ItemStack itemStack)
 	{
-		return dsu;
+		return MFRCompat.DSU;
 	}
 
 	@Override

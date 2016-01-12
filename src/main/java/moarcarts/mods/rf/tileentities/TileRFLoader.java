@@ -5,6 +5,8 @@ import boilerplate.common.tiles.TileEntitySided;
 import boilerplate.common.utils.BlockUtils;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
+import cofh.api.energy.IEnergyProvider;
+import cofh.api.energy.IEnergyReceiver;
 import mods.railcraft.api.carts.CartTools;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.nbt.NBTTagCompound;
@@ -29,43 +31,64 @@ public class TileRFLoader extends TileEntitySided implements IEnergyHandler
 				int blockPosY = this.yCoord + direction.offsetY;
 				int blockPosZ = this.zCoord + direction.offsetZ;
 
-				if(BlockUtils.isRailBlock(this.worldObj.getBlock(blockPosX, blockPosY, blockPosZ)))
+				if(this.getSideValue(direction.ordinal()) == SideType.INPUT)
 				{
-					EntityMinecart entityMinecart = CartTools.getMinecartOnSide(this.worldObj, xCoord, yCoord, zCoord,
-							1F, direction);
-					if(entityMinecart instanceof IEnergyHandler)
+					IEnergyProvider energyProvider = null;
+					if(BlockUtils.isRailBlock(this.worldObj.getBlock(blockPosX, blockPosY, blockPosZ)))
 					{
-						IEnergyHandler energyCart = (IEnergyHandler)entityMinecart;
-						if(this.getSideValue(direction.ordinal()) == SideType.INPUT)
+						EntityMinecart entityMinecart = CartTools.getMinecartOnSide(this.worldObj, xCoord, yCoord,
+								zCoord, 1F, direction);
+						if(entityMinecart instanceof IEnergyProvider)
 						{
-							if(energyCart.canConnectEnergy(direction.getOpposite()))
-							{
-								this.unLoadCart(direction, energyCart);
-							}
-						} else if(this.getSideValue(direction.ordinal()) == SideType.INPUT)
-						{
-							if(energyCart.canConnectEnergy(direction.getOpposite()))
-							{
-								this.loadCart(direction, energyCart);
-							}
+							energyProvider = (IEnergyProvider)entityMinecart;
 						}
+					} else if(this.worldObj.getTileEntity(blockPosX, blockPosY, blockPosZ) instanceof IEnergyProvider)
+					{
+						energyProvider = (IEnergyProvider)this.worldObj.getTileEntity(blockPosX, blockPosY, blockPosZ);
+					}
+
+					if(energyProvider != null)
+					{
+						this.unLoadCart(direction, energyProvider);
+					}
+				}
+
+				if(this.getSideValue(direction.ordinal()) == SideType.OUTPUT)
+				{
+					IEnergyReceiver energyReceiver = null;
+					if(BlockUtils.isRailBlock(this.worldObj.getBlock(blockPosX, blockPosY, blockPosZ)))
+					{
+						EntityMinecart entityMinecart = CartTools.getMinecartOnSide(this.worldObj, xCoord, yCoord,
+								zCoord, 1F, direction);
+						if(entityMinecart instanceof IEnergyReceiver)
+						{
+							energyReceiver = (IEnergyReceiver) entityMinecart;
+						}
+					} else if(this.worldObj.getTileEntity(blockPosX, blockPosY, blockPosZ) instanceof IEnergyReceiver)
+					{
+						energyReceiver = (IEnergyReceiver) this.worldObj.getTileEntity(blockPosX, blockPosY, blockPosZ);
+					}
+
+					if(energyReceiver != null)
+					{
+						this.loadCart(direction, energyReceiver);
 					}
 				}
 			}
 		}
 	}
 
-	public void unLoadCart(ForgeDirection direction, IEnergyHandler energyCart)
+	public void unLoadCart(ForgeDirection direction, IEnergyProvider provider)
 	{
 		int amountToUnload = this.energyStorage.receiveEnergy(this.energyStorage.getMaxReceive(), true);
-		int amountRemovedFromCart = energyCart.extractEnergy(direction.getOpposite(), amountToUnload, false);
+		int amountRemovedFromCart = provider.extractEnergy(direction.getOpposite(), amountToUnload, false);
 		this.energyStorage.receiveEnergy(amountRemovedFromCart, false);
 	}
 
-	public void loadCart(ForgeDirection direction, IEnergyHandler energyCart)
+	public void loadCart(ForgeDirection direction, IEnergyReceiver receiver)
 	{
 		int amountToLoad = this.energyStorage.extractEnergy(this.energyStorage.getMaxExtract(), true);
-		int amountLoadedIntoCart = energyCart.receiveEnergy(direction.getOpposite(), amountToLoad, false);
+		int amountLoadedIntoCart = receiver.receiveEnergy(direction.getOpposite(), amountToLoad, false);
 		this.energyStorage.extractEnergy(amountLoadedIntoCart, false);
 	}
 
