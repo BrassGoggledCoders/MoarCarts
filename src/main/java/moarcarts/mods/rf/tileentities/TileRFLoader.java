@@ -95,14 +95,14 @@ public class TileRFLoader extends TileEntitySided implements IEnergyHandler
 	@Override
 	public void readFromNBTCustom(NBTTagCompound nbtTagCompound)
 	{
-		super.readFromNBT(nbtTagCompound);
+		super.readFromNBTCustom(nbtTagCompound);
 		this.energyStorage.readFromNBT(nbtTagCompound);
 	}
 
 	@Override
 	public void writeToNBTCustom(NBTTagCompound nbtTagCompound)
 	{
-		super.writeToNBT(nbtTagCompound);
+		super.writeToNBTCustom(nbtTagCompound);
 		this.energyStorage.writeToNBT(nbtTagCompound);
 	}
 
