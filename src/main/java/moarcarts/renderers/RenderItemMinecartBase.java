@@ -126,7 +126,7 @@ public class RenderItemMinecartBase implements IItemRenderer
 		}
 		if(renderTileEntity != null)
 		{
-			GL11.glRotated(90D, 0D, 1D, 0D);
+			rotateTESR();
 			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 			TileEntityRendererDispatcher.instance.renderTileEntityAt(renderTileEntity, 0, 0, 0, 0.0F);
 			GL11.glEnable(GL12.GL_RESCALE_NORMAL);
@@ -137,4 +137,10 @@ public class RenderItemMinecartBase implements IItemRenderer
 	{
 
 	}
+
+	protected void rotateTESR()
+	{
+		GL11.glRotated(90D, 0D, 1D, 0D);
+	}
+
 }

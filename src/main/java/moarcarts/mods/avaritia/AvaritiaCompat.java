@@ -14,7 +14,6 @@ import moarcarts.mods.avaritia.items.ItemMinecartInfinitato;
 import moarcarts.mods.avaritia.renderers.RenderItemMinecartInfinitato;
 import moarcarts.mods.avaritia.renderers.RenderMinecartInfinatato;
 import moarcarts.recipes.NBTCartRecipe;
-import moarcarts.renderers.RenderItemMinecartBase;
 import net.minecraft.block.Block;
 import net.minecraftforge.client.MinecraftForgeClient;
 
@@ -26,7 +25,7 @@ public class AvaritiaCompat extends ModCompat
 	public static ItemMinecartInfinitato ITEM_MINECART_INFINITATO;
 	public static Block INFINITATO;
 
-	public boolean isBotaniaModuleLoaded = false;
+	public boolean bringOutThePotatoes = false;
 
 	@Override
 	public String getName()
@@ -44,8 +43,8 @@ public class AvaritiaCompat extends ModCompat
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		ModCompat botania = MoarCarts.compatibilityHandler.getModCompatEnabled().get("Botania");
-		isBotaniaModuleLoaded = (botania != null && botania.getIsActive());
-		if(isBotaniaModuleLoaded)
+		bringOutThePotatoes = (botania != null && botania.getIsActive() && AvaritiaConfigHelper.isInfinitatoActive());
+		if(bringOutThePotatoes)
 		{
 			ITEM_MINECART_INFINITATO = new ItemMinecartInfinitato();
 			RegistryHelper.registerItem(ITEM_MINECART_INFINITATO, MoarCarts.MODID);
@@ -56,7 +55,7 @@ public class AvaritiaCompat extends ModCompat
 	@Override
 	public void clientInit(FMLInitializationEvent event)
 	{
-		if(isBotaniaModuleLoaded)
+		if(bringOutThePotatoes)
 		{
 			RenderingRegistry.registerEntityRenderingHandler(EntityMinecartInfinitato.class, new RenderMinecartInfinatato());
 			MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_INFINITATO, new RenderItemMinecartInfinitato());
@@ -66,11 +65,10 @@ public class AvaritiaCompat extends ModCompat
 	@Override
 	public void postInit(FMLPostInitializationEvent event)
 	{
-		if(isBotaniaModuleLoaded)
+		if(bringOutThePotatoes)
 		{
 			INFINITATO = GameRegistry.findBlock("Avaritia", "infinitato");
 			GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_INFINITATO, INFINITATO));
-			MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_INFINITATO, new RenderItemMinecartBase());
 		}
 	}
 }
