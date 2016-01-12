@@ -52,7 +52,8 @@ public class MoarCarts implements IBoilerplateMod
 	public static final String MODID = "moarcarts";
 	public static final String MODNAME = "MoarCarts";
 	public static final String MODVERSION = "@VERSION@";
-	public static final String DEPENDENCIES = "after:boilerplate;after:railcraft;after:Avaritia;";
+	public static final String DEPENDENCIES = "required-after:boilerplate@[1.7.10-6.2.0.0,);after:railcraft;after:Avaritia;"
+			+ "after:ImmersiveEngineering@[0.6.5,);";
 
 	public static CompatibilityHandler compatibilityHandler;
 	public static GuiHandler guiHandler;
