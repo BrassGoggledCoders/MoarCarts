@@ -73,7 +73,7 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 
 	public boolean shouldAccessPlayerInventory()
 	{
-		return true;
+		return false;
 	}
 
 

@@ -1,5 +1,6 @@
 package moarcarts.mods.waila.providers;
 
+import boilerplate.common.utils.ItemStackUtils;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaEntityAccessor;
 import moarcarts.entities.EntityMinecartDeepStorageTEBase;
@@ -19,9 +20,14 @@ public class EntityMinecartDSUProvider extends EntityMinecartTEBaseProvider
 		if(entity instanceof EntityMinecartDeepStorageTEBase)
 		{
 			EntityMinecartDeepStorageTEBase deepStorageTEBase = (EntityMinecartDeepStorageTEBase) entity;
-			currenttip.add(String.format("Quantity: %d", deepStorageTEBase.getItemQuantity()));
-			currenttip.add(String.format("Itemstack: %s", deepStorageTEBase.getStoredItemType().getItem()
+
+			if(ItemStackUtils.isItemNonNull(deepStorageTEBase.getStoredItemType()))
+			{
+				currenttip.add(String.format("Quantity: %d", deepStorageTEBase.getItemQuantity()));
+				currenttip.add(String.format("Itemstack: %s", deepStorageTEBase.getStoredItemType().getItem()
 					.getItemStackDisplayName(deepStorageTEBase.getStoredItemType())));
+			}
+
 		}
 		return currenttip;
 	}
