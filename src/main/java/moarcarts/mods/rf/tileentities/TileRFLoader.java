@@ -62,11 +62,11 @@ public class TileRFLoader extends TileEntitySided implements IEnergyHandler
 								zCoord, 1F, direction);
 						if(entityMinecart instanceof IEnergyReceiver)
 						{
-							energyReceiver = (IEnergyReceiver) entityMinecart;
+							energyReceiver = (IEnergyReceiver)entityMinecart;
 						}
 					} else if(this.worldObj.getTileEntity(blockPosX, blockPosY, blockPosZ) instanceof IEnergyReceiver)
 					{
-						energyReceiver = (IEnergyReceiver) this.worldObj.getTileEntity(blockPosX, blockPosY, blockPosZ);
+						energyReceiver = (IEnergyReceiver)this.worldObj.getTileEntity(blockPosX, blockPosY, blockPosZ);
 					}
 
 					if(energyReceiver != null)
