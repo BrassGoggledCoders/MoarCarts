@@ -79,7 +79,7 @@ public class MoarCarts implements IBoilerplateMod
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		guiHandler = new GuiHandler();
+		guiHandler = new GuiHandler(this);
 		proxy.init(event);
 
 		MinecraftForge.EVENT_BUS.register(new CartUpdateEvents());
@@ -113,5 +113,11 @@ public class MoarCarts implements IBoilerplateMod
 	public String getModID()
 	{
 		return MODID;
+	}
+
+	@Override
+	public Object getInstance()
+	{
+		return MoarCarts.instance;
 	}
 }

@@ -7,6 +7,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import moarcarts.mods.rf.blocks.BlockRFLoader;
 import moarcarts.mods.rf.events.RFComparatorTrackHandler;
 import moarcarts.mods.rf.tileentities.TileRFLoader;
+import net.minecraft.block.Block;
 import net.minecraftforge.common.MinecraftForge;
 
 /**
@@ -14,6 +15,8 @@ import net.minecraftforge.common.MinecraftForge;
  */
 public class RFCompat extends ModCompat
 {
+	public static Block RFLOADER;
+
 	@Override
 	public String getName()
 	{
@@ -29,7 +32,8 @@ public class RFCompat extends ModCompat
 	@Override
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		GameRegistry.registerBlock(new BlockRFLoader(), "blockrfloader");
+		RFLOADER = new BlockRFLoader();
+		GameRegistry.registerBlock(RFLOADER, "blockrfloader");
 		GameRegistry.registerTileEntity(TileRFLoader.class, "tilerfloader");
 		MinecraftForge.EVENT_BUS.register(new RFComparatorTrackHandler());
 	}
