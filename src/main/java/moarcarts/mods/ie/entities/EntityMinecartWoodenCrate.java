@@ -1,7 +1,6 @@
 package moarcarts.mods.ie.entities;
 
 import blusunrize.immersiveengineering.client.gui.GuiCrate;
-import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IBlockOverlayText;
 import blusunrize.immersiveengineering.common.blocks.wooden.TileEntityWoodenCrate;
 import boilerplate.api.IOpenableGUI;
 import moarcarts.entities.EntityMinecartInventoryTEBase;
@@ -9,13 +8,12 @@ import moarcarts.items.ItemMinecartBase;
 import moarcarts.mods.ie.IEModCompat;
 import moarcarts.mods.ie.container.ContainerMinecartWoodenCrate;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
 /**
  * @author SkySom
  */
-public class EntityMinecartWoodenCrate extends EntityMinecartInventoryTEBase implements IOpenableGUI, IBlockOverlayText
+public class EntityMinecartWoodenCrate extends EntityMinecartInventoryTEBase implements IOpenableGUI
 {
 	public EntityMinecartWoodenCrate(World world)
 	{
@@ -46,17 +44,5 @@ public class EntityMinecartWoodenCrate extends EntityMinecartInventoryTEBase imp
 	public boolean shouldSaveDataToItem()
 	{
 		return true;
-	}
-
-	@Override
-	public String[] getOverlayText(EntityPlayer entityPlayer, MovingObjectPosition movingObjectPosition, boolean b)
-	{
-		return ((IBlockOverlayText)this.getTileEntity()).getOverlayText(entityPlayer, movingObjectPosition, b);
-	}
-
-	@Override
-	public boolean useNixieFont(EntityPlayer entityPlayer, MovingObjectPosition movingObjectPosition)
-	{
-		return ((IBlockOverlayText)this.getTileEntity()).useNixieFont(entityPlayer, movingObjectPosition);
 	}
 }

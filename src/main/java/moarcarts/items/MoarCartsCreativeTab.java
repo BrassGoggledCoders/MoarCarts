@@ -12,7 +12,7 @@ public class MoarCartsCreativeTab extends BaseCreativeTab
 {
 	public MoarCartsCreativeTab()
 	{
-		super("MoarCarts");
+		super("moarcarts");
 	}
 
 	public Item getTabIconItem() {
