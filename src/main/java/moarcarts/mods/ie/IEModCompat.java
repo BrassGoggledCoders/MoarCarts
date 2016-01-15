@@ -13,9 +13,11 @@ import moarcarts.mods.ie.items.ItemMinecartCapacitor;
 import moarcarts.mods.ie.items.ItemMinecartMetalBarrel;
 import moarcarts.mods.ie.items.ItemMinecartWoodenBarrel;
 import moarcarts.mods.ie.items.ItemMinecartWoodenCrate;
+import moarcarts.mods.rf.RFCompat;
 import moarcarts.recipes.NBTCartRecipe;
 import moarcarts.renderers.RenderItemMinecartBase;
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -32,6 +34,8 @@ public class IEModCompat extends ModCompat
 	public static Block WOODEN_DEVICE;
 	public static Block METAL_DEVICE;
 	public static Block METAL_DEVICE2;
+
+	public boolean isRFModuleEnabled = false;
 
 	@Override
 	public String getName()
@@ -60,12 +64,18 @@ public class IEModCompat extends ModCompat
 		RegistryHelper.registerItem(ITEM_MINECART_WOODENCRATE, MoarCarts.MODID);
 		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartWoodenCrate.class, "entityminecartwoodencrate");
 
-		ITEM_MINECART_CAPACITOR = new ItemMinecartCapacitor();
-		RegistryHelper.registerItem(ITEM_MINECART_CAPACITOR, MoarCarts.MODID);
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartCapacitorLV.class, "entityminecartcapacitorlv");
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartCapacitorMV.class, "entityminecartcapacitormv");
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartCapacitorHV.class, "entityminecartcapacitorhv");
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartCapacitorCreative.class, "entityminecartcapacitorcreative");
+		ModCompat rfCompat = MoarCarts.compatibilityHandler.getModCompatEnabled().get("RF");
+		isRFModuleEnabled = rfCompat.getIsActive();
+
+		if(isRFModuleEnabled)
+		{
+			ITEM_MINECART_CAPACITOR = new ItemMinecartCapacitor();
+			RegistryHelper.registerItem(ITEM_MINECART_CAPACITOR, MoarCarts.MODID);
+			RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartCapacitorLV.class, "entityminecartcapacitorlv");
+			RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartCapacitorMV.class, "entityminecartcapacitormv");
+			RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartCapacitorHV.class, "entityminecartcapacitorhv");
+			RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartCapacitorCreative.class, "entityminecartcapacitorcreative");
+		}
 
 		Shaders.initShaders();
 	}
@@ -80,10 +90,17 @@ public class IEModCompat extends ModCompat
 		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_WOODENBARREL, WOODEN_DEVICE, 6));
 		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_METALBARREL, METAL_DEVICE2, 7));
 		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_WOODENCRATE, WOODEN_DEVICE, 4));
-		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_CAPACITOR, 0, METAL_DEVICE, 1));
-		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_CAPACITOR, 1, METAL_DEVICE, 4));
-		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_CAPACITOR, 2, METAL_DEVICE, 7));
-		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_CAPACITOR, 3, METAL_DEVICE2, 8));
+		if(isRFModuleEnabled)
+		{
+			GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_CAPACITOR, 0, METAL_DEVICE, 1));
+			GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_CAPACITOR, 1, METAL_DEVICE, 4));
+			GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_CAPACITOR, 2, METAL_DEVICE, 7));
+			GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_CAPACITOR, 3, METAL_DEVICE2, 8));
+			RFCompat.registerRFLoaderRecipe(new ItemStack(METAL_DEVICE, 1, 1));
+			RFCompat.registerRFLoaderRecipe(new ItemStack(METAL_DEVICE, 1, 4));
+			RFCompat.registerRFLoaderRecipe(new ItemStack(METAL_DEVICE, 1, 7));
+			RFCompat.registerRFLoaderRecipe(new ItemStack(METAL_DEVICE2, 1, 8));
+		}
 	}
 
 	@Override
@@ -92,9 +109,14 @@ public class IEModCompat extends ModCompat
 		ClientEvents clientEvents = new ClientEvents();
 		MinecraftForge.EVENT_BUS.register(clientEvents);
 
-		MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_CAPACITOR, new RenderItemMinecartBase());
 		MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_WOODENBARREL, new RenderItemMinecartBase());
 		MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_METALBARREL, new RenderItemMinecartBase());
 		MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_WOODENCRATE, new RenderItemMinecartBase());
+
+		if(isRFModuleEnabled)
+		{
+			MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_CAPACITOR, new RenderItemMinecartBase());
+		}
+
 	}
 }

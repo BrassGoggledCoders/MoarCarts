@@ -8,7 +8,6 @@ import moarcarts.api.ComparatorTrackEvent;
 import moarcarts.api.IComparatorCart;
 import net.minecraft.block.BlockRailDetector;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
@@ -32,7 +31,7 @@ public class BlockComparatorTrack extends BlockRailDetector
 		super();
 		this.setBlockName("blockcomparatorrail");
 		this.setBlockTextureName(MoarCarts.MODID + "vanilla/blockraildetector");
-		this.setCreativeTab(CreativeTabs.tabTransport);
+		this.setCreativeTab(MoarCarts.moarcartsTab);
 	}
 
 	@Override

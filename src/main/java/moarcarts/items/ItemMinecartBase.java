@@ -24,7 +24,6 @@ import mods.railcraft.api.carts.CartTools;
 import mods.railcraft.api.core.items.IMinecartItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemMinecart;
@@ -42,7 +41,7 @@ public abstract class ItemMinecartBase extends ItemMinecart implements IMinecart
 		super(0);
 		this.setUnlocalizedName(name);
 		this.setTextureName(MoarCarts.MODID + ":" + "defaultcart");
-		this.setCreativeTab(CreativeTabs.tabTransport);
+		this.setCreativeTab(MoarCarts.moarcartsTab);
 		this.setMaxStackSize(ConfigSettings.getMinecartStackSize());
 		BlockDispenser.dispenseBehaviorRegistry.putObject(this, new CartDispenserBehavior());
 	}

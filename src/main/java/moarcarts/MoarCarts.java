@@ -24,6 +24,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import moarcarts.config.ConfigHandler;
 import moarcarts.events.CartUpdateEvents;
+import moarcarts.items.MoarCartsCreativeTab;
 import moarcarts.mods.avaritia.AvaritiaCompat;
 import moarcarts.mods.botania.BotaniaCompat;
 import moarcarts.mods.ie.IEModCompat;
@@ -59,6 +60,8 @@ public class MoarCarts implements IBoilerplateMod
 	public static GuiHandler guiHandler;
 	public static ModLogger logger;
 	public static PacketHandler packetHandler;
+
+	public static MoarCartsCreativeTab moarcartsTab = new MoarCartsCreativeTab();
 
 	@SidedProxy(clientSide = "moarcarts.proxies.ClientProxy", serverSide = "moarcarts.proxies.CommonProxy")
 	public static CommonProxy proxy;
