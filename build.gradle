@@ -20,16 +20,17 @@ apply plugin: 'forge'
 project.ext {
     buildNum = System.getenv("BUILD_NUMBER")
     mcVersion = "${project.minecraft.version}"
+    mocversion = "${moarcartsversion}-${project.ext.buildNum}"
 }
 
-version = "${minecraftversion}-${moarcartsversion}-${project.ext.buildNum}"
+version = "${minecraftversion}-" + project.ext.mocversion
 group = "brassgoggledcoders"
 archivesBaseName = "moarcarts"
 
 minecraft {
     version = "${minecraftversion}-${forgeversion}-${minecraftversion}"
 
-    replace "@VERSION@", project.version
+    replace "@VERSION@", project.ext.mocversion
     replaceIn "MoarCarts.java"
 }
 
