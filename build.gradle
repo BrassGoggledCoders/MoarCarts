@@ -173,7 +173,7 @@ idea {
 }
 
 jar {
-    classifier = "universal"
+    classifier = ""
 }
 
 task deobfJar(type: Jar) {

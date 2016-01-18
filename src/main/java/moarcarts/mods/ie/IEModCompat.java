@@ -6,6 +6,8 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import moarcarts.MoarCarts;
 import moarcarts.mods.ie.entities.*;
 import moarcarts.mods.ie.events.ClientEvents;
@@ -104,6 +106,7 @@ public class IEModCompat extends ModCompat
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void clientInit(FMLInitializationEvent event)
 	{
 		ClientEvents clientEvents = new ClientEvents();

@@ -16,6 +16,8 @@ import boilerplate.common.utils.helpers.RegistryHelper;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import moarcarts.MoarCarts;
 import moarcarts.mods.vanilla.blocks.BlockComparatorTrack;
 import moarcarts.mods.vanilla.entities.EntityMinecartEnderChest;
@@ -57,6 +59,7 @@ public class VanillaCompat extends ModCompat
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void clientInit(FMLInitializationEvent event)
 	{
 		MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_ENDERCHEST, new RenderItemMinecartBase());

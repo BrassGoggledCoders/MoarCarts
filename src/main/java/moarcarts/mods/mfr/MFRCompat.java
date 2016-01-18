@@ -6,6 +6,8 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import moarcarts.MoarCarts;
 import moarcarts.mods.mfr.entities.EntityMinecartDSU;
 import moarcarts.mods.mfr.items.ItemMinecartDSU;
@@ -56,6 +58,7 @@ public class MFRCompat extends ModCompat
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void clientInit(FMLInitializationEvent event)
 	{
 		MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_DSU, new RenderItemMinecartBase());

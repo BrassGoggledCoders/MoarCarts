@@ -8,6 +8,8 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import moarcarts.MoarCarts;
 import moarcarts.mods.avaritia.entities.EntityMinecartInfinitato;
 import moarcarts.mods.avaritia.items.ItemMinecartInfinitato;
@@ -53,6 +55,7 @@ public class AvaritiaCompat extends ModCompat
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void clientInit(FMLInitializationEvent event)
 	{
 		if(bringOutThePotatoes)
