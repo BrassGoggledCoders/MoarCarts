@@ -17,7 +17,7 @@ public class CartUpdateEvents
 	public void renderOverLay(RenderGameOverlayEvent.Pre event)
 	{
 		MovingObjectPosition movingObjectPosition = Minecraft.getMinecraft().objectMouseOver;
-		if(movingObjectPosition.typeOfHit == MovingObjectType.ENTITY)
+		if(movingObjectPosition != null && movingObjectPosition.typeOfHit == MovingObjectType.ENTITY)
 		{
 			if(movingObjectPosition.entityHit instanceof EntityMinecartTEBase)
 			{
