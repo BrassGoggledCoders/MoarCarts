@@ -1,17 +1,15 @@
 package moarcarts.mods.ironchest.entities;
 
 import boilerplate.api.IOpenableGUI;
-import cpw.mods.ironchest.ContainerIronChest;
 import cpw.mods.ironchest.IronChestType;
+import cpw.mods.ironchest.TileEntityIronChest;
 import cpw.mods.ironchest.client.GUIChest;
 import moarcarts.entities.EntityMinecartInventoryTEBase;
 import moarcarts.items.ItemMinecartBase;
 import moarcarts.mods.ironchest.IronChestCompat;
+import moarcarts.mods.ironchest.containers.ContainerIronChestCart;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.world.World;
-
-import java.lang.reflect.Constructor;
 
 /**
  * @author SkySom
@@ -42,18 +40,15 @@ public class EntityMinecartIronChest extends EntityMinecartInventoryTEBase imple
 	@Override
 	public Object getClientGuiElement(int i, EntityPlayer entityPlayer, World world, int i1, int i2, int i3)
 	{
-		try {
-			Constructor<GUIChest> constructor = GUIChest.class.getDeclaredConstructor(GUIChest.GUI.class, IInventory.class, IInventory.class);
-			constructor.setAccessible(true);
-			return constructor.newInstance(GUIChest.GUI.values()[getMetadata()], entityPlayer.inventory, this);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
+		GUIChest guiChest = GUIChest.GUI.buildGUI(this.getIronChestType(), entityPlayer.inventory,
+				(TileEntityIronChest)this.getTileEntity());
+		guiChest.inventorySlots = new ContainerIronChestCart(entityPlayer.inventory, this);
+		return guiChest;
 	}
 
 	@Override
 	public Object getServerGuiElement(int i, EntityPlayer entityPlayer, World world, int i1, int i2, int i3)
 	{
-		return new ContainerIronChest(entityPlayer.inventory, this, getIronChestType(), 0, 0);
+		return new ContainerIronChestCart(entityPlayer.inventory, this);
 	}
 }
