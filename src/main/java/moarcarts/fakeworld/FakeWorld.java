@@ -3,9 +3,12 @@ package moarcarts.fakeworld;
 import moarcarts.entities.EntityMinecartBase;
 import moarcarts.entities.EntityMinecartTEBase;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSettings;
@@ -126,14 +129,14 @@ public class FakeWorld extends World
 
 	//Most Blocks use this.
 	@Override
-	public int getBlockMetadata(int posX, int posY, int posZ)
+	public IBlockState getBlockState(BlockPos blockPos)
 	{
-		return this.getEntityMinecartBase().getMetadata();
+		return this.getEntityMinecartBase().;
 	}
 
 	//Enderchest Particles
 	@Override
-	public void spawnParticle(String name, double posX, double posY, double posZ, double velX, double velY, double velZ)
+	public void spawnParticle(EnumParticleTypes enumParticleType, double posX, double posY, double posZ, double velX, double velY, double velZ)
 	{
 		int intCartX = (int)Math.floor(this.getCartX());
 		int intCartY = (int)Math.floor(this.getCartY());
@@ -141,19 +144,15 @@ public class FakeWorld extends World
 		double changeInX = (this.getCartX() - (double)intCartX) / 2.0;
 		double changeInY = (this.getCartY() - (double)intCartY) / 2.0;
 		double changeInZ = (this.getCartZ() - (double)intCartZ) / 2.0;
-		this.getCartWorld().spawnParticle(name, posX - changeInX, posY - changeInY, posZ - changeInZ, velX, velY, velZ);
+		this.getCartWorld().spawnParticle(enumParticleType, posX - changeInX, posY - changeInY, posZ - changeInZ,
+				velX, velY, velZ);
 	}
 
 	//Infinitato tries to get Entities and add potion effects
 	@Override
 	public List getEntitiesWithinAABB(Class entityClass, AxisAlignedBB axisAlignedBB)
 	{
-		axisAlignedBB.minX += this.getCartX();
-		axisAlignedBB.maxX += this.getCartX();
-		axisAlignedBB.minY += this.getCartY();
-		axisAlignedBB.maxY += this.getCartY();
-		axisAlignedBB.minZ += this.getCartZ();
-		axisAlignedBB.maxZ += this.getCartZ();
+		axisAlignedBB.getAverageEdgeLength();
 
 		return this.getCartWorld().getEntitiesWithinAABB(entityClass, axisAlignedBB);
 	}
@@ -170,20 +169,6 @@ public class FakeWorld extends World
 	public void playSoundEffect(double posX, double posY, double posZ, String sound, float noice, float soundTimes)
 	{
 		this.getCartWorld().playSoundAtEntity(this.getEntityMinecartBase(), sound, noice, soundTimes);
-	}
-
-	//EntityMinecartEmpty calls when rendered within a tiny potato (Skytato)
-	@Override
-	public boolean blockExists(int posX, int posY, int posZ)
-	{
-		return true;
-	}
-
-	//EntityMinecartEmpty calls when rendered within a tiny potato (Skytato)
-	@Override
-	public int getBlockLightValue(int posX, int posY, int posZ)
-	{
-		return 15;
 	}
 
 	public EntityMinecartTEBase getEntityMinecartTEBase()

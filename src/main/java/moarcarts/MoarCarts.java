@@ -11,6 +11,17 @@
  */
 package moarcarts;
 
+import moarcarts.config.ConfigHandler;
+import moarcarts.events.CartUpdateEvents;
+import moarcarts.items.MoarCartsCreativeTab;
+import moarcarts.mods.botania.BotaniaCompat;
+import moarcarts.mods.ironchest.IronChestCompat;
+import moarcarts.mods.vanilla.VanillaCompat;
+import moarcarts.mods.waila.WailaCompat;
+import moarcarts.network.PacketHandler;
+import moarcarts.proxies.CommonProxy;
+import moarcarts.recipes.NBTCartRecipe;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -18,24 +29,11 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import moarcarts.config.ConfigHandler;
-import moarcarts.events.CartUpdateEvents;
-import moarcarts.items.MoarCartsCreativeTab;
-import moarcarts.mods.avaritia.AvaritiaCompat;
-import moarcarts.mods.botania.BotaniaCompat;
-import moarcarts.mods.ie.IEModCompat;
-import moarcarts.mods.ironchest.IronChestCompat;
-import moarcarts.mods.mfr.MFRCompat;
-import moarcarts.mods.minechem.MinechemCompat;
-import moarcarts.mods.railcraft.RailcraftCompat;
-import moarcarts.mods.rf.RFCompat;
-import moarcarts.mods.vanilla.VanillaCompat;
-import moarcarts.mods.waila.WailaCompat;
-import moarcarts.network.PacketHandler;
-import moarcarts.proxies.CommonProxy;
-import moarcarts.recipes.NBTCartRecipe;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.RecipeSorter;
+import xyz.brassgoggledcoders.boilerplate.client.guis.GuiHandler;
+import xyz.brassgoggledcoders.boilerplate.common.IBoilerplateMod;
+import xyz.brassgoggledcoders.boilerplate.common.modcompat.CompatibilityHandler;
+import xyz.brassgoggledcoders.boilerplate.common.utils.ModLogger;
 
 /*
  * @author SkySom
@@ -97,14 +95,20 @@ public class MoarCarts implements IBoilerplateMod
 	{
 		compatibilityHandler = new CompatibilityHandler(MoarCarts.logger);
 		compatibilityHandler.addModCompat(new VanillaCompat());
-		compatibilityHandler.addModCompat(new RailcraftCompat());
-		compatibilityHandler.addModCompat(new RFCompat());
+		//TODO: Railcraft Compat
+		//compatibilityHandler.addModCompat(new RailcraftCompat());
+		//TODO: RF Compat (IE Flux)
+		//compatibilityHandler.addModCompat(new RFCompat());
 		compatibilityHandler.addModCompat(new IronChestCompat());
-		compatibilityHandler.addModCompat(new IEModCompat());
-		compatibilityHandler.addModCompat(new MFRCompat());
-		compatibilityHandler.addModCompat(new MinechemCompat());
+		//TODO: IE Compat
+		//compatibilityHandler.addModCompat(new IEModCompat());
+		//TODO: MFR Compat
+		//compatibilityHandler.addModCompat(new MFRCompat());
+		//TODO: Minechem Compat
+		//compatibilityHandler.addModCompat(new MinechemCompat());
 		compatibilityHandler.addModCompat(new BotaniaCompat());
-		compatibilityHandler.addModCompat(new AvaritiaCompat());
+		//TODO: Avaritia Compat
+		//compatibilityHandler.addModCompat(new AvaritiaCompat());
 		compatibilityHandler.addModCompat(new WailaCompat());
 	}
 

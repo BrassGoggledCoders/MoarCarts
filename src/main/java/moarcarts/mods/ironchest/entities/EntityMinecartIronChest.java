@@ -1,15 +1,16 @@
 package moarcarts.mods.ironchest.entities;
 
-import xyz.brassgoggledcoders.boilerplate.api.IOpenableGUI;
-import net.minecraftforge.ironchest.IronChestType;
-import net.minecraftforge.ironchest.TileEntityIronChest;
-import net.minecraftforge.ironchest.client.GUIChest;
+import cpw.mods.ironchest.IronChestType;
+import cpw.mods.ironchest.TileEntityIronChest;
+import cpw.mods.ironchest.client.GUIChest;
 import moarcarts.entities.EntityMinecartInventoryTEBase;
 import moarcarts.items.ItemMinecartBase;
 import moarcarts.mods.ironchest.IronChestCompat;
 import moarcarts.mods.ironchest.containers.ContainerIronChestCart;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+import xyz.brassgoggledcoders.boilerplate.api.IOpenableGUI;
 
 /**
  * @author SkySom
@@ -38,7 +39,7 @@ public class EntityMinecartIronChest extends EntityMinecartInventoryTEBase imple
 	}
 
 	@Override
-	public Object getClientGuiElement(int i, EntityPlayer entityPlayer, World world, int i1, int i2, int i3)
+	public Object getClientGuiElement(int i, EntityPlayer entityPlayer, World world, BlockPos blockPos)
 	{
 		GUIChest guiChest = GUIChest.GUI.buildGUI(this.getIronChestType(), entityPlayer.inventory,
 				(TileEntityIronChest)this.getTileEntity());
@@ -47,7 +48,7 @@ public class EntityMinecartIronChest extends EntityMinecartInventoryTEBase imple
 	}
 
 	@Override
-	public Object getServerGuiElement(int i, EntityPlayer entityPlayer, World world, int i1, int i2, int i3)
+	public Object getServerGuiElement(int i, EntityPlayer entityPlayer, World world, BlockPos blockPos)
 	{
 		return new ContainerIronChestCart(entityPlayer.inventory, this);
 	}

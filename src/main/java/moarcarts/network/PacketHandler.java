@@ -25,8 +25,8 @@ public class PacketHandler
 
 	public void sendToAllAround(IMessage message, EntityMinecartTEBase minecartTEBase)
 	{
-		networkWrapper.sendToAllAround(message, new NetworkRegistry.TargetPoint(minecartTEBase.worldObj.provider
-				.dimensionId, minecartTEBase.posX, minecartTEBase.posY, minecartTEBase.posZ, 64));
+		networkWrapper.sendToAllAround(message, new NetworkRegistry.TargetPoint(minecartTEBase.worldObj.provider.getDimensionId(),
+				minecartTEBase.posX, minecartTEBase.posY, minecartTEBase.posZ, 64));
 	}
 
 	public void sendToServer(IMessage message)

@@ -3,7 +3,6 @@ package moarcarts.mods.waila.providers;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaEntityAccessor;
 import net.minecraft.entity.Entity;
-import net.minecraftforge.common.util.EnumFacing;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
@@ -22,10 +21,10 @@ public class EntityMinecartFluidProvider extends EntityMinecartTEBaseProvider
 		if(entity instanceof IFluidHandler)
 		{
 			IFluidHandler iFluidHandler = (IFluidHandler)entity;
-			if(iFluidHandler.getTankInfo(EnumFacing.UNKNOWN).length > 0 &&
-					iFluidHandler.getTankInfo(EnumFacing.UNKNOWN)[0] != null)
+			if(iFluidHandler.getTankInfo(null).length > 0 &&
+					iFluidHandler.getTankInfo(null)[0] != null)
 			{
-				FluidTankInfo fluidTankInfo = iFluidHandler.getTankInfo(EnumFacing.UNKNOWN)[0];
+				FluidTankInfo fluidTankInfo = iFluidHandler.getTankInfo(null)[0];
 				if(fluidTankInfo.fluid != null)
 				{
 					FluidStack fluid = fluidTankInfo.fluid;

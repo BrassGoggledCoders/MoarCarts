@@ -11,6 +11,9 @@
  */
 package moarcarts.entities;
 
+import moarcarts.fakeworld.CartBlockPos;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import moarcarts.MoarCarts;
@@ -40,15 +43,19 @@ public abstract class EntityMinecartBase extends EntityMinecart implements /*IMi
 	protected Block cartBlock;
 	protected Random random;
 	protected FakeWorld fakeWorld;
+	protected CartBlockPos cartBlockPos;
+
+	protected static BlockPos ORIGIN_POS = new BlockPos(0, 0, 0);
 
 	private static int METADATA_DW = 31;
 	private static String METADATA = "METADATA";
 
-	public EntityMinecartBase(World world, int metadata)
+	public EntityMinecartBase(World world, IBlockState blockState)
 	{
 		super(world);
-		this.setMetadata(metadata);
+		this.func_174899_a(blockState);
 		this.fakeWorld = new FakeWorld(this);
+		this.cartBlockPos = new CartBlockPos(this);
 		this.random = new Random();
 	}
 
@@ -78,24 +85,6 @@ public abstract class EntityMinecartBase extends EntityMinecart implements /*IMi
 	{
 		super.writeEntityToNBT(nbtTagCompound);
 		nbtTagCompound.setInteger(METADATA, this.getMetadata());
-	}
-
-	@Override
-	public Block func_145820_n()
-	{
-		return this.getCartBlock();
-	}
-
-	@Override
-	public Block func_145817_o()
-	{
-		return this.getCartBlock();
-	}
-
-	@Override
-	public int getDisplayTileData()
-	{
-		return this.getMetadata();
 	}
 
 	@Override
@@ -175,9 +164,9 @@ public abstract class EntityMinecartBase extends EntityMinecart implements /*IMi
 		} else
 		{
 			blockCartItemStack = this.getCartItem();
-			if(func_95999_t() != null && !func_95999_t().isEmpty())
+			if(this.getName() != null && !this.getName().isEmpty())
 			{
-				blockCartItemStack.setStackDisplayName(func_95999_t());
+				blockCartItemStack.setStackDisplayName(this.getName());
 			}
 		}
 		this.dropCart(blockCartItemStack);
@@ -205,7 +194,7 @@ public abstract class EntityMinecartBase extends EntityMinecart implements /*IMi
 	{
 		if(this.getCartBlock().hasComparatorInputOverride())
 		{
-			return this.getCartBlock().getComparatorInputOverride(this.getFakeWorld(), 0, 0, 0, this.getMetadata());
+			return this.getCartBlock().getComparatorInputOverride(this.getFakeWorld(), ORIGIN_POS);
 		}
 		return 0;
 	}
@@ -226,7 +215,7 @@ public abstract class EntityMinecartBase extends EntityMinecart implements /*IMi
 		int intPosX = (int)Math.floor(this.posX);
 		int intPosY = (int)Math.floor(this.posY);
 		int intPosZ = (int)Math.floor(this.posZ);
-		this.getCartBlock().randomDisplayTick(this.getFakeWorld(), intPosX, intPosY, intPosZ, random);
+		this.getCartBlock().randomDisplayTick(this.getFakeWorld(), ORIGIN_POS, this.getDisplayTile(), random);
 	}
 
 	public Block getCartBlock()

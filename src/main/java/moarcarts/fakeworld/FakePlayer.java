@@ -6,7 +6,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryEnderChest;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
 
@@ -41,12 +40,6 @@ public class FakePlayer extends EntityPlayer
 	public boolean canCommandSenderUseCommand(int p_70003_1_, String p_70003_2_)
 	{
 		return false;
-	}
-
-	@Override
-	public ChunkCoordinates getPlayerCoordinates()
-	{
-		return null;
 	}
 
 	@Override
@@ -94,6 +87,12 @@ public class FakePlayer extends EntityPlayer
 	}
 
 	@Override
+	public boolean isSpectator()
+	{
+		return false;
+	}
+
+	@Override
 	public void displayGUIChest(IInventory iInventory)
 	{
 		this.getEntityPlayer().displayGUIChest(iInventory);
@@ -103,12 +102,6 @@ public class FakePlayer extends EntityPlayer
 	public InventoryEnderChest getInventoryEnderChest()
 	{
 		return this.getEntityPlayer().getInventoryEnderChest();
-	}
-
-	@Override
-	public String getCommandSenderName()
-	{
-		return "MoarCarts FakePlayer";
 	}
 
 	public EntityPlayer getEntityPlayer()

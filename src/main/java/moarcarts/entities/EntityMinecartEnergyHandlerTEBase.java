@@ -1,20 +1,18 @@
 package moarcarts.entities;
 
-import xyz.brassgoggledcoders.boilerplate.common.utils.ComparatorUtils;
-import cofh.api.energy.IEnergyHandler;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.EnumFacing;
 
 /**
  * @author SkySom
+ * TODO: RF Stuff
  */
-public abstract class EntityMinecartEnergyHandlerTEBase extends EntityMinecartTEBase implements IEnergyHandler
+public abstract class EntityMinecartEnergyHandlerTEBase extends EntityMinecartTEBase //implements IEnergyHandler
 {
 	public EntityMinecartEnergyHandlerTEBase(World world, int metadata)
 	{
 		super(world, metadata);
 	}
-
+	/*
 	@Override
 	public int receiveEnergy(EnumFacing EnumFacing, int amount, boolean simulate)
 	{
@@ -48,14 +46,14 @@ public abstract class EntityMinecartEnergyHandlerTEBase extends EntityMinecartTE
 	public IEnergyHandler getIEnergyHandler()
 	{
 		return (IEnergyHandler)this.getTileEntity();
-	}
+	}*/
 
 	@Override
 	public int getComparatorInputOverride()
 	{
 		if(!this.cartBlock.hasComparatorInputOverride())
 		{
-			return ComparatorUtils.scaleStoredEnergyTo(15, this);
+			//return ComparatorUtils.scaleStoredEnergyTo(15, this);
 		}
 		return super.getComparatorInputOverride();
 	}

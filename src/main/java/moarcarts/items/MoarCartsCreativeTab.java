@@ -1,6 +1,6 @@
 package moarcarts.items;
 
-import xyz.brassgoggledcoders.boilerplate.common.baseclasses.BaseCreativeTab;
+import xyz.brassgoggledcoders.boilerplate.common.BaseCreativeTab;
 import moarcarts.mods.vanilla.VanillaCompat;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;

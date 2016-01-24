@@ -1,13 +1,10 @@
 package moarcarts.proxies;
 
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import moarcarts.MoarCarts;
-import moarcarts.entities.EntityMinecartTEBase;
-import moarcarts.renderers.RenderMinecartTEBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 /**
  * @author SkySom
@@ -24,7 +21,8 @@ public class ClientProxy extends CommonProxy
 
 	private void registerRenderers()
 	{
-		RenderingRegistry.registerEntityRenderingHandler(EntityMinecartTEBase.class, new RenderMinecartTEBase());
+		//TODO: Rendering
+		//RenderingRegistry.registerEntityRenderingHandler(EntityMinecartTEBase.class, new RenderMinecartTEBase());
 	}
 
 	public World getWorld()

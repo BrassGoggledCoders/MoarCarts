@@ -1,6 +1,6 @@
 package moarcarts.mods.ironchest.containers;
 
-import net.minecraftforge.ironchest.ContainerIronChest;
+import cpw.mods.ironchest.ContainerIronChest;
 import moarcarts.mods.ironchest.entities.EntityMinecartIronChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;

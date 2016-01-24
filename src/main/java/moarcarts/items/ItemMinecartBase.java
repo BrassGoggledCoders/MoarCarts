@@ -11,46 +11,45 @@
  */
 package moarcarts.items;
 
-import xyz.brassgoggledcoders.boilerplate.common.utils.BlockUtils;
-import com.mojang.authlib.GameProfile;
-import net.minecraftforge.fml.common.Optional;
 import moarcarts.MoarCarts;
 import moarcarts.behaviors.CartDispenserBehavior;
 import moarcarts.config.ConfigSettings;
 import moarcarts.entities.EntityMinecartBase;
 import moarcarts.entities.EntityMinecartTEBase;
 import moarcarts.renderers.IRenderBlock.RenderMethod;
-import mods.railcraft.api.carts.CartTools;
-import mods.railcraft.api.core.items.IMinecartItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
-import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemMinecart;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Optional;
+import xyz.brassgoggledcoders.boilerplate.common.utils.BlockUtils;
 
 /**
  * @author SkySom
  */
 @Optional.Interface(modid = "RailcraftAPI|items", iface = "mods.railcraft.api.core.items.IMinecartItem")
-public abstract class ItemMinecartBase extends ItemMinecart implements IMinecartItem
+public abstract class ItemMinecartBase extends ItemMinecart //implements IMinecartItem
 {
 	public ItemMinecartBase(String mod, String name)
 	{
-		super(0);
+		super(null);
 		this.setUnlocalizedName(name);
-		this.setTextureName(MoarCarts.MODID + ":" + "defaultcart");
 		this.setCreativeTab(MoarCarts.moarcartsTab);
 		this.setMaxStackSize(ConfigSettings.getMinecartStackSize());
 		BlockDispenser.dispenseBehaviorRegistry.putObject(this, new CartDispenserBehavior());
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int i, int j, int k, int l, float par8, float par9, float par10) {
-		return placeCart(itemStack, world, i, j, k, this.getEntityFromItem(world, itemStack));
+	public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, BlockPos blockPos, EnumFacing facing,
+			float par8, float par9, float par10) {
+		return placeCart(itemStack, world, blockPos, this.getEntityFromItem(world, itemStack));
 	}
 
+	/* TODO: Railcraft IMinecartItem
 	@Override
 	@Optional.Method(modid = "RailcraftAPI|items")
 	public boolean canBePlacedByNonPlayer(ItemStack itemStack)
@@ -69,22 +68,22 @@ public abstract class ItemMinecartBase extends ItemMinecart implements IMinecart
 			return entityMinecart;
 		}
 		return null;
-	}
+	}*/
 
-	public boolean placeCart(ItemStack itemStack, World world, int posX, int posY, int posZ, EntityMinecartBase entityMinecart)
+	public boolean placeCart(ItemStack itemStack, World world, BlockPos blockPos, EntityMinecartBase entityMinecart)
 	{
-		if (itemStack != null && BlockUtils.isRailBlock(world.getBlock(posX, posY, posZ)))
+		if (itemStack != null && BlockUtils.isRailBlock(world.getBlockState(blockPos).getBlock()))
 		{
 			if(itemStack.hasDisplayName())
 			{
-				entityMinecart.setMinecartName(itemStack.getDisplayName());
+				entityMinecart.setCustomNameTag(itemStack.getDisplayName());
 			}
 
 			if (!world.isRemote)
 			{
-				entityMinecart.posX = (float)posX + 0.5F;
-				entityMinecart.posY = (float)posY + 0.5F;
-				entityMinecart.posZ = (float)posZ + 0.5F;
+				entityMinecart.posX = (float)blockPos.getX() + 0.5F;
+				entityMinecart.posY = (float)blockPos.getY() + 0.5F;
+				entityMinecart.posZ = (float)blockPos.getZ() + 0.5F;
 				if(entityMinecart instanceof EntityMinecartTEBase)
 				{
 					EntityMinecartTEBase entityMinecartTEBase = (EntityMinecartTEBase)entityMinecart;

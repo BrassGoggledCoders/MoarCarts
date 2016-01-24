@@ -51,16 +51,11 @@ repositories {
         name "Waila"
         url "http://mobiusstrip.eu/maven"
     }
-    maven {
-        name "Forge"
-        url "files.minecraftforge.net"
-    }
 }
 
 dependencies {
     compile "brassgoggledcoders:boilerplate:${minecraftversion}-${boilerplateversion}:deobf"
     compile "mcp.mobius.waila:Waila:${wailaversion}:dev"
-    compile "net.minecraftforge:ironchest:${minecraftversion}-${ironchestversion}:deobf"
 }
 
 task getLibraries {
@@ -71,38 +66,18 @@ task getLibraries {
 
     def downloads = new ArrayList<Tuple>();
 
-    def railcraft = 'Railcraft_' + project.minecraftversion + '-' + railcraftversion + '-dev.jar'
-    def railcraftSource = 'https://dl.dropboxusercontent.com/u/38558957/Minecraft/Railcraft/' + railcraft
-
-    def immersiveengineering = 'ImmersiveEngineering-' + immersiveengineeringversion + '.jar'
-    def immersiveengineeringSource = 'http://minecraft.curseforge.com/projects/immersive-engineering/files/2273007/download'
+    def ironchest = 'ironchest-' + minecraftversion + '-' + ironchestversion + '.jar'
+    def ironchestSource = 'http://addons.curse.cursecdn.com/files/2276/366/' + ironchest
 
     def inventorytweaks = 'inventory-tweaks-' + invtweaksversion + '.jar'
     def inventorytweaksSource = 'http://minecraft.curseforge.com/projects/inventory-tweaks/files/2232022/download'
 
-    def cofhcore = 'cofhcore-' + cofhcoreversion + '.jar'
-    def cofhcoreSource = 'http://minecraft.curseforge.com/projects/cofhcore/files/2246920/download'
-
-    def minefactory = 'minefactory-' + minefactoryversion + '.jar'
-    def minefactorySource = 'http://minecraft.curseforge.com/projects/minefactory-reloaded/files/2233907/download'
-
-    def minechem = 'Minechem-' + project.minecraftversion + '-' + minechemversion + '.jar'
-    def minechemSource = 'http://minecraft.curseforge.com/projects/minechem/files/2251057/download'
-
     def botania = 'Botania ' + botaniaversion + '-deobf.jar'
     def botaniaSource = 'https://github.com/williewillus/Botania/releases/download/v0.5.2.1-beta/Botania.r1.8-248-MC1.8-400bf95.jar'
 
-    def avaritia = 'avaritia-' + project.avaritiaversion + '.jar'
-    def avaritiaSource = 'http://minecraft.curseforge.com/projects/avaritia/files/2268137/download'
-
-    //downloads.add(new Tuple(railcraft, railcraftSource))))
-    //downloads.add(new Tuple(immersiveengineering, immersiveengineeringSource))
     downloads.add(new Tuple(inventorytweaks, inventorytweaksSource))
-    //downloads.add(new Tuple(cofhcore, cofhcoreSource))
-    //downloads.add(new Tuple(minefactory, minefactorySource))
-    //downloads.add(new Tuple(minechem, minechemSource))
     downloads.add(new Tuple(botania, botaniaSource))
-    //downloads.add(new Tuple(avaritia, avaritiaSource))
+    downloads.add(new Tuple(ironchest, ironchestSource))
 
     libsFolder.listFiles().each { file ->
         def isInDownloadList = false;
