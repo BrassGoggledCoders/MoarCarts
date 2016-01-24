@@ -4,11 +4,11 @@ import moarcarts.entities.EntityMinecartTEBase;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderMinecart;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.entity.item.EntityMinecart;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import org.lwjgl.opengl.GL11;
@@ -17,18 +17,21 @@ import org.lwjgl.opengl.GL12;
 /**
  * @author SkySom
  */
-public class RenderMinecartTEBase extends RenderMinecart
+public class RenderMinecartTEBase<EntityMinecartTEBase> extends RenderMinecart
 {
-	protected EntityMinecartTEBase entityMinecartTEBase;
 	protected String haloString;
 	private Minecraft mc = Minecraft.getMinecraft();
 
-	public void doRender(EntityMinecart entityMinecart, double posX, double posY, double posZ, float p_76986_8_, float partial)
+	public RenderMinecartTEBase(RenderManager renderManagerIn)
 	{
-		if(entityMinecart instanceof EntityMinecartTEBase)
+		super(renderManagerIn);
+	}
+
+	public void doRender(EntityMinecartTEBase entityMinecart, double posX, double posY, double posZ, float p_76986_8_, float partial)
+	{
+		if(entityMinecart != null)
 		{
-			entityMinecartTEBase = (EntityMinecartTEBase) entityMinecart;
-			this.field_94145_f.blockAccess = entityMinecartTEBase.getFakeWorld();
+			this.field_94145_f.blockAccess = entityMinecart.getFakeWorld();
 			GL11.glPushMatrix();
 			this.bindEntityTexture(entityMinecartTEBase);
 			long i = (long) entityMinecartTEBase.getEntityId() * 493286711L;

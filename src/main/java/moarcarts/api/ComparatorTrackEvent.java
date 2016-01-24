@@ -1,7 +1,7 @@
 package moarcarts.api;
 
-import cpw.mods.fml.common.eventhandler.Cancelable;
-import cpw.mods.fml.common.eventhandler.Event.HasResult;
+import net.minecraftforge.fml.common.eventhandler.Cancelable;
+import net.minecraftforge.fml.common.eventhandler.Event.HasResult;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraftforge.event.entity.minecart.MinecartEvent;
 

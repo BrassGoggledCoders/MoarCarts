@@ -1,8 +1,8 @@
 package moarcarts.mods.vanilla.blocks;
 
-import boilerplate.common.utils.ComparatorUtils;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import xyz.brassgoggledcoders.boilerplate.common.utils.ComparatorUtils;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import moarcarts.MoarCarts;
 import moarcarts.api.ComparatorTrackEvent;
 import moarcarts.api.IComparatorCart;

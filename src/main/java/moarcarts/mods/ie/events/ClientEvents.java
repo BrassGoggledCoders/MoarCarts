@@ -3,7 +3,7 @@ package moarcarts.mods.ie.events;
 import blusunrize.immersiveengineering.client.ClientUtils;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IBlockOverlayText;
 import blusunrize.immersiveengineering.common.util.Utils;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

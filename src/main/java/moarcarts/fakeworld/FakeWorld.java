@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldSettings;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.common.util.EnumFacing;
 
 import java.util.List;
 
@@ -103,7 +103,7 @@ public class FakeWorld extends World
 	public void addBlockEvent(int x, int y, int z, Block block, int metadata, int p_14745) {}
 
 	@Override
-	public boolean isSideSolid(int x, int y, int z, ForgeDirection blockSide)
+	public boolean isSideSolid(int x, int y, int z, EnumFacing blockSide)
 	{
 		return false;
 	}

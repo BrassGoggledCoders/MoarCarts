@@ -11,9 +11,9 @@
  */
 package moarcarts.items;
 
-import boilerplate.common.utils.BlockUtils;
+import xyz.brassgoggledcoders.boilerplate.common.utils.BlockUtils;
 import com.mojang.authlib.GameProfile;
-import cpw.mods.fml.common.Optional;
+import net.minecraftforge.fml.common.Optional;
 import moarcarts.MoarCarts;
 import moarcarts.behaviors.CartDispenserBehavior;
 import moarcarts.config.ConfigSettings;

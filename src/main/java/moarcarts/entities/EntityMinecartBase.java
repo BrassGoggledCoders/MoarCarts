@@ -11,14 +11,14 @@
  */
 package moarcarts.entities;
 
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
+import net.minecraftforge.fml.common.Optional;
+import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import moarcarts.MoarCarts;
 import moarcarts.api.IComparatorCart;
 import moarcarts.config.ConfigSettings;
 import moarcarts.fakeworld.FakeWorld;
 import moarcarts.items.ItemMinecartBase;
-import mods.railcraft.api.carts.IMinecart;
+//import mods.railcraft.api.carts.IMinecart;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,7 +35,7 @@ import java.util.Random;
  * @author SkySom
  */
 @Optional.Interface(iface = "mods.railcraft.api.carts.IMinecart", modid = "RailcraftAPI|carts")
-public abstract class EntityMinecartBase extends EntityMinecart implements IMinecart, IComparatorCart
+public abstract class EntityMinecartBase extends EntityMinecart implements /*IMinecart,*/ IComparatorCart
 {
 	protected Block cartBlock;
 	protected Random random;
@@ -105,9 +105,15 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	}
 
 	@Override
-	public int getMinecartType()
+	public EnumMinecartType getMinecartType()
 	{
-		return 1;
+		return null;
+	}
+
+	@Override
+	public boolean isPoweredCart()
+	{
+		return false;
 	}
 
 	@Override
@@ -153,12 +159,6 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	}
 
 	@Override
-	public boolean hasCustomInventoryName()
-	{
-		return false;
-	}
-
-	@Override
 	public void setDead()
 	{
 		super.setDead();
@@ -191,6 +191,7 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 		}
 	}
 
+	/* TODO: Railcraft
 	@Override
 	@Optional.Method(modid = "RailcraftAPI|carts")
 	public boolean doesCartMatchFilter(ItemStack itemStack, EntityMinecart entityMinecart)
@@ -198,7 +199,7 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 		return itemStack != null && entityMinecart instanceof EntityMinecartBase &&
 				itemStack.isItemEqual(entityMinecart.getCartItem());
 	}
-
+	*/
 	@Override
 	public int getComparatorInputOverride()
 	{

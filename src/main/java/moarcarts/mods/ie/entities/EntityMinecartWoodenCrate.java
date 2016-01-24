@@ -2,7 +2,7 @@ package moarcarts.mods.ie.entities;
 
 import blusunrize.immersiveengineering.client.gui.GuiCrate;
 import blusunrize.immersiveengineering.common.blocks.wooden.TileEntityWoodenCrate;
-import boilerplate.api.IOpenableGUI;
+import xyz.brassgoggledcoders.boilerplate.api.IOpenableGUI;
 import moarcarts.entities.EntityMinecartInventoryTEBase;
 import moarcarts.items.ItemMinecartBase;
 import moarcarts.mods.ie.IEModCompat;

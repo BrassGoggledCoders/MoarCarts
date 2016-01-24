@@ -11,13 +11,13 @@
  */
 package moarcarts.mods.vanilla;
 
-import boilerplate.common.modcompat.ModCompat;
-import boilerplate.common.utils.helpers.RegistryHelper;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import xyz.brassgoggledcoders.boilerplate.common.modcompat.ModCompat;
+import xyz.brassgoggledcoders.boilerplate.common.utils.helpers.RegistryHelper;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import moarcarts.MoarCarts;
 import moarcarts.mods.vanilla.blocks.BlockComparatorTrack;
 import moarcarts.mods.vanilla.entities.EntityMinecartEnderChest;

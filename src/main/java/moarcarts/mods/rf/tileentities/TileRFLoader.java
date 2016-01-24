@@ -1,8 +1,8 @@
 package moarcarts.mods.rf.tileentities;
 
-import boilerplate.common.blocks.SideType;
-import boilerplate.common.tiles.TileEntitySided;
-import boilerplate.common.utils.BlockUtils;
+import xyz.brassgoggledcoders.boilerplate.common.blocks.SideType;
+import xyz.brassgoggledcoders.boilerplate.common.tiles.TileEntitySided;
+import xyz.brassgoggledcoders.boilerplate.common.utils.BlockUtils;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
 import cofh.api.energy.IEnergyProvider;
@@ -10,7 +10,7 @@ import cofh.api.energy.IEnergyReceiver;
 import mods.railcraft.api.carts.CartTools;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.common.util.EnumFacing;
 
 /**
  * @author SkySom
@@ -23,7 +23,7 @@ public class TileRFLoader extends TileEntitySided implements IEnergyHandler
 	public void updateEntity()
 	{
 		super.updateEntity();
-		for(ForgeDirection direction: ForgeDirection.VALID_DIRECTIONS)
+		for(EnumFacing direction: EnumFacing.VALID_DIRECTIONS)
 		{
 			if(this.getSideValue(direction.ordinal()) != SideType.NONE)
 			{
@@ -78,14 +78,14 @@ public class TileRFLoader extends TileEntitySided implements IEnergyHandler
 		}
 	}
 
-	public void unLoadCart(ForgeDirection direction, IEnergyProvider provider)
+	public void unLoadCart(EnumFacing direction, IEnergyProvider provider)
 	{
 		int amountToUnload = this.energyStorage.receiveEnergy(this.energyStorage.getMaxReceive(), true);
 		int amountRemovedFromCart = provider.extractEnergy(direction.getOpposite(), amountToUnload, false);
 		this.energyStorage.receiveEnergy(amountRemovedFromCart, false);
 	}
 
-	public void loadCart(ForgeDirection direction, IEnergyReceiver receiver)
+	public void loadCart(EnumFacing direction, IEnergyReceiver receiver)
 	{
 		int amountToLoad = this.energyStorage.extractEnergy(this.energyStorage.getMaxExtract(), true);
 		int amountLoadedIntoCart = receiver.receiveEnergy(direction.getOpposite(), amountToLoad, false);
@@ -107,37 +107,37 @@ public class TileRFLoader extends TileEntitySided implements IEnergyHandler
 	}
 
 	@Override
-	public int receiveEnergy(ForgeDirection forgeDirection, int amount, boolean simulate)
+	public int receiveEnergy(EnumFacing EnumFacing, int amount, boolean simulate)
 	{
-		int received = (!worldObj.isRemote && this.canConnectEnergy(forgeDirection)) ?
+		int received = (!worldObj.isRemote && this.canConnectEnergy(EnumFacing)) ?
 				this.energyStorage.receiveEnergy(amount, simulate) : 0;
 		this.sendBlockUpdate();
 		return received;
 	}
 
 	@Override
-	public int extractEnergy(ForgeDirection forgeDirection, int amount, boolean simulate)
+	public int extractEnergy(EnumFacing EnumFacing, int amount, boolean simulate)
 	{
-		int extracted = (this.canConnectEnergy(forgeDirection)) ? this.energyStorage.extractEnergy(amount, simulate) : 0;
+		int extracted = (this.canConnectEnergy(EnumFacing)) ? this.energyStorage.extractEnergy(amount, simulate) : 0;
 		this.sendBlockUpdate();
 		return extracted;
 	}
 
 	@Override
-	public int getEnergyStored(ForgeDirection forgeDirection)
+	public int getEnergyStored(EnumFacing EnumFacing)
 	{
 		return this.energyStorage.getEnergyStored();
 	}
 
 	@Override
-	public int getMaxEnergyStored(ForgeDirection forgeDirection)
+	public int getMaxEnergyStored(EnumFacing EnumFacing)
 	{
 		return this.energyStorage.getMaxEnergyStored();
 	}
 
 	@Override
-	public boolean canConnectEnergy(ForgeDirection forgeDirection)
+	public boolean canConnectEnergy(EnumFacing EnumFacing)
 	{
-		return this.getSideValue(forgeDirection.ordinal()) != SideType.NONE;
+		return this.getSideValue(EnumFacing.ordinal()) != SideType.NONE;
 	}
 }

@@ -1,14 +1,14 @@
 package moarcarts.mods.botania;
 
-import boilerplate.common.modcompat.ModCompat;
-import boilerplate.common.utils.helpers.RegistryHelper;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import xyz.brassgoggledcoders.boilerplate.common.modcompat.ModCompat;
+import xyz.brassgoggledcoders.boilerplate.common.utils.helpers.RegistryHelper;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import moarcarts.MoarCarts;
 import moarcarts.mods.botania.entities.EntityMinecartTinyPotato;
 import moarcarts.mods.botania.events.ManaCartComparatorEvent;

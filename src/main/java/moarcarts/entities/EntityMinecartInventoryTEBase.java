@@ -1,23 +1,22 @@
 package moarcarts.entities;
 
-import cpw.mods.fml.common.Optional;
 import moarcarts.renderers.IRenderBlock;
-import mods.railcraft.api.carts.IItemCart;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Optional;
 
 /**
  * @author SkySom
+ * TODO: Railcraft - IItemcart
  */
 @Optional.Interface(iface = "mods.railcraft.api.carts.IItemCart", modid = "RailcraftAPI|carts")
-public abstract class EntityMinecartInventoryTEBase extends EntityMinecartTEBase implements IRenderBlock, IInventory,
-		IItemCart
+public abstract class EntityMinecartInventoryTEBase extends EntityMinecartTEBase implements IRenderBlock, IInventory
+		//IItemCart
 {
 	private boolean dropContentsWhenDead = true;
 
@@ -97,27 +96,51 @@ public abstract class EntityMinecartInventoryTEBase extends EntityMinecartTEBase
 	}
 
 	@Override
+	public void openInventory(EntityPlayer player)
+	{
+
+	}
+
+	@Override
+	public void closeInventory(EntityPlayer player)
+	{
+
+	}
+
+	@Override
 	public int getInventoryStackLimit()
 	{
 		return this.getIInventoryTileEntity().getInventoryStackLimit();
 	}
 
 	@Override
-	public void openInventory()
-	{
-		this.getIInventoryTileEntity().openInventory();
-	}
-
-	@Override
-	public void closeInventory()
-	{
-		this.getIInventoryTileEntity().closeInventory();
-	}
-
-	@Override
 	public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack)
 	{
 		return this.getIInventoryTileEntity().isItemValidForSlot(slotIndex, itemStack);
+	}
+
+	@Override
+	public int getField(int id)
+	{
+		return this.getIInventoryTileEntity().getField(id);
+	}
+
+	@Override
+	public void setField(int id, int value)
+	{
+		this.getIInventoryTileEntity().setField(id, value);
+	}
+
+	@Override
+	public int getFieldCount()
+	{
+		return this.getIInventoryTileEntity().getFieldCount();
+	}
+
+	@Override
+	public void clear()
+	{
+		this.getIInventoryTileEntity().clear();
 	}
 
 	@Override
@@ -139,9 +162,9 @@ public abstract class EntityMinecartInventoryTEBase extends EntityMinecartTEBase
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int slotIndex)
+	public ItemStack removeStackFromSlot(int index)
 	{
-		return this.getIInventoryTileEntity().getStackInSlotOnClosing(slotIndex);
+		return this.getIInventoryTileEntity().removeStackFromSlot(index);
 	}
 
 	@Override
@@ -150,12 +173,7 @@ public abstract class EntityMinecartInventoryTEBase extends EntityMinecartTEBase
 		this.getIInventoryTileEntity().setInventorySlotContents(slotIndex, itemStack);
 	}
 
-	@Override
-	public String getInventoryName()
-	{
-		return this.getIInventoryTileEntity().getInventoryName();
-	}
-
+	/* TODO Railcraft IItemcart stuff
 	@Override
 	public boolean canPassItemRequests()
 	{
@@ -172,7 +190,7 @@ public abstract class EntityMinecartInventoryTEBase extends EntityMinecartTEBase
 	public boolean canProvidePulledItem(EntityMinecart entityMinecart, ItemStack itemStack)
 	{
 		return true;
-	}
+	}*/
 
 	public boolean dropContentsWhenDead()
 	{

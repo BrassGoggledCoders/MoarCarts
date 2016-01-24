@@ -1,9 +1,9 @@
 package moarcarts.mods.rf;
 
-import boilerplate.common.modcompat.ModCompat;
-import cpw.mods.fml.common.ModAPIManager;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
+import xyz.brassgoggledcoders.boilerplate.common.modcompat.ModCompat;
+import net.minecraftforge.fml.common.ModAPIManager;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import moarcarts.mods.rf.blocks.BlockRFLoader;
 import moarcarts.mods.rf.events.RFComparatorTrackHandler;
 import moarcarts.mods.rf.tileentities.TileRFLoader;

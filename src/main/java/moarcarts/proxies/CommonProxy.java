@@ -1,7 +1,7 @@
 package moarcarts.proxies;
 
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import moarcarts.MoarCarts;
 import net.minecraft.world.World;
 

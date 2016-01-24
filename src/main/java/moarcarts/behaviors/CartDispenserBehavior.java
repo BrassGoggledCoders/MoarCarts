@@ -1,6 +1,6 @@
 package moarcarts.behaviors;
 
-import boilerplate.common.utils.ItemStackUtils;
+import xyz.brassgoggledcoders.boilerplate.common.utils.ItemStackUtils;
 import moarcarts.entities.EntityMinecartBase;
 import moarcarts.items.ItemMinecartBase;
 import net.minecraft.block.Block;

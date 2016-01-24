@@ -1,6 +1,6 @@
 package moarcarts.mods.mfr.entities;
 
-import boilerplate.api.IOpenableGUI;
+import xyz.brassgoggledcoders.boilerplate.api.IOpenableGUI;
 import moarcarts.entities.EntityMinecartDeepStorageTEBase;
 import moarcarts.items.ItemMinecartBase;
 import moarcarts.mods.mfr.MFRCompat;

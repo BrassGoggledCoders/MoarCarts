@@ -1,9 +1,9 @@
 package moarcarts.entities;
 
-import boilerplate.common.utils.ComparatorUtils;
+import xyz.brassgoggledcoders.boilerplate.common.utils.ComparatorUtils;
 import cofh.api.energy.IEnergyHandler;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.common.util.EnumFacing;
 
 /**
  * @author SkySom
@@ -16,33 +16,33 @@ public abstract class EntityMinecartEnergyHandlerTEBase extends EntityMinecartTE
 	}
 
 	@Override
-	public int receiveEnergy(ForgeDirection forgeDirection, int amount, boolean simulate)
+	public int receiveEnergy(EnumFacing EnumFacing, int amount, boolean simulate)
 	{
-		return this.getIEnergyHandler().receiveEnergy(ForgeDirection.UP, amount, simulate);
+		return this.getIEnergyHandler().receiveEnergy(EnumFacing.UP, amount, simulate);
 	}
 
 	@Override
-	public int extractEnergy(ForgeDirection forgeDirection, int amount, boolean simulate)
+	public int extractEnergy(EnumFacing EnumFacing, int amount, boolean simulate)
 	{
-		return this.getIEnergyHandler().extractEnergy(ForgeDirection.DOWN, amount, simulate);
+		return this.getIEnergyHandler().extractEnergy(EnumFacing.DOWN, amount, simulate);
 	}
 
 	@Override
-	public int getEnergyStored(ForgeDirection forgeDirection)
+	public int getEnergyStored(EnumFacing EnumFacing)
 	{
-		return this.getIEnergyHandler().getEnergyStored(forgeDirection);
+		return this.getIEnergyHandler().getEnergyStored(EnumFacing);
 	}
 
 	@Override
-	public int getMaxEnergyStored(ForgeDirection forgeDirection)
+	public int getMaxEnergyStored(EnumFacing EnumFacing)
 	{
-		return this.getIEnergyHandler().getMaxEnergyStored(forgeDirection);
+		return this.getIEnergyHandler().getMaxEnergyStored(EnumFacing);
 	}
 
 	@Override
-	public boolean canConnectEnergy(ForgeDirection forgeDirection)
+	public boolean canConnectEnergy(EnumFacing EnumFacing)
 	{
-		return this.getIEnergyHandler().canConnectEnergy(forgeDirection);
+		return this.getIEnergyHandler().canConnectEnergy(EnumFacing);
 	}
 
 	public IEnergyHandler getIEnergyHandler()

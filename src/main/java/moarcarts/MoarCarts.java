@@ -11,17 +11,13 @@
  */
 package moarcarts;
 
-import boilerplate.client.GuiHandler;
-import boilerplate.common.IBoilerplateMod;
-import boilerplate.common.modcompat.CompatibilityHandler;
-import boilerplate.common.utils.ModLogger;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.Mod.Instance;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import moarcarts.config.ConfigHandler;
 import moarcarts.events.CartUpdateEvents;
 import moarcarts.items.MoarCartsCreativeTab;

@@ -1,9 +1,9 @@
 package moarcarts.mods.waila;
 
-import boilerplate.common.modcompat.ModCompat;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLInterModComms;
+import xyz.brassgoggledcoders.boilerplate.common.modcompat.ModCompat;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLInterModComms;
 
 /**
  * @author SkySom

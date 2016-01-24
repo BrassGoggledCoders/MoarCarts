@@ -1,9 +1,9 @@
 package moarcarts.mods.ironchest.entities;
 
-import boilerplate.api.IOpenableGUI;
-import cpw.mods.ironchest.IronChestType;
-import cpw.mods.ironchest.TileEntityIronChest;
-import cpw.mods.ironchest.client.GUIChest;
+import xyz.brassgoggledcoders.boilerplate.api.IOpenableGUI;
+import net.minecraftforge.ironchest.IronChestType;
+import net.minecraftforge.ironchest.TileEntityIronChest;
+import net.minecraftforge.ironchest.client.GUIChest;
 import moarcarts.entities.EntityMinecartInventoryTEBase;
 import moarcarts.items.ItemMinecartBase;
 import moarcarts.mods.ironchest.IronChestCompat;

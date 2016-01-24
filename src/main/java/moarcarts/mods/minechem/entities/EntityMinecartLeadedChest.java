@@ -1,6 +1,6 @@
 package moarcarts.mods.minechem.entities;
 
-import boilerplate.api.IOpenableGUI;
+import xyz.brassgoggledcoders.boilerplate.api.IOpenableGUI;
 import minechem.tileentity.leadedchest.LeadedChestGui;
 import minechem.tileentity.leadedchest.LeadedChestTileEntity;
 import moarcarts.entities.EntityMinecartInventoryTEBase;

@@ -1,7 +1,7 @@
 package moarcarts.renderers;
 
-import boilerplate.common.utils.ItemStackUtils;
-import cpw.mods.fml.client.FMLClientHandler;
+import xyz.brassgoggledcoders.boilerplate.common.utils.ItemStackUtils;
+import net.minecraftforge.fml.client.FMLClientHandler;
 import moarcarts.items.ItemMinecartBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;

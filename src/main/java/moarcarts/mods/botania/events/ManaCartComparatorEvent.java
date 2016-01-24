@@ -1,6 +1,6 @@
 package moarcarts.mods.botania.events;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import moarcarts.api.ComparatorTrackEvent;
 import vazkii.botania.common.entity.EntityPoolMinecart;
 

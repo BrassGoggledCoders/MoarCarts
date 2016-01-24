@@ -1,7 +1,7 @@
 package moarcarts.network;
 
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import moarcarts.entities.EntityMinecartTEBase;
 
 /**

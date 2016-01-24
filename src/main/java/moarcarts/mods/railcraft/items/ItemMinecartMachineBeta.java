@@ -1,7 +1,7 @@
 package moarcarts.mods.railcraft.items;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import moarcarts.entities.EntityMinecartBase;
 import moarcarts.items.ItemMinecartBase;
 import moarcarts.mods.railcraft.RailcraftCompat;

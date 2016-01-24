@@ -1,6 +1,6 @@
 package moarcarts.mods.waila.providers;
 
-import boilerplate.common.utils.ItemStackUtils;
+import xyz.brassgoggledcoders.boilerplate.common.utils.ItemStackUtils;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaEntityAccessor;
 import moarcarts.entities.EntityMinecartDeepStorageTEBase;

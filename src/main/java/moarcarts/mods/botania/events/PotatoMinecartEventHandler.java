@@ -1,6 +1,6 @@
 package moarcarts.mods.botania.events;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.item.EntityMinecartEmpty;
 import org.lwjgl.opengl.GL11;

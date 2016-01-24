@@ -1,13 +1,13 @@
 package moarcarts.entities;
 
-import boilerplate.common.utils.ComparatorUtils;
-import boilerplate.common.utils.FluidUtils;
-import cpw.mods.fml.common.Optional;
+import xyz.brassgoggledcoders.boilerplate.common.utils.ComparatorUtils;
+import xyz.brassgoggledcoders.boilerplate.common.utils.FluidUtils;
+import net.minecraftforge.fml.common.Optional;
 import mods.railcraft.api.carts.IFluidCart;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.common.util.EnumFacing;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
@@ -57,48 +57,48 @@ public abstract class EntityMinecartFluidInventoryTEBase extends EntityMinecartI
 	@Optional.Method(modid = "RailcraftAPI|carts")
 	public boolean canAcceptPushedFluid(EntityMinecart entityMinecart, Fluid fluid)
 	{
-		return this.getFluidTileEntity().canFill(ForgeDirection.UNKNOWN, fluid);
+		return this.getFluidTileEntity().canFill(EnumFacing.UNKNOWN, fluid);
 	}
 
 	@Override
 	@Optional.Method(modid = "RailcraftAPI|carts")
 	public boolean canProvidePulledFluid(EntityMinecart entityMinecart, Fluid fluid)
 	{
-		return this.getFluidTileEntity().canDrain(ForgeDirection.UNKNOWN, fluid);
+		return this.getFluidTileEntity().canDrain(EnumFacing.UNKNOWN, fluid);
 	}
 
 	@Override
-	public int fill(ForgeDirection from, FluidStack resource, boolean doFill)
+	public int fill(EnumFacing from, FluidStack resource, boolean doFill)
 	{
 		return this.getFluidTileEntity().fill(from, resource, doFill);
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain)
+	public FluidStack drain(EnumFacing from, FluidStack resource, boolean doDrain)
 	{
 		return this.getFluidTileEntity().drain(from, resource, doDrain);
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain)
+	public FluidStack drain(EnumFacing from, int maxDrain, boolean doDrain)
 	{
 		return this.getFluidTileEntity().drain(from, maxDrain, doDrain);
 	}
 
 	@Override
-	public boolean canFill(ForgeDirection from, Fluid fluid)
+	public boolean canFill(EnumFacing from, Fluid fluid)
 	{
 		return this.getFluidTileEntity().canFill(from, fluid);
 	}
 
 	@Override
-	public boolean canDrain(ForgeDirection from, Fluid fluid)
+	public boolean canDrain(EnumFacing from, Fluid fluid)
 	{
 		return this.getFluidTileEntity().canDrain(from, fluid);
 	}
 
 	@Override
-	public FluidTankInfo[] getTankInfo(ForgeDirection from)
+	public FluidTankInfo[] getTankInfo(EnumFacing from)
 	{
 		return this.getFluidTileEntity().getTankInfo(from);
 	}

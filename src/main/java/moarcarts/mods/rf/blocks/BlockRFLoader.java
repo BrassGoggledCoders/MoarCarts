@@ -1,11 +1,11 @@
 package moarcarts.mods.rf.blocks;
 
-import boilerplate.common.blocks.SideType;
-import boilerplate.common.blocks.SidedBlock;
-import boilerplate.common.utils.ComparatorUtils;
+import xyz.brassgoggledcoders.boilerplate.common.blocks.SideType;
+import xyz.brassgoggledcoders.boilerplate.common.blocks.SidedBlock;
+import xyz.brassgoggledcoders.boilerplate.common.utils.ComparatorUtils;
 import cofh.api.energy.IEnergyHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import moarcarts.MoarCarts;
 import moarcarts.mods.rf.tileentities.TileRFLoader;
 import net.minecraft.block.Block;

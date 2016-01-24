@@ -1,6 +1,6 @@
 package moarcarts.events;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import moarcarts.entities.EntityMinecartTEBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.MovingObjectPosition;
