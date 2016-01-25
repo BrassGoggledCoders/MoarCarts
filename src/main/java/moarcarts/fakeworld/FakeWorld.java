@@ -8,13 +8,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldSettings;
-import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraftforge.common.util.EnumFacing;
 
 import java.util.List;
 
@@ -34,14 +32,12 @@ public class FakeWorld extends World
 
 	public FakeWorld(World world, EntityMinecartBase entityMinecartBase)
 	{
-		super(world.getSaveHandler(), world.getWorldInfo().getWorldName(), world.provider,
-				new WorldSettings(world.getWorldInfo()), world.theProfiler);
+		super(world.getSaveHandler(), world.getWorldInfo(), world.provider, world.theProfiler, world.isRemote);
 		this.setEntityMinecartBase(entityMinecartBase);
 		if(entityMinecartBase instanceof EntityMinecartTEBase)
 		{
 			this.setEntityMinecartTEBase((EntityMinecartTEBase)entityMinecartBase);
 		}
-		this.isRemote = world.isRemote;
 	}
 
 	//MFR grabs TE's just a bit different than most
@@ -52,6 +48,7 @@ public class FakeWorld extends World
 	}
 
 	//MFR grabs TE's just a bit different than most
+	/*TODO: MFR Stuff
 	@Override
 	public void markTileEntityChunkModified(int posX, int posY, int posZ, TileEntity tileEntity)
 	{
@@ -70,11 +67,11 @@ public class FakeWorld extends World
 			this.fakeChunk = new FakeChunk(this);
 		}
 		return this.fakeChunk;
-	}
+	}*/
 
 	//Pretty sure this for IE's blocks originally though other use it.
 	@Override
-	public void markBlockForUpdate(int posX, int posY, int posZ)
+	public void markBlockForUpdate(BlockPos blockPos)
 	{
 		if(this.getEntityMinecartTEBase() != null)
 		{
@@ -82,43 +79,31 @@ public class FakeWorld extends World
 		}
 	}
 
-	@Override
-	public void func_147453_f(int posX, int posY, int posZ, Block block)
-	{
-		//NO-OP
-	}
-
-	@Override
-	protected int func_152379_p()
-	{
-		return 0;
-	}
-
-	//Most blocks use this
-	@Override
-	public Block getBlock(int x, int y, int z)
-	{
-		return this.getEntityMinecartBase().getCartBlock();
-	}
-
 	//Enderchest use this for open and close
 	@Override
-	public void addBlockEvent(int x, int y, int z, Block block, int metadata, int p_14745) {}
+	public void addBlockEvent(BlockPos blockPos, Block block, int metadata, int p_14745) {}
 
 	@Override
-	public boolean isSideSolid(int x, int y, int z, EnumFacing blockSide)
+	public boolean isSideSolid(BlockPos blockPos, EnumFacing blockSide)
 	{
 		return false;
 	}
 
 	@Override
-	public TileEntity getTileEntity(int x, int y, int z)
+	public TileEntity getTileEntity(BlockPos blockPos)
 	{
 		if(this.getEntityMinecartTEBase() != null)
 		{
 			return this.getEntityMinecartTEBase().getTileEntity();
 		}
 		return null;
+	}
+
+	//Really hope this doesn't break anything. Welp.
+	@Override
+	protected int getRenderDistanceChunks()
+	{
+		return 0;
 	}
 
 	@Override
@@ -131,12 +116,13 @@ public class FakeWorld extends World
 	@Override
 	public IBlockState getBlockState(BlockPos blockPos)
 	{
-		return this.getEntityMinecartBase().;
+		return this.getEntityMinecartBase().getDisplayTile();
 	}
 
 	//Enderchest Particles
 	@Override
-	public void spawnParticle(EnumParticleTypes enumParticleType, double posX, double posY, double posZ, double velX, double velY, double velZ)
+	public void spawnParticle(EnumParticleTypes enumParticleType, double posX, double posY, double posZ, double velX,
+			double velY, double velZ, int... what)
 	{
 		int intCartX = (int)Math.floor(this.getCartX());
 		int intCartY = (int)Math.floor(this.getCartY());

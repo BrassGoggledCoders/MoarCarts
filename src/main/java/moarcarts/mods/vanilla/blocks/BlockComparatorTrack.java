@@ -1,22 +1,21 @@
 package moarcarts.mods.vanilla.blocks;
 
-import xyz.brassgoggledcoders.boilerplate.common.utils.ComparatorUtils;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import com.google.common.base.Predicate;
 import moarcarts.MoarCarts;
 import moarcarts.api.ComparatorTrackEvent;
 import moarcarts.api.IComparatorCart;
 import net.minecraft.block.BlockRailDetector;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.IFluidHandler;
+import xyz.brassgoggledcoders.boilerplate.common.utils.ComparatorUtils;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -24,44 +23,32 @@ import java.util.List;
  */
 public class BlockComparatorTrack extends BlockRailDetector
 {
-	IIcon trackIcon;
-
 	public BlockComparatorTrack()
 	{
 		super();
-		this.setBlockName("blockcomparatorrail");
-		this.setBlockTextureName(MoarCarts.MODID + "vanilla/blockraildetector");
+		this.setRegistryName("blockcomparatorrail");
 		this.setCreativeTab(MoarCarts.moarcartsTab);
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister iconRegister)
-	{
-		this.trackIcon = iconRegister.registerIcon(MoarCarts.MODID + ":vanilla/blockcomparatortrack");
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta)
-	{
-		return this.trackIcon;
-	}
-
-	public int getComparatorInputOverride(World world, int posX, int posY, int posZ, int side)
+	public int getComparatorInputOverride(World world, BlockPos blockPos)
 	{
 		int comparatorOutput = 0;
-		if ((world.getBlockMetadata(posX, posY, posZ) & 8) > 0)
+		if (world.getBlockState(blockPos).getValue(POWERED))
 		{
 			float f = 0.125F;
-			List list = world.getEntitiesWithinAABB(EntityMinecart.class, AxisAlignedBB
-					.getBoundingBox((double)((float)posX + f), (double)posY, (double)((float)posZ + f),
-							(double)((float)(posX + 1) - f), (double)((float)(posY + 1) - f),
-							(double)((float)(posZ + 1) - f)));
+			List<? extends EntityMinecart> list = this.findMinecarts(world, blockPos, EntityMinecart.class, new Predicate<Entity>()
+			{
+				@Override
+				public boolean apply(@Nullable Entity input)
+				{
+					return input instanceof EntityMinecart;
+				}
+			});
 
 			if(list.size() > 0 && list.get(0) != null)
 			{
-				EntityMinecart minecart = (EntityMinecart)list.get(0);
+				EntityMinecart minecart = list.get(0);
 				if(minecart instanceof IComparatorCart)
 				{
 					comparatorOutput = ((IComparatorCart)minecart).getComparatorInputOverride();

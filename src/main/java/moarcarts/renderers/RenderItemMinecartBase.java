@@ -1,26 +1,11 @@
 package moarcarts.renderers;
 
-import xyz.brassgoggledcoders.boilerplate.common.utils.ItemStackUtils;
-import net.minecraftforge.fml.client.FMLClientHandler;
-import moarcarts.items.ItemMinecartBase;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelMinecart;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.IItemRenderer;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
 /**
  * @author SkySom
  */
-public class RenderItemMinecartBase implements IItemRenderer
+public class RenderItemMinecartBase
 {
+	/*
 	public static ResourceLocation TEXTURE = new ResourceLocation("textures/entity/minecart.png");
 
 	public ModelBase model = new ModelMinecart();
@@ -142,5 +127,5 @@ public class RenderItemMinecartBase implements IItemRenderer
 	{
 		GL11.glRotated(90D, 0D, 1D, 0D);
 	}
-
+	*/
 }

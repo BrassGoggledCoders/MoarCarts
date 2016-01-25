@@ -1,20 +1,18 @@
 package moarcarts.mods.ironchest;
 
-import xyz.brassgoggledcoders.boilerplate.common.modcompat.ModCompat;
-import xyz.brassgoggledcoders.boilerplate.common.utils.helpers.RegistryHelper;
+import moarcarts.MoarCarts;
+import moarcarts.mods.ironchest.entities.*;
+import moarcarts.mods.ironchest.items.ItemMinecartIronChest;
+import moarcarts.recipes.NBTCartRecipe;
+import net.minecraft.block.Block;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import moarcarts.MoarCarts;
-import moarcarts.mods.ironchest.entities.*;
-import moarcarts.mods.ironchest.items.ItemMinecartIronChest;
-import moarcarts.recipes.NBTCartRecipe;
-import moarcarts.renderers.RenderItemMinecartBase;
-import net.minecraft.block.Block;
-import net.minecraftforge.client.MinecraftForgeClient;
+import xyz.brassgoggledcoders.boilerplate.common.modcompat.ModCompat;
+import xyz.brassgoggledcoders.boilerplate.common.utils.helpers.RegistryHelper;
 
 /**
  * @author SkySom
@@ -53,7 +51,7 @@ public class IronChestCompat extends ModCompat
 	@SideOnly(Side.CLIENT)
 	public void clientInit(FMLInitializationEvent event)
 	{
-		MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_IRONCHEST, new RenderItemMinecartBase());
+		//MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_IRONCHEST, new RenderItemMinecartBase());
 	}
 
 	public void registerEntities()
@@ -71,7 +69,7 @@ public class IronChestCompat extends ModCompat
 	public void registerItems()
 	{
 		ITEM_MINECART_IRONCHEST = new ItemMinecartIronChest();
-		RegistryHelper.registerItem(ITEM_MINECART_IRONCHEST, MoarCarts.MODID);
+		RegistryHelper.registerItem(ITEM_MINECART_IRONCHEST);
 	}
 
 	public void registerRecipes()

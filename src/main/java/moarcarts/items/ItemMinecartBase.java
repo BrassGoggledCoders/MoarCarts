@@ -11,14 +11,17 @@
  */
 package moarcarts.items;
 
+import com.mojang.authlib.GameProfile;
 import moarcarts.MoarCarts;
 import moarcarts.behaviors.CartDispenserBehavior;
 import moarcarts.config.ConfigSettings;
 import moarcarts.entities.EntityMinecartBase;
 import moarcarts.entities.EntityMinecartTEBase;
 import moarcarts.renderers.IRenderBlock.RenderMethod;
+import mods.railcraft.api.core.items.IMinecartItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
+import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemMinecart;
 import net.minecraft.item.ItemStack;
@@ -32,7 +35,7 @@ import xyz.brassgoggledcoders.boilerplate.common.utils.BlockUtils;
  * @author SkySom
  */
 @Optional.Interface(modid = "RailcraftAPI|items", iface = "mods.railcraft.api.core.items.IMinecartItem")
-public abstract class ItemMinecartBase extends ItemMinecart //implements IMinecartItem
+public abstract class ItemMinecartBase extends ItemMinecart implements IMinecartItem
 {
 	public ItemMinecartBase(String mod, String name)
 	{
@@ -49,7 +52,6 @@ public abstract class ItemMinecartBase extends ItemMinecart //implements IMineca
 		return placeCart(itemStack, world, blockPos, this.getEntityFromItem(world, itemStack));
 	}
 
-	/* TODO: Railcraft IMinecartItem
 	@Override
 	@Optional.Method(modid = "RailcraftAPI|items")
 	public boolean canBePlacedByNonPlayer(ItemStack itemStack)
@@ -61,18 +63,18 @@ public abstract class ItemMinecartBase extends ItemMinecart //implements IMineca
 	@Optional.Method(modid = "RailcraftAPI|items")
 	public EntityMinecart placeCart(GameProfile gameProfile, ItemStack itemStack, World world, int posX, int posY, int posZ)
 	{
+		BlockPos blockPos = new BlockPos(posX, posY, posZ);
 		EntityMinecartBase entityMinecart = getEntityFromItem(world, itemStack);
-		CartTools.setCartOwner(entityMinecart, gameProfile);
-		if (placeCart(itemStack, world, posX, posY, posZ, entityMinecart))
+		if (placeCart(itemStack, world, blockPos, entityMinecart))
 		{
 			return entityMinecart;
 		}
 		return null;
-	}*/
+	}
 
 	public boolean placeCart(ItemStack itemStack, World world, BlockPos blockPos, EntityMinecartBase entityMinecart)
 	{
-		if (itemStack != null && BlockUtils.isRailBlock(world.getBlockState(blockPos).getBlock()))
+		if (itemStack != null && BlockUtils.isRailBlock(world.getBlockState(blockPos)))
 		{
 			if(itemStack.hasDisplayName())
 			{

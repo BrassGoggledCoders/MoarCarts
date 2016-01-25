@@ -1,24 +1,20 @@
 package moarcarts.renderers;
 
 import moarcarts.entities.EntityMinecartTEBase;
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderMinecart;
-import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.entity.item.EntityMinecart;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 /**
  * @author SkySom
  */
-public class RenderMinecartTEBase<EntityMinecartTEBase> extends RenderMinecart
+public class RenderMinecartTEBase extends RenderMinecart<EntityMinecartTEBase>
 {
+	public RenderMinecartTEBase(RenderManager renderManagerIn)
+	{
+		super(renderManagerIn);
+	}
+
+	/*
 	protected String haloString;
 	private Minecraft mc = Minecraft.getMinecraft();
 
@@ -130,9 +126,9 @@ public class RenderMinecartTEBase<EntityMinecartTEBase> extends RenderMinecart
 
 			GL11.glPopMatrix();
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			this.bindEntityTexture(entityMinecartTEBase);
+			this.bindEntityTexture(entityMinecart);
 			GL11.glScalef(-1.0F, -1.0F, 1.0F);
-			this.modelMinecart.render(entityMinecartTEBase, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+			this.modelMinecart.render(entityMinecart, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 
 			GL11.glPopMatrix();
 		} else
@@ -217,5 +213,5 @@ public class RenderMinecartTEBase<EntityMinecartTEBase> extends RenderMinecart
 	public void renderHalo(EntityMinecartTEBase entityMinecartTEBase, String text)
 	{
 		func_147906_a(entityMinecartTEBase, text, 0, 0, 0, 64);
-	}
+	} */
 }

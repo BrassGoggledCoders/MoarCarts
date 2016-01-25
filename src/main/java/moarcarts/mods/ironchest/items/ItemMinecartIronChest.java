@@ -1,9 +1,7 @@
 package moarcarts.mods.ironchest.items;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.ironchest.IronChest;
-import net.minecraftforge.ironchest.IronChestType;
+import cpw.mods.ironchest.IronChest;
+import cpw.mods.ironchest.IronChestType;
 import moarcarts.entities.EntityMinecartBase;
 import moarcarts.items.ItemMinecartBase;
 import moarcarts.mods.ironchest.entities.*;
@@ -11,8 +9,9 @@ import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
@@ -21,8 +20,6 @@ import java.util.List;
  */
 public class ItemMinecartIronChest extends ItemMinecartBase
 {
-	private IIcon[] ironChestIcons;
-
 	public ItemMinecartIronChest()
 	{
 		super("ironchest", "minecartironchest");

@@ -1,30 +1,10 @@
 package moarcarts.mods.botania.renderers;
 
-import moarcarts.entities.EntityMinecartTEBase;
 import moarcarts.renderers.RenderMinecartTEBase;
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.util.IIcon;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.MinecraftForge;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-import vazkii.botania.api.item.TinyPotatoRenderEvent;
-import vazkii.botania.client.core.handler.ContributorFancinessHandler;
-import vazkii.botania.client.core.helper.ShaderHelper;
 import vazkii.botania.client.lib.LibResources;
 import vazkii.botania.client.model.ModelTinyPotato;
-import vazkii.botania.common.block.tile.TileTinyPotato;
-import vazkii.botania.common.item.ModItems;
-import vazkii.botania.common.item.equipment.bauble.ItemFlightTiara;
-import vazkii.botania.common.item.material.ItemManaResource;
-import vazkii.botania.common.item.relic.ItemInfiniteFruit;
 
 /**
  * @author SkySom
@@ -35,6 +15,11 @@ public class RenderMinecartTinyPotato extends RenderMinecartTEBase
 	private static final ResourceLocation textureGrayscale = new ResourceLocation(LibResources.MODEL_TINY_POTATO_GS);
 	private static final ModelTinyPotato model = new ModelTinyPotato();
 
+	public RenderMinecartTinyPotato(RenderManager renderManagerIn)
+	{
+		super(renderManagerIn);
+	}
+	/* TODO: MORE RENDERING
 	@Override
 	protected void renderCustom(EntityMinecartTEBase entityMinecartTEBase, Block block, float partial)
 	{
@@ -351,5 +336,5 @@ public class RenderMinecartTinyPotato extends RenderMinecartTEBase
 			String additionalText = text.equals("pahimar") ? "[WIP]" : "(soon)";
 			func_147906_a(entityMinecartTEBase, additionalText, 0, -0.3, 0, 64);
 		}
-	}
+	} */
 }

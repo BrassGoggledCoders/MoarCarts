@@ -51,7 +51,7 @@ public abstract class EntityMinecartEnergyHandlerTEBase extends EntityMinecartTE
 	@Override
 	public int getComparatorInputOverride()
 	{
-		if(!this.cartBlock.hasComparatorInputOverride())
+		if(!this.getCartBlock().hasComparatorInputOverride())
 		{
 			//return ComparatorUtils.scaleStoredEnergyTo(15, this);
 		}

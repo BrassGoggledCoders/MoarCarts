@@ -1,17 +1,17 @@
 package moarcarts.entities;
 
-import xyz.brassgoggledcoders.boilerplate.common.utils.ComparatorUtils;
-import xyz.brassgoggledcoders.boilerplate.common.utils.FluidUtils;
-import net.minecraftforge.fml.common.Optional;
 import mods.railcraft.api.carts.IFluidCart;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.EnumFacing;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
+import net.minecraftforge.fml.common.Optional;
+import xyz.brassgoggledcoders.boilerplate.common.utils.ComparatorUtils;
+import xyz.brassgoggledcoders.boilerplate.common.utils.FluidUtils;
 
 /**
  * @author SkySom
@@ -36,7 +36,7 @@ public abstract class EntityMinecartFluidInventoryTEBase extends EntityMinecartI
 	public void entityInit()
 	{
 		super.entityInit();
-		dataWatcher.addObject(IS_FILLING, Byte.valueOf((byte) 0));
+		dataWatcher.addObject(IS_FILLING, (byte) 0);
 	}
 
 	@Override
@@ -57,14 +57,14 @@ public abstract class EntityMinecartFluidInventoryTEBase extends EntityMinecartI
 	@Optional.Method(modid = "RailcraftAPI|carts")
 	public boolean canAcceptPushedFluid(EntityMinecart entityMinecart, Fluid fluid)
 	{
-		return this.getFluidTileEntity().canFill(EnumFacing.UNKNOWN, fluid);
+		return this.getFluidTileEntity().canFill(EnumFacing.UP, fluid);
 	}
 
 	@Override
 	@Optional.Method(modid = "RailcraftAPI|carts")
 	public boolean canProvidePulledFluid(EntityMinecart entityMinecart, Fluid fluid)
 	{
-		return this.getFluidTileEntity().canDrain(EnumFacing.UNKNOWN, fluid);
+		return this.getFluidTileEntity().canDrain(EnumFacing.DOWN, fluid);
 	}
 
 	@Override
@@ -112,13 +112,13 @@ public abstract class EntityMinecartFluidInventoryTEBase extends EntityMinecartI
 	@Optional.Method(modid = "RailcraftAPI|carts")
 	public void setFilling(boolean isFilling)
 	{
-		dataWatcher.updateObject(IS_FILLING, Byte.valueOf(isFilling ? 1 : (byte) 0));
+		dataWatcher.updateObject(IS_FILLING, isFilling ? 1 : (byte) 0);
 	}
 
 	@Override
 	public int getComparatorInputOverride()
 	{
-		if(!this.cartBlock.hasComparatorInputOverride())
+		if(!this.getCartBlock().hasComparatorInputOverride())
 		{
 			return ComparatorUtils.scaleSingleFluidLevelTo(15, this);
 		}

@@ -1,7 +1,9 @@
 package moarcarts.entities;
 
 import moarcarts.renderers.IRenderBlock;
+import mods.railcraft.api.carts.IItemCart;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
@@ -15,8 +17,8 @@ import net.minecraftforge.fml.common.Optional;
  * TODO: Railcraft - IItemcart
  */
 @Optional.Interface(iface = "mods.railcraft.api.carts.IItemCart", modid = "RailcraftAPI|carts")
-public abstract class EntityMinecartInventoryTEBase extends EntityMinecartTEBase implements IRenderBlock, IInventory
-		//IItemCart
+public abstract class EntityMinecartInventoryTEBase extends EntityMinecartTEBase implements IRenderBlock, IInventory,
+		IItemCart
 {
 	private boolean dropContentsWhenDead = true;
 
@@ -173,7 +175,6 @@ public abstract class EntityMinecartInventoryTEBase extends EntityMinecartTEBase
 		this.getIInventoryTileEntity().setInventorySlotContents(slotIndex, itemStack);
 	}
 
-	/* TODO Railcraft IItemcart stuff
 	@Override
 	public boolean canPassItemRequests()
 	{
@@ -190,7 +191,7 @@ public abstract class EntityMinecartInventoryTEBase extends EntityMinecartTEBase
 	public boolean canProvidePulledItem(EntityMinecart entityMinecart, ItemStack itemStack)
 	{
 		return true;
-	}*/
+	}
 
 	public boolean dropContentsWhenDead()
 	{
@@ -205,7 +206,7 @@ public abstract class EntityMinecartInventoryTEBase extends EntityMinecartTEBase
 	@Override
 	public int getComparatorInputOverride()
 	{
-		if(!this.cartBlock.hasComparatorInputOverride())
+		if(!this.getCartBlock().hasComparatorInputOverride())
 		{
 			return Container.calcRedstoneFromInventory(this);
 		}

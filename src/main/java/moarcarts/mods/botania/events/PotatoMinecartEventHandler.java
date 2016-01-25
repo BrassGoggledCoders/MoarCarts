@@ -5,6 +5,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.item.EntityMinecartEmpty;
 import org.lwjgl.opengl.GL11;
 import vazkii.botania.api.item.TinyPotatoRenderEvent;
+import xyz.brassgoggledcoders.boilerplate.client.ClientHelper;
 
 /**
  * @author SkySom
@@ -12,6 +13,7 @@ import vazkii.botania.api.item.TinyPotatoRenderEvent;
 public class PotatoMinecartEventHandler
 {
 	EntityMinecartEmpty entityMinecartEmpty;
+	RenderManager renderManager;
 
 	@SubscribeEvent
 	public void onPotatoRender(TinyPotatoRenderEvent event)
@@ -25,7 +27,7 @@ public class PotatoMinecartEventHandler
 			GL11.glTranslatef(0.035F, -1.175F, 0F);
 			GL11.glRotatef(155F, 0F, 0F, 1F);
 			GL11.glScalef(0.275F,0.275F,0.275F);
-			RenderManager.getInstance().renderEntityWithPosYaw(entityMinecartEmpty, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
+			ClientHelper.mc().getRenderManager().renderEntityWithPosYaw(entityMinecartEmpty, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
 
 			GL11.glPopMatrix();
 		}

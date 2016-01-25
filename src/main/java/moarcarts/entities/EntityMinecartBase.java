@@ -11,49 +11,47 @@
  */
 package moarcarts.entities;
 
-import moarcarts.fakeworld.CartBlockPos;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.BlockPos;
-import net.minecraftforge.fml.common.Optional;
-import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import moarcarts.MoarCarts;
 import moarcarts.api.IComparatorCart;
 import moarcarts.config.ConfigSettings;
+import moarcarts.fakeworld.CartBlockPos;
 import moarcarts.fakeworld.FakeWorld;
 import moarcarts.items.ItemMinecartBase;
-//import mods.railcraft.api.carts.IMinecart;
+import mods.railcraft.api.carts.IMinecart;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.minecart.MinecartInteractEvent;
+import net.minecraftforge.fml.common.Optional;
+import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 
 import java.util.Random;
+
+//import mods.railcraft.api.carts.IMinecart;
 
 /**
  * @author SkySom
  */
 @Optional.Interface(iface = "mods.railcraft.api.carts.IMinecart", modid = "RailcraftAPI|carts")
-public abstract class EntityMinecartBase extends EntityMinecart implements /*IMinecart,*/ IComparatorCart
+public abstract class EntityMinecartBase extends EntityMinecart implements IMinecart, IComparatorCart
 {
-	protected Block cartBlock;
 	protected Random random;
 	protected FakeWorld fakeWorld;
 	protected CartBlockPos cartBlockPos;
 
 	protected static BlockPos ORIGIN_POS = new BlockPos(0, 0, 0);
 
-	private static int METADATA_DW = 31;
-	private static String METADATA = "METADATA";
-
-	public EntityMinecartBase(World world, IBlockState blockState)
+	public EntityMinecartBase(World world, int metadata)
 	{
 		super(world);
-		this.func_174899_a(blockState);
+		this.func_174899_a(this.getBlockState(metadata));
 		this.fakeWorld = new FakeWorld(this);
 		this.cartBlockPos = new CartBlockPos(this);
 		this.random = new Random();
@@ -70,21 +68,6 @@ public abstract class EntityMinecartBase extends EntityMinecart implements /*IMi
 	@Override
 	public void entityInit(){
 		super.entityInit();
-		dataWatcher.addObject(METADATA_DW, 0);
-	}
-
-	@Override
-	protected void readEntityFromNBT(NBTTagCompound nbtTagCompound)
-	{
-		super.readEntityFromNBT(nbtTagCompound);
-		this.setMetadata(nbtTagCompound.getInteger(METADATA));
-	}
-
-	@Override
-	protected void writeEntityToNBT(NBTTagCompound nbtTagCompound)
-	{
-		super.writeEntityToNBT(nbtTagCompound);
-		nbtTagCompound.setInteger(METADATA, this.getMetadata());
 	}
 
 	@Override
@@ -180,7 +163,6 @@ public abstract class EntityMinecartBase extends EntityMinecart implements /*IMi
 		}
 	}
 
-	/* TODO: Railcraft
 	@Override
 	@Optional.Method(modid = "RailcraftAPI|carts")
 	public boolean doesCartMatchFilter(ItemStack itemStack, EntityMinecart entityMinecart)
@@ -188,7 +170,7 @@ public abstract class EntityMinecartBase extends EntityMinecart implements /*IMi
 		return itemStack != null && entityMinecart instanceof EntityMinecartBase &&
 				itemStack.isItemEqual(entityMinecart.getCartItem());
 	}
-	*/
+
 	@Override
 	public int getComparatorInputOverride()
 	{
@@ -212,9 +194,6 @@ public abstract class EntityMinecartBase extends EntityMinecart implements /*IMi
 
 	public void doDisplayTick()
 	{
-		int intPosX = (int)Math.floor(this.posX);
-		int intPosY = (int)Math.floor(this.posY);
-		int intPosZ = (int)Math.floor(this.posZ);
 		this.getCartBlock().randomDisplayTick(this.getFakeWorld(), ORIGIN_POS, this.getDisplayTile(), random);
 	}
 
@@ -223,19 +202,14 @@ public abstract class EntityMinecartBase extends EntityMinecart implements /*IMi
 		return this.getItem().getCartBlock(this.getCartItem());
 	}
 
-	public void setCartBlock(Block cartBlock)
-	{
-		this.cartBlock = cartBlock;
-	}
-
 	public int getMetadata()
 	{
-		return this.dataWatcher.getWatchableObjectInt(METADATA_DW);
+		return this.getDisplayTile().getBlock().getMetaFromState(this.getDisplayTile());
 	}
 
-	public void setMetadata(int metadata)
+	public IBlockState getBlockState(int metadata)
 	{
-		this.dataWatcher.updateObject(METADATA_DW, metadata);
+		return this.getCartBlock().getStateFromMeta(metadata);
 	}
 
 	public FakeWorld getFakeWorld()

@@ -11,21 +11,19 @@
  */
 package moarcarts.mods.vanilla;
 
-import xyz.brassgoggledcoders.boilerplate.common.modcompat.ModCompat;
-import xyz.brassgoggledcoders.boilerplate.common.utils.helpers.RegistryHelper;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import moarcarts.MoarCarts;
 import moarcarts.mods.vanilla.blocks.BlockComparatorTrack;
 import moarcarts.mods.vanilla.entities.EntityMinecartEnderChest;
 import moarcarts.mods.vanilla.items.ItemMinecartEnderChest;
 import moarcarts.recipes.NBTCartRecipe;
-import moarcarts.renderers.RenderItemMinecartBase;
 import net.minecraft.init.Blocks;
-import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import xyz.brassgoggledcoders.boilerplate.common.modcompat.ModCompat;
+import xyz.brassgoggledcoders.boilerplate.common.utils.helpers.RegistryHelper;
 
 /**
  * @author SkySom
@@ -48,7 +46,7 @@ public class VanillaCompat extends ModCompat
 		RegistryHelper.registerBlockWithDesc(BLOCK_COMPARATOR_TRACK, "Comparator Track");
 
 		ITEM_MINECART_ENDERCHEST = new ItemMinecartEnderChest();
-		RegistryHelper.registerItem(ITEM_MINECART_ENDERCHEST, MoarCarts.MODID);
+		RegistryHelper.registerItem(ITEM_MINECART_ENDERCHEST);
 		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartEnderChest.class, "entityminecartenderchest");
 	}
 
@@ -62,6 +60,6 @@ public class VanillaCompat extends ModCompat
 	@SideOnly(Side.CLIENT)
 	public void clientInit(FMLInitializationEvent event)
 	{
-		MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_ENDERCHEST, new RenderItemMinecartBase());
+		//MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_ENDERCHEST, new RenderItemMinecartBase());
 	}
 }

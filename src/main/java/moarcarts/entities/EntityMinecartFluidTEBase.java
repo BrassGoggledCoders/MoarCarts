@@ -1,5 +1,7 @@
 package moarcarts.entities;
 
+import mods.railcraft.api.carts.IFluidCart;
+import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
@@ -16,7 +18,7 @@ import xyz.brassgoggledcoders.boilerplate.common.utils.FluidUtils;
  * TODO: Railcraft IFluidcart
  */
 @Optional.Interface(iface = "mods.railcraft.api.carts.IFluidCart", modid = "RailcraftAPI|carts")
-public abstract class EntityMinecartFluidTEBase extends EntityMinecartTEBase implements IFluidHandler//, IFluidCart
+public abstract class EntityMinecartFluidTEBase extends EntityMinecartTEBase implements IFluidHandler, IFluidCart
 {
 	private static int IS_FILLING = 29;
 
@@ -87,7 +89,6 @@ public abstract class EntityMinecartFluidTEBase extends EntityMinecartTEBase imp
 		return dataWatcher.getWatchableObjectByte(IS_FILLING) != 0;
 	}
 
-	/* TODO Railcraft IFluidcart
 	@Override
 	@Optional.Method(modid = "RailcraftAPI|carts")
 	public boolean canPassFluidRequests(Fluid fluid)
@@ -99,14 +100,14 @@ public abstract class EntityMinecartFluidTEBase extends EntityMinecartTEBase imp
 	@Optional.Method(modid = "RailcraftAPI|carts")
 	public boolean canAcceptPushedFluid(EntityMinecart entityMinecart, Fluid fluid)
 	{
-		return this.getFluidTileEntity().canFill(EnumFacing.UNKNOWN, fluid);
+		return this.getFluidTileEntity().canFill(EnumFacing.UP, fluid);
 	}
 
 	@Override
 	@Optional.Method(modid = "RailcraftAPI|carts")
 	public boolean canProvidePulledFluid(EntityMinecart entityMinecart, Fluid fluid)
 	{
-		return this.getFluidTileEntity().canDrain(EnumFacing.UNKNOWN, fluid);
+		return this.getFluidTileEntity().canDrain(EnumFacing.DOWN, fluid);
 	}
 
 	@Override
@@ -114,12 +115,12 @@ public abstract class EntityMinecartFluidTEBase extends EntityMinecartTEBase imp
 	public void setFilling(boolean isFilling)
 	{
 		dataWatcher.updateObject(IS_FILLING, isFilling ? 1 : (byte) 0);
-	}*/
+	}
 
 	@Override
 	public int getComparatorInputOverride()
 	{
-		if(!this.cartBlock.hasComparatorInputOverride())
+		if(!this.getCartBlock().hasComparatorInputOverride())
 		{
 			return ComparatorUtils.scaleSingleFluidLevelTo(15, this);
 		}

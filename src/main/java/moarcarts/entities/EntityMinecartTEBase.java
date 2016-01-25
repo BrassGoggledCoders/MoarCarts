@@ -7,10 +7,13 @@ import moarcarts.network.EntityTileEntityUpdateMessage;
 import moarcarts.network.EntityTileEntityUpdateRequestMessage;
 import moarcarts.renderers.IRenderBlock;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
 
 /**
@@ -27,9 +30,9 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 	public EntityMinecartTEBase(World world, int metadata)
 	{
 		super(world, metadata);
-		if(cartBlock instanceof BlockContainer)
+		if(this.getCartBlock() instanceof BlockContainer)
 		{
-			this.setTileEntity(cartBlock.createTileEntity(world, metadata));
+			this.setTileEntity(this.getCartBlock().createTileEntity(world, this.getDisplayTile()));
 		}
 		this.setDirty(true);
 	}
@@ -53,9 +56,9 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 			this.setClientNeedy(false);
 			this.sendUpdateToAllAround();
 		}
-		if(shouldTileUpdate())
+		if(shouldTileUpdate() && this.getTileEntity() instanceof ITickable)
 		{
-			this.getTileEntity().updateEntity();
+			((ITickable)this.getTileEntity()).update();
 		}
 	}
 
@@ -66,7 +69,8 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 		if(!player.isSneaking())
 		{
 			EntityPlayer fakePlayer = new FakePlayer(player, this, this.shouldAccessPlayerInventory());
-			return this.getCartBlock().onBlockActivated(this.getFakeWorld(), 0, 0, 0, fakePlayer, this.getMetadata(), 0, 0, 0);
+			return this.getCartBlock().onBlockActivated(this.getFakeWorld(), ORIGIN_POS, this.getDisplayTile(),
+					fakePlayer, EnumFacing.NORTH, 0, 0, 0);
 		}
 		return true;
 	}
@@ -168,7 +172,7 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 	{
 		if(worldObj != null && this.getCartBlock() != null)
 		{
-			return this.getCartBlock().createTileEntity(worldObj, this.getMetadata());
+			return this.getCartBlock().createTileEntity(worldObj, this.getDisplayTile());
 		}
 		return null;
 	}
@@ -208,9 +212,9 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 	}
 
 	@Override
-	public void setMetadata(int metadata)
+	public void func_174899_a(IBlockState blockState)
 	{
-		super.setMetadata(metadata);
+		super.func_174899_a(blockState);
 
 		TileEntity tileEntity = this.createTileEntity();
 		if(tileEntity != null)
