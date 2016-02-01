@@ -21,6 +21,7 @@ import moarcarts.renderers.IRenderBlock.RenderMethod;
 import mods.railcraft.api.core.items.IMinecartItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemMinecart;
@@ -101,6 +102,11 @@ public abstract class ItemMinecartBase extends ItemMinecart implements IMinecart
 			return true;
 		}
 		return false;
+	}
+
+	public IBlockState getCartBlockState(ItemStack itemStack)
+	{
+		return this.getCartBlock(itemStack).getStateFromMeta(this.getCartBlockMetadata(itemStack));
 	}
 
 	public RenderMethod getCartBlockRenderMethod(ItemStack itemStack)
