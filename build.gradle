@@ -78,10 +78,10 @@ task getLibraries {
     def botania = 'Botania ' + botaniaversion + '-deobf.jar'
     def botaniaSource = 'https://github.com/williewillus/Botania/releases/download/v0.5.2.1-beta/Botania.r1.8-248-MC1.8-400bf95.jar'
 
-    downloads.add(new Tuple(inventorytweaks, inventorytweaksSource))
-    downloads.add(new Tuple(botania, botaniaSource))
+    //downloads.add(new Tuple(inventorytweaks, inventorytweaksSource))
+    //downloads.add(new Tuple(botania, botaniaSource))
     downloads.add(new Tuple(ironchest, ironchestSource))
-    downloads.add(new Tuple(baubles, baublesSource))
+    //downloads.add(new Tuple(baubles, baublesSource))
 
     libsFolder.listFiles().each { file ->
         def isInDownloadList = false;
