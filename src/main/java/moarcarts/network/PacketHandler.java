@@ -19,8 +19,6 @@ public class PacketHandler
 		networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(MoarCarts.MODID);
 		networkWrapper.registerMessage(EntityTileEntityUpdateMessage.Handler.class,
 				EntityTileEntityUpdateMessage.class, ++id, Side.CLIENT);
-		networkWrapper.registerMessage(EntityTileEntityUpdateRequestMessage.Handler.class,
-				EntityTileEntityUpdateRequestMessage.class, ++id, Side.SERVER);
 	}
 
 	public void sendToAllAround(IMessage message, EntityMinecartTEBase minecartTEBase)

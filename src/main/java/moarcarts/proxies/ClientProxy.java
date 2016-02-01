@@ -2,6 +2,7 @@ package moarcarts.proxies;
 
 import moarcarts.MoarCarts;
 import net.minecraft.client.Minecraft;
+import net.minecraft.util.IThreadListener;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -33,5 +34,11 @@ public class ClientProxy extends CommonProxy
 	public World getWorld(MessageContext ctx)
 	{
 		return Minecraft.getMinecraft().theWorld;
+	}
+
+	@Override
+	public IThreadListener getIThreadListener(MessageContext messageContext)
+	{
+		return Minecraft.getMinecraft();
 	}
 }

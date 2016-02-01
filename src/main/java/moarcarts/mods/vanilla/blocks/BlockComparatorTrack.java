@@ -31,12 +31,12 @@ public class BlockComparatorTrack extends BlockRailDetector
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public int getComparatorInputOverride(World world, BlockPos blockPos)
 	{
 		int comparatorOutput = 0;
 		if (world.getBlockState(blockPos).getValue(POWERED))
 		{
-			float f = 0.125F;
 			List<? extends EntityMinecart> list = this.findMinecarts(world, blockPos, EntityMinecart.class, new Predicate<Entity>()
 			{
 				@Override

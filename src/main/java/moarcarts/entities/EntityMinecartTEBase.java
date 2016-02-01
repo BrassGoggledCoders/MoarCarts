@@ -4,7 +4,6 @@ import moarcarts.MoarCarts;
 import moarcarts.fakeworld.FakePlayer;
 import moarcarts.fakeworld.FakeWorld;
 import moarcarts.network.EntityTileEntityUpdateMessage;
-import moarcarts.network.EntityTileEntityUpdateRequestMessage;
 import moarcarts.renderers.IRenderBlock;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.state.IBlockState;

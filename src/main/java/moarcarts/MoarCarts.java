@@ -12,16 +12,13 @@
 package moarcarts;
 
 import moarcarts.config.ConfigHandler;
-import moarcarts.events.CartUpdateEvents;
 import moarcarts.items.MoarCartsCreativeTab;
-import moarcarts.mods.botania.BotaniaCompat;
 import moarcarts.mods.ironchest.IronChestCompat;
 import moarcarts.mods.vanilla.VanillaCompat;
 import moarcarts.mods.waila.WailaCompat;
 import moarcarts.network.PacketHandler;
 import moarcarts.proxies.CommonProxy;
 import moarcarts.recipes.NBTCartRecipe;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -79,7 +76,7 @@ public class MoarCarts implements IBoilerplateMod
 		guiHandler = new GuiHandler(this);
 		proxy.init(event);
 
-		MinecraftForge.EVENT_BUS.register(new CartUpdateEvents());
+		//MinecraftForge.EVENT_BUS.register(new CartUpdateEvents());
 
 		RecipeSorter.register("moarcarts:nbtcartrecipe", NBTCartRecipe.class, RecipeSorter.Category.SHAPELESS,
 				"after:minecraft:shapeless");
@@ -106,7 +103,8 @@ public class MoarCarts implements IBoilerplateMod
 		//compatibilityHandler.addModCompat(new MFRCompat());
 		//TODO: Minechem Compat
 		//compatibilityHandler.addModCompat(new MinechemCompat());
-		compatibilityHandler.addModCompat(new BotaniaCompat());
+		//TODO: Botania Compat
+		//compatibilityHandler.addModCompat(new BotaniaCompat());
 		//TODO: Avaritia Compat
 		//compatibilityHandler.addModCompat(new AvaritiaCompat());
 		compatibilityHandler.addModCompat(new WailaCompat());

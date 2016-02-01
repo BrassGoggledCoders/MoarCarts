@@ -15,9 +15,7 @@ import moarcarts.entities.EntityMinecartBase;
 import moarcarts.items.ItemMinecartBase;
 import moarcarts.mods.vanilla.VanillaCompat;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.InventoryEnderChest;
-import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
 /**

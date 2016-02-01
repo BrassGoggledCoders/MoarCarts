@@ -1,12 +1,14 @@
 package moarcarts.network;
 
+import io.netty.buffer.ByteBuf;
+import moarcarts.MoarCarts;
+import moarcarts.entities.EntityMinecartTEBase;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.IThreadListener;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import io.netty.buffer.ByteBuf;
-import moarcarts.entities.EntityMinecartTEBase;
-import net.minecraft.nbt.NBTTagCompound;
 
 /**
  * @author SkySom
@@ -42,14 +44,20 @@ public class EntityTileEntityUpdateMessage extends EntityTileEntityBaseMessage
 	public static class Handler implements IMessageHandler<EntityTileEntityUpdateMessage, IMessage>
 	{
 		@Override
-		public IMessage onMessage(EntityTileEntityUpdateMessage message, MessageContext ctx)
+		public IMessage onMessage(final EntityTileEntityUpdateMessage message, final MessageContext ctx)
 		{
-			EntityMinecartTEBase minecartTEBase = message.getEntityMinecartTEBaseFromMessage(ctx);
+			IThreadListener mainThread = MoarCarts.proxy.getIThreadListener(ctx);
+			mainThread.addScheduledTask(new Runnable() {
+				@Override
+				public void run() {
+					EntityMinecartTEBase minecartTEBase = message.getEntityMinecartTEBaseFromMessage(ctx);
 
-			if(minecartTEBase != null)
-			{
-				minecartTEBase.getTileEntity().readFromNBT(message.nbtTagCompound);
-			}
+					if(minecartTEBase != null)
+					{
+						minecartTEBase.getTileEntity().readFromNBT(message.nbtTagCompound);
+					}
+				}
+			});
 			return null;
 		}
 	}
