@@ -22,8 +22,7 @@ public class ClientProxy extends CommonProxy
 
 	private void registerRenderers()
 	{
-		//TODO: Rendering
-		//RenderingRegistry.registerEntityRenderingHandler(EntityMinecartTEBase.class, new RenderMinecartTEBase());
+
 	}
 
 	public World getWorld()
