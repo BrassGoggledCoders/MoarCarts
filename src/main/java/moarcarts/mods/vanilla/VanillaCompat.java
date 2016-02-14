@@ -11,7 +11,6 @@
  */
 package moarcarts.mods.vanilla;
 
-import moarcarts.MoarCarts;
 import moarcarts.mods.vanilla.blocks.BlockComparatorTrack;
 import moarcarts.mods.vanilla.entities.EntityMinecartEnderChest;
 import moarcarts.mods.vanilla.items.ItemMinecartEnderChest;
@@ -22,8 +21,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import xyz.brassgoggledcoders.boilerplate.common.modcompat.ModCompat;
-import xyz.brassgoggledcoders.boilerplate.common.utils.helpers.RegistryHelper;
+import xyz.brassgoggledcoders.boilerplate.lib.common.modcompat.ModCompat;
+import xyz.brassgoggledcoders.boilerplate.lib.common.utils.helpers.RegistryHelper;
 
 /**
  * @author SkySom
@@ -47,7 +46,7 @@ public class VanillaCompat extends ModCompat
 
 		ITEM_MINECART_ENDERCHEST = new ItemMinecartEnderChest();
 		RegistryHelper.registerItem(ITEM_MINECART_ENDERCHEST);
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartEnderChest.class, "entityminecartenderchest");
+		RegistryHelper.registerEntity(EntityMinecartEnderChest.class, "entityminecartenderchest");
 	}
 
 	@Override

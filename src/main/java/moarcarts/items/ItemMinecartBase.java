@@ -30,7 +30,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
-import xyz.brassgoggledcoders.boilerplate.common.utils.BlockUtils;
+import xyz.brassgoggledcoders.boilerplate.lib.common.utils.BlockUtils;
 
 /**
  * @author SkySom

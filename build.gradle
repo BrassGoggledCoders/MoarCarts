@@ -53,10 +53,17 @@ repositories {
     }
 }
 
+configurations {
+    shade
+    compile.extendsFrom shade
+}
+
 dependencies {
-    compile "brassgoggledcoders:boilerplate:${minecraftversion}-${boilerplateversion}:deobf"
+    shade "brassgoggledcoders:boilerplate:${minecraftversion}-${boilerplateversion}:lib"
     compile "mcp.mobius.waila:Waila:${wailaversion}:dev"
 }
+
+
 
 task getLibraries {
     def libsFolder = new File('libs')
@@ -147,11 +154,25 @@ idea {
     }
 }
 
+reobfJar {
+    addExtraSrgLine "PK: xyz/brassgoggledcoders/boilerplate xyz/brassgoggledcoders/moarcarts/boilerplate"
+}
+
 jar {
+    configurations.shade.each { dep ->
+        from(project.zipTree(dep)){
+            exclude 'META-INF', 'META-INF/**'
+        }
+    }
     classifier = ""
 }
 
 task deobfJar(type: Jar) {
+    configurations.shade.each { dep ->
+        from(project.zipTree(dep)){
+            exclude 'META-INF', 'META-INF/**'
+        }
+    }
     from(sourceSets.main.output) {
         classifier = "deobf"
     }

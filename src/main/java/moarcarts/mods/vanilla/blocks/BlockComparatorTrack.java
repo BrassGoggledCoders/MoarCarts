@@ -13,7 +13,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.IFluidHandler;
-import xyz.brassgoggledcoders.boilerplate.common.utils.ComparatorUtils;
+import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ComparatorUtils;
 
 import javax.annotation.Nullable;
 import java.util.List;

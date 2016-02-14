@@ -127,14 +127,6 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 		}
 	}
 
-	public void requestClientUpdate()
-	{
-		if(worldObj.isRemote)
-		{
-			MoarCarts.packetHandler.sendToServer(new EntityTileEntityUpdateRequestMessage(this));
-		}
-	}
-
 	@Override
 	public void afterEntitySpawned()
 	{

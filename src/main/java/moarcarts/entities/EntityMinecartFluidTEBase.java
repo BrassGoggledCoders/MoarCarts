@@ -10,8 +10,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fml.common.Optional;
-import xyz.brassgoggledcoders.boilerplate.common.utils.ComparatorUtils;
-import xyz.brassgoggledcoders.boilerplate.common.utils.FluidUtils;
+import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ComparatorUtils;
+import xyz.brassgoggledcoders.boilerplate.lib.common.utils.FluidUtils;
 
 /**
  * @author SkySom

@@ -10,7 +10,7 @@ import moarcarts.mods.ironchest.containers.ContainerIronChestCart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
-import xyz.brassgoggledcoders.boilerplate.api.IOpenableGUI;
+import xyz.brassgoggledcoders.boilerplate.lib.client.guis.IOpenableGUI;
 
 /**
  * @author SkySom

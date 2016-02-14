@@ -1,6 +1,5 @@
 package moarcarts.mods.ironchest;
 
-import moarcarts.MoarCarts;
 import moarcarts.mods.ironchest.entities.*;
 import moarcarts.mods.ironchest.items.ItemMinecartIronChest;
 import moarcarts.recipes.NBTCartRecipe;
@@ -11,8 +10,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import xyz.brassgoggledcoders.boilerplate.common.modcompat.ModCompat;
-import xyz.brassgoggledcoders.boilerplate.common.utils.helpers.RegistryHelper;
+import xyz.brassgoggledcoders.boilerplate.lib.common.modcompat.ModCompat;
+import xyz.brassgoggledcoders.boilerplate.lib.common.utils.helpers.RegistryHelper;
 
 /**
  * @author SkySom
@@ -56,14 +55,14 @@ public class IronChestCompat extends ModCompat
 
 	public void registerEntities()
 	{
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartCopperChest.class, "entityminecartcopperchest");
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartCrystalChest.class, "entityminecartcrystalchest");
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartDiamondChest.class, "entityminecartdiamondchest");
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartDirtChest.class, "entityminecartdirtchest");
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartGoldChest.class, "entityminecartgoldchest");
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartIronChest.class, "entityminecartironchest");
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartObsidianChest.class, "entityminecartobsidianchest");
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartSilverChest.class, "entityminecartsilverchest");
+		RegistryHelper.registerEntity(EntityMinecartCopperChest.class, "entityminecartcopperchest");
+		RegistryHelper.registerEntity(EntityMinecartCrystalChest.class, "entityminecartcrystalchest");
+		RegistryHelper.registerEntity(EntityMinecartDiamondChest.class, "entityminecartdiamondchest");
+		RegistryHelper.registerEntity(EntityMinecartDirtChest.class, "entityminecartdirtchest");
+		RegistryHelper.registerEntity(EntityMinecartGoldChest.class, "entityminecartgoldchest");
+		RegistryHelper.registerEntity(EntityMinecartIronChest.class, "entityminecartironchest");
+		RegistryHelper.registerEntity(EntityMinecartObsidianChest.class, "entityminecartobsidianchest");
+		RegistryHelper.registerEntity(EntityMinecartSilverChest.class, "entityminecartsilverchest");
 	}
 
 	public void registerItems()

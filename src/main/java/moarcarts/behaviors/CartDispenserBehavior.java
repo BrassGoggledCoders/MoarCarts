@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import xyz.brassgoggledcoders.boilerplate.common.utils.ItemStackUtils;
+import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ItemStackUtils;
 
 /**
  * @author SkySom
