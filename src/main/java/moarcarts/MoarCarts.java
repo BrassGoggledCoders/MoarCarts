@@ -11,7 +11,7 @@
  */
 package moarcarts;
 
-import moarcarts.config.ConfigHandler;
+import moarcarts.config.ConfigSettings;
 import moarcarts.items.MoarCartsCreativeTab;
 import moarcarts.mods.ironchest.IronChestCompat;
 import moarcarts.mods.vanilla.VanillaCompat;
@@ -20,6 +20,7 @@ import moarcarts.network.PacketHandler;
 import moarcarts.proxies.CommonProxy;
 import moarcarts.recipes.NBTCartRecipe;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -28,7 +29,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.oredict.RecipeSorter;
-import xyz.brassgoggledcoders.boilerplate.lib.client.guis.GuiHandler;
+import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
 import xyz.brassgoggledcoders.boilerplate.lib.common.IBoilerplateMod;
 import xyz.brassgoggledcoders.boilerplate.lib.common.modcompat.CompatibilityHandler;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ModLogger;
@@ -45,11 +46,8 @@ public class MoarCarts implements IBoilerplateMod
 	public static final String MODID = "moarcarts";
 	public static final String MODNAME = "MoarCarts";
 	public static final String MODVERSION = "@VERSION@";
-	public static final String DEPENDENCIES = "after:railcraft;after:Avaritia;"
-			+ "after:ImmersiveEngineering@[0.6.5,);";
+	public static final String DEPENDENCIES = "after:railcraft;after:Avaritia;after:ImmersiveEngineering@[0.6.5,);";
 
-	public static CompatibilityHandler compatibilityHandler;
-	public static GuiHandler guiHandler;
 	public static ModLogger logger;
 	public static PacketHandler packetHandler;
 
@@ -63,21 +61,17 @@ public class MoarCarts implements IBoilerplateMod
 	{
 		logger = new ModLogger(MODID);
 		packetHandler = new PacketHandler();
-
 		initModCompatHandler();
-		ConfigHandler.setConfigFile(event.getSuggestedConfigurationFile());
-		ConfigHandler.init();
-
-		compatibilityHandler.preInit(event);
+		Configuration configuration = BoilerplateLib.getInstance().config(event);
+		ConfigSettings.init(configuration);
+		configuration.save();
+		BoilerplateLib.getInstance().preInit(event);
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		guiHandler = new GuiHandler(this);
-		proxy.init(event);
-
-		//MinecraftForge.EVENT_BUS.register(new CartUpdateEvents());
+		BoilerplateLib.getInstance().init(event);
 
 		RecipeSorter.register("moarcarts:nbtcartrecipe", NBTCartRecipe.class, RecipeSorter.Category.SHAPELESS,
 				"after:minecraft:shapeless");
@@ -86,12 +80,12 @@ public class MoarCarts implements IBoilerplateMod
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
-		compatibilityHandler.postInit(event);
+		BoilerplateLib.getInstance().postInit(event);
 	}
 
 	public void initModCompatHandler()
 	{
-		compatibilityHandler = new CompatibilityHandler(MoarCarts.logger);
+		CompatibilityHandler compatibilityHandler = BoilerplateLib.getInstance().compatibilityHandler;
 		compatibilityHandler.addModCompat(new VanillaCompat());
 		//TODO: Railcraft Compat
 		//compatibilityHandler.addModCompat(new RailcraftCompat());

@@ -59,6 +59,6 @@ public class VanillaCompat extends ModCompat
 	@SideOnly(Side.CLIENT)
 	public void clientInit(FMLInitializationEvent event)
 	{
-		//MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_ENDERCHEST, new RenderItemMinecartBase());
+
 	}
 }

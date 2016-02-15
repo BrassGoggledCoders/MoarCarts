@@ -26,7 +26,10 @@ public class BlockComparatorTrack extends BlockRailDetector
 	public BlockComparatorTrack()
 	{
 		super();
-		this.setRegistryName("blockcomparatorrail");
+		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.125F, 1.0F);
+		setResistance(3.5F);
+		setHardness(1.05F);
+		setStepSound(soundTypeMetal);
 		this.setCreativeTab(MoarCarts.moarcartsTab);
 	}
 
