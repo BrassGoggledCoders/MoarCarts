@@ -14,6 +14,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
+import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
 
 /**
  * @author SkySom
@@ -123,7 +124,7 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 	{
 		if(!worldObj.isRemote)
 		{
-			MoarCarts.packetHandler.sendToAllAround(new EntityTileEntityUpdateMessage(this), this);
+			BoilerplateLib.getInstance().packetHandler.sendToAllAround(new EntityTileEntityUpdateMessage(this), this);
 		}
 	}
 

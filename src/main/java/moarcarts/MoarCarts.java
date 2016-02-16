@@ -16,7 +16,7 @@ import moarcarts.items.MoarCartsCreativeTab;
 import moarcarts.mods.ironchest.IronChestCompat;
 import moarcarts.mods.vanilla.VanillaCompat;
 import moarcarts.mods.waila.WailaCompat;
-import moarcarts.network.PacketHandler;
+import moarcarts.network.EntityTileEntityUpdateMessage;
 import moarcarts.proxies.CommonProxy;
 import moarcarts.recipes.NBTCartRecipe;
 import net.minecraft.creativetab.CreativeTabs;
@@ -28,6 +28,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.RecipeSorter;
 import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
 import xyz.brassgoggledcoders.boilerplate.lib.common.IBoilerplateMod;
@@ -49,7 +50,6 @@ public class MoarCarts implements IBoilerplateMod
 	public static final String DEPENDENCIES = "after:railcraft;after:Avaritia;after:ImmersiveEngineering@[0.6.5,);";
 
 	public static ModLogger logger;
-	public static PacketHandler packetHandler;
 
 	public static MoarCartsCreativeTab moarcartsTab = new MoarCartsCreativeTab();
 
@@ -60,11 +60,14 @@ public class MoarCarts implements IBoilerplateMod
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		logger = new ModLogger(MODID);
-		packetHandler = new PacketHandler();
 		initModCompatHandler();
+		BoilerplateLib.getInstance().packetHandler.registerPacket(EntityTileEntityUpdateMessage.Handler.class,
+				EntityTileEntityUpdateMessage.class, Side.CLIENT);
+
 		Configuration configuration = BoilerplateLib.getInstance().config(event);
 		ConfigSettings.init(configuration);
 		configuration.save();
+
 		BoilerplateLib.getInstance().preInit(event);
 	}
 
