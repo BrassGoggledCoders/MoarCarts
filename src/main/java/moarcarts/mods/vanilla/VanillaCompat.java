@@ -21,6 +21,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import xyz.brassgoggledcoders.boilerplate.lib.client.models.SafeModelLoader;
 import xyz.brassgoggledcoders.boilerplate.lib.common.modcompat.ModCompat;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.helpers.RegistryHelper;
 
@@ -42,7 +43,8 @@ public class VanillaCompat extends ModCompat
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		BLOCK_COMPARATOR_TRACK = new BlockComparatorTrack();
-		RegistryHelper.registerBlockWithDesc(BLOCK_COMPARATOR_TRACK, "Comparator Track");
+		RegistryHelper.registerBlockWithDesc(BLOCK_COMPARATOR_TRACK, "comparatortrack");
+		SafeModelLoader.loadBlockModel(BLOCK_COMPARATOR_TRACK);
 
 		ITEM_MINECART_ENDERCHEST = new ItemMinecartEnderChest();
 		RegistryHelper.registerItem(ITEM_MINECART_ENDERCHEST);
@@ -53,6 +55,7 @@ public class VanillaCompat extends ModCompat
 	public void init(FMLInitializationEvent event)
 	{
 		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_ENDERCHEST, Blocks.ender_chest));
+
 	}
 
 	@Override

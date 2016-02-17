@@ -32,7 +32,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.RecipeSorter;
 import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
 import xyz.brassgoggledcoders.boilerplate.lib.common.IBoilerplateMod;
-import xyz.brassgoggledcoders.boilerplate.lib.common.modcompat.CompatibilityHandler;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ModLogger;
 
 /*
@@ -88,13 +87,12 @@ public class MoarCarts implements IBoilerplateMod
 
 	public void initModCompatHandler()
 	{
-		CompatibilityHandler compatibilityHandler = BoilerplateLib.getInstance().compatibilityHandler;
-		compatibilityHandler.addModCompat(new VanillaCompat());
+		BoilerplateLib.getInstance().compatibilityHandler.addModCompat(new VanillaCompat());
 		//TODO: Railcraft Compat
 		//compatibilityHandler.addModCompat(new RailcraftCompat());
 		//TODO: RF Compat (IE Flux)
 		//compatibilityHandler.addModCompat(new RFCompat());
-		compatibilityHandler.addModCompat(new IronChestCompat());
+		BoilerplateLib.getInstance().compatibilityHandler.addModCompat(new IronChestCompat());
 		//TODO: IE Compat
 		//compatibilityHandler.addModCompat(new IEModCompat());
 		//TODO: MFR Compat
@@ -105,7 +103,7 @@ public class MoarCarts implements IBoilerplateMod
 		//compatibilityHandler.addModCompat(new BotaniaCompat());
 		//TODO: Avaritia Compat
 		//compatibilityHandler.addModCompat(new AvaritiaCompat());
-		compatibilityHandler.addModCompat(new WailaCompat());
+		BoilerplateLib.getInstance().compatibilityHandler.addModCompat(new WailaCompat());
 	}
 
 	@Override

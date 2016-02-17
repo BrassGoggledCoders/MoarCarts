@@ -30,6 +30,8 @@ public class BlockComparatorTrack extends BlockRailDetector
 		setResistance(3.5F);
 		setHardness(1.05F);
 		setStepSound(soundTypeMetal);
+		setUnlocalizedName("comparatortrack");
+		setRegistryName("comparatortrack");
 		this.setCreativeTab(MoarCarts.moarcartsTab);
 	}
 
