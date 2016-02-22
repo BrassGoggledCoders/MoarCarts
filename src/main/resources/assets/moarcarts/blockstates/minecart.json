@@ -9,19 +9,13 @@
     },
     "variants": {
         "normal": [
-            {
-                "textures": {
-                    "rail": "moarcarts:blocks/vanilla/comparatortrack"
-                },
-                "model": "rail_flat"
-            }
+            {}
         ],
         "inventory": [
             {
                 "textures": {
                     "rail": "moarcarts:blocks/vanilla/comparatortrack"
                 },
-                "transform": "forge:default-item",
                 "model": "rail_flat"
             }
         ],

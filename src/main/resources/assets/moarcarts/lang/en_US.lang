@@ -1,12 +1,13 @@
 ## core stuff
 itemGroup.moarcarts=MoarCarts
+tile.minecart.name=Minecart
 
 ## vanilla stuff
 item.minecartenderchest.name=Ender Chest Cart
 
 entity.moarcarts.entityminecartenderchest.name=Ender Chest Cart
 
-tile.blockcomparatorrail.name=Comparator Track
+tile.comparatortrack.name=Comparator Track
 
 ## ironchest stuff
 item.minecartironchest.iron.name=Iron Chest Cart

@@ -161,7 +161,7 @@ reobfJar {
 jar {
     configurations.shade.each { dep ->
         from(project.zipTree(dep)){
-            exclude 'META-INF', 'META-INF/**'
+            exclude 'META-INF', 'META-INF/**', 'mcmod.info'
         }
     }
     classifier = ""

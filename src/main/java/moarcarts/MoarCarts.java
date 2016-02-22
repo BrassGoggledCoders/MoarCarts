@@ -11,6 +11,7 @@
  */
 package moarcarts;
 
+import moarcarts.blocks.BlockMinecart;
 import moarcarts.config.ConfigSettings;
 import moarcarts.items.MoarCartsCreativeTab;
 import moarcarts.mods.ironchest.IronChestCompat;
@@ -31,8 +32,10 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.RecipeSorter;
 import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
+import xyz.brassgoggledcoders.boilerplate.lib.client.models.SafeModelLoader;
 import xyz.brassgoggledcoders.boilerplate.lib.common.IBoilerplateMod;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ModLogger;
+import xyz.brassgoggledcoders.boilerplate.lib.common.utils.helpers.RegistryHelper;
 
 /*
  * @author SkySom
@@ -55,6 +58,8 @@ public class MoarCarts implements IBoilerplateMod
 	@SidedProxy(clientSide = "moarcarts.proxies.ClientProxy", serverSide = "moarcarts.proxies.CommonProxy")
 	public static CommonProxy proxy;
 
+	public static BlockMinecart blockMinecart;
+
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
@@ -68,6 +73,10 @@ public class MoarCarts implements IBoilerplateMod
 		configuration.save();
 
 		BoilerplateLib.getInstance().preInit(event);
+
+		blockMinecart = new BlockMinecart();
+		RegistryHelper.registerBlockWithDesc(blockMinecart, "minecart");
+		SafeModelLoader.loadBlockModel(blockMinecart);
 	}
 
 	@EventHandler

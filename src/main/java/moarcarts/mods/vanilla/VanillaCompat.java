@@ -14,13 +14,8 @@ package moarcarts.mods.vanilla;
 import moarcarts.mods.vanilla.blocks.BlockComparatorTrack;
 import moarcarts.mods.vanilla.entities.EntityMinecartEnderChest;
 import moarcarts.mods.vanilla.items.ItemMinecartEnderChest;
-import moarcarts.recipes.NBTCartRecipe;
-import net.minecraft.init.Blocks;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import xyz.brassgoggledcoders.boilerplate.lib.client.models.SafeModelLoader;
 import xyz.brassgoggledcoders.boilerplate.lib.common.modcompat.ModCompat;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.helpers.RegistryHelper;
@@ -47,21 +42,8 @@ public class VanillaCompat extends ModCompat
 		SafeModelLoader.loadBlockModel(BLOCK_COMPARATOR_TRACK);
 
 		ITEM_MINECART_ENDERCHEST = new ItemMinecartEnderChest();
-		RegistryHelper.registerItem(ITEM_MINECART_ENDERCHEST);
+		GameRegistry.registerItem(ITEM_MINECART_ENDERCHEST, ITEM_MINECART_ENDERCHEST.getUnlocalizedName().substring(5));
 		RegistryHelper.registerEntity(EntityMinecartEnderChest.class, "entityminecartenderchest");
-	}
-
-	@Override
-	public void init(FMLInitializationEvent event)
-	{
-		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_ENDERCHEST, Blocks.ender_chest));
-
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void clientInit(FMLInitializationEvent event)
-	{
-
+		SafeModelLoader.loadItemModel(ITEM_MINECART_ENDERCHEST);
 	}
 }

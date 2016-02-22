@@ -23,7 +23,6 @@ public class FakeWorld extends World
 {
 	private EntityMinecartTEBase entityMinecartTEBase;
 	private EntityMinecartBase entityMinecartBase;
-	private FakeChunk fakeChunk;
 
 	public FakeWorld(EntityMinecartBase entityMinecartBase)
 	{
@@ -46,28 +45,6 @@ public class FakeWorld extends World
 	{
 		return chunkProvider;
 	}
-
-	//MFR grabs TE's just a bit different than most
-	/*TODO: MFR Stuff
-	@Override
-	public void markTileEntityChunkModified(int posX, int posY, int posZ, TileEntity tileEntity)
-	{
-		if(this.getEntityMinecartTEBase() != null)
-		{
-			this.getEntityMinecartTEBase().markDirty();
-		}
-	}
-
-	//MFR grabs TE's just a bit different than most
-	@Override
-	public Chunk getChunkFromBlockCoords(int x, int z)
-	{
-		if(this.fakeChunk == null)
-		{
-			this.fakeChunk = new FakeChunk(this);
-		}
-		return this.fakeChunk;
-	}*/
 
 	//Pretty sure this for IE's blocks originally though other use it.
 	@Override
@@ -136,7 +113,7 @@ public class FakeWorld extends World
 
 	//Infinitato tries to get Entities and add potion effects
 	@Override
-	public List getEntitiesWithinAABB(Class entityClass, AxisAlignedBB axisAlignedBB)
+	public <T extends Entity> List<T> getEntitiesWithinAABB(Class<? extends T > entityClass, AxisAlignedBB axisAlignedBB)
 	{
 		axisAlignedBB.getAverageEdgeLength();
 
@@ -155,6 +132,21 @@ public class FakeWorld extends World
 	public void playSoundEffect(double posX, double posY, double posZ, String sound, float noice, float soundTimes)
 	{
 		this.getCartWorld().playSoundAtEntity(this.getEntityMinecartBase(), sound, noice, soundTimes);
+	}
+
+	@Override
+	protected boolean isChunkLoaded(int x, int z, boolean allowEmpty)
+	{
+		return true;
+	}
+
+	@Override
+	public void markChunkDirty(BlockPos pos, TileEntity unusedTileEntity)
+	{
+		if(this.getEntityMinecartTEBase() != null)
+		{
+			this.getEntityMinecartTEBase().markDirty();
+		}
 	}
 
 	public EntityMinecartTEBase getEntityMinecartTEBase()

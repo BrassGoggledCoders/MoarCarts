@@ -1,5 +1,6 @@
 package moarcarts.mods.ironchest;
 
+import cpw.mods.ironchest.IronChestType;
 import moarcarts.mods.ironchest.entities.*;
 import moarcarts.mods.ironchest.items.ItemMinecartIronChest;
 import moarcarts.recipes.NBTCartRecipe;
@@ -8,8 +9,7 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import xyz.brassgoggledcoders.boilerplate.lib.client.models.SafeModelLoader;
 import xyz.brassgoggledcoders.boilerplate.lib.common.modcompat.ModCompat;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.helpers.RegistryHelper;
 
@@ -44,13 +44,7 @@ public class IronChestCompat extends ModCompat
 	public void init(FMLInitializationEvent event)
 	{
 		this.registerRecipes();
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void clientInit(FMLInitializationEvent event)
-	{
-		//MinecraftForgeClient.registerItemRenderer(ITEM_MINECART_IRONCHEST, new RenderItemMinecartBase());
+		this.registerModelVariants();
 	}
 
 	public void registerEntities()
@@ -68,7 +62,8 @@ public class IronChestCompat extends ModCompat
 	public void registerItems()
 	{
 		ITEM_MINECART_IRONCHEST = new ItemMinecartIronChest();
-		RegistryHelper.registerItem(ITEM_MINECART_IRONCHEST);
+		GameRegistry.registerItem(ITEM_MINECART_IRONCHEST, "minecartironchest");
+		SafeModelLoader.loadItemModel(ITEM_MINECART_IRONCHEST);
 	}
 
 	public void registerRecipes()
@@ -77,6 +72,21 @@ public class IronChestCompat extends ModCompat
 		for (int i = 0; i < 8; i++)
 		{
 			GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_IRONCHEST, i, IRON_CHEST, i));
+		}
+	}
+
+	public void registerModelVariants()
+	{
+		String name = ITEM_MINECART_IRONCHEST.getUnlocalizedName().substring(5);
+		SafeModelLoader.addVariantName(ITEM_MINECART_IRONCHEST, name + IronChestType.COPPER.name(),
+				name + IronChestType.CRYSTAL.name(), name + IronChestType.DIAMOND.name(),
+				name + IronChestType.DIRTCHEST9000.name(), name + IronChestType.GOLD.name(),
+				name + IronChestType.IRON.name(), name + IronChestType.OBSIDIAN.name(),
+				name + IronChestType.SILVER.name(), name + IronChestType.WOOD.name());
+
+		for(IronChestType type: IronChestType.values())
+		{
+			SafeModelLoader.registerItemModelVariant(ITEM_MINECART_IRONCHEST, type.ordinal(), name);
 		}
 	}
 }
