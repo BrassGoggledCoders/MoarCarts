@@ -5,6 +5,7 @@ import cpw.mods.ironchest.IronChestType;
 import moarcarts.entities.EntityMinecartBase;
 import moarcarts.items.ItemMinecartBase;
 import moarcarts.mods.ironchest.entities.*;
+import moarcarts.renderers.IRenderBlock.RenderMethod;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -44,8 +45,7 @@ public class ItemMinecartIronChest extends ItemMinecartBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	@SuppressWarnings("unchecked")
-	public void getSubItems(Item item, CreativeTabs tab, List list)
+	public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> list)
 	{
 		for (int i = 0; i < 8; i++)
 		{
@@ -64,6 +64,12 @@ public class ItemMinecartIronChest extends ItemMinecartBase
 	public int getCartBlockMetadata(ItemStack itemStack)
 	{
 		return itemStack.getItemDamage();
+	}
+
+	@Override
+	public RenderMethod getCartBlockRenderMethod(ItemStack itemStack)
+	{
+		return RenderMethod.TESR;
 	}
 
 	@Override

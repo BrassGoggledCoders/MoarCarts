@@ -32,10 +32,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.RecipeSorter;
 import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
-import xyz.brassgoggledcoders.boilerplate.lib.client.models.SafeModelLoader;
 import xyz.brassgoggledcoders.boilerplate.lib.common.IBoilerplateMod;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ModLogger;
-import xyz.brassgoggledcoders.boilerplate.lib.common.utils.helpers.RegistryHelper;
 
 /*
  * @author SkySom
@@ -74,16 +72,16 @@ public class MoarCarts implements IBoilerplateMod
 
 		BoilerplateLib.getInstance().preInit(event);
 
-		blockMinecart = new BlockMinecart();
-		RegistryHelper.registerBlockWithDesc(blockMinecart, "minecart");
-		SafeModelLoader.loadBlockModel(blockMinecart);
+		//blockMinecart = new BlockMinecart();
+		//RegistryHelper.registerBlockWithDesc(blockMinecart, "minecart");
+		//SafeModelLoader.loadBlockModel(blockMinecart);
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
 		BoilerplateLib.getInstance().init(event);
-
+		MoarCarts.proxy.init();
 		RecipeSorter.register("moarcarts:nbtcartrecipe", NBTCartRecipe.class, RecipeSorter.Category.SHAPELESS,
 				"after:minecraft:shapeless");
 	}

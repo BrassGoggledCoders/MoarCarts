@@ -3,17 +3,30 @@ package moarcarts.renderers;
 import moarcarts.entities.EntityMinecartTEBase;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderMinecart;
 import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
+import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 /**
  * @author SkySom
  */
 public class RenderMinecartTEBase<T extends EntityMinecartTEBase> extends RenderMinecart<EntityMinecartTEBase>
 {
+	public enum Factory implements IRenderFactory<EntityMinecartTEBase>
+	{
+		INSTANCE;
+
+		@Override
+		public Render<? super EntityMinecartTEBase> createRenderFor(RenderManager manager) {
+			return new RenderMinecartTEBase(manager);
+		}
+	}
+
 	public RenderMinecartTEBase(RenderManager renderManagerIn)
 	{
 		super(renderManagerIn);
@@ -79,27 +92,53 @@ public class RenderMinecartTEBase<T extends EntityMinecartTEBase> extends Render
 		{
 			GlStateManager.rotate(MathHelper.sin(f5) * f5 * f6 / 10.0F * (float)entity.getRollingDirection(), 1.0F, 0.0F, 0.0F);
 		}
-
 		int j = entity.getDisplayTileOffset();
-		IBlockState iblockstate = entity.getDisplayTile();
 
-		if (iblockstate.getBlock().getRenderType() != -1)
+		GlStateManager.pushMatrix();
+		this.bindTexture(TextureMap.locationBlocksTexture);
+		float f4 = 0.75F;
+		GlStateManager.scale(f4, f4, f4);
+		GlStateManager.translate(-0.5F, (float)(j - 8) / 16.0F, 0.5F);
+
+		switch(entity.getRenderMethod())
 		{
-			GlStateManager.pushMatrix();
-			this.bindTexture(TextureMap.locationBlocksTexture);
-			float f4 = 0.75F;
-			GlStateManager.scale(f4, f4, f4);
-			GlStateManager.translate(-0.5F, (float)(j - 8) / 16.0F, 0.5F);
-			this.func_180560_a(entity, partialTicks, iblockstate);
-			GlStateManager.popMatrix();
-			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-			this.bindEntityTexture(entity);
+			case TESR:
+				renderTESRModel(entity);
+				break;
+			case ISBRH:
+			case VMC:
+				renderBlockModel(entity, partialTicks);
+				break;
+			case CUSTOM:
+				break;
 		}
+
+		GlStateManager.popMatrix();
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		this.bindEntityTexture(entity);
 
 		GlStateManager.scale(-1.0F, -1.0F, 1.0F);
 		this.modelMinecart.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 		GlStateManager.popMatrix();
 		super.doRender(entity, x, y, z, entityYaw, partialTicks);
+	}
+
+	protected void renderTESRModel(EntityMinecartTEBase entity)
+	{
+		GlStateManager.rotate(90F, 0F, 1F, 0F);
+		GlStateManager.translate(-0.5F, -0.5F, -0.5F);
+		TileEntityRendererDispatcher.instance.renderTileEntityAt(entity.getTileEntity(), 0, 0, 0, 0.0F);
+		GlStateManager.enableRescaleNormal();
+	}
+
+	protected void renderBlockModel(EntityMinecartTEBase entity, float partialTicks)
+	{
+		IBlockState iblockstate = entity.getDisplayTile();
+
+		if (iblockstate.getBlock().getRenderType() != -1)
+		{
+			this.func_180560_a(entity, partialTicks, iblockstate);
+		}
 	}
 }
 
