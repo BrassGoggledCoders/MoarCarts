@@ -44,7 +44,6 @@ public class IronChestCompat extends ModCompat
 	public void init(FMLInitializationEvent event)
 	{
 		this.registerRecipes();
-		this.registerModelVariants();
 	}
 
 	public void registerEntities()
@@ -64,6 +63,10 @@ public class IronChestCompat extends ModCompat
 		ITEM_MINECART_IRONCHEST = new ItemMinecartIronChest();
 		GameRegistry.registerItem(ITEM_MINECART_IRONCHEST, "minecartironchest");
 		SafeModelLoader.loadItemModel(ITEM_MINECART_IRONCHEST);
+		for (int i = 0; i < 8; i++)
+		{
+			SafeModelLoader.loadItemModel(ITEM_MINECART_IRONCHEST, i, "minecartironchest" + IronChestType.values()[i]);
+		}
 	}
 
 	public void registerRecipes()
@@ -72,21 +75,6 @@ public class IronChestCompat extends ModCompat
 		for (int i = 0; i < 8; i++)
 		{
 			GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_IRONCHEST, i, IRON_CHEST, i));
-		}
-	}
-
-	public void registerModelVariants()
-	{
-		String name = ITEM_MINECART_IRONCHEST.getUnlocalizedName().substring(5);
-		SafeModelLoader.addVariantName(ITEM_MINECART_IRONCHEST, name + IronChestType.COPPER.name(),
-				name + IronChestType.CRYSTAL.name(), name + IronChestType.DIAMOND.name(),
-				name + IronChestType.DIRTCHEST9000.name(), name + IronChestType.GOLD.name(),
-				name + IronChestType.IRON.name(), name + IronChestType.OBSIDIAN.name(),
-				name + IronChestType.SILVER.name(), name + IronChestType.WOOD.name());
-
-		for(IronChestType type: IronChestType.values())
-		{
-			SafeModelLoader.registerItemModelVariant(ITEM_MINECART_IRONCHEST, type.ordinal(), name);
 		}
 	}
 }

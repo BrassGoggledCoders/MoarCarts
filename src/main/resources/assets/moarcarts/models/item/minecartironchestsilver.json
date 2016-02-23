@@ -1,7 +1,7 @@
 {
     "parent": "builtin/generated",
     "textures": {
-        "layer0": "moarcarts:items/ironchest/minecartironchestcopper"
+        "layer0": "moarcarts:items/ironchest/minecartironchestsilver"
     },
     "display": {
         "thirdperson": {
