@@ -71,7 +71,7 @@ public class MoarCarts implements IBoilerplateMod
 		configuration.save();
 
 		BoilerplateLib.getInstance().preInit(event);
-
+		MoarCarts.proxy.preInit();
 		//blockMinecart = new BlockMinecart();
 		//RegistryHelper.registerBlockWithDesc(blockMinecart, "minecart");
 		//SafeModelLoader.loadBlockModel(blockMinecart);
@@ -81,7 +81,7 @@ public class MoarCarts implements IBoilerplateMod
 	public void init(FMLInitializationEvent event)
 	{
 		BoilerplateLib.getInstance().init(event);
-		MoarCarts.proxy.init();
+
 		RecipeSorter.register("moarcarts:nbtcartrecipe", NBTCartRecipe.class, RecipeSorter.Category.SHAPELESS,
 				"after:minecraft:shapeless");
 	}

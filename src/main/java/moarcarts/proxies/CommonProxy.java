@@ -25,8 +25,7 @@ public class CommonProxy
 		return (WorldServer)messageContext.getServerHandler().playerEntity.worldObj;
 	}
 
-	public void init()
+	public void preInit()
 	{
-
 	}
 }

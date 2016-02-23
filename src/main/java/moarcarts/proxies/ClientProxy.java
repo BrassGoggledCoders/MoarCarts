@@ -1,7 +1,6 @@
 package moarcarts.proxies;
 
 import moarcarts.entities.EntityMinecartTEBase;
-import moarcarts.mods.ironchest.entities.EntityMinecartIronChest;
 import moarcarts.renderers.RenderMinecartTEBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.IThreadListener;
@@ -33,9 +32,8 @@ public class ClientProxy extends CommonProxy
 	}
 
 	@Override
-	public void init()
+	public void preInit()
 	{
 		RenderingRegistry.registerEntityRenderingHandler(EntityMinecartTEBase.class, RenderMinecartTEBase.Factory.INSTANCE);
-		RenderingRegistry.registerEntityRenderingHandler(EntityMinecartIronChest.class, RenderMinecartTEBase.Factory.INSTANCE);
 	}
 }

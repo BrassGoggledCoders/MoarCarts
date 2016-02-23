@@ -126,7 +126,6 @@ public class RenderMinecartTEBase<T extends EntityMinecartTEBase> extends Render
 	protected void renderTESRModel(EntityMinecartTEBase entity)
 	{
 		GlStateManager.rotate(90F, 0F, 1F, 0F);
-		GlStateManager.translate(-0.5F, -0.5F, -0.5F);
 		TileEntityRendererDispatcher.instance.renderTileEntityAt(entity.getTileEntity(), 0, 0, 0, 0.0F);
 		GlStateManager.enableRescaleNormal();
 	}
