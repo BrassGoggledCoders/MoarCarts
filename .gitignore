@@ -3,7 +3,7 @@ build/
 run/
 libs/
 saves/
-config/
+/config/
 logs/
 crash-reports/
 asm/
