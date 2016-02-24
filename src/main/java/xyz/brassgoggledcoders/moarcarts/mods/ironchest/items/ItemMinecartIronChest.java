@@ -2,9 +2,12 @@ package xyz.brassgoggledcoders.moarcarts.mods.ironchest.items;
 
 import cpw.mods.ironchest.IronChest;
 import cpw.mods.ironchest.IronChestType;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartBase;
 import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
 import xyz.brassgoggledcoders.moarcarts.mods.ironchest.entities.*;
+import xyz.brassgoggledcoders.moarcarts.mods.ironchest.renderers.RenderItemMinecartIronChest;
 import xyz.brassgoggledcoders.moarcarts.renderers.IRenderBlock.RenderMethod;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -13,13 +16,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import xyz.brassgoggledcoders.moarcarts.renderers.ISpecialRenderedItem;
+import xyz.brassgoggledcoders.moarcarts.renderers.ItemSpecialRenderer;
 
 import java.util.List;
 
 /**
  * @author SkySom
  */
-public class ItemMinecartIronChest extends ItemMinecartBase
+public class ItemMinecartIronChest extends ItemMinecartBase implements ISpecialRenderedItem
 {
 	public ItemMinecartIronChest()
 	{
@@ -102,5 +107,23 @@ public class ItemMinecartIronChest extends ItemMinecartBase
 				entityMinecartIronChest = new EntityMinecartIronChest(world, itemStack.getItemDamage());
 		}
 		return entityMinecartIronChest;
+	}
+
+	@Override
+	public ItemSpecialRenderer getSpecialRenderer()
+	{
+		return RenderItemMinecartIronChest.getInstance();
+	}
+
+	@Override
+	public ModelResourceLocation[] getModelDefinitions()
+	{
+		ModelResourceLocation[] locations = new ModelResourceLocation[8];
+		for(int i = 0; i < 8; i++)
+		{
+			locations[i] = new ModelResourceLocation(BoilerplateLib.getInstance().mod.getPrefix() +
+					"minecartironchest" + IronChestType.values()[i]);
+		}
+		return locations;
 	}
 }

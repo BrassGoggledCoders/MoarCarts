@@ -1,10 +1,10 @@
 package xyz.brassgoggledcoders.moarcarts.mods.ironchest;
 
-import cpw.mods.ironchest.IronChestType;
-import xyz.brassgoggledcoders.moarcarts.mods.ironchest.entities.*;
-import xyz.brassgoggledcoders.moarcarts.mods.ironchest.items.ItemMinecartIronChest;
-import xyz.brassgoggledcoders.moarcarts.recipes.NBTCartRecipe;
 import net.minecraft.block.Block;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraftforge.client.ForgeHooksClient;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -12,6 +12,11 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import xyz.brassgoggledcoders.boilerplate.lib.client.models.SafeModelLoader;
 import xyz.brassgoggledcoders.boilerplate.lib.common.modcompat.ModCompat;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.helpers.RegistryHelper;
+import xyz.brassgoggledcoders.moarcarts.mods.ironchest.entities.*;
+import xyz.brassgoggledcoders.moarcarts.mods.ironchest.items.ItemMinecartIronChest;
+import xyz.brassgoggledcoders.moarcarts.mods.ironchest.renderers.RenderItemMinecartIronChest;
+import xyz.brassgoggledcoders.moarcarts.recipes.NBTCartRecipe;
+import xyz.brassgoggledcoders.moarcarts.renderers.ModelBakeHandler;
 
 /**
  * @author SkySom
@@ -46,6 +51,20 @@ public class IronChestCompat extends ModCompat
 		this.registerRecipes();
 	}
 
+	@Override
+	public void clientInit(FMLInitializationEvent event)
+	{
+		RenderItemMinecartIronChest renderer = RenderItemMinecartIronChest.getInstance();
+		ClientRegistry.bindTileEntitySpecialRenderer(renderer.getTileClass(), renderer);
+		ModelResourceLocation[] variants = ITEM_MINECART_IRONCHEST.getModelDefinitions();
+		for(int i = 0; i < 8; i++)
+		{
+			ModelLoader.setCustomModelResourceLocation(ITEM_MINECART_IRONCHEST, i, variants[i]);
+			ModelBakeHandler.getInstance().registerModelToSwap(variants[i], renderer);
+			ForgeHooksClient.registerTESRItemStack(ITEM_MINECART_IRONCHEST, i, renderer.getTileClass());
+		}
+	}
+
 	public void registerEntities()
 	{
 		RegistryHelper.registerEntity(EntityMinecartCopperChest.class, "entityminecartcopperchest");
@@ -63,10 +82,6 @@ public class IronChestCompat extends ModCompat
 		ITEM_MINECART_IRONCHEST = new ItemMinecartIronChest();
 		GameRegistry.registerItem(ITEM_MINECART_IRONCHEST, "minecartironchest");
 		SafeModelLoader.loadItemModel(ITEM_MINECART_IRONCHEST);
-		for (int i = 0; i < 8; i++)
-		{
-			SafeModelLoader.loadItemModel(ITEM_MINECART_IRONCHEST, i, "minecartironchest" + IronChestType.values()[i]);
-		}
 	}
 
 	public void registerRecipes()
