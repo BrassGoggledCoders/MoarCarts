@@ -41,10 +41,10 @@ import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ModLogger;
 @Mod(modid = MoarCarts.MODID, name = MoarCarts.MODNAME, version = MoarCarts.MODVERSION, dependencies = MoarCarts.DEPENDENCIES)
 public class MoarCarts implements IBoilerplateMod
 {
-	@Instance("xyz/brassgoggledcoders/moarcarts")
+	@Instance("moarcarts")
 	public static MoarCarts instance;
 
-	public static final String MODID = "xyz/brassgoggledcoders/moarcarts";
+	public static final String MODID = "moarcarts";
 	public static final String MODNAME = "MoarCarts";
 	public static final String MODVERSION = "@VERSION@";
 	public static final String DEPENDENCIES = "after:railcraft;after:Avaritia;after:ImmersiveEngineering@[0.6.5,);";
@@ -82,7 +82,7 @@ public class MoarCarts implements IBoilerplateMod
 	{
 		BoilerplateLib.getInstance().init(event);
 
-		RecipeSorter.register("xyz.brassgoggledcoders.moarcarts:nbtcartrecipe", NBTCartRecipe.class, RecipeSorter.Category.SHAPELESS,
+		RecipeSorter.register("moarcarts:nbtcartrecipe", NBTCartRecipe.class, RecipeSorter.Category.SHAPELESS,
 				"after:minecraft:shapeless");
 	}
 
@@ -158,12 +158,12 @@ public class MoarCarts implements IBoilerplateMod
 	@Override
 	public String getClientProxyPath()
 	{
-		return "xyz.brassgoggledcoders.xyz.brassgoggledcoders.moarcarts.proxy.ClientProxy";
+		return "xyz.brassgoggledcoders.moarcarts.proxy.ClientProxy";
 	}
 
 	@Override
 	public String getCommonProxyPath()
 	{
-		return "xyz.brassgoggledcoders.xyz.brassgoggledcoders.moarcarts.proxy.CommonProxy";
+		return "xyz.brassgoggledcoders.moarcarts.proxy.CommonProxy";
 	}
 }
