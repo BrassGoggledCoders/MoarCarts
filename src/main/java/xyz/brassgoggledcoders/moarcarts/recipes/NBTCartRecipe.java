@@ -80,10 +80,9 @@ public class NBTCartRecipe extends ShapelessRecipes
 		return output;
 	}
 
-	@SuppressWarnings("unchecked")
-	public static List getInputList(ItemStack cartBlock)
+	public static List<ItemStack> getInputList(ItemStack cartBlock)
 	{
-		List<ItemStack> list = new ArrayList();
+		List<ItemStack> list = new ArrayList<ItemStack>();
 		list.add(cartBlock);
 		list.add(new ItemStack(Items.minecart));
 		return list;

@@ -22,6 +22,7 @@ public class RenderMinecartTEBase<T extends EntityMinecartTEBase> extends Render
 		INSTANCE;
 
 		@Override
+		@SuppressWarnings("unchecked")
 		public Render<? super EntityMinecartTEBase> createRenderFor(RenderManager manager) {
 			return new RenderMinecartTEBase(manager);
 		}

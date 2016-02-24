@@ -42,15 +42,7 @@ public class BlockComparatorTrack extends BlockRailDetector
 		int comparatorOutput = 0;
 		if (world.getBlockState(blockPos).getValue(POWERED))
 		{
-			List<? extends EntityMinecart> list = this.findMinecarts(world, blockPos, EntityMinecart.class, new Predicate<Entity>()
-			{
-				@Override
-				public boolean apply(@Nullable Entity input)
-				{
-					return input instanceof EntityMinecart;
-				}
-			});
-
+			List<EntityMinecart> list = this.findMinecarts(world, blockPos, EntityMinecart.class, new MinecartPredicate());
 			if(list.size() > 0 && list.get(0) != null)
 			{
 				EntityMinecart minecart = list.get(0);
@@ -86,5 +78,14 @@ public class BlockComparatorTrack extends BlockRailDetector
 		}
 
 		return comparatorOutput;
+	}
+}
+
+class MinecartPredicate implements Predicate<Entity>
+{
+	@Override
+	public boolean apply(@Nullable Entity input)
+	{
+		return false;
 	}
 }
