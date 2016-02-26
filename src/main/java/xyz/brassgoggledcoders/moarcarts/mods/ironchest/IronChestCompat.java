@@ -65,7 +65,8 @@ public class IronChestCompat extends ModCompat
 		SafeModelLoader.loadItemModel(ITEM_MINECART_IRONCHEST);
 		for (int i = 0; i < 8; i++)
 		{
-			SafeModelLoader.loadItemModel(ITEM_MINECART_IRONCHEST, i, "minecartironchest" + IronChestType.values()[i]);
+			SafeModelLoader.loadItemModel(ITEM_MINECART_IRONCHEST, i, "minecartironchest" +
+					IronChestType.values()[i].toString().toLowerCase());
 		}
 	}
 

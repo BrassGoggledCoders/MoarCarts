@@ -72,9 +72,6 @@ public class MoarCarts implements IBoilerplateMod
 
 		BoilerplateLib.getInstance().preInit(event);
 		MoarCarts.proxy.preInit();
-		//blockMinecart = new BlockMinecart();
-		//RegistryHelper.registerBlockWithDesc(blockMinecart, "minecart");
-		//SafeModelLoader.loadBlockModel(blockMinecart);
 	}
 
 	@EventHandler
