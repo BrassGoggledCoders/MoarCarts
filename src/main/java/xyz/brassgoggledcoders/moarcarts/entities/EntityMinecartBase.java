@@ -34,8 +34,6 @@ import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 
 import java.util.Random;
 
-//import mods.railcraft.api.carts.IMinecart;
-
 /**
  * @author SkySom
  */
