@@ -37,11 +37,11 @@ public class ClientProxy extends CommonProxy
 	public void preInit()
 	{
 		RenderingRegistry.registerEntityRenderingHandler(EntityMinecartTEBase.class, RenderMinecartTEBase.Factory.INSTANCE);
+		MinecraftForge.EVENT_BUS.register(ModelBakeHandler.getInstance());
 	}
 
 	@Override
 	public void init()
 	{
-		MinecraftForge.EVENT_BUS.register(ModelBakeHandler.getInstance());
 	}
 }

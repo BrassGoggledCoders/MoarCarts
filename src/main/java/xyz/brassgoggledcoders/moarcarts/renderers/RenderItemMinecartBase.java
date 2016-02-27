@@ -12,6 +12,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.FMLClientHandler;
+import org.lwjgl.opengl.GL11;
+import xyz.brassgoggledcoders.boilerplate.lib.client.ClientHelper;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ItemStackUtils;
 import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
 
@@ -25,14 +27,15 @@ public abstract class RenderItemMinecartBase extends ItemSpecialRenderer
 	public void renderItem(ItemStack stack, float partialTicks)
 	{
 		GlStateManager.pushMatrix();
-		GlStateManager.enableAlpha();
-
+		GlStateManager.translate(-0.5,0.5,-0.5);
 		FMLClientHandler.instance().getClient().renderEngine.bindTexture(TextureMap.locationBlocksTexture);
 
 		GlStateManager.pushMatrix();
-		GlStateManager.scale(0.75 * 0.75, 0.75 * 0.75, 0.75 * 0.75);
 		GlStateManager.rotate(270, 0, 1, 0);
-		GlStateManager.translate(0.0F, 6 / 16.0F, 0.0F);
+		GlStateManager.rotate(90, 0, 0, 1);
+		GlStateManager.scale(12, 12, 12);
+
+		GL11.glTranslated(0.0F, 6 / 16.0F, 0.0F);
 
 		if(ItemStackUtils.isItemInstanceOf(stack, ItemMinecartBase.class))
 		{
@@ -54,16 +57,13 @@ public abstract class RenderItemMinecartBase extends ItemSpecialRenderer
 			}
 		}
 
-		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		GlStateManager.popMatrix();
-
-		GlStateManager.rotate(90, 0, 1, 0);
-		GlStateManager.scale(0.75, 0.75, 0.75);
+		GlStateManager.rotate(-90, 0, 0, 1);
+		GlStateManager.rotate(-90, 1, 0, 0);
 		GlStateManager.scale(-1, -1, 1);
-		FMLClientHandler.instance().getClient().renderEngine.bindTexture(minecartTextures);
 
-		modelMinecart.render(null, 0, 0, -0.1F, 0, 0, 1F / 16F);
-
+		Minecraft.getMinecraft().getTextureManager().bindTexture(minecartTextures);
+		modelMinecart.render(ClientHelper.player(), 0, 0, 0, 0, 0, 1);
 		GlStateManager.popMatrix();
 	}
 
@@ -71,9 +71,9 @@ public abstract class RenderItemMinecartBase extends ItemSpecialRenderer
 	{
 		if (blockState.getBlock().getRenderType() != -1)
 		{
-			GlStateManager.pushMatrix();
+			GL11.glPushMatrix();
 			Minecraft.getMinecraft().getBlockRendererDispatcher().renderBlockBrightness(blockState, 15);
-			GlStateManager.popMatrix();
+			GL11.glPopMatrix();
 		}
 	}
 
@@ -81,8 +81,7 @@ public abstract class RenderItemMinecartBase extends ItemSpecialRenderer
 	{
 		if(renderTileEntity == null)
 		{
-			renderTileEntity = itemMinecartBase.getCartBlock(itemStack).createTileEntity(
-					Minecraft.getMinecraft().theWorld, itemMinecartBase.getCartBlockState(itemStack));
+			renderTileEntity = blockState.getBlock().createTileEntity(ClientHelper.world(), blockState);
 		}
 		if(renderTileEntity != null)
 		{
@@ -115,7 +114,7 @@ public abstract class RenderItemMinecartBase extends ItemSpecialRenderer
 		}
 	}
 
-	private TransformationMatrix transformationMatrixFirstPerson() {
+	protected TransformationMatrix transformationMatrixFirstPerson() {
 		return new TransformationMatrix(0.25, -0.275, 0.35)
 				.multiplyRightWith(new TransformationMatrix(90, 1, 0, 0))
 				.multiplyRightWith(new TransformationMatrix(225, 0, 0, 1))
@@ -123,29 +122,30 @@ public abstract class RenderItemMinecartBase extends ItemSpecialRenderer
 				.scale(0.075, 0.075, 0.075);
 	}
 
-	private TransformationMatrix transformationMatrixThirdPerson() {
-		return new TransformationMatrix(0.08, -0.1, -0.07)
+	protected TransformationMatrix transformationMatrixThirdPerson() {
+		return new TransformationMatrix(0, 0.1, -0.07)
 				.multiplyRightWith(new TransformationMatrix(180, 0, 1, 0))
+				.scale(0.02, 0.02, 0.02);
+	}
+
+	protected TransformationMatrix transformationMatrixGui() {
+		return new TransformationMatrix(0.025, 0, 0)
+				.multiplyRightWith(new TransformationMatrix(90, -1, 0, 1))
+				.multiplyRightWith(new TransformationMatrix(90, 0, 0, 1))
+				.multiplyRightWith(new TransformationMatrix(75, 0, 1, 0))
+				.multiplyRightWith(new TransformationMatrix(-90, 0, 1, 0))
 				.scale(0.03, 0.03, 0.03);
 	}
 
-	private TransformationMatrix transformationMatrixGui() {
-		return new TransformationMatrix(0, -0.1, 0)
-				.multiplyRightWith(new TransformationMatrix(90, -1, 0, 1))
-				.multiplyRightWith(new TransformationMatrix(-0, 1, 0, 0))
-				.multiplyRightWith(new TransformationMatrix(90, 0, 1, 0))
-				.scale(0.035, 0.035, 0.035);
-	}
-
-	private TransformationMatrix transformationMatrixGround() {
+	protected TransformationMatrix transformationMatrixGround() {
 		return new TransformationMatrix(-0.2, 0, 0.05)
 				.multiplyRightWith(new TransformationMatrix(90, 1, 0, 0))
-				.multiplyRightWith(new TransformationMatrix(225, 0, 0, 1))
+				.multiplyRightWith(new TransformationMatrix(90, 0, 0, 1))
 				.multiplyRightWith(new TransformationMatrix(180, 0, 1, 0))
 				.scale(0.03, 0.03, 0.03);
 	}
 
-	private TransformationMatrix transformationMatrixDefault() {
+	protected TransformationMatrix transformationMatrixDefault() {
 		return new TransformationMatrix(0.25, -0.275, 0.35)
 				.multiplyRightWith(new TransformationMatrix(90, 1, 0, 0))
 				.multiplyRightWith(new TransformationMatrix(225, 0, 0, 1))

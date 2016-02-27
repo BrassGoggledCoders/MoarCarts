@@ -122,7 +122,7 @@ public class ItemMinecartIronChest extends ItemMinecartBase implements ISpecialR
 		for(int i = 0; i < 8; i++)
 		{
 			locations[i] = new ModelResourceLocation(BoilerplateLib.getInstance().mod.getPrefix() +
-					"minecartironchest" + IronChestType.values()[i]);
+					"minecartironchest" + IronChestType.values()[i].toString().toLowerCase());
 		}
 		return locations;
 	}

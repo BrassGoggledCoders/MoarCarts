@@ -121,7 +121,6 @@ public class RenderMinecartTEBase<T extends EntityMinecartTEBase> extends Render
 		GlStateManager.scale(-1.0F, -1.0F, 1.0F);
 		this.modelMinecart.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 		GlStateManager.popMatrix();
-		super.doRender(entity, x, y, z, entityYaw, partialTicks);
 	}
 
 	protected void renderTESRModel(EntityMinecartTEBase entity)
