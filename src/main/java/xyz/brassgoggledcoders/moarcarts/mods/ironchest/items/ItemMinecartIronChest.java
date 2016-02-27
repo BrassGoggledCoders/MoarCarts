@@ -6,6 +6,7 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartBase;
 import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
+import xyz.brassgoggledcoders.moarcarts.items.ItemSubMinecartBase;
 import xyz.brassgoggledcoders.moarcarts.mods.ironchest.entities.*;
 import xyz.brassgoggledcoders.moarcarts.mods.ironchest.renderers.RenderItemMinecartIronChest;
 import xyz.brassgoggledcoders.moarcarts.renderers.IRenderBlock.RenderMethod;
@@ -24,12 +25,11 @@ import java.util.List;
 /**
  * @author SkySom
  */
-public class ItemMinecartIronChest extends ItemMinecartBase implements ISpecialRenderedItem
+public class ItemMinecartIronChest extends ItemSubMinecartBase implements ISpecialRenderedItem
 {
 	public ItemMinecartIronChest()
 	{
 		super("ironchest", "minecartironchest");
-		this.setHasSubtypes(true);
 	}
 
 
@@ -43,32 +43,21 @@ public class ItemMinecartIronChest extends ItemMinecartBase implements ISpecialR
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack itemstack)
+	public String getUnlocalizedNameMetaExtension(ItemStack itemStack)
 	{
-		return "item.minecartironchest." + IronChestType.values()[itemstack.getItemDamage()].name().toLowerCase();
+		return IronChestType.values()[itemStack.getItemDamage()].name().toLowerCase();
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> list)
+	public int getNumberOfSubItems()
 	{
-		for (int i = 0; i < 8; i++)
-		{
-			ItemStack stack = new ItemStack(item, 1, i);
-			list.add(stack);
-		}
+		return 8;
 	}
 
 	@Override
 	public Block getCartBlock(ItemStack itemStack)
 	{
 		return IronChest.ironChestBlock;
-	}
-
-	@Override
-	public int getCartBlockMetadata(ItemStack itemStack)
-	{
-		return itemStack.getItemDamage();
 	}
 
 	@Override
@@ -118,8 +107,9 @@ public class ItemMinecartIronChest extends ItemMinecartBase implements ISpecialR
 	@Override
 	public ModelResourceLocation[] getModelDefinitions()
 	{
-		ModelResourceLocation[] locations = new ModelResourceLocation[8];
-		for(int i = 0; i < 8; i++)
+		int numberOfSubItems = getNumberOfSubItems();
+		ModelResourceLocation[] locations = new ModelResourceLocation[getNumberOfSubItems()];
+		for(int i = 0; i < numberOfSubItems; i++)
 		{
 			locations[i] = new ModelResourceLocation(BoilerplateLib.getInstance().mod.getPrefix() +
 					"minecartironchest" + IronChestType.values()[i].toString().toLowerCase());

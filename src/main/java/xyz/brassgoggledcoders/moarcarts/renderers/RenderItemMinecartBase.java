@@ -17,11 +17,11 @@ import xyz.brassgoggledcoders.boilerplate.lib.client.ClientHelper;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ItemStackUtils;
 import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
 
+@SuppressWarnings("depecated")
 public abstract class RenderItemMinecartBase extends ItemSpecialRenderer
 {
 	private static final ResourceLocation minecartTextures = new ResourceLocation("textures/entity/minecart.png");
 	protected ModelBase modelMinecart = new ModelMinecart();
-	protected TileEntity renderTileEntity;
 
 	@Override
 	public void renderItem(ItemStack stack, float partialTicks)
@@ -79,17 +79,10 @@ public abstract class RenderItemMinecartBase extends ItemSpecialRenderer
 
 	protected void renderTESRMethod(ItemStack itemStack, ItemMinecartBase itemMinecartBase, IBlockState blockState)
 	{
-		if(renderTileEntity == null)
-		{
-			renderTileEntity = blockState.getBlock().createTileEntity(ClientHelper.world(), blockState);
-		}
-		if(renderTileEntity != null)
-		{
 			rotateTESR();
 			GlStateManager.translate(-0.5F, -0.5F, -0.5F);
-			TileEntityRendererDispatcher.instance.renderTileEntityAt(renderTileEntity, 0, 0, 0, 0.0F);
+			TileEntityRendererDispatcher.instance.renderTileEntityAt(itemMinecartBase.getRenderTileEntity(itemStack), 0, 0, 0, 0.0F);
 			GlStateManager.enableRescaleNormal();
-		}
 	}
 
 	protected void renderCustom(ItemStack itemStack, ItemMinecartBase itemMinecartBase)

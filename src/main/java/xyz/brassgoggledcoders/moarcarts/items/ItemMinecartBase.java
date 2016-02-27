@@ -12,6 +12,9 @@
 package xyz.brassgoggledcoders.moarcarts.items;
 
 import com.mojang.authlib.GameProfile;
+import net.minecraft.tileentity.TileEntity;
+import xyz.brassgoggledcoders.boilerplate.lib.client.ClientHelper;
+import xyz.brassgoggledcoders.boilerplate.lib.common.tileentities.TileEntityBase;
 import xyz.brassgoggledcoders.moarcarts.MoarCarts;
 import xyz.brassgoggledcoders.moarcarts.behaviors.CartDispenserBehavior;
 import xyz.brassgoggledcoders.moarcarts.config.ConfigSettings;
@@ -38,6 +41,8 @@ import xyz.brassgoggledcoders.boilerplate.lib.common.utils.BlockUtils;
 @Optional.Interface(modid = "RailcraftAPI|items", iface = "mods.railcraft.api.core.items.IMinecartItem")
 public abstract class ItemMinecartBase extends ItemMinecart implements IMinecartItem
 {
+	private TileEntity renderTileEntity;
+
 	public ItemMinecartBase(String mod, String name)
 	{
 		super(null);
@@ -107,6 +112,15 @@ public abstract class ItemMinecartBase extends ItemMinecart implements IMinecart
 	public IBlockState getCartBlockState(ItemStack itemStack)
 	{
 		return this.getCartBlock(itemStack).getStateFromMeta(this.getCartBlockMetadata(itemStack));
+	}
+
+	public TileEntity getRenderTileEntity(ItemStack itemStack)
+	{
+		if(renderTileEntity == null)
+		{
+			renderTileEntity = getCartBlock(itemStack).createTileEntity(ClientHelper.world(), getCartBlockState(itemStack));
+		}
+		return renderTileEntity;
 	}
 
 	public RenderMethod getCartBlockRenderMethod(ItemStack itemStack)
