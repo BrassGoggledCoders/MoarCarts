@@ -1,11 +1,13 @@
 package xyz.brassgoggledcoders.moarcarts.items;
 
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
 import xyz.brassgoggledcoders.boilerplate.lib.client.ClientHelper;
 
 import java.util.List;
@@ -30,13 +32,14 @@ public abstract class ItemSubMinecartBase extends ItemMinecartBase
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack)
 	{
-		return getUnlocalizedName() + "." + getUnlocalizedNameMetaExtension(itemstack);
+		return getUnlocalizedName() + "." + getUnlocalizedNameMetaExtension(itemstack.getItemDamage());
 	}
 
-	public String getUnlocalizedNameMetaExtension(ItemStack itemStack)
+	public String getUnlocalizedNameMetaExtension(int meta)
 	{
-		return itemStack.getItemDamage() + "";
+		return meta + "";
 	}
+
 
 	public abstract int getNumberOfSubItems();
 
@@ -49,6 +52,19 @@ public abstract class ItemSubMinecartBase extends ItemMinecartBase
 					getCartBlockState(itemStack));
 		}
 		return renderTileEntities[damage];
+	}
+
+	@Override
+	public ModelResourceLocation[] getModelDefinitions()
+	{
+		int numberOfSubItems = getNumberOfSubItems();
+		ModelResourceLocation[] locations = new ModelResourceLocation[getNumberOfSubItems()];
+		for(int i = 0; i < numberOfSubItems; i++)
+		{
+			locations[i] = new ModelResourceLocation(BoilerplateLib.getInstance().mod.getPrefix() +
+					getUnlocalizedName() + getUnlocalizedNameMetaExtension(i));
+		}
+		return locations;
 	}
 
 	@Override

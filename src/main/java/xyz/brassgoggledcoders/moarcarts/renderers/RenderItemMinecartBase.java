@@ -18,8 +18,9 @@ import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ItemStackUtils;
 import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
 
 @SuppressWarnings("depecated")
-public abstract class RenderItemMinecartBase extends ItemSpecialRenderer
+public class RenderItemMinecartBase extends ItemSpecialRenderer
 {
+	private static RenderItemMinecartBase instance = new RenderItemMinecartBase();
 	private static final ResourceLocation minecartTextures = new ResourceLocation("textures/entity/minecart.png");
 	protected ModelBase modelMinecart = new ModelMinecart();
 
@@ -72,6 +73,7 @@ public abstract class RenderItemMinecartBase extends ItemSpecialRenderer
 		if (blockState.getBlock().getRenderType() != -1)
 		{
 			GL11.glPushMatrix();
+			GlStateManager.translate(-0.5F, -0.5F, 0.5F);
 			Minecraft.getMinecraft().getBlockRendererDispatcher().renderBlockBrightness(blockState, 15);
 			GL11.glPopMatrix();
 		}
@@ -145,4 +147,18 @@ public abstract class RenderItemMinecartBase extends ItemSpecialRenderer
 				.multiplyRightWith(new TransformationMatrix(180, 0, 1, 0))
 				.scale(0.075, 0.075, 0.075);
 	}
+
+	public static RenderItemMinecartBase getInstance()
+	{
+		return instance;
+	}
+
+	@Override
+	public Class getTileClass()
+	{
+		return TileEntityDummy.class;
+	}
+
+	public static class TileEntityDummy extends TileEntity
+	{}
 }

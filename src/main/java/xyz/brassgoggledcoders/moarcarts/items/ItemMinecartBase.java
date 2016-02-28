@@ -12,7 +12,9 @@
 package xyz.brassgoggledcoders.moarcarts.items;
 
 import com.mojang.authlib.GameProfile;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.tileentity.TileEntity;
+import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
 import xyz.brassgoggledcoders.boilerplate.lib.client.ClientHelper;
 import xyz.brassgoggledcoders.boilerplate.lib.common.tileentities.TileEntityBase;
 import xyz.brassgoggledcoders.moarcarts.MoarCarts;
@@ -34,12 +36,15 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.BlockUtils;
+import xyz.brassgoggledcoders.moarcarts.renderers.ISpecialRenderedItem;
+import xyz.brassgoggledcoders.moarcarts.renderers.ItemSpecialRenderer;
+import xyz.brassgoggledcoders.moarcarts.renderers.RenderItemMinecartBase;
 
 /**
  * @author SkySom
  */
 @Optional.Interface(modid = "RailcraftAPI|items", iface = "mods.railcraft.api.core.items.IMinecartItem")
-public abstract class ItemMinecartBase extends ItemMinecart implements IMinecartItem
+public abstract class ItemMinecartBase extends ItemMinecart implements IMinecartItem, ISpecialRenderedItem
 {
 	private TileEntity renderTileEntity;
 
@@ -131,6 +136,19 @@ public abstract class ItemMinecartBase extends ItemMinecart implements IMinecart
 	public int getCartBlockMetadata(ItemStack itemStack)
 	{
 		return 0;
+	}
+
+	@Override
+	public ItemSpecialRenderer getSpecialRenderer()
+	{
+		return RenderItemMinecartBase.getInstance();
+	}
+
+	@Override
+	public ModelResourceLocation[] getModelDefinitions()
+	{
+		return new ModelResourceLocation[] {new ModelResourceLocation(BoilerplateLib.getInstance().mod.getPrefix() +
+				getUnlocalizedName().substring(5))};
 	}
 
 	public abstract Block getCartBlock(ItemStack itemStack);
