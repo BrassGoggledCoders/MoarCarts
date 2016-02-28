@@ -1,6 +1,9 @@
 package xyz.brassgoggledcoders.moarcarts.mods.vanilla.blocks;
 
 import com.google.common.base.Predicate;
+import net.minecraft.util.ResourceLocation;
+import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
+import xyz.brassgoggledcoders.boilerplate.lib.client.models.IHasModel;
 import xyz.brassgoggledcoders.moarcarts.MoarCarts;
 import xyz.brassgoggledcoders.moarcarts.api.ComparatorTrackEvent;
 import xyz.brassgoggledcoders.moarcarts.api.IComparatorCart;
@@ -21,7 +24,7 @@ import java.util.List;
 /**
  * @author SkySom
  */
-public class BlockComparatorTrack extends BlockRailDetector
+public class BlockComparatorTrack extends BlockRailDetector implements IHasModel
 {
 	public BlockComparatorTrack()
 	{
@@ -78,6 +81,12 @@ public class BlockComparatorTrack extends BlockRailDetector
 		}
 
 		return comparatorOutput;
+	}
+
+	@Override
+	public ResourceLocation[] getResourceLocations()
+	{
+		return new ResourceLocation[] {new ResourceLocation(getRegistryName())};
 	}
 }
 

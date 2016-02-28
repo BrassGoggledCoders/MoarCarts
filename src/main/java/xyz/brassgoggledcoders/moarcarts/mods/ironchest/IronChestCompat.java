@@ -10,12 +10,11 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import xyz.brassgoggledcoders.boilerplate.lib.common.modcompat.ModCompat;
-import xyz.brassgoggledcoders.boilerplate.lib.common.utils.helpers.RegistryHelper;
-import xyz.brassgoggledcoders.moarcarts.MoarCarts;
+import xyz.brassgoggledcoders.boilerplate.lib.common.registries.EntityRegistry;
+import xyz.brassgoggledcoders.boilerplate.lib.common.registries.ItemRegistry;
 import xyz.brassgoggledcoders.moarcarts.mods.ironchest.entities.*;
 import xyz.brassgoggledcoders.moarcarts.mods.ironchest.items.ItemMinecartIronChest;
 import xyz.brassgoggledcoders.moarcarts.recipes.NBTCartRecipe;
-import xyz.brassgoggledcoders.moarcarts.renderers.ModelBakeHandler;
 import xyz.brassgoggledcoders.moarcarts.renderers.RenderItemMinecartBase;
 
 /**
@@ -43,16 +42,6 @@ public class IronChestCompat extends ModCompat
 	{
 		this.registerItems();
 		this.registerEntities();
-        RenderItemMinecartBase renderer = RenderItemMinecartBase.getInstance();
-        ClientRegistry.bindTileEntitySpecialRenderer(renderer.getTileClass(), renderer);
-        ModelResourceLocation[] variants = ITEM_MINECART_IRONCHEST.getModelDefinitions();
-        for(int i = 0; i < 8; i++)
-        {
-            ModelLoader.setCustomModelResourceLocation(ITEM_MINECART_IRONCHEST, i, variants[i]);
-            ModelBakeHandler.getInstance().registerModelToSwap(variants[i], renderer);
-            //noinspection deprecation
-            ForgeHooksClient.registerTESRItemStack(ITEM_MINECART_IRONCHEST, i, renderer.getTileClass());
-        }
 	}
 
 	@Override
@@ -63,20 +52,20 @@ public class IronChestCompat extends ModCompat
 
 	public void registerEntities()
 	{
-		RegistryHelper.registerEntity(EntityMinecartCopperChest.class, "entityminecartcopperchest");
-		RegistryHelper.registerEntity(EntityMinecartCrystalChest.class, "entityminecartcrystalchest");
-		RegistryHelper.registerEntity(EntityMinecartDiamondChest.class, "entityminecartdiamondchest");
-		RegistryHelper.registerEntity(EntityMinecartDirtChest.class, "entityminecartdirtchest");
-		RegistryHelper.registerEntity(EntityMinecartGoldChest.class, "entityminecartgoldchest");
-		RegistryHelper.registerEntity(EntityMinecartIronChest.class, "entityminecartironchest");
-		RegistryHelper.registerEntity(EntityMinecartObsidianChest.class, "entityminecartobsidianchest");
-		RegistryHelper.registerEntity(EntityMinecartSilverChest.class, "entityminecartsilverchest");
+		EntityRegistry.registerEntity(EntityMinecartCopperChest.class, "entityminecartcopperchest");
+		EntityRegistry.registerEntity(EntityMinecartCrystalChest.class, "entityminecartcrystalchest");
+		EntityRegistry.registerEntity(EntityMinecartDiamondChest.class, "entityminecartdiamondchest");
+		EntityRegistry.registerEntity(EntityMinecartDirtChest.class, "entityminecartdirtchest");
+		EntityRegistry.registerEntity(EntityMinecartGoldChest.class, "entityminecartgoldchest");
+		EntityRegistry.registerEntity(EntityMinecartIronChest.class, "entityminecartironchest");
+		EntityRegistry.registerEntity(EntityMinecartObsidianChest.class, "entityminecartobsidianchest");
+		EntityRegistry.registerEntity(EntityMinecartSilverChest.class, "entityminecartsilverchest");
 	}
 
 	public void registerItems()
 	{
 		ITEM_MINECART_IRONCHEST = new ItemMinecartIronChest();
-		GameRegistry.registerItem(ITEM_MINECART_IRONCHEST, "minecartironchest");
+		ItemRegistry.registerItem(ITEM_MINECART_IRONCHEST);
 	}
 
 	public void registerRecipes()

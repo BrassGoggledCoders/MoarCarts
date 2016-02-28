@@ -3,7 +3,9 @@ package xyz.brassgoggledcoders.moarcarts.mods.ironchest.items;
 import cpw.mods.ironchest.IronChest;
 import cpw.mods.ironchest.IronChestType;
 import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.util.ResourceLocation;
 import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
+import xyz.brassgoggledcoders.boilerplate.lib.common.items.IHasRecipe;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartBase;
 import xyz.brassgoggledcoders.moarcarts.items.ItemSubMinecartBase;
 import xyz.brassgoggledcoders.moarcarts.mods.ironchest.entities.*;
@@ -11,9 +13,6 @@ import xyz.brassgoggledcoders.moarcarts.renderers.IRenderBlock.RenderMethod;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import xyz.brassgoggledcoders.moarcarts.renderers.ISpecialRenderedItem;
-import xyz.brassgoggledcoders.moarcarts.renderers.ItemSpecialRenderer;
-import xyz.brassgoggledcoders.moarcarts.renderers.RenderItemMinecartBase;
 
 /**
  * @author SkySom
@@ -89,18 +88,5 @@ public class ItemMinecartIronChest extends ItemSubMinecartBase
 				entityMinecartIronChest = new EntityMinecartIronChest(world, itemStack.getItemDamage());
 		}
 		return entityMinecartIronChest;
-	}
-
-	@Override
-	public ModelResourceLocation[] getModelDefinitions()
-	{
-		int numberOfSubItems = getNumberOfSubItems();
-		ModelResourceLocation[] locations = new ModelResourceLocation[getNumberOfSubItems()];
-		for(int i = 0; i < numberOfSubItems; i++)
-		{
-			locations[i] = new ModelResourceLocation(BoilerplateLib.getInstance().mod.getPrefix() +
-					"minecartironchest" + IronChestType.values()[i].toString().toLowerCase());
-		}
-		return locations;
 	}
 }

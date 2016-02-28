@@ -11,7 +11,6 @@
  */
 package xyz.brassgoggledcoders.moarcarts;
 
-import xyz.brassgoggledcoders.moarcarts.blocks.BlockMinecart;
 import xyz.brassgoggledcoders.moarcarts.config.ConfigSettings;
 import xyz.brassgoggledcoders.moarcarts.items.MoarCartsCreativeTab;
 import xyz.brassgoggledcoders.moarcarts.mods.ironchest.IronChestCompat;
@@ -56,25 +55,21 @@ public class MoarCarts implements IBoilerplateMod
 	@SidedProxy(clientSide = "xyz.brassgoggledcoders.moarcarts.proxies.ClientProxy", serverSide = "xyz.brassgoggledcoders.moarcarts.proxies.CommonProxy")
 	public static CommonProxy proxy;
 
-	public static BlockMinecart blockMinecart;
-
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		logger = new ModLogger(MODID);
 		initModCompatHandler();
-		BoilerplateLib.getInstance().packetHandler.registerPacket(EntityTileEntityUpdateMessage.Handler.class,
+		BoilerplateLib.getInstance().preInitStart(event);
+		BoilerplateLib.getPacketHandler().registerPacket(EntityTileEntityUpdateMessage.Handler.class,
 				EntityTileEntityUpdateMessage.class, Side.CLIENT);
 
-		Configuration configuration = BoilerplateLib.getInstance().config(event);
+		Configuration configuration = BoilerplateLib.getConfig();
 		ConfigSettings.init(configuration);
 		configuration.save();
 
-		BoilerplateLib.getInstance().preInit(event);
+		BoilerplateLib.getInstance().preInitEnd(event);
 		MoarCarts.proxy.preInit();
-		//blockMinecart = new BlockMinecart();
-		//RegistryHelper.registerBlockWithDesc(blockMinecart, "minecart");
-		//SafeModelLoader.loadBlockModel(blockMinecart);
 	}
 
 	@EventHandler
@@ -94,12 +89,12 @@ public class MoarCarts implements IBoilerplateMod
 
 	public void initModCompatHandler()
 	{
-		BoilerplateLib.getInstance().compatibilityHandler.addModCompat(new VanillaCompat());
+		BoilerplateLib.getCompatibilityHandler().addModCompat(new VanillaCompat());
 		//TODO: Railcraft Compat
 		//compatibilityHandler.addModCompat(new RailcraftCompat());
 		//TODO: RF Compat (IE Flux)
 		//compatibilityHandler.addModCompat(new RFCompat());
-		BoilerplateLib.getInstance().compatibilityHandler.addModCompat(new IronChestCompat());
+		BoilerplateLib.getCompatibilityHandler().addModCompat(new IronChestCompat());
 		//TODO: IE Compat
 		//compatibilityHandler.addModCompat(new IEModCompat());
 		//TODO: MFR Compat
@@ -110,7 +105,7 @@ public class MoarCarts implements IBoilerplateMod
 		//compatibilityHandler.addModCompat(new BotaniaCompat());
 		//TODO: Avaritia Compat
 		//compatibilityHandler.addModCompat(new AvaritiaCompat());
-		BoilerplateLib.getInstance().compatibilityHandler.addModCompat(new WailaCompat());
+		BoilerplateLib.getCompatibilityHandler().addModCompat(new WailaCompat());
 	}
 
 	@Override

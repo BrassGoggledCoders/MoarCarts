@@ -14,9 +14,11 @@ package xyz.brassgoggledcoders.moarcarts.items;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
 import xyz.brassgoggledcoders.boilerplate.lib.client.ClientHelper;
-import xyz.brassgoggledcoders.boilerplate.lib.common.tileentities.TileEntityBase;
+import xyz.brassgoggledcoders.boilerplate.lib.client.renderers.ISpecialRenderedItem;
+import xyz.brassgoggledcoders.boilerplate.lib.client.renderers.ItemSpecialRenderer;
 import xyz.brassgoggledcoders.moarcarts.MoarCarts;
 import xyz.brassgoggledcoders.moarcarts.behaviors.CartDispenserBehavior;
 import xyz.brassgoggledcoders.moarcarts.config.ConfigSettings;
@@ -36,8 +38,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.BlockUtils;
-import xyz.brassgoggledcoders.moarcarts.renderers.ISpecialRenderedItem;
-import xyz.brassgoggledcoders.moarcarts.renderers.ItemSpecialRenderer;
 import xyz.brassgoggledcoders.moarcarts.renderers.RenderItemMinecartBase;
 
 /**
@@ -141,13 +141,13 @@ public abstract class ItemMinecartBase extends ItemMinecart implements IMinecart
 	@Override
 	public ItemSpecialRenderer getSpecialRenderer()
 	{
-		return RenderItemMinecartBase.getInstance();
+		return new RenderItemMinecartBase();
 	}
 
 	@Override
-	public ModelResourceLocation[] getModelDefinitions()
+	public ResourceLocation[] getResourceLocations()
 	{
-		return new ModelResourceLocation[] {new ModelResourceLocation(BoilerplateLib.getInstance().mod.getPrefix() +
+		return new ResourceLocation[] {new ResourceLocation(BoilerplateLib.getMod().getPrefix() +
 				getUnlocalizedName().substring(5))};
 	}
 

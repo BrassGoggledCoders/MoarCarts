@@ -124,7 +124,7 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 	{
 		if(!worldObj.isRemote)
 		{
-			BoilerplateLib.getInstance().packetHandler.sendToAllAround(new EntityTileEntityUpdateMessage(this), this);
+			BoilerplateLib.getPacketHandler().sendToAllAround(new EntityTileEntityUpdateMessage(this), this);
 		}
 	}
 

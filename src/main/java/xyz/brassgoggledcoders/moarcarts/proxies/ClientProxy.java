@@ -7,7 +7,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartTEBase;
-import xyz.brassgoggledcoders.moarcarts.renderers.ModelBakeHandler;
 import xyz.brassgoggledcoders.moarcarts.renderers.RenderMinecartTEBase;
 
 /**
@@ -37,7 +36,6 @@ public class ClientProxy extends CommonProxy
 	public void preInit()
 	{
 		RenderingRegistry.registerEntityRenderingHandler(EntityMinecartTEBase.class, RenderMinecartTEBase.Factory.INSTANCE);
-		MinecraftForge.EVENT_BUS.register(ModelBakeHandler.getInstance());
 	}
 
 	@Override

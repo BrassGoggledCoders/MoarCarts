@@ -14,6 +14,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import org.lwjgl.opengl.GL11;
 import xyz.brassgoggledcoders.boilerplate.lib.client.ClientHelper;
+import xyz.brassgoggledcoders.boilerplate.lib.client.renderers.ItemSpecialRenderer;
+import xyz.brassgoggledcoders.boilerplate.lib.client.renderers.math.DefaultTransformationMatrices;
+import xyz.brassgoggledcoders.boilerplate.lib.client.renderers.math.TransformationMatrix;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ItemStackUtils;
 import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
 
@@ -100,52 +103,7 @@ public class RenderItemMinecartBase extends ItemSpecialRenderer
 
 	@Override
 	public TransformationMatrix getTransformMatrixForPerspective(ItemCameraTransforms.TransformType cameraTransformsType) {
-		switch(cameraTransformsType) {
-			case FIRST_PERSON: return transformationMatrixFirstPerson();
-			case THIRD_PERSON: return transformationMatrixThirdPerson();
-			case GUI: return transformationMatrixGui();
-			case GROUND: return transformationMatrixGround();
-			default: return transformationMatrixDefault();
-		}
-	}
-
-	protected TransformationMatrix transformationMatrixFirstPerson() {
-		return new TransformationMatrix(0.25, -0.275, 0.35)
-				.multiplyRightWith(new TransformationMatrix(90, 1, 0, 0))
-				.multiplyRightWith(new TransformationMatrix(225, 0, 0, 1))
-				.multiplyRightWith(new TransformationMatrix(180, 0, 1, 0))
-				.scale(0.075, 0.075, 0.075);
-	}
-
-	protected TransformationMatrix transformationMatrixThirdPerson() {
-		return new TransformationMatrix(0, 0.1, -0.07)
-				.multiplyRightWith(new TransformationMatrix(180, 0, 1, 0))
-				.scale(0.02, 0.02, 0.02);
-	}
-
-	protected TransformationMatrix transformationMatrixGui() {
-		return new TransformationMatrix(0.025, 0, 0)
-				.multiplyRightWith(new TransformationMatrix(90, -1, 0, 1))
-				.multiplyRightWith(new TransformationMatrix(90, 0, 0, 1))
-				.multiplyRightWith(new TransformationMatrix(75, 0, 1, 0))
-				.multiplyRightWith(new TransformationMatrix(-90, 0, 1, 0))
-				.scale(0.03, 0.03, 0.03);
-	}
-
-	protected TransformationMatrix transformationMatrixGround() {
-		return new TransformationMatrix(-0.2, 0, 0.05)
-				.multiplyRightWith(new TransformationMatrix(90, 1, 0, 0))
-				.multiplyRightWith(new TransformationMatrix(90, 0, 0, 1))
-				.multiplyRightWith(new TransformationMatrix(180, 0, 1, 0))
-				.scale(0.03, 0.03, 0.03);
-	}
-
-	protected TransformationMatrix transformationMatrixDefault() {
-		return new TransformationMatrix(0.25, -0.275, 0.35)
-				.multiplyRightWith(new TransformationMatrix(90, 1, 0, 0))
-				.multiplyRightWith(new TransformationMatrix(225, 0, 0, 1))
-				.multiplyRightWith(new TransformationMatrix(180, 0, 1, 0))
-				.scale(0.075, 0.075, 0.075);
+		return DefaultTransformationMatrices.getTransformMatrixForPerspective(cameraTransformsType);
 	}
 
 	public static RenderItemMinecartBase getInstance()
@@ -156,9 +114,8 @@ public class RenderItemMinecartBase extends ItemSpecialRenderer
 	@Override
 	public Class getTileClass()
 	{
-		return TileEntityDummy.class;
+		return DummyTile.class;
 	}
 
-	public static class TileEntityDummy extends TileEntity
-	{}
+	static class DummyTile extends TileEntity {}
 }

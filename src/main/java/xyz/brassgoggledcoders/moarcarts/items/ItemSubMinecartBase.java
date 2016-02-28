@@ -5,6 +5,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
@@ -55,14 +56,14 @@ public abstract class ItemSubMinecartBase extends ItemMinecartBase
 	}
 
 	@Override
-	public ModelResourceLocation[] getModelDefinitions()
+	public ResourceLocation[] getResourceLocations()
 	{
 		int numberOfSubItems = getNumberOfSubItems();
-		ModelResourceLocation[] locations = new ModelResourceLocation[getNumberOfSubItems()];
+		ResourceLocation[] locations = new ResourceLocation[getNumberOfSubItems()];
 		for(int i = 0; i < numberOfSubItems; i++)
 		{
-			locations[i] = new ModelResourceLocation(BoilerplateLib.getInstance().mod.getPrefix() +
-					getUnlocalizedName() + getUnlocalizedNameMetaExtension(i));
+			locations[i] = new ResourceLocation(BoilerplateLib.getMod().getPrefix() +
+					getUnlocalizedName().substring(5) + getUnlocalizedNameMetaExtension(i));
 		}
 		return locations;
 	}

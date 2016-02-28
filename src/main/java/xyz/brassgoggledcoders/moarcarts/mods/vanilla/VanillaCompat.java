@@ -11,20 +11,14 @@
  */
 package xyz.brassgoggledcoders.moarcarts.mods.vanilla;
 
-import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraftforge.client.ForgeHooksClient;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import xyz.brassgoggledcoders.boilerplate.lib.common.modcompat.ModCompat;
+import xyz.brassgoggledcoders.boilerplate.lib.common.registries.BlockRegistry;
+import xyz.brassgoggledcoders.boilerplate.lib.common.registries.EntityRegistry;
+import xyz.brassgoggledcoders.boilerplate.lib.common.registries.ItemRegistry;
 import xyz.brassgoggledcoders.moarcarts.mods.vanilla.blocks.BlockComparatorTrack;
 import xyz.brassgoggledcoders.moarcarts.mods.vanilla.entities.EntityMinecartEnderChest;
 import xyz.brassgoggledcoders.moarcarts.mods.vanilla.items.ItemMinecartEnderChest;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import xyz.brassgoggledcoders.boilerplate.lib.client.models.SafeModelLoader;
-import xyz.brassgoggledcoders.boilerplate.lib.common.modcompat.ModCompat;
-import xyz.brassgoggledcoders.boilerplate.lib.common.utils.helpers.RegistryHelper;
-import xyz.brassgoggledcoders.moarcarts.renderers.ModelBakeHandler;
-import xyz.brassgoggledcoders.moarcarts.renderers.RenderItemMinecartBase;
 
 /**
  * @author SkySom
@@ -44,20 +38,10 @@ public class VanillaCompat extends ModCompat
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		BLOCK_COMPARATOR_TRACK = new BlockComparatorTrack();
-		RegistryHelper.registerBlockWithDesc(BLOCK_COMPARATOR_TRACK, "comparatortrack");
-		SafeModelLoader.loadBlockModel(BLOCK_COMPARATOR_TRACK);
+		BlockRegistry.registerBlock(BLOCK_COMPARATOR_TRACK, "comparatortrack");
 
 		ITEM_MINECART_ENDERCHEST = new ItemMinecartEnderChest();
-		GameRegistry.registerItem(ITEM_MINECART_ENDERCHEST, ITEM_MINECART_ENDERCHEST.getUnlocalizedName().substring(5));
-		RegistryHelper.registerEntity(EntityMinecartEnderChest.class, "entityminecartenderchest");
-		SafeModelLoader.loadItemModel(ITEM_MINECART_ENDERCHEST);
-
-		RenderItemMinecartBase renderer = RenderItemMinecartBase.getInstance();
-		ClientRegistry.bindTileEntitySpecialRenderer(renderer.getTileClass(), renderer);
-		ModelResourceLocation[] variants = ITEM_MINECART_ENDERCHEST.getModelDefinitions();
-		ModelLoader.setCustomModelResourceLocation(ITEM_MINECART_ENDERCHEST, 0, variants[0]);
-		ModelBakeHandler.getInstance().registerModelToSwap(variants[0], renderer);
-		//noinspection deprecation
-		ForgeHooksClient.registerTESRItemStack(ITEM_MINECART_ENDERCHEST, 0, renderer.getTileClass());
+		ItemRegistry.registerItem(ITEM_MINECART_ENDERCHEST);
+		EntityRegistry.registerEntity(EntityMinecartEnderChest.class, "entityminecartenderchest");
 	}
 }

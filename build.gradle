@@ -200,7 +200,7 @@ task("uploadJars", dependsOn: "reobf") {
                     repository(url: "file://" + System.getenv("local_maven"))
                     pom {
                         groupId = project.group
-                        version = project.version
+                        version
                         artifactId = project.archivesBaseName
                         project {
                             name project.archivesBaseName
