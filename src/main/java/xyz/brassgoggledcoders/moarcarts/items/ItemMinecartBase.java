@@ -12,11 +12,23 @@
 package xyz.brassgoggledcoders.moarcarts.items;
 
 import com.mojang.authlib.GameProfile;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.item.Item;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
+import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
+import xyz.brassgoggledcoders.boilerplate.lib.client.ClientHelper;
+import xyz.brassgoggledcoders.boilerplate.lib.client.renderers.ISpecialRenderedItem;
+import xyz.brassgoggledcoders.boilerplate.lib.client.renderers.ItemSpecialRenderer;
+import xyz.brassgoggledcoders.boilerplate.lib.common.items.IHasRecipe;
+import xyz.brassgoggledcoders.boilerplate.lib.common.registries.ItemRegistry;
 import xyz.brassgoggledcoders.moarcarts.MoarCarts;
 import xyz.brassgoggledcoders.moarcarts.behaviors.CartDispenserBehavior;
 import xyz.brassgoggledcoders.moarcarts.config.ConfigSettings;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartBase;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartTEBase;
+import xyz.brassgoggledcoders.moarcarts.recipes.NBTCartRecipe;
 import xyz.brassgoggledcoders.moarcarts.renderers.IRenderBlock.RenderMethod;
 import mods.railcraft.api.core.items.IMinecartItem;
 import net.minecraft.block.Block;
@@ -31,17 +43,23 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.BlockUtils;
+import xyz.brassgoggledcoders.moarcarts.renderers.RenderItemMinecartBase;
 
 /**
  * @author SkySom
  */
 @Optional.Interface(modid = "RailcraftAPI|items", iface = "mods.railcraft.api.core.items.IMinecartItem")
-public abstract class ItemMinecartBase extends ItemMinecart implements IMinecartItem
+public abstract class ItemMinecartBase extends ItemMinecart implements IMinecartItem, ISpecialRenderedItem, IHasRecipe
 {
+	private TileEntity renderTileEntity;
+	protected String mod;
+
 	public ItemMinecartBase(String mod, String name)
 	{
 		super(null);
+		this.mod = mod;
 		this.setUnlocalizedName(name);
+		this.setRegistryName(name);
 		this.setCreativeTab(MoarCarts.moarcartsTab);
 		this.setMaxStackSize(ConfigSettings.getMinecartStackSize());
 		BlockDispenser.dispenseBehaviorRegistry.putObject(this, new CartDispenserBehavior());
@@ -109,6 +127,15 @@ public abstract class ItemMinecartBase extends ItemMinecart implements IMinecart
 		return this.getCartBlock(itemStack).getStateFromMeta(this.getCartBlockMetadata(itemStack));
 	}
 
+	public TileEntity getRenderTileEntity(ItemStack itemStack)
+	{
+		if(renderTileEntity == null)
+		{
+			renderTileEntity = getCartBlock(itemStack).createTileEntity(ClientHelper.world(), getCartBlockState(itemStack));
+		}
+		return renderTileEntity;
+	}
+
 	public RenderMethod getCartBlockRenderMethod(ItemStack itemStack)
 	{
 		return RenderMethod.VMC;
@@ -117,6 +144,26 @@ public abstract class ItemMinecartBase extends ItemMinecart implements IMinecart
 	public int getCartBlockMetadata(ItemStack itemStack)
 	{
 		return 0;
+	}
+
+	@Override
+	public ItemSpecialRenderer getSpecialRenderer()
+	{
+		return RenderItemMinecartBase.getInstance();
+	}
+
+	@Override
+	public ResourceLocation[] getResourceLocations()
+	{
+		return new ResourceLocation[] {new ResourceLocation(getRegistryName())};
+	}
+
+	@Override
+	public IRecipe[] getRecipes()
+	{
+		Item itemMinecartBase = ItemRegistry.getItem(this.getUnlocalizedName().substring(5));
+		ItemStack itemStack = new ItemStack(itemMinecartBase, 1, 0);
+		return new IRecipe[]{new NBTCartRecipe(itemMinecartBase, getCartBlock(itemStack))};
 	}
 
 	public abstract Block getCartBlock(ItemStack itemStack);

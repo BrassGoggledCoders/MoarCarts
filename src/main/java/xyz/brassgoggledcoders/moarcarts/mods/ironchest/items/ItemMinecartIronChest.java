@@ -2,29 +2,26 @@ package xyz.brassgoggledcoders.moarcarts.mods.ironchest.items;
 
 import cpw.mods.ironchest.IronChest;
 import cpw.mods.ironchest.IronChestType;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.util.ResourceLocation;
+import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
+import xyz.brassgoggledcoders.boilerplate.lib.common.items.IHasRecipe;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartBase;
-import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
+import xyz.brassgoggledcoders.moarcarts.items.ItemSubMinecartBase;
 import xyz.brassgoggledcoders.moarcarts.mods.ironchest.entities.*;
 import xyz.brassgoggledcoders.moarcarts.renderers.IRenderBlock.RenderMethod;
 import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.List;
 
 /**
  * @author SkySom
  */
-public class ItemMinecartIronChest extends ItemMinecartBase
+public class ItemMinecartIronChest extends ItemSubMinecartBase
 {
 	public ItemMinecartIronChest()
 	{
 		super("ironchest", "minecartironchest");
-		this.setHasSubtypes(true);
 	}
 
 
@@ -38,32 +35,21 @@ public class ItemMinecartIronChest extends ItemMinecartBase
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack itemstack)
+	public String getUnlocalizedNameMetaExtension(int meta)
 	{
-		return "item.minecartironchest." + IronChestType.values()[itemstack.getItemDamage()].name().toLowerCase();
+		return IronChestType.values()[meta].name().toLowerCase();
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> list)
+	public int getNumberOfSubItems()
 	{
-		for (int i = 0; i < 8; i++)
-		{
-			ItemStack stack = new ItemStack(item, 1, i);
-			list.add(stack);
-		}
+		return 8;
 	}
 
 	@Override
 	public Block getCartBlock(ItemStack itemStack)
 	{
 		return IronChest.ironChestBlock;
-	}
-
-	@Override
-	public int getCartBlockMetadata(ItemStack itemStack)
-	{
-		return itemStack.getItemDamage();
 	}
 
 	@Override

@@ -31,6 +31,7 @@ archivesBaseName = "moarcarts"
 minecraft {
     version = "${minecraftversion}-${forgeversion}"
     mappings = "${mappingsversion}"
+    useDepAts = true
     runDir = "run/"
     useDepAts = true
 
@@ -202,7 +203,7 @@ task("uploadJars", dependsOn: "reobf") {
                     repository(url: "file://" + System.getenv("local_maven"))
                     pom {
                         groupId = project.group
-                        version = project.version
+                        version
                         artifactId = project.archivesBaseName
                         project {
                             name project.archivesBaseName

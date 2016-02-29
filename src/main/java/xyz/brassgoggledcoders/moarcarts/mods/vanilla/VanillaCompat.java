@@ -11,19 +11,15 @@
  */
 package xyz.brassgoggledcoders.moarcarts.mods.vanilla;
 
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import xyz.brassgoggledcoders.boilerplate.lib.client.models.SafeModelLoader;
 import xyz.brassgoggledcoders.boilerplate.lib.common.modcompat.ModCompat;
-import xyz.brassgoggledcoders.boilerplate.lib.common.utils.helpers.RegistryHelper;
+import xyz.brassgoggledcoders.boilerplate.lib.common.registries.BlockRegistry;
+import xyz.brassgoggledcoders.boilerplate.lib.common.registries.EntityRegistry;
+import xyz.brassgoggledcoders.boilerplate.lib.common.registries.ItemRegistry;
 import xyz.brassgoggledcoders.moarcarts.mods.vanilla.blocks.BlockComparatorTrack;
 import xyz.brassgoggledcoders.moarcarts.mods.vanilla.entities.EntityMinecartEnderChest;
 import xyz.brassgoggledcoders.moarcarts.mods.vanilla.items.ItemMinecartEnderChest;
-import xyz.brassgoggledcoders.moarcarts.recipes.NBTCartRecipe;
+
 
 /**
  * @author SkySom
@@ -43,21 +39,10 @@ public class VanillaCompat extends ModCompat
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		BLOCK_COMPARATOR_TRACK = new BlockComparatorTrack();
-		RegistryHelper.registerBlockWithDesc(BLOCK_COMPARATOR_TRACK, "comparatortrack");
-
-		SafeModelLoader.loadBlockModel(BLOCK_COMPARATOR_TRACK);
+		BlockRegistry.registerBlock(BLOCK_COMPARATOR_TRACK);
 
 		ITEM_MINECART_ENDERCHEST = new ItemMinecartEnderChest();
-		GameRegistry.registerItem(ITEM_MINECART_ENDERCHEST, ITEM_MINECART_ENDERCHEST.getUnlocalizedName().substring(5));
-		RegistryHelper.registerEntity(EntityMinecartEnderChest.class, "entityminecartenderchest");
-		SafeModelLoader.loadItemModel(ITEM_MINECART_ENDERCHEST);
-	}
-
-	@Override
-	public void init(FMLInitializationEvent event)
-	{
-		GameRegistry.addShapelessRecipe(new ItemStack(BLOCK_COMPARATOR_TRACK), new ItemStack(Blocks.detector_rail),
-				new ItemStack(Items.comparator));
-		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_ENDERCHEST, Blocks.ender_chest));
+		ItemRegistry.registerItem(ITEM_MINECART_ENDERCHEST);
+		EntityRegistry.registerEntity(EntityMinecartEnderChest.class);
 	}
 }

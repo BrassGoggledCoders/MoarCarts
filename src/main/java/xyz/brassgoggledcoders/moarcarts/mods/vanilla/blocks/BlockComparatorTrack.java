@@ -1,6 +1,17 @@
 package xyz.brassgoggledcoders.moarcarts.mods.vanilla.blocks;
 
 import com.google.common.base.Predicate;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.ShapelessRecipes;
+import net.minecraft.util.ResourceLocation;
+import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
+import xyz.brassgoggledcoders.boilerplate.lib.client.models.IHasModel;
+import xyz.brassgoggledcoders.boilerplate.lib.common.items.IHasRecipe;
+import xyz.brassgoggledcoders.boilerplate.lib.common.registries.BlockRegistry;
 import xyz.brassgoggledcoders.moarcarts.MoarCarts;
 import xyz.brassgoggledcoders.moarcarts.api.ComparatorTrackEvent;
 import xyz.brassgoggledcoders.moarcarts.api.IComparatorCart;
@@ -14,14 +25,16 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.IFluidHandler;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ComparatorUtils;
+import xyz.brassgoggledcoders.moarcarts.mods.vanilla.VanillaCompat;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author SkySom
  */
-public class BlockComparatorTrack extends BlockRailDetector
+public class BlockComparatorTrack extends BlockRailDetector implements IHasModel, IHasRecipe
 {
 	public BlockComparatorTrack()
 	{
@@ -78,6 +91,22 @@ public class BlockComparatorTrack extends BlockRailDetector
 		}
 
 		return comparatorOutput;
+	}
+
+	@Override
+	public ResourceLocation[] getResourceLocations()
+	{
+		return new ResourceLocation[] {new ResourceLocation(BoilerplateLib.getMod().getPrefix() + "vanilla/" +
+			getUnlocalizedName().substring(5))};
+	}
+
+	@Override
+	public IRecipe[] getRecipes()
+	{
+		ArrayList<ItemStack> materials = new ArrayList<ItemStack>();
+		materials.add(new ItemStack(Items.comparator));
+		materials.add(new ItemStack(Blocks.detector_rail));
+		return new IRecipe[]{new ShapelessRecipes(new ItemStack(this), materials)};
 	}
 }
 
