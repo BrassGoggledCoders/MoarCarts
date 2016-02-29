@@ -47,11 +47,14 @@ import xyz.brassgoggledcoders.moarcarts.renderers.RenderItemMinecartBase;
 public abstract class ItemMinecartBase extends ItemMinecart implements IMinecartItem, ISpecialRenderedItem
 {
 	private TileEntity renderTileEntity;
+	protected String mod;
 
 	public ItemMinecartBase(String mod, String name)
 	{
 		super(null);
+		this.mod = mod;
 		this.setUnlocalizedName(name);
+		this.setRegistryName(name);
 		this.setCreativeTab(MoarCarts.moarcartsTab);
 		this.setMaxStackSize(ConfigSettings.getMinecartStackSize());
 		BlockDispenser.dispenseBehaviorRegistry.putObject(this, new CartDispenserBehavior());
@@ -141,14 +144,13 @@ public abstract class ItemMinecartBase extends ItemMinecart implements IMinecart
 	@Override
 	public ItemSpecialRenderer getSpecialRenderer()
 	{
-		return new RenderItemMinecartBase();
+		return RenderItemMinecartBase.getInstance();
 	}
 
 	@Override
 	public ResourceLocation[] getResourceLocations()
 	{
-		return new ResourceLocation[] {new ResourceLocation(BoilerplateLib.getMod().getPrefix() +
-				getUnlocalizedName().substring(5))};
+		return new ResourceLocation[] {new ResourceLocation(getRegistryName())};
 	}
 
 	public abstract Block getCartBlock(ItemStack itemStack);
