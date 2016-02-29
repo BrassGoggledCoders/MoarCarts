@@ -11,11 +11,16 @@
  */
 package xyz.brassgoggledcoders.moarcarts.mods.vanilla;
 
+import net.minecraft.item.Item;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
 import xyz.brassgoggledcoders.boilerplate.lib.common.modcompat.ModCompat;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.BlockRegistry;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.EntityRegistry;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.ItemRegistry;
+import xyz.brassgoggledcoders.moarcarts.MoarCarts;
 import xyz.brassgoggledcoders.moarcarts.mods.vanilla.blocks.BlockComparatorTrack;
 import xyz.brassgoggledcoders.moarcarts.mods.vanilla.entities.EntityMinecartEnderChest;
 import xyz.brassgoggledcoders.moarcarts.mods.vanilla.items.ItemMinecartEnderChest;
@@ -38,10 +43,10 @@ public class VanillaCompat extends ModCompat
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		BLOCK_COMPARATOR_TRACK = new BlockComparatorTrack();
-		BlockRegistry.registerBlock(BLOCK_COMPARATOR_TRACK, "comparatortrack");
+		BlockRegistry.registerBlock(BLOCK_COMPARATOR_TRACK);
 
 		ITEM_MINECART_ENDERCHEST = new ItemMinecartEnderChest();
 		ItemRegistry.registerItem(ITEM_MINECART_ENDERCHEST);
-		EntityRegistry.registerEntity(EntityMinecartEnderChest.class, "entityminecartenderchest");
+		EntityRegistry.registerEntity(EntityMinecartEnderChest.class);
 	}
 }

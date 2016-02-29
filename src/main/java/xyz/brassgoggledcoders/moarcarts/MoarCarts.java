@@ -46,10 +46,11 @@ public class MoarCarts implements IBoilerplateMod
 	public static final String MODID = "moarcarts";
 	public static final String MODNAME = "MoarCarts";
 	public static final String MODVERSION = "@VERSION@";
-	public static final String DEPENDENCIES = "after:railcraft;after:Avaritia;after:ImmersiveEngineering@[0.6.5,);";
+	public static final String DEPENDENCIES = "after:ironchest;";
 
 	public static ModLogger logger;
 
+	public static Configuration config;
 	public static MoarCartsCreativeTab moarcartsTab = new MoarCartsCreativeTab();
 
 	@SidedProxy(clientSide = "xyz.brassgoggledcoders.moarcarts.proxies.ClientProxy", serverSide = "xyz.brassgoggledcoders.moarcarts.proxies.CommonProxy")
@@ -59,14 +60,16 @@ public class MoarCarts implements IBoilerplateMod
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		logger = new ModLogger(MODID);
+
+		config = new Configuration(event.getSuggestedConfigurationFile());
+		ConfigSettings.init(config);
+
 		initModCompatHandler();
+
 		BoilerplateLib.getInstance().preInitStart(event);
+
 		BoilerplateLib.getPacketHandler().registerPacket(EntityTileEntityUpdateMessage.Handler.class,
 				EntityTileEntityUpdateMessage.class, Side.CLIENT);
-
-		Configuration configuration = BoilerplateLib.getConfig();
-		ConfigSettings.init(configuration);
-		configuration.save();
 
 		BoilerplateLib.getInstance().preInitEnd(event);
 		MoarCarts.proxy.preInit();
@@ -148,6 +151,12 @@ public class MoarCarts implements IBoilerplateMod
 	public ModLogger getLogger()
 	{
 		return logger;
+	}
+
+	@Override
+	public Configuration getConfig()
+	{
+		return config;
 	}
 
 	@Override

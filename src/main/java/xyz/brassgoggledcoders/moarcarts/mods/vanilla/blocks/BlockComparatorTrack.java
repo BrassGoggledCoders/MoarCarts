@@ -86,7 +86,8 @@ public class BlockComparatorTrack extends BlockRailDetector implements IHasModel
 	@Override
 	public ResourceLocation[] getResourceLocations()
 	{
-		return new ResourceLocation[] {new ResourceLocation(getRegistryName())};
+		return new ResourceLocation[] {new ResourceLocation(BoilerplateLib.getMod().getPrefix() + "vanilla/" +
+			getUnlocalizedName().substring(5))};
 	}
 }
 

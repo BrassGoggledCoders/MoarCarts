@@ -2,14 +2,18 @@ package xyz.brassgoggledcoders.moarcarts.items;
 
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
 import xyz.brassgoggledcoders.boilerplate.lib.client.ClientHelper;
+import xyz.brassgoggledcoders.moarcarts.recipes.NBTCartRecipe;
 
 import java.util.List;
 
@@ -66,6 +70,19 @@ public abstract class ItemSubMinecartBase extends ItemMinecartBase
 					getUnlocalizedName().substring(5) + getUnlocalizedNameMetaExtension(i));
 		}
 		return locations;
+	}
+
+	@Override
+	public IRecipe[] getRecipes()
+	{
+		IRecipe[] recipes = new IRecipe[getNumberOfSubItems()];
+		int numberOfSubItems = getNumberOfSubItems();
+		for(int i = 0; i < numberOfSubItems; i++)
+		{
+			ItemStack itemStack = new ItemStack(this, 1, i);
+			recipes[i] = new NBTCartRecipe(this, i, getCartBlock(itemStack), i);
+		}
+		return recipes;
 	}
 
 	@Override

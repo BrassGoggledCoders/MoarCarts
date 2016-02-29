@@ -28,6 +28,7 @@ public class ConfigSettings
 				"change the value to your desired minecart stack size, vanilla=1, default=3, max=64").getInt(3);
 		minecartsBreakOnDrop = configuration.get("Tweaks", "breakOnDrop", false,
 				"change to '{t}=true' to restore vanilla behavior").getBoolean(false);
+		configuration.save();
 		return configuration;
 	}
 

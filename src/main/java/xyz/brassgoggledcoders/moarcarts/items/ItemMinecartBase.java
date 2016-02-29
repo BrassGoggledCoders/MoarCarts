@@ -13,17 +13,22 @@ package xyz.brassgoggledcoders.moarcarts.items;
 
 import com.mojang.authlib.GameProfile;
 import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.item.Item;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
 import xyz.brassgoggledcoders.boilerplate.lib.client.ClientHelper;
 import xyz.brassgoggledcoders.boilerplate.lib.client.renderers.ISpecialRenderedItem;
 import xyz.brassgoggledcoders.boilerplate.lib.client.renderers.ItemSpecialRenderer;
+import xyz.brassgoggledcoders.boilerplate.lib.common.items.IHasRecipe;
+import xyz.brassgoggledcoders.boilerplate.lib.common.registries.ItemRegistry;
 import xyz.brassgoggledcoders.moarcarts.MoarCarts;
 import xyz.brassgoggledcoders.moarcarts.behaviors.CartDispenserBehavior;
 import xyz.brassgoggledcoders.moarcarts.config.ConfigSettings;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartBase;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartTEBase;
+import xyz.brassgoggledcoders.moarcarts.recipes.NBTCartRecipe;
 import xyz.brassgoggledcoders.moarcarts.renderers.IRenderBlock.RenderMethod;
 import mods.railcraft.api.core.items.IMinecartItem;
 import net.minecraft.block.Block;
@@ -44,7 +49,7 @@ import xyz.brassgoggledcoders.moarcarts.renderers.RenderItemMinecartBase;
  * @author SkySom
  */
 @Optional.Interface(modid = "RailcraftAPI|items", iface = "mods.railcraft.api.core.items.IMinecartItem")
-public abstract class ItemMinecartBase extends ItemMinecart implements IMinecartItem, ISpecialRenderedItem
+public abstract class ItemMinecartBase extends ItemMinecart implements IMinecartItem, ISpecialRenderedItem, IHasRecipe
 {
 	private TileEntity renderTileEntity;
 	protected String mod;
@@ -151,6 +156,14 @@ public abstract class ItemMinecartBase extends ItemMinecart implements IMinecart
 	public ResourceLocation[] getResourceLocations()
 	{
 		return new ResourceLocation[] {new ResourceLocation(getRegistryName())};
+	}
+
+	@Override
+	public IRecipe[] getRecipes()
+	{
+		Item itemMinecartBase = ItemRegistry.getItem(this.getUnlocalizedName().substring(5));
+		ItemStack itemStack = new ItemStack(itemMinecartBase, 1, 0);
+		return new IRecipe[]{new NBTCartRecipe(itemMinecartBase, getCartBlock(itemStack))};
 	}
 
 	public abstract Block getCartBlock(ItemStack itemStack);
