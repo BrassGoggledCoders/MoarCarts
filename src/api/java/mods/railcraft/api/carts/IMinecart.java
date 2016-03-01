@@ -30,5 +30,5 @@ public interface IMinecart {
 	 * @param cart the Cart
 	 * @return true if the item matches the cart
 	 */
-	public boolean doesCartMatchFilter(ItemStack stack, EntityMinecart cart);
+	boolean doesCartMatchFilter(ItemStack stack, EntityMinecart cart);
 }

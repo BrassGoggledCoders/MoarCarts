@@ -1,8 +1,6 @@
 package xyz.brassgoggledcoders.moarcarts.items;
 
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -12,7 +10,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
-import xyz.brassgoggledcoders.boilerplate.lib.client.ClientHelper;
 import xyz.brassgoggledcoders.moarcarts.recipes.NBTCartRecipe;
 
 import java.util.List;
@@ -48,13 +45,13 @@ public abstract class ItemSubMinecartBase extends ItemMinecartBase
 
 	public abstract int getNumberOfSubItems();
 
-	public TileEntity getRenderTileEntity(ItemStack itemStack)
+	@Override
+	public TileEntity getRenderTileEntity(ItemStack itemStack, World world)
 	{
 		int damage = itemStack.getItemDamage();
 		if(renderTileEntities[damage] == null)
 		{
-			renderTileEntities[damage] = getCartBlock(itemStack).createTileEntity(ClientHelper.world(),
-					getCartBlockState(itemStack));
+			renderTileEntities[damage] = getCartBlock(itemStack).createTileEntity(world, getCartBlockState(itemStack));
 		}
 		return renderTileEntities[damage];
 	}

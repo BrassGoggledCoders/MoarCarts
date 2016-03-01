@@ -23,7 +23,6 @@ import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
 @SuppressWarnings("depecated")
 public class RenderItemMinecartBase extends ItemSpecialRenderer
 {
-	private static RenderItemMinecartBase instance = new RenderItemMinecartBase();
 	private static final ResourceLocation minecartTextures = new ResourceLocation("textures/entity/minecart.png");
 	protected ModelBase modelMinecart = new ModelMinecart();
 
@@ -86,7 +85,8 @@ public class RenderItemMinecartBase extends ItemSpecialRenderer
 	{
 			rotateTESR();
 			GlStateManager.translate(-0.5F, -0.5F, -0.5F);
-			TileEntityRendererDispatcher.instance.renderTileEntityAt(itemMinecartBase.getRenderTileEntity(itemStack), 0, 0, 0, 0.0F);
+			TileEntityRendererDispatcher.instance.renderTileEntityAt(
+					itemMinecartBase.getRenderTileEntity(itemStack, ClientHelper.world()), 0, 0, 0, 0.0F);
 			GlStateManager.enableRescaleNormal();
 	}
 
@@ -104,11 +104,6 @@ public class RenderItemMinecartBase extends ItemSpecialRenderer
 	@Override
 	public TransformationMatrix getTransformMatrixForPerspective(ItemCameraTransforms.TransformType cameraTransformsType) {
 		return DefaultTransformationMatrices.getTransformMatrixForPerspective(cameraTransformsType);
-	}
-
-	public static RenderItemMinecartBase getInstance()
-	{
-		return instance;
 	}
 
 	@Override

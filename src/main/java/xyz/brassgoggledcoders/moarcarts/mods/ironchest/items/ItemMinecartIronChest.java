@@ -2,17 +2,13 @@ package xyz.brassgoggledcoders.moarcarts.mods.ironchest.items;
 
 import cpw.mods.ironchest.IronChest;
 import cpw.mods.ironchest.IronChestType;
-import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.util.ResourceLocation;
-import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
-import xyz.brassgoggledcoders.boilerplate.lib.common.items.IHasRecipe;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartBase;
 import xyz.brassgoggledcoders.moarcarts.items.ItemSubMinecartBase;
 import xyz.brassgoggledcoders.moarcarts.mods.ironchest.entities.*;
 import xyz.brassgoggledcoders.moarcarts.renderers.IRenderBlock.RenderMethod;
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 
 /**
  * @author SkySom

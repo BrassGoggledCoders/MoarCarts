@@ -15,7 +15,6 @@ import xyz.brassgoggledcoders.moarcarts.mods.ironchest.items.ItemMinecartIronChe
 public class IronChestCompat extends ModCompat
 {
 	public static ItemMinecartIronChest ITEM_MINECART_IRONCHEST;
-	public static Block IRON_CHEST;
 
 	@Override
 	public String getName()

@@ -28,9 +28,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
-import xyz.brassgoggledcoders.boilerplate.lib.client.ClientHelper;
 import xyz.brassgoggledcoders.boilerplate.lib.client.renderers.ISpecialRenderedItem;
-import xyz.brassgoggledcoders.boilerplate.lib.client.renderers.ItemSpecialRenderer;
 import xyz.brassgoggledcoders.boilerplate.lib.common.config.ConfigEntry;
 import xyz.brassgoggledcoders.boilerplate.lib.common.config.IConfigListener;
 import xyz.brassgoggledcoders.boilerplate.lib.common.items.IHasRecipe;
@@ -43,7 +41,6 @@ import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartBase;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartTEBase;
 import xyz.brassgoggledcoders.moarcarts.recipes.NBTCartRecipe;
 import xyz.brassgoggledcoders.moarcarts.renderers.IRenderBlock.RenderMethod;
-import xyz.brassgoggledcoders.moarcarts.renderers.RenderItemMinecartBase;
 
 /**
  * @author SkySom
@@ -128,11 +125,11 @@ public abstract class ItemMinecartBase extends ItemMinecart implements IMinecart
 		return this.getCartBlock(itemStack).getStateFromMeta(this.getCartBlockMetadata(itemStack));
 	}
 
-	public TileEntity getRenderTileEntity(ItemStack itemStack)
+	public TileEntity getRenderTileEntity(ItemStack itemStack, World world)
 	{
 		if(renderTileEntity == null)
 		{
-			renderTileEntity = getCartBlock(itemStack).createTileEntity(ClientHelper.world(), getCartBlockState(itemStack));
+			renderTileEntity = getCartBlock(itemStack).createTileEntity(world, getCartBlockState(itemStack));
 		}
 		return renderTileEntity;
 	}
@@ -148,9 +145,9 @@ public abstract class ItemMinecartBase extends ItemMinecart implements IMinecart
 	}
 
 	@Override
-	public ItemSpecialRenderer getSpecialRenderer()
+	public String getSpecialRendererPath()
 	{
-		return RenderItemMinecartBase.getInstance();
+		return "xyz.brassgoggledcoders.moarcarts.renderers.RenderItemMinecartBase";
 	}
 
 	@Override

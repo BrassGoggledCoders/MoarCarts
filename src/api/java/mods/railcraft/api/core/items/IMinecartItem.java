@@ -30,7 +30,7 @@ public interface IMinecartItem
 	 * @param cart
 	 * @return true if it can be placed, false otherwise
 	 */
-	public boolean canBePlacedByNonPlayer(ItemStack cart);
+	boolean canBePlacedByNonPlayer(ItemStack cart);
 
 	/**
 	 * Places a cart at the specified location.
@@ -45,5 +45,5 @@ public interface IMinecartItem
 	 * @param k z-Coord
 	 * @return the cart placed or null if failed
 	 */
-	public EntityMinecart placeCart(GameProfile owner, ItemStack cart, World world, int i, int j, int k);
+	EntityMinecart placeCart(GameProfile owner, ItemStack cart, World world, int i, int j, int k);
 }
