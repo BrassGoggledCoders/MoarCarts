@@ -11,14 +11,6 @@
  */
 package xyz.brassgoggledcoders.moarcarts;
 
-import xyz.brassgoggledcoders.moarcarts.config.ConfigSettings;
-import xyz.brassgoggledcoders.moarcarts.items.MoarCartsCreativeTab;
-import xyz.brassgoggledcoders.moarcarts.mods.ironchest.IronChestCompat;
-import xyz.brassgoggledcoders.moarcarts.mods.vanilla.VanillaCompat;
-import xyz.brassgoggledcoders.moarcarts.mods.waila.WailaCompat;
-import xyz.brassgoggledcoders.moarcarts.network.EntityTileEntityUpdateMessage;
-import xyz.brassgoggledcoders.moarcarts.proxies.CommonProxy;
-import xyz.brassgoggledcoders.moarcarts.recipes.NBTCartRecipe;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
@@ -32,7 +24,17 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.RecipeSorter;
 import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
 import xyz.brassgoggledcoders.boilerplate.lib.common.IBoilerplateMod;
+import xyz.brassgoggledcoders.boilerplate.lib.common.config.ConfigEntry;
+import xyz.brassgoggledcoders.boilerplate.lib.common.config.Type;
+import xyz.brassgoggledcoders.boilerplate.lib.common.registries.ConfigRegistry;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ModLogger;
+import xyz.brassgoggledcoders.moarcarts.items.MoarCartsCreativeTab;
+import xyz.brassgoggledcoders.moarcarts.mods.ironchest.IronChestCompat;
+import xyz.brassgoggledcoders.moarcarts.mods.vanilla.VanillaCompat;
+import xyz.brassgoggledcoders.moarcarts.mods.waila.WailaCompat;
+import xyz.brassgoggledcoders.moarcarts.network.EntityTileEntityUpdateMessage;
+import xyz.brassgoggledcoders.moarcarts.proxies.CommonProxy;
+import xyz.brassgoggledcoders.moarcarts.recipes.NBTCartRecipe;
 
 /*
  * @author SkySom
@@ -60,16 +62,18 @@ public class MoarCarts implements IBoilerplateMod
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		logger = new ModLogger(MODID);
-
-		config = new Configuration(event.getSuggestedConfigurationFile());
-		ConfigSettings.init(config);
-
 		initModCompatHandler();
 
 		BoilerplateLib.getInstance().preInitStart(event);
-
 		BoilerplateLib.getPacketHandler().registerPacket(EntityTileEntityUpdateMessage.Handler.class,
 				EntityTileEntityUpdateMessage.class, Side.CLIENT);
+
+		ConfigRegistry.addCategoryComment("Tweaks",
+				"Most these values will be overwritten by Railcraft values, if it is installed");
+		ConfigRegistry.addEntry(new ConfigEntry("Tweaks", "breakOnDrop", Type.BOOLEAN, "false",
+				"change to '{t}=true' to restore vanilla behavior"));
+		ConfigRegistry.addEntry(new ConfigEntry("Tweaks", "maxStackSize", Type.INTEGER, "3",
+				"change the value to your desired minecart stack size, vanilla=1, default=3, max=64"));
 
 		BoilerplateLib.getInstance().preInitEnd(event);
 		MoarCarts.proxy.preInit();

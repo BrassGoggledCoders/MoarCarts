@@ -11,12 +11,6 @@
  */
 package xyz.brassgoggledcoders.moarcarts.entities;
 
-import xyz.brassgoggledcoders.moarcarts.MoarCarts;
-import xyz.brassgoggledcoders.moarcarts.api.IComparatorCart;
-import xyz.brassgoggledcoders.moarcarts.config.ConfigSettings;
-import xyz.brassgoggledcoders.moarcarts.fakeworld.CartBlockPos;
-import xyz.brassgoggledcoders.moarcarts.fakeworld.FakeWorld;
-import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
 import mods.railcraft.api.carts.IMinecart;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -28,9 +22,16 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.minecart.MinecartInteractEvent;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
+import xyz.brassgoggledcoders.boilerplate.lib.common.registries.ConfigRegistry;
+import xyz.brassgoggledcoders.moarcarts.MoarCarts;
+import xyz.brassgoggledcoders.moarcarts.api.IComparatorCart;
+import xyz.brassgoggledcoders.moarcarts.fakeworld.CartBlockPos;
+import xyz.brassgoggledcoders.moarcarts.fakeworld.FakeWorld;
+import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
 
 import java.util.Random;
 
@@ -64,11 +65,6 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	}
 
 	@Override
-	public void entityInit(){
-		super.entityInit();
-	}
-
-	@Override
 	public void killMinecart(DamageSource damageSource)
 	{
 		this.setDead();
@@ -89,7 +85,7 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	@Override
 	public boolean interactFirst(EntityPlayer player)
 	{
-		if(net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new MinecartInteractEvent(this, player)))
+		if(MinecraftForge.EVENT_BUS.post(new MinecartInteractEvent(this, player)))
 		{
 			return true;
 		}
@@ -134,7 +130,7 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 		super.setDead();
 		ItemStack blockCartItemStack;
 
-		if(ConfigSettings.doMinecartsBreakOnDrop())
+		if(ConfigRegistry.getBoolean("breakOnDrop", false))
 		{
 			blockCartItemStack = new ItemStack(this.getCartBlock());
 			ItemStack cartItemStack = new ItemStack(Items.minecart, 1);
