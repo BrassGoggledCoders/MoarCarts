@@ -112,6 +112,10 @@ public class RenderMinecartTEBase<T extends EntityMinecartTEBase> extends Render
 				break;
 			case CUSTOM:
 				break;
+			case COMBO:
+				renderTESRModel(entity);
+				renderBlockModel(entity, partialTicks);
+				break;
 		}
 
 		GlStateManager.popMatrix();
@@ -125,19 +129,23 @@ public class RenderMinecartTEBase<T extends EntityMinecartTEBase> extends Render
 
 	protected void renderTESRModel(EntityMinecartTEBase entity)
 	{
+		GlStateManager.pushMatrix();
 		GlStateManager.rotate(90F, 0F, 1F, 0F);
 		TileEntityRendererDispatcher.instance.renderTileEntityAt(entity.getTileEntity(), 0, 0, 0, 0.0F);
 		GlStateManager.enableRescaleNormal();
+		GlStateManager.popMatrix();
 	}
 
 	protected void renderBlockModel(EntityMinecartTEBase entity, float partialTicks)
 	{
+		GlStateManager.pushMatrix();
 		IBlockState iblockstate = entity.getDisplayTile();
 
 		if (iblockstate.getBlock().getRenderType() != -1)
 		{
 			this.func_180560_a(entity, partialTicks, iblockstate);
 		}
+		GlStateManager.popMatrix();
 	}
 }
 

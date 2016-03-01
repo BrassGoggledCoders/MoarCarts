@@ -7,5 +7,5 @@ public interface IRenderBlock
 {
 	RenderMethod getRenderMethod();
 
-	enum RenderMethod{VMC,ISBRH,TESR,CUSTOM}
+	enum RenderMethod{VMC,ISBRH,TESR,CUSTOM,COMBO}
 }

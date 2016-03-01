@@ -53,6 +53,10 @@ repositories {
         name "Waila"
         url "http://mobiusstrip.eu/maven"
     }
+    maven {
+        name "MCMultiPart"
+        url "http://maven.amadornes.com/"
+    }
 }
 
 configurations {
@@ -64,6 +68,8 @@ dependencies {
     shade "brassgoggledcoders:boilerplate:${minecraftversion}-${boilerplateversion}:lib"
     compile "mcp.mobius.waila:Waila:${wailaversion}:dev"
     deobfCompile "mezz.jei:jei_${minecraftversion}:${jeiversion}"
+    compile "k4unl:HydCraft:${minecraftversion}-${hydraulicraftversion}:deobf"
+    deobfCompile "MCMultiPart:MCMultiPart:${mcmultipartversion}:universal"
 }
 
 

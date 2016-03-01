@@ -55,6 +55,10 @@ public class RenderItemMinecartBase extends ItemSpecialRenderer
 				case CUSTOM:
 					this.renderCustom(stack, itemMinecartBase);
 					break;
+				case COMBO:
+					this.renderTESRMethod(stack, itemMinecartBase, blockState);
+					this.renderVMCMethod(stack, itemMinecartBase, blockState);
+					break;
 				default:
 					break;
 			}
@@ -74,20 +78,22 @@ public class RenderItemMinecartBase extends ItemSpecialRenderer
 	{
 		if (blockState.getBlock().getRenderType() != -1)
 		{
-			GL11.glPushMatrix();
+			GlStateManager.pushMatrix();
 			GlStateManager.translate(-0.5F, -0.5F, 0.5F);
 			Minecraft.getMinecraft().getBlockRendererDispatcher().renderBlockBrightness(blockState, 15);
-			GL11.glPopMatrix();
+			GlStateManager.popMatrix();
 		}
 	}
 
 	protected void renderTESRMethod(ItemStack itemStack, ItemMinecartBase itemMinecartBase, IBlockState blockState)
 	{
-			rotateTESR();
-			GlStateManager.translate(-0.5F, -0.5F, -0.5F);
-			TileEntityRendererDispatcher.instance.renderTileEntityAt(
+		rotateTESR();
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(-0.5F, -0.5F, -0.5F);
+		TileEntityRendererDispatcher.instance.renderTileEntityAt(
 					itemMinecartBase.getRenderTileEntity(itemStack, ClientHelper.world()), 0, 0, 0, 0.0F);
-			GlStateManager.enableRescaleNormal();
+		GlStateManager.enableRescaleNormal();
+		GlStateManager.popMatrix();
 	}
 
 	protected void renderCustom(ItemStack itemStack, ItemMinecartBase itemMinecartBase)

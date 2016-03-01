@@ -28,6 +28,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
+import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
 import xyz.brassgoggledcoders.boilerplate.lib.client.renderers.ISpecialRenderedItem;
 import xyz.brassgoggledcoders.boilerplate.lib.common.config.ConfigEntry;
 import xyz.brassgoggledcoders.boilerplate.lib.common.config.IConfigListener;
@@ -153,7 +154,7 @@ public abstract class ItemMinecartBase extends ItemMinecart implements IMinecart
 	@Override
 	public ResourceLocation[] getResourceLocations()
 	{
-		return new ResourceLocation[] {new ResourceLocation(getRegistryName())};
+		return new ResourceLocation[] {new ResourceLocation(BoilerplateLib.getMod().getPrefix() + "defaultcart")};
 	}
 
 	@Override

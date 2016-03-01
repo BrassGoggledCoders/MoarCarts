@@ -28,6 +28,11 @@ entity.moarcarts.entityminecartcrystalchest.name=Crystal Chest Cart
 entity.moarcarts.entityminecartobsidianchest.name=Obsidian Chest Cart
 entity.moarcarts.entityminecartdirtchest.name=DirtChest 9000! Cart
 
+## hydraulicraft stuff
+item.minecartfluidtank.name=Fluid Tank Cart
+
+entity.moarcarts.entityminecartfluidtank.name=Fluid Tank Cart
+
 ## ie stuff
 item.minecartwoodenbarrel.name=Wooden Barrel Cart
 item.minecartmetalbarrel.name=Metal Barrel Cart
