@@ -5,6 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelMinecart;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
@@ -56,7 +57,6 @@ public class RenderItemMinecartBase extends ItemSpecialRenderer
 					this.renderCustom(stack, itemMinecartBase);
 					break;
 				case COMBO:
-					this.renderTESRMethod(stack, itemMinecartBase, blockState);
 					this.renderVMCMethod(stack, itemMinecartBase, blockState);
 					break;
 				default:
@@ -92,7 +92,6 @@ public class RenderItemMinecartBase extends ItemSpecialRenderer
 		GlStateManager.translate(-0.5F, -0.5F, -0.5F);
 		TileEntityRendererDispatcher.instance.renderTileEntityAt(
 					itemMinecartBase.getRenderTileEntity(itemStack, ClientHelper.world()), 0, 0, 0, 0.0F);
-		GlStateManager.enableRescaleNormal();
 		GlStateManager.popMatrix();
 	}
 
