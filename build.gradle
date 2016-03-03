@@ -74,9 +74,7 @@ dependencies {
     deobfCompile "mezz.jei:jei_${minecraftversion}:${jeiversion}"
     compile "k4unl:HydCraft:${minecraftversion}-${hydraulicraftversion}:deobf"
     deobfCompile "MCMultiPart:MCMultiPart:${mcmultipartversion}:universal"
-    compile "com.teambr.bookshelf:Bookshelf:1.8.9-2.3.2-B48:dev"
-    compile "com.dyonovan.neotech:NeoTech:1.8.9-2.4.0a-B69:dev"
-
+    compile "com.dyonovan.neotech:NeoTech:${minecraftversion}-${neotechversion}:dev"
 }
 
 
