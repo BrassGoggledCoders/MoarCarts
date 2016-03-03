@@ -57,6 +57,10 @@ repositories {
         name "MCMultiPart"
         url "http://maven.amadornes.com/"
     }
+    maven {
+        name "Neotech"
+        url "http://www.teambrmodding.com/maven2/"
+    }
 }
 
 configurations {
@@ -70,6 +74,9 @@ dependencies {
     deobfCompile "mezz.jei:jei_${minecraftversion}:${jeiversion}"
     compile "k4unl:HydCraft:${minecraftversion}-${hydraulicraftversion}:deobf"
     deobfCompile "MCMultiPart:MCMultiPart:${mcmultipartversion}:universal"
+    compile "com.teambr.bookshelf:Bookshelf:1.8.9-2.3.2-B48:dev"
+    compile "com.dyonovan.neotech:NeoTech:1.8.9-2.4.0a-B69:dev"
+
 }
 
 
@@ -85,19 +92,7 @@ task getLibraries {
     def ironchest = 'ironchest-' + minecraftversion + '-' + ironchestversion + '.jar'
     def ironchestSource = 'http://addons.curse.cursecdn.com/files/2276/366/' + ironchest
 
-    def inventorytweaks = 'inventory-tweaks-' + invtweaksversion + '.jar'
-    def inventorytweaksSource = 'http://minecraft.curseforge.com/projects/inventory-tweaks/files/2275677/download'
-
-    def baubles = 'Baubles-' + minecraftversion + '-' + baublesversion + '.jar'
-    def baublesSource = 'https://dl.dropboxusercontent.com/u/47135879/' + baubles
-
-    def botania = 'Botania ' + botaniaversion + '-deobf.jar'
-    def botaniaSource = 'https://github.com/williewillus/Botania/releases/download/v0.5.2.1-beta/Botania.r1.8-248-MC1.8-400bf95.jar'
-
-    //downloads.add(new Tuple(inventorytweaks, inventorytweaksSource))
-    //downloads.add(new Tuple(botania, botaniaSource))
     downloads.add(new Tuple(ironchest, ironchestSource))
-    //downloads.add(new Tuple(baubles, baublesSource))
 
     libsFolder.listFiles().each { file ->
         def isInDownloadList = false;
