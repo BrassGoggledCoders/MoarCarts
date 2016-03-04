@@ -5,7 +5,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelMinecart;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
@@ -13,7 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.FMLClientHandler;
-import org.lwjgl.opengl.GL11;
 import xyz.brassgoggledcoders.boilerplate.lib.client.ClientHelper;
 import xyz.brassgoggledcoders.boilerplate.lib.client.renderers.ItemSpecialRenderer;
 import xyz.brassgoggledcoders.boilerplate.lib.client.renderers.math.DefaultTransformationMatrices;
@@ -21,8 +19,7 @@ import xyz.brassgoggledcoders.boilerplate.lib.client.renderers.math.Transformati
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ItemStackUtils;
 import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
 
-@SuppressWarnings("depecated")
-public class RenderItemMinecartBase extends ItemSpecialRenderer
+public class RenderItemMinecartBase extends ItemSpecialRenderer<RenderItemMinecartBase.DummyTile>
 {
 	private static final ResourceLocation minecartTextures = new ResourceLocation("textures/entity/minecart.png");
 	protected ModelBase modelMinecart = new ModelMinecart();
@@ -39,7 +36,7 @@ public class RenderItemMinecartBase extends ItemSpecialRenderer
 		GlStateManager.rotate(90, 0, 0, 1);
 		GlStateManager.scale(12, 12, 12);
 
-		GL11.glTranslated(0.0F, 6 / 16.0F, 0.0F);
+		GlStateManager.translate(0.0F, 6 / 16.0F, 0.0F);
 
 		if(ItemStackUtils.isItemInstanceOf(stack, ItemMinecartBase.class))
 		{
@@ -107,12 +104,13 @@ public class RenderItemMinecartBase extends ItemSpecialRenderer
 
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public TransformationMatrix getTransformMatrixForPerspective(ItemCameraTransforms.TransformType cameraTransformsType) {
 		return DefaultTransformationMatrices.getTransformMatrixForPerspective(cameraTransformsType);
 	}
 
 	@Override
-	public Class getTileClass()
+	public Class<DummyTile> getTileClass()
 	{
 		return DummyTile.class;
 	}

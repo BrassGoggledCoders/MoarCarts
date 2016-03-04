@@ -1,6 +1,5 @@
 package xyz.brassgoggledcoders.moarcarts.mods.ironchest;
 
-import net.minecraft.block.Block;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import xyz.brassgoggledcoders.boilerplate.lib.common.modcompat.ModCompat;
