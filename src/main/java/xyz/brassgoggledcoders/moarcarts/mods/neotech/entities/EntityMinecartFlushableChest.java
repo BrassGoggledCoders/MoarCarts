@@ -1,4 +1,4 @@
-package xyz.brassgoggledcoders.moarcarts.mods.neotech.entity;
+package xyz.brassgoggledcoders.moarcarts.mods.neotech.entities;
 
 import com.dyonovan.neotech.client.gui.storage.GuiFlushableChest;
 import com.dyonovan.neotech.common.tiles.storage.TileFlushableChest;
@@ -23,6 +23,12 @@ public class EntityMinecartFlushableChest extends EntityMinecartInventoryTEBase 
 	public ItemMinecartBase getItem()
 	{
 		return NeotechCompat.ITEM_MINECART_FLUSHABLECHEST;
+	}
+
+	@Override
+	public boolean shouldTileUpdate()
+	{
+		return true;
 	}
 
 	@Override

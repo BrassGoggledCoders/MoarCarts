@@ -6,20 +6,19 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartBase;
 import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
-import xyz.brassgoggledcoders.moarcarts.mods.neotech.entities.EntityMinecartFlushableChest;
-import xyz.brassgoggledcoders.moarcarts.renderers.IRenderBlock.RenderMethod;
+import xyz.brassgoggledcoders.moarcarts.mods.neotech.entities.EntityMinecartDimensionalChest;
 
-public class ItemMinecartFlushableChest extends ItemMinecartBase
+public class ItemMinecartDimensionalChest extends ItemMinecartBase
 {
-	public ItemMinecartFlushableChest()
+	public ItemMinecartDimensionalChest()
 	{
-		super("neotech", "minecartflushablechest");
+		super("neotech", "minecartdimensionalchest");
 	}
 
 	@Override
 	public Block getCartBlock(ItemStack itemStack)
 	{
-		return BlockManager.flushableChest();
+		return BlockManager.dimStorage();
 	}
 
 	@Override
@@ -29,14 +28,8 @@ public class ItemMinecartFlushableChest extends ItemMinecartBase
 	}
 
 	@Override
-	public RenderMethod getCartBlockRenderMethod(ItemStack itemStack)
-	{
-		return RenderMethod.TESR;
-	}
-
-	@Override
 	public EntityMinecartBase getEntityFromItem(World world, ItemStack itemStack)
 	{
-		return new EntityMinecartFlushableChest(world);
+		return new EntityMinecartDimensionalChest(world);
 	}
 }
