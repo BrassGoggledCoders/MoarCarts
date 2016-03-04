@@ -31,6 +31,7 @@ import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ModLogger;
 import xyz.brassgoggledcoders.moarcarts.items.MoarCartsCreativeTab;
 import xyz.brassgoggledcoders.moarcarts.mods.hydraulicraft.HydraulicraftCompat;
 import xyz.brassgoggledcoders.moarcarts.mods.ironchest.IronChestCompat;
+import xyz.brassgoggledcoders.moarcarts.mods.neotech.NeotechCompat;
 import xyz.brassgoggledcoders.moarcarts.mods.vanilla.VanillaCompat;
 import xyz.brassgoggledcoders.moarcarts.mods.waila.WailaCompat;
 import xyz.brassgoggledcoders.moarcarts.network.EntityTileEntityUpdateMessage;
@@ -98,23 +99,10 @@ public class MoarCarts implements IBoilerplateMod
 	public void initModCompatHandler()
 	{
 		BoilerplateLib.getCompatibilityHandler().addModCompat(new VanillaCompat());
-		//TODO: Railcraft Compat
-		//compatibilityHandler.addModCompat(new RailcraftCompat());
-		//TODO: RF Compat (IE Flux)
-		//compatibilityHandler.addModCompat(new RFCompat());
 		BoilerplateLib.getCompatibilityHandler().addModCompat(new IronChestCompat());
-		//TODO: IE Compat
-		//compatibilityHandler.addModCompat(new IEModCompat());
-		//TODO: MFR Compat
-		//compatibilityHandler.addModCompat(new MFRCompat());
-		//TODO: Minechem Compat
-		//compatibilityHandler.addModCompat(new MinechemCompat());
-		//TODO: Botania Compat
-		//compatibilityHandler.addModCompat(new BotaniaCompat());
-		//TODO: Avaritia Compat
-		//compatibilityHandler.addModCompat(new AvaritiaCompat());
 		BoilerplateLib.getCompatibilityHandler().addModCompat(new WailaCompat());
 		BoilerplateLib.getCompatibilityHandler().addModCompat(new HydraulicraftCompat());
+		BoilerplateLib.getCompatibilityHandler().addModCompat(new NeotechCompat());
 	}
 
 	@Override
