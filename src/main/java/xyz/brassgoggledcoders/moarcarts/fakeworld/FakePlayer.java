@@ -57,8 +57,11 @@ public class FakePlayer extends EntityPlayer
 	@Override
 	public void openGui(Object mod, int id, World world, int posX, int posY, int poxZ)
 	{
-		this.getEntityPlayer().openGui(MoarCarts.instance, this.getEntityMinecartTEBase().getEntityId(),
-				this.getEntityMinecartTEBase().worldObj, posX, posY, poxZ);
+		if(!getEntityPlayer().isSneaking())
+		{
+			this.getEntityPlayer().openGui(MoarCarts.instance, this.getEntityMinecartTEBase().getEntityId(),
+					this.getEntityMinecartTEBase().worldObj, posX, posY, poxZ);
+		}
 	}
 
 	@Override
@@ -84,6 +87,12 @@ public class FakePlayer extends EntityPlayer
 		{
 			this.getEntityPlayer().setCurrentItemOrArmor(slot, itemStack);
 		}
+	}
+
+	@Override
+	public boolean isSneaking()
+	{
+		return getEntityPlayer().isSneaking();
 	}
 
 	@Override

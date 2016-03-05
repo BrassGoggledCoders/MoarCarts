@@ -66,20 +66,15 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 	public boolean interactFirst(EntityPlayer player)
 	{
 		this.sendUpdateToAllAround();
-		if(!player.isSneaking())
-		{
-			EntityPlayer fakePlayer = new FakePlayer(player, this, this.shouldAccessPlayerInventory());
-			return this.getCartBlock().onBlockActivated(this.getFakeWorld(), ORIGIN_POS, this.getDisplayTile(),
+		EntityPlayer fakePlayer = new FakePlayer(player, this, this.shouldAccessPlayerInventory());
+		return this.getCartBlock().onBlockActivated(this.getFakeWorld(), ORIGIN_POS, this.getDisplayTile(),
 					fakePlayer, EnumFacing.NORTH, 0, 0, 0);
-		}
-		return true;
 	}
 
 	public boolean shouldAccessPlayerInventory()
 	{
 		return false;
 	}
-
 
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound nbtTagCompound)

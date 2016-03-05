@@ -19,6 +19,6 @@ public class ContainerMinecartFlushableChest extends ContainerFlushableChest
 	@Override
 	public boolean canInteractWith(EntityPlayer entityPlayer)
 	{
-		return minecartFlushableChest.isUseableByPlayer(entityPlayer);
+		return !minecartFlushableChest.isDead && entityPlayer.getDistanceSqToEntity(minecartFlushableChest) <= 64.0D;
 	}
 }
