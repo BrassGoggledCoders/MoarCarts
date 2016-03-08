@@ -12,7 +12,7 @@ public class ItemMinecartDimensionalChest extends ItemMinecartBase
 {
 	public ItemMinecartDimensionalChest()
 	{
-		super("neotech", "minecartdimensionalchest");
+		super("neotech", "dimensionalchest");
 	}
 
 	@Override

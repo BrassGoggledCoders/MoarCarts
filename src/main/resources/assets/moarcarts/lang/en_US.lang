@@ -29,16 +29,26 @@ entity.moarcarts.entityminecartobsidianchest.name=Obsidian Chest Cart
 entity.moarcarts.entityminecartdirtchest.name=DirtChest 9000! Cart
 
 ## hydraulicraft stuff
-item.minecartfluidtank.name=Fluid Tank Cart
+item.hydraulicraft.minecartfluidtank.name=Fluid Tank Cart
 
 entity.moarcarts.entityminecartfluidtank.name=Fluid Tank Cart
 
 ##neotech stuff
-item.minecartflushablechest.name=Flushable Chest Cart
-item.minecartdimensionalchest.name=Dimensional Chest Cart
+item.neotech.minecartflushablechest.name=Flushable Chest Cart
+item.neotech.minecartdimensionalchest.name=Dimensional Chest Cart
+item.neotech.minecarttank.iron.name=Iron Fluid Tank Cart
+item.neotech.minecarttank.gold.name=Gold Fluid Tank Cart
+item.neotech.minecarttank.diamond.name=Diamond Fluid Tank Cart
+item.neotech.minecarttank.emerald.name=Creative Fluid Tank Cart
+item.neotech.minecarttank.void.name=Void Fluid Tank Cart
 
 entity.moarcarts.entityminecartflushablechest.name=Flushable Chest Cart
 entity.moarcarts.entityminecartdimensionalchest.name=Dimensional Chest Cart
+entity.moarcarts.entityminecartirontank.name=Iron Fluid Tank Cart
+entity.moarcarts.entityminecartgoldtank.name=Gold Fluid Tank Cart
+entity.moarcarts.entityminecartdiamondtank.name=Diamond Fluid Tank Cart
+entity.moarcarts.entityminecartemeraldtank.name=Creative Fluid Tank Cart
+entity.moarcarts.entityminecartvoidtank.name=Void Fluid Tank Cart
 
 ##boilerplate
 boilerplate.blockSide.facing=Facing Side

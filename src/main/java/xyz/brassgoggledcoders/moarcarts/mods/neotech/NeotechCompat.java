@@ -5,18 +5,16 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import xyz.brassgoggledcoders.boilerplate.lib.common.modcompat.ModCompat;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.EntityRegistry;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.ItemRegistry;
-import xyz.brassgoggledcoders.moarcarts.mods.neotech.entities.EntityMinecartDimensionalChest;
-import xyz.brassgoggledcoders.moarcarts.mods.neotech.entities.EntityMinecartFlushableChest;
-import xyz.brassgoggledcoders.moarcarts.mods.neotech.entities.EntityMinecartIronTank;
+import xyz.brassgoggledcoders.moarcarts.mods.neotech.entities.*;
 import xyz.brassgoggledcoders.moarcarts.mods.neotech.items.ItemMinecartDimensionalChest;
+import xyz.brassgoggledcoders.moarcarts.mods.neotech.items.ItemMinecartTank;
 import xyz.brassgoggledcoders.moarcarts.mods.neotech.items.ItemMinecartFlushableChest;
-import xyz.brassgoggledcoders.moarcarts.mods.neotech.items.ItemMinecartIronTank;
 
 public class NeotechCompat extends ModCompat
 {
 	public static ItemMinecartFlushableChest ITEM_MINECART_FLUSHABLECHEST;
 	public static ItemMinecartDimensionalChest ITEM_MINECART_DIMENSIONALCHEST;
-	public static ItemMinecartIronTank ITEM_MINECART_IRONTANK;
+	public static ItemMinecartTank ITEM_MINECART_IRONTANK;
 
 	@Override
 	public String getName()
@@ -41,8 +39,12 @@ public class NeotechCompat extends ModCompat
 		ItemRegistry.registerItem(ITEM_MINECART_DIMENSIONALCHEST);
 		EntityRegistry.registerEntity(EntityMinecartDimensionalChest.class);
 
-		ITEM_MINECART_IRONTANK = new ItemMinecartIronTank();
+		ITEM_MINECART_IRONTANK = new ItemMinecartTank();
 		ItemRegistry.registerItem(ITEM_MINECART_IRONTANK);
 		EntityRegistry.registerEntity(EntityMinecartIronTank.class);
+		EntityRegistry.registerEntity(EntityMinecartGoldTank.class);
+		EntityRegistry.registerEntity(EntityMinecartDiamondTank.class);
+		EntityRegistry.registerEntity(EntityMinecartCreativeTank.class);
+		EntityRegistry.registerEntity(EntityMinecartVoidTank.class);
 	}
 }

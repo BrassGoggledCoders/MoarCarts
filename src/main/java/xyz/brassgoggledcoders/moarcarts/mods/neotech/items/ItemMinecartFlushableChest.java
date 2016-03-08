@@ -13,7 +13,7 @@ public class ItemMinecartFlushableChest extends ItemMinecartBase
 {
 	public ItemMinecartFlushableChest()
 	{
-		super("neotech", "minecartflushablechest");
+		super("neotech", "flushablechest");
 	}
 
 	@Override

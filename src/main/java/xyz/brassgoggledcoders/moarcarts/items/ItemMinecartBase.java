@@ -57,6 +57,10 @@ public abstract class ItemMinecartBase extends ItemMinecart implements IMinecart
 	{
 		super(null);
 		this.mod = mod;
+		if(!name.toLowerCase().contains("minecart"))
+		{
+			name = mod + ".minecart" + name;
+		}
 		this.setUnlocalizedName(name);
 		this.setRegistryName(name);
 		this.setCreativeTab(MoarCarts.moarcartsTab);
