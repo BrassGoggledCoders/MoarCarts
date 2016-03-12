@@ -70,6 +70,7 @@ configurations {
 
 dependencies {
     shade "brassgoggledcoders:boilerplate:${minecraftversion}-${boilerplateversion}:lib"
+    compile "brassgoggledcoders:boilerplate:${minecraftversion}-${boilerplateversion}:api"
     compile "mcp.mobius.waila:Waila:${wailaversion}:dev"
     deobfCompile "mezz.jei:jei_${minecraftversion}:${jeiversion}"
     compile "k4unl:HydCraft:${minecraftversion}-${hydraulicraftversion}:deobf"

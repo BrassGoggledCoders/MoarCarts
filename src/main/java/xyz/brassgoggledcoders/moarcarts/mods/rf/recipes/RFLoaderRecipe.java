@@ -1,7 +1,7 @@
 package xyz.brassgoggledcoders.moarcarts.mods.rf.recipes;
 
-import moarcarts.mods.rf.RFCompat;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import xyz.brassgoggledcoders.moarcarts.mods.rf.RFCompat;
 
 /**
  * @author SkySom
