@@ -13,7 +13,11 @@ package xyz.brassgoggledcoders.moarcarts.mods.vanilla.entities;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryEnderChest;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.minecart.MinecartInteractEvent;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartBase;
 import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
 import xyz.brassgoggledcoders.moarcarts.mods.vanilla.VanillaCompat;
@@ -35,7 +39,12 @@ public class EntityMinecartEnderChest extends EntityMinecartBase
 	}
 
 	@Override
-	public boolean interactFirst(EntityPlayer player) {
+	public boolean processInitialInteract(EntityPlayer player, ItemStack stack, EnumHand hand)
+	{
+		if(MinecraftForge.EVENT_BUS.post(new MinecartInteractEvent(this, player, stack, hand)))
+		{
+			return true;
+		}
 		InventoryEnderChest inventoryenderchest = player.getInventoryEnderChest();
 
 		if (!this.worldObj.isRemote && !player.isSneaking()) {

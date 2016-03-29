@@ -10,18 +10,19 @@ import net.minecraft.inventory.IInventory;
  */
 public class ContainerIronChestCart extends ContainerIronChest
 {
-	private EntityMinecartIronChest entityMinecartIronChest;
+	private EntityMinecartIronChest minecartIronChest;
 	public ContainerIronChestCart(IInventory playerInventory, EntityMinecartIronChest minecartIronChest)
 	{
-		super(playerInventory, minecartIronChest.getIInventoryTileEntity(), minecartIronChest.getIronChestType(),
+		super(playerInventory, (IInventory)minecartIronChest.getTileEntity(), minecartIronChest.getIronChestType(),
 				ContainerSize.values()[minecartIronChest.getIronChestType().ordinal()].xSize,
 				ContainerSize.values()[minecartIronChest.getIronChestType().ordinal()].ySize);
-		entityMinecartIronChest = minecartIronChest;
+		this.minecartIronChest = minecartIronChest;
 	}
 
+	@Override
 	public boolean canInteractWith(EntityPlayer player)
 	{
-		return entityMinecartIronChest.isUseableByPlayer(player);
+		return !minecartIronChest.isDead && player.getDistanceSqToEntity(minecartIronChest) <= 64.0D;
 	}
 
 	public enum ContainerSize

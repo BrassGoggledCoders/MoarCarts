@@ -12,7 +12,7 @@ import net.minecraftforge.event.entity.minecart.MinecartEvent;
 @Cancelable
 public class ComparatorTrackEvent extends MinecartEvent
 {
-	int intResult = 0;
+	private int intResult = 0;
 
 	public ComparatorTrackEvent(EntityMinecart minecart)
 	{

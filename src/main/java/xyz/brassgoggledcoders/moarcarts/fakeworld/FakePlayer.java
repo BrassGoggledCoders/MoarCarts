@@ -1,13 +1,13 @@
 package xyz.brassgoggledcoders.moarcarts.fakeworld;
 
-import xyz.brassgoggledcoders.moarcarts.MoarCarts;
-import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartTEBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryEnderChest;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
+import xyz.brassgoggledcoders.moarcarts.MoarCarts;
+import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartTEBase;
 
 /**
  * @author SkySom
@@ -16,15 +16,16 @@ public class FakePlayer extends EntityPlayer
 {
 	protected EntityPlayer entityPlayer;
 	private EntityMinecartTEBase entityMinecartTEBase;
-	private boolean accessInventory;
 
 	public FakePlayer(EntityPlayer entityPlayer, EntityMinecartTEBase entityMinecartTEBase, boolean accessInventory)
 	{
 		super(entityPlayer.getEntityWorld(), entityPlayer.getGameProfile());
-		this.accessInventory = accessInventory;
-		if(this.accessInventory)
+		if(accessInventory)
 		{
 			this.inventory = entityPlayer.inventory;
+		} else
+		{
+			this.inventory = new InventoryPlayer(entityPlayer);
 		}
 		this.setEntityPlayer(entityPlayer);
 		this.setEntityMinecartTEBase(entityMinecartTEBase);
@@ -65,31 +66,6 @@ public class FakePlayer extends EntityPlayer
 	}
 
 	@Override
-	public ItemStack getEquipmentInSlot(int slot)
-	{
-		return this.getEntityPlayer().getEquipmentInSlot(slot);
-	}
-
-	@Override
-	public ItemStack getHeldItem()
-	{
-		if(this.accessInventory)
-		{
-			return this.getEntityPlayer().getHeldItem();
-		}
-		return null;
-	}
-
-	@Override
-	public void setCurrentItemOrArmor(int slot, ItemStack itemStack)
-	{
-		if(this.accessInventory)
-		{
-			this.getEntityPlayer().setCurrentItemOrArmor(slot, itemStack);
-		}
-	}
-
-	@Override
 	public boolean isSneaking()
 	{
 		return getEntityPlayer().isSneaking();
@@ -99,6 +75,12 @@ public class FakePlayer extends EntityPlayer
 	public boolean isSpectator()
 	{
 		return false;
+	}
+
+	@Override
+	public boolean isCreative()
+	{
+		return getEntityPlayer().isCreative();
 	}
 
 	@Override

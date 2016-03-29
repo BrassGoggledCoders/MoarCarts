@@ -11,9 +11,9 @@ public class RFComparatorTrackHandler
 {
 	public void onComparatorTrack(ComparatorTrackEvent event)
 	{
-		if(event.entity instanceof IEnergyHandler)
+		if(event.getEntity() instanceof IEnergyHandler)
 		{
-			event.setIntResult(ComparatorUtils.scaleStoredEnergyTo(15, (IEnergyHandler)event.entity));
+			event.setIntResult(ComparatorUtils.scaleStoredEnergyTo(15, (IEnergyHandler)event.getEntity()));
 		}
 	}
 }

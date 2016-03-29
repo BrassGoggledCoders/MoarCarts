@@ -23,12 +23,12 @@ import net.minecraft.item.ItemMinecart;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
-import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
 import xyz.brassgoggledcoders.boilerplate.lib.client.renderers.ISpecialRenderedItem;
 import xyz.brassgoggledcoders.boilerplate.lib.common.config.ConfigEntry;
 import xyz.brassgoggledcoders.boilerplate.lib.common.config.IConfigListener;
@@ -69,9 +69,9 @@ public abstract class ItemMinecartBase extends ItemMinecart implements IMinecart
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, BlockPos blockPos, EnumFacing facing,
-			float par8, float par9, float par10) {
-		return placeCart(itemStack, world, blockPos, this.getEntityFromItem(world, itemStack));
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand,
+			EnumFacing facing, float hitX, float hitY, float hitZ) {
+		return placeCart(stack, world, pos, this.getEntityFromItem(world, stack));
 	}
 
 	@Override
@@ -87,14 +87,14 @@ public abstract class ItemMinecartBase extends ItemMinecart implements IMinecart
 	{
 		BlockPos blockPos = new BlockPos(posX, posY, posZ);
 		EntityMinecartBase entityMinecart = getEntityFromItem(world, itemStack);
-		if (placeCart(itemStack, world, blockPos, entityMinecart))
+		if (placeCart(itemStack, world, blockPos, entityMinecart) == EnumActionResult.SUCCESS)
 		{
 			return entityMinecart;
 		}
 		return null;
 	}
 
-	public boolean placeCart(ItemStack itemStack, World world, BlockPos blockPos, EntityMinecartBase entityMinecart)
+	public EnumActionResult placeCart(ItemStack itemStack, World world, BlockPos blockPos, EntityMinecartBase entityMinecart)
 	{
 		if (itemStack != null && BlockUtils.isRailBlock(world.getBlockState(blockPos)))
 		{
@@ -120,9 +120,9 @@ public abstract class ItemMinecartBase extends ItemMinecart implements IMinecart
 				entityMinecart.afterEntitySpawned();
 			}
 			--itemStack.stackSize;
-			return true;
+			return EnumActionResult.SUCCESS;
 		}
-		return false;
+		return EnumActionResult.FAIL;
 	}
 
 	public IBlockState getCartBlockState(ItemStack itemStack)
@@ -156,9 +156,9 @@ public abstract class ItemMinecartBase extends ItemMinecart implements IMinecart
 	}
 
 	@Override
-	public ResourceLocation[] getResourceLocations()
+	public String[] getResourceLocations()
 	{
-		return new ResourceLocation[] {new ResourceLocation(BoilerplateLib.getMod().getPrefix() + "defaultcart")};
+		return new String[] {"default_cart"};
 	}
 
 	@Override

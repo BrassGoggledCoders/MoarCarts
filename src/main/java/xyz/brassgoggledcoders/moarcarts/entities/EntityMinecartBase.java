@@ -19,6 +19,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
@@ -27,6 +28,7 @@ import net.minecraftforge.event.entity.minecart.MinecartInteractEvent;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import xyz.brassgoggledcoders.boilerplate.api.IDebuggable;
+import xyz.brassgoggledcoders.boilerplate.lib.client.models.IHasModel;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.ConfigRegistry;
 import xyz.brassgoggledcoders.moarcarts.MoarCarts;
 import xyz.brassgoggledcoders.moarcarts.api.IComparatorCart;
@@ -45,7 +47,8 @@ import java.util.Random;
 		@Optional.Interface(iface = "mods.railcraft.api.carts.IMinecart", modid = "RailcraftAPI|carts"),
 		@Optional.Interface(iface = "xyz.brassgoggledcoders.boilerplate.api.IDebuggable", modid = "boilerplate")
 })
-public abstract class EntityMinecartBase extends EntityMinecart implements IMinecart, IComparatorCart, IDebuggable
+public abstract class EntityMinecartBase extends EntityMinecart implements IMinecart, IComparatorCart, IDebuggable,
+		IHasModel
 {
 	protected Random random;
 	protected FakeWorld fakeWorld;
@@ -56,7 +59,7 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	public EntityMinecartBase(World world, int metadata)
 	{
 		super(world);
-		this.func_174899_a(this.getBlockState(metadata));
+		this.setDisplayTile(this.getBlockState(metadata));
 		this.fakeWorld = new FakeWorld(this);
 		this.cartBlockPos = new CartBlockPos(this);
 		this.random = new Random();
@@ -77,7 +80,7 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	}
 
 	@Override
-	public EnumMinecartType getMinecartType()
+	public EntityMinecart.Type getType()
 	{
 		return null;
 	}
@@ -89,9 +92,9 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	}
 
 	@Override
-	public boolean interactFirst(EntityPlayer player)
+	public boolean processInitialInteract(EntityPlayer player, ItemStack stack, EnumHand hand)
 	{
-		if(MinecraftForge.EVENT_BUS.post(new MinecartInteractEvent(this, player)))
+		if(MinecraftForge.EVENT_BUS.post(new MinecartInteractEvent(this, player, stack, hand)))
 		{
 			return true;
 		}
@@ -174,9 +177,9 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	@Override
 	public int getComparatorInputOverride()
 	{
-		if(this.getCartBlock().hasComparatorInputOverride())
+		if(this.getCartBlock().hasComparatorInputOverride(this.getDisplayTile()))
 		{
-			return this.getCartBlock().getComparatorInputOverride(this.getFakeWorld(), ORIGIN_POS);
+			return this.getCartBlock().getComparatorInputOverride(this.getDisplayTile(), this.getFakeWorld(), ORIGIN_POS);
 		}
 		return 0;
 	}
@@ -194,7 +197,12 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 
 	public void doDisplayTick()
 	{
-		this.getCartBlock().randomDisplayTick(this.getFakeWorld(), ORIGIN_POS, this.getDisplayTile(), random);
+		this.getCartBlock().randomDisplayTick(this.getDisplayTile(), this.getFakeWorld(), ORIGIN_POS, random);
+	}
+
+	public String[] getResourceLocations()
+	{
+		return new String[] {"defaultcart"};
 	}
 
 	public Block getCartBlock()

@@ -1,5 +1,6 @@
 package xyz.brassgoggledcoders.moarcarts.behaviors;
 
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.math.BlockPos;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartBase;
 import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
@@ -20,7 +21,7 @@ public class CartDispenserBehavior extends BehaviorDefaultDispenseItem
 	{
 		EntityMinecartBase entityMinecartBase;
 		World world = dispenser.getWorld();
-		boolean cartSpawned = false;
+		EnumActionResult cartSpawned = EnumActionResult.FAIL;
 		if(ItemStackUtils.isItemInstanceOf(cartItemStack, ItemMinecartBase.class))
 		{
 			ItemMinecartBase itemMinecartBase = (ItemMinecartBase)cartItemStack.getItem();
@@ -34,7 +35,7 @@ public class CartDispenserBehavior extends BehaviorDefaultDispenseItem
 			}
 		}
 
-		if(!cartSpawned)
+		if(cartSpawned == EnumActionResult.FAIL)
 		{
 			cartItemStack = super.dispenseStack(dispenser, cartItemStack);
 		}

@@ -31,9 +31,9 @@ public class CartUpdateEvents
 	@SubscribeEvent
 	public void cartJoinWorld(EntityJoinWorldEvent entityJoinWorldEvent)
 	{
-		if(!entityJoinWorldEvent.world.isRemote && entityJoinWorldEvent.entity instanceof EntityMinecartTEBase)
+		if(!entityJoinWorldEvent.getWorld().isRemote && entityJoinWorldEvent.getEntity() instanceof EntityMinecartTEBase)
 		{
-			((EntityMinecartTEBase) entityJoinWorldEvent.entity).sendUpdateToAllAround();
+			((EntityMinecartTEBase) entityJoinWorldEvent.getEntity()).sendUpdateToAllAround();
 		}
 	}
 }

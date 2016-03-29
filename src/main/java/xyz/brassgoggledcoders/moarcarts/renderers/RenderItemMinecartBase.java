@@ -5,11 +5,15 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelMinecart;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.block.model.ItemOverrideList;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import xyz.brassgoggledcoders.boilerplate.lib.client.ClientHelper;
@@ -18,6 +22,8 @@ import xyz.brassgoggledcoders.boilerplate.lib.client.renderers.math.DefaultTrans
 import xyz.brassgoggledcoders.boilerplate.lib.client.renderers.math.TransformationMatrix;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ItemStackUtils;
 import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
+
+import java.util.List;
 
 @SuppressWarnings("deprecation")
 public class RenderItemMinecartBase extends ItemSpecialRenderer
@@ -74,7 +80,7 @@ public class RenderItemMinecartBase extends ItemSpecialRenderer
 
 	protected void renderVMCMethod(ItemStack itemStack, ItemMinecartBase itemMinecartBase, IBlockState blockState)
 	{
-		if (blockState.getBlock().getRenderType() != -1)
+		if (blockState.getRenderType() != EnumBlockRenderType.INVISIBLE  )
 		{
 			GlStateManager.pushMatrix();
 			GlStateManager.translate(-0.5F, -0.5F, 0.5F);
@@ -113,6 +119,18 @@ public class RenderItemMinecartBase extends ItemSpecialRenderer
 	public Class getTileClass()
 	{
 		return DummyTile.class;
+	}
+
+	@Override
+	public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand)
+	{
+		return null;
+	}
+
+	@Override
+	public ItemOverrideList getOverrides()
+	{
+		return null;
 	}
 
 	static class DummyTile extends TileEntity {}

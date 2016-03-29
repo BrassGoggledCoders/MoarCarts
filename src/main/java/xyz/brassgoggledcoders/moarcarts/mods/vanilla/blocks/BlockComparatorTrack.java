@@ -2,6 +2,7 @@ package xyz.brassgoggledcoders.moarcarts.mods.vanilla.blocks;
 
 import com.google.common.base.Predicate;
 import net.minecraft.block.BlockRailDetector;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.init.Blocks;
@@ -12,11 +13,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.IFluidHandler;
-import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
 import xyz.brassgoggledcoders.boilerplate.lib.client.models.IHasModel;
 import xyz.brassgoggledcoders.boilerplate.lib.common.items.IHasRecipe;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ComparatorUtils;
@@ -36,10 +35,8 @@ public class BlockComparatorTrack extends BlockRailDetector implements IHasModel
 	public BlockComparatorTrack()
 	{
 		super();
-		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.125F, 1.0F);
 		setResistance(3.5F);
 		setHardness(1.05F);
-		setStepSound(soundTypeMetal);
 		setUnlocalizedName("comparatortrack");
 		setRegistryName("comparatortrack");
 		this.setCreativeTab(MoarCarts.moarcartsTab);
@@ -47,10 +44,10 @@ public class BlockComparatorTrack extends BlockRailDetector implements IHasModel
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public int getComparatorInputOverride(World world, BlockPos blockPos)
+	public int getComparatorInputOverride(IBlockState blockState, World world, BlockPos blockPos)
 	{
 		int comparatorOutput = 0;
-		if (world.getBlockState(blockPos).getValue(POWERED))
+		if (blockState.getValue(POWERED))
 		{
 			List<EntityMinecart> list = this.findMinecarts(world, blockPos, EntityMinecart.class, new MinecartPredicate());
 			if(list.size() > 0 && list.get(0) != null)
@@ -67,7 +64,7 @@ public class BlockComparatorTrack extends BlockRailDetector implements IHasModel
 					comparatorOutput = Container.calcRedstoneFromInventory((IInventory)minecart);
 				} else if(minecart.canBeRidden())
 				{
-					comparatorOutput = (minecart.riddenByEntity != null) ? 15 : 0;
+					comparatorOutput = minecart.isBeingRidden() ? 15 : 0;
 				} else
 				{
 					ComparatorTrackEvent comparatorTrackEvent = new ComparatorTrackEvent(minecart);
@@ -91,19 +88,18 @@ public class BlockComparatorTrack extends BlockRailDetector implements IHasModel
 	}
 
 	@Override
-	public ResourceLocation[] getResourceLocations()
-	{
-		return new ResourceLocation[] {new ResourceLocation(BoilerplateLib.getMod().getPrefix() + "vanilla/" +
-			getUnlocalizedName().substring(5))};
-	}
-
-	@Override
 	public IRecipe[] getRecipes()
 	{
 		ArrayList<ItemStack> materials = new ArrayList<ItemStack>();
 		materials.add(new ItemStack(Items.comparator));
 		materials.add(new ItemStack(Blocks.detector_rail));
 		return new IRecipe[]{new ShapelessRecipes(new ItemStack(this), materials)};
+	}
+
+	@Override
+	public String[] getResourceLocations()
+	{
+		return new String[] {"comparatortrack"};
 	}
 }
 

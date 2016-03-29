@@ -2,11 +2,16 @@ package xyz.brassgoggledcoders.moarcarts.entities;
 
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
 import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
@@ -25,9 +30,10 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 {
 	protected TileEntity tileEntity;
 
-	private static int IS_DIRTY_DW = 30;
-	private static int IS_CLIENT_NEEDY = 28;
-	private static int UPDATE_TICKS = 200;
+	private static final DataParameter<Boolean>
+			IS_DIRTY = EntityDataManager.<Boolean>createKey(EntityMinecart.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Boolean>
+			IS_CLIENT_NEEDY = EntityDataManager.<Boolean>createKey(EntityMinecart.class, DataSerializers.BOOLEAN);
 
 	public EntityMinecartTEBase(World world, int metadata)
 	{
@@ -40,11 +46,11 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 	}
 
 	@Override
-	public void entityInit()
+	protected void entityInit()
 	{
 		super.entityInit();
-		dataWatcher.addObject(IS_DIRTY_DW, (byte) 1);
-		dataWatcher.addObject(IS_CLIENT_NEEDY, (byte) 1);
+		this.dataManager.register(IS_DIRTY, true);
+		this.dataManager.register(IS_CLIENT_NEEDY, true);
 	}
 
 	@Override
@@ -52,7 +58,7 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 	{
 		super.onUpdate();
 		if(!this.worldObj.isRemote && (this.isClientNeedy() ||
-				(this.isDirty() && random.nextInt(UPDATE_TICKS) == 0)))
+				(this.isDirty() && random.nextInt(200) == 0)))
 		{
 			this.setDirty(false);
 			this.setClientNeedy(false);
@@ -65,12 +71,12 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 	}
 
 	@Override
-	public boolean interactFirst(EntityPlayer player)
+	public boolean processInitialInteract(EntityPlayer player, ItemStack stack, EnumHand hand)
 	{
 		this.sendUpdateToAllAround();
 		EntityPlayer fakePlayer = new FakePlayer(player, this, this.shouldAccessPlayerInventory());
 		return this.getCartBlock().onBlockActivated(this.getFakeWorld(), ORIGIN_POS, this.getDisplayTile(),
-					fakePlayer, EnumFacing.NORTH, 0, 0, 0);
+					fakePlayer, hand, stack, EnumFacing.NORTH, 0, 0, 0);
 	}
 
 	public boolean shouldAccessPlayerInventory()
@@ -201,9 +207,9 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 	}
 
 	@Override
-	public void func_174899_a(IBlockState blockState)
+	public void setDisplayTile(IBlockState blockState)
 	{
-		super.func_174899_a(blockState);
+		super.setDisplayTile(blockState);
 
 		TileEntity tileEntity = this.createTileEntity();
 		if(tileEntity != null)
@@ -227,22 +233,22 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 
 	public boolean isDirty()
 	{
-		return dataWatcher.getWatchableObjectByte(IS_DIRTY_DW) != 0;
+		return this.dataManager.get(IS_DIRTY);
 	}
 
 	public void setDirty(boolean isDirty)
 	{
-		dataWatcher.updateObject(IS_DIRTY_DW, isDirty ? 1 : (byte) 0);
+		this.dataManager.set(IS_DIRTY, isDirty);
 	}
 
 	public boolean isClientNeedy()
 	{
-		return dataWatcher.getWatchableObjectByte(IS_CLIENT_NEEDY) != 0;
+		return this.dataManager.get(IS_CLIENT_NEEDY);
 	}
 
 	public void setClientNeedy(boolean needy)
 	{
-		dataWatcher.updateObject(IS_CLIENT_NEEDY, needy ? 1 : (byte) 0);
+		this.dataManager.set(IS_CLIENT_NEEDY, needy);
 	}
 
 	public boolean showHalo()

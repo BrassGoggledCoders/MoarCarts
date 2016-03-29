@@ -72,7 +72,6 @@ dependencies {
     shade "brassgoggledcoders:boilerplate:${minecraftversion}-${boilerplateversion}:lib"
     compile "brassgoggledcoders:boilerplate:${minecraftversion}-${boilerplateversion}:api"
     deobfCompile "mezz.jei:jei_${minecraftversion}:${jeiversion}"
-    compile "com.dyonovan.neotech:NeoTech:${minecraftversion}-${neotechversion}:dev"
 }
 
 

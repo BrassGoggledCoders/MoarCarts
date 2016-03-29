@@ -1,5 +1,6 @@
 package xyz.brassgoggledcoders.moarcarts.renderers;
 
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartTEBase;
@@ -141,9 +142,9 @@ public class RenderMinecartTEBase<T extends EntityMinecartTEBase> extends Render
 		GlStateManager.pushMatrix();
 		IBlockState iblockstate = entity.getDisplayTile();
 
-		if (iblockstate.getBlock().getRenderType() != -1)
+		if (iblockstate.getRenderType() != EnumBlockRenderType.INVISIBLE)
 		{
-			this.func_180560_a(entity, partialTicks, iblockstate);
+			this.func_188319_a(entity, partialTicks, iblockstate);
 		}
 		GlStateManager.popMatrix();
 	}

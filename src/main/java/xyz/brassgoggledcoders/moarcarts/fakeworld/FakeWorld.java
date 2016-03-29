@@ -46,16 +46,6 @@ public class FakeWorld extends World
 		return chunkProvider;
 	}
 
-	//Pretty sure this for IE's blocks originally though other use it.
-	@Override
-	public void markBlockForUpdate(BlockPos blockPos)
-	{
-		if(this.getEntityMinecartTEBase() != null)
-		{
-			this.getEntityMinecartTEBase().setDirty(true);
-		}
-	}
-
 	//Enderchest use this for open and close
 	@Override
 	public void addBlockEvent(BlockPos blockPos, Block block, int metadata, int p_14745) {}
@@ -74,13 +64,6 @@ public class FakeWorld extends World
 			return this.getEntityMinecartTEBase().getTileEntity();
 		}
 		return null;
-	}
-
-	//Really hope this doesn't break anything. Welp.
-	@Override
-	protected int getRenderDistanceChunks()
-	{
-		return 0;
 	}
 
 	@Override
@@ -125,13 +108,6 @@ public class FakeWorld extends World
 	public Explosion createExplosion(Entity entity, double posX, double posY, double posZ, float size, boolean damage)
 	{
 		return this.getCartWorld().createExplosion(entity, this.getCartX(), this.getCartY(), this.getCartZ(), size, damage);
-	}
-
-	//Shia Labouef tiny potato screams "Just do it"
-	@Override
-	public void playSoundEffect(double posX, double posY, double posZ, String sound, float noice, float soundTimes)
-	{
-		this.getCartWorld().playSoundAtEntity(this.getEntityMinecartBase(), sound, noice, soundTimes);
 	}
 
 	@Override

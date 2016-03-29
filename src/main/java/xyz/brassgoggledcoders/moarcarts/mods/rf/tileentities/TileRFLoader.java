@@ -36,7 +36,7 @@ public class TileRFLoader extends TileEntitySided implements IEnergyProvider, IE
 					IEnergyProvider energyProvider = null;
 					if(BlockUtils.isRailBlock(this.worldObj.getBlockState(pos)))
 					{
-						EntityMinecart entityMinecart = getMinecartsAt(worldObj, pos.offset(facing), 1f).get(0);
+						EntityMinecart entityMinecart = getMinecartsAt(worldObj, pos.offset(facing)).get(0);
 						if(entityMinecart instanceof IEnergyProvider)
 						{
 							energyProvider = (IEnergyProvider)entityMinecart;
@@ -57,7 +57,7 @@ public class TileRFLoader extends TileEntitySided implements IEnergyProvider, IE
 					IEnergyReceiver energyReceiver = null;
 					if(BlockUtils.isRailBlock(this.worldObj.getBlockState(pos)))
 					{
-						EntityMinecart entityMinecart = getMinecartsAt(worldObj, pos.offset(facing), 1f).get(0);
+						EntityMinecart entityMinecart = getMinecartsAt(worldObj, pos.offset(facing)).get(0);
 						if(entityMinecart instanceof IEnergyReceiver)
 						{
 							energyReceiver = (IEnergyReceiver)entityMinecart;
@@ -139,16 +139,12 @@ public class TileRFLoader extends TileEntitySided implements IEnergyProvider, IE
 		return this.getSideValue(from.ordinal()) != SideType.NONE;
 	}
 
-	public static List<EntityMinecart> getMinecartsAt(World world, BlockPos pos, float sensitivity) {
-		sensitivity = Math.min(sensitivity, 0.49f);
-		List entities = world.getEntitiesWithinAABB(EntityMinecart.class, AxisAlignedBB
-				.fromBounds(pos.getX() + sensitivity, pos.getY() + sensitivity, pos.getZ() + sensitivity,
-				pos.getX() + 1 - sensitivity, pos.getY() + 1 - sensitivity, pos.getZ() + 1 - sensitivity));
+	public static List<EntityMinecart> getMinecartsAt(World world, BlockPos pos) {
+		List<EntityMinecart> entities = world.getEntitiesWithinAABB(EntityMinecart.class, new AxisAlignedBB(pos));
 		List<EntityMinecart> carts = new ArrayList<EntityMinecart>();
-		for (Object o : entities) {
-			EntityMinecart cart = (EntityMinecart) o;
-			if (!cart.isDead)
-				carts.add((EntityMinecart) o);
+		for (EntityMinecart entityMinecart : entities) {
+			if (!entityMinecart.isDead)
+				carts.add(entityMinecart);
 		}
 		return carts;
 	}
