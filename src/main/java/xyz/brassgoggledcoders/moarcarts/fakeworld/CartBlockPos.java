@@ -1,7 +1,7 @@
 package xyz.brassgoggledcoders.moarcarts.fakeworld;
 
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartBase;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 
 /**
  * @author SkySom

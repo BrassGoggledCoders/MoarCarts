@@ -4,7 +4,7 @@ import com.dyonovan.neotech.client.gui.storage.GuiFlushableChest;
 import com.dyonovan.neotech.common.tiles.storage.TileFlushableChest;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import xyz.brassgoggledcoders.boilerplate.lib.client.guis.IOpenableGUI;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartCapableTEBase;

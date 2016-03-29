@@ -1,12 +1,12 @@
 package xyz.brassgoggledcoders.moarcarts.behaviors;
 
+import net.minecraft.util.math.BlockPos;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartBase;
 import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.dispenser.BehaviorDefaultDispenseItem;
 import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ItemStackUtils;

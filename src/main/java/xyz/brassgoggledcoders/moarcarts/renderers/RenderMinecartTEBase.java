@@ -1,5 +1,7 @@
 package xyz.brassgoggledcoders.moarcarts.renderers;
 
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartTEBase;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;
@@ -8,8 +10,6 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderMinecart;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 /**
@@ -47,13 +47,13 @@ public class RenderMinecartTEBase<T extends EntityMinecartTEBase> extends Render
 		double d1 = entity.lastTickPosY + (entity.posY - entity.lastTickPosY) * (double)partialTicks;
 		double d2 = entity.lastTickPosZ + (entity.posZ - entity.lastTickPosZ) * (double)partialTicks;
 		double d3 = 0.30000001192092896D;
-		Vec3 vec3 = entity.func_70489_a(d0, d1, d2);
+		Vec3d vec3 = entity.func_70489_a(d0, d1, d2);
 		float f3 = entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * partialTicks;
 
 		if (vec3 != null)
 		{
-			Vec3 vec31 = entity.func_70495_a(d0, d1, d2, d3);
-			Vec3 vec32 = entity.func_70495_a(d0, d1, d2, -d3);
+			Vec3d vec31 = entity.func_70495_a(d0, d1, d2, d3);
+			Vec3d vec32 = entity.func_70495_a(d0, d1, d2, -d3);
 
 			if (vec31 == null)
 			{
@@ -68,7 +68,7 @@ public class RenderMinecartTEBase<T extends EntityMinecartTEBase> extends Render
 			x += vec3.xCoord - d0;
 			y += (vec31.yCoord + vec32.yCoord) / 2.0D - d1;
 			z += vec3.zCoord - d2;
-			Vec3 vec33 = vec32.addVector(-vec31.xCoord, -vec31.yCoord, -vec31.zCoord);
+			Vec3d vec33 = vec32.addVector(-vec31.xCoord, -vec31.yCoord, -vec31.zCoord);
 
 			if (vec33.lengthVector() != 0.0D)
 			{

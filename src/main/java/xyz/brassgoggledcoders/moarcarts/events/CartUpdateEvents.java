@@ -1,10 +1,10 @@
 package xyz.brassgoggledcoders.moarcarts.events;
 
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartTEBase;
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.MovingObjectPosition.MovingObjectType;
+import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 
@@ -16,8 +16,8 @@ public class CartUpdateEvents
 	@SubscribeEvent
 	public void renderOverLay(RenderGameOverlayEvent.Pre event)
 	{
-		MovingObjectPosition movingObjectPosition = Minecraft.getMinecraft().objectMouseOver;
-		if(movingObjectPosition != null && movingObjectPosition.typeOfHit == MovingObjectType.ENTITY)
+		RayTraceResult movingObjectPosition = Minecraft.getMinecraft().objectMouseOver;
+		if(movingObjectPosition != null && movingObjectPosition.typeOfHit == Type.ENTITY)
 		{
 			if(movingObjectPosition.entityHit instanceof EntityMinecartTEBase)
 			{

@@ -4,7 +4,7 @@ import cofh.api.energy.IEnergyHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import xyz.brassgoggledcoders.boilerplate.lib.common.blocks.SidedBlock;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ComparatorUtils;

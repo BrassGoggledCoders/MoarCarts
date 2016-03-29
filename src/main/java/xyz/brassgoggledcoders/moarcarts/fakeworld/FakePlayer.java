@@ -6,7 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryEnderChest;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 
 /**
@@ -31,7 +31,7 @@ public class FakePlayer extends EntityPlayer
 	}
 
 	@Override
-	public void addChatMessage(IChatComponent iChatComponent)
+	public void addChatMessage(ITextComponent iChatComponent)
 	{
 		this.getEntityPlayer().addChatComponentMessage(iChatComponent);
 	}
