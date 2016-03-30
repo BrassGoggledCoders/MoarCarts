@@ -7,7 +7,7 @@ item.minecartenderchest.name=Ender Chest Cart
 
 entity.moarcarts.entityminecartenderchest.name=Ender Chest Cart
 
-tile.comparatortrack.name=Comparator Track
+tile.comparator_track.name=Comparator Track
 
 ## ironchest stuff
 item.minecartironchest.iron.name=Iron Chest Cart

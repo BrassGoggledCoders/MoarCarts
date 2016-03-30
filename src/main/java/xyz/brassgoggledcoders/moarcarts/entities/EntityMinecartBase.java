@@ -19,16 +19,15 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.minecart.MinecartInteractEvent;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import xyz.brassgoggledcoders.boilerplate.api.IDebuggable;
-import xyz.brassgoggledcoders.boilerplate.lib.client.models.IHasModel;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.ConfigRegistry;
 import xyz.brassgoggledcoders.moarcarts.MoarCarts;
 import xyz.brassgoggledcoders.moarcarts.api.IComparatorCart;
@@ -47,8 +46,7 @@ import java.util.Random;
 		@Optional.Interface(iface = "mods.railcraft.api.carts.IMinecart", modid = "RailcraftAPI|carts"),
 		@Optional.Interface(iface = "xyz.brassgoggledcoders.boilerplate.api.IDebuggable", modid = "boilerplate")
 })
-public abstract class EntityMinecartBase extends EntityMinecart implements IMinecart, IComparatorCart, IDebuggable,
-		IHasModel
+public abstract class EntityMinecartBase extends EntityMinecart implements IMinecart, IComparatorCart, IDebuggable
 {
 	protected Random random;
 	protected FakeWorld fakeWorld;
@@ -198,11 +196,6 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	public void doDisplayTick()
 	{
 		this.getCartBlock().randomDisplayTick(this.getDisplayTile(), this.getFakeWorld(), ORIGIN_POS, random);
-	}
-
-	public String[] getResourceLocations()
-	{
-		return new String[] {"defaultcart"};
 	}
 
 	public Block getCartBlock()

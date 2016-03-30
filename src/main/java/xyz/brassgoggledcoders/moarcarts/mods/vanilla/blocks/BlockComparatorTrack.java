@@ -37,8 +37,8 @@ public class BlockComparatorTrack extends BlockRailDetector implements IHasModel
 		super();
 		setResistance(3.5F);
 		setHardness(1.05F);
-		setUnlocalizedName("comparatortrack");
-		setRegistryName("comparatortrack");
+		setUnlocalizedName("comparator_track");
+		setRegistryName("comparator_track");
 		this.setCreativeTab(MoarCarts.moarcartsTab);
 	}
 
@@ -99,7 +99,7 @@ public class BlockComparatorTrack extends BlockRailDetector implements IHasModel
 	@Override
 	public String[] getResourceLocations()
 	{
-		return new String[] {"comparatortrack"};
+		return new String[] {"comparator_track"};
 	}
 }
 
@@ -108,6 +108,6 @@ class MinecartPredicate implements Predicate<Entity>
 	@Override
 	public boolean apply(@Nullable Entity input)
 	{
-		return false;
+		return input instanceof EntityMinecart;
 	}
 }
