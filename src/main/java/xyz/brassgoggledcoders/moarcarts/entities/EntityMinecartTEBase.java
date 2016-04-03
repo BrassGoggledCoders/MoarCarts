@@ -69,13 +69,15 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 	{
 		this.sendUpdateToAllAround();
 		EntityPlayer fakePlayer = new FakePlayer(player, this, this.shouldAccessPlayerInventory());
-		return this.getCartBlock().onBlockActivated(this.getFakeWorld(), ORIGIN_POS, this.getDisplayTile(),
-					fakePlayer, EnumFacing.NORTH, 0, 0, 0);
+		boolean blockActivated = this.getCartBlock().onBlockActivated(this.getFakeWorld(), ORIGIN_POS, this.getDisplayTile(),
+				fakePlayer, EnumFacing.NORTH, 0, 0, 0);
+		this.sendUpdateToAllAround();
+		return blockActivated;
 	}
 
 	public boolean shouldAccessPlayerInventory()
 	{
-		return false;
+		return true;
 	}
 
 	@Override

@@ -26,6 +26,7 @@ public class FakePlayer extends EntityPlayer
 		{
 			this.inventory = entityPlayer.inventory;
 		}
+		this.worldObj = entityPlayer.worldObj;
 		this.setEntityPlayer(entityPlayer);
 		this.setEntityMinecartTEBase(entityMinecartTEBase);
 	}
