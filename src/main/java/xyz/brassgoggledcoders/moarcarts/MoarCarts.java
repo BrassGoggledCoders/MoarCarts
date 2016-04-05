@@ -29,6 +29,7 @@ import xyz.brassgoggledcoders.boilerplate.lib.common.config.Type;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.ConfigRegistry;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ModLogger;
 import xyz.brassgoggledcoders.moarcarts.items.MoarCartsCreativeTab;
+import xyz.brassgoggledcoders.moarcarts.mods.extras.ExtrasCompat;
 import xyz.brassgoggledcoders.moarcarts.mods.hydraulicraft.HydraulicraftCompat;
 import xyz.brassgoggledcoders.moarcarts.mods.ironchest.IronChestCompat;
 import xyz.brassgoggledcoders.moarcarts.mods.neotech.NeotechCompat;
@@ -103,6 +104,7 @@ public class MoarCarts implements IBoilerplateMod
 		BoilerplateLib.getCompatibilityHandler().addModCompat(new WailaCompat());
 		BoilerplateLib.getCompatibilityHandler().addModCompat(new HydraulicraftCompat());
 		BoilerplateLib.getCompatibilityHandler().addModCompat(new NeotechCompat());
+		BoilerplateLib.getCompatibilityHandler().addModCompat(new ExtrasCompat());
 	}
 
 	@Override

@@ -11,7 +11,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
 import xyz.brassgoggledcoders.boilerplate.lib.common.blocks.SideType;
-import xyz.brassgoggledcoders.boilerplate.lib.common.tileentities.TileEntitySided;
+import xyz.brassgoggledcoders.boilerplate.lib.common.tileentities.TileEntitySidedBase;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.BlockUtils;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * @author SkySom
  */
-public class TileRFLoader extends TileEntitySided implements IEnergyProvider, IEnergyReceiver, ITickable
+public class TileRFLoader extends TileEntitySidedBase implements IEnergyProvider, IEnergyReceiver, ITickable
 {
 	protected EnergyStorage energyStorage = new EnergyStorage(100000, 1000, 1000);
 

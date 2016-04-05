@@ -6,18 +6,18 @@ import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
-import xyz.brassgoggledcoders.boilerplate.lib.common.blocks.SidedBlock;
+import xyz.brassgoggledcoders.boilerplate.lib.common.blocks.BlockSidedBase;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ComparatorUtils;
 import xyz.brassgoggledcoders.moarcarts.mods.rf.tileentities.TileRFLoader;
 
 /**
  * @author SkySom
  */
-public class BlockRFLoader extends SidedBlock
+public class BlockRFLoader extends BlockSidedBase
 {
 	public BlockRFLoader()
 	{
-		super(Material.iron);
+		super(Material.iron, "rf_loader");
 		this.setStepSound(Block.soundTypeMetal);
 	}
 

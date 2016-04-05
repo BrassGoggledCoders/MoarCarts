@@ -50,6 +50,9 @@ entity.moarcarts.entityminecartdiamondtank.name=Diamond Fluid Tank Cart
 entity.moarcarts.entityminecartcreativetank.name=Creative Fluid Tank Cart
 entity.moarcarts.entityminecartvoidtank.name=Void Fluid Tank Cart
 
+## extras stuff
+tile.fluid_hopper.name=Fluid Hopper
+
 ##boilerplate
 boilerplate.blockSide.facing=Facing Side
 boilerplate.blockSide.opposite=Opposite Side
