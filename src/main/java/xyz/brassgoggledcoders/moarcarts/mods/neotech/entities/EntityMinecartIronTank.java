@@ -19,6 +19,12 @@ public class EntityMinecartIronTank extends EntityMinecartFluidTEBase
 	}
 
 	@Override
+	public int getMetadata()
+	{
+		return ItemMinecartTank.TankType.IRON.ordinal();
+	}
+
+	@Override
 	public ItemMinecartBase getItem()
 	{
 		return NeotechCompat.ITEM_MINECART_IRONTANK;

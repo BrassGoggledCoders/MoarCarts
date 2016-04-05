@@ -47,7 +47,7 @@ entity.moarcarts.entityminecartdimensionalchest.name=Dimensional Chest Cart
 entity.moarcarts.entityminecartirontank.name=Iron Fluid Tank Cart
 entity.moarcarts.entityminecartgoldtank.name=Gold Fluid Tank Cart
 entity.moarcarts.entityminecartdiamondtank.name=Diamond Fluid Tank Cart
-entity.moarcarts.entityminecartemeraldtank.name=Creative Fluid Tank Cart
+entity.moarcarts.entityminecartcreativetank.name=Creative Fluid Tank Cart
 entity.moarcarts.entityminecartvoidtank.name=Void Fluid Tank Cart
 
 ##boilerplate

@@ -35,9 +35,9 @@ public class NeotechCompat extends ModCompat
 		ItemRegistry.registerItem(ITEM_MINECART_FLUSHABLECHEST);
 		EntityRegistry.registerEntity(EntityMinecartFlushableChest.class);
 
-		ITEM_MINECART_DIMENSIONALCHEST = new ItemMinecartDimensionalChest();
-		ItemRegistry.registerItem(ITEM_MINECART_DIMENSIONALCHEST);
-		EntityRegistry.registerEntity(EntityMinecartDimensionalChest.class);
+		//ITEM_MINECART_DIMENSIONALCHEST = new ItemMinecartDimensionalChest();
+		//ItemRegistry.registerItem(ITEM_MINECART_DIMENSIONALCHEST);
+		//EntityRegistry.registerEntity(EntityMinecartDimensionalChest.class);
 
 		ITEM_MINECART_IRONTANK = new ItemMinecartTank();
 		ItemRegistry.registerItem(ITEM_MINECART_IRONTANK);

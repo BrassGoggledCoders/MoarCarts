@@ -9,4 +9,10 @@ public class EntityMinecartDiamondTank extends EntityMinecartIronTank
 	{
 		super(world, ItemMinecartTank.TankType.DIAMOND);
 	}
+
+	@Override
+	public int getMetadata()
+	{
+		return ItemMinecartTank.TankType.DIAMOND.ordinal();
+	}
 }

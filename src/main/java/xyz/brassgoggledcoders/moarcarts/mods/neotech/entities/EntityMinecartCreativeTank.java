@@ -9,4 +9,10 @@ public class EntityMinecartCreativeTank extends EntityMinecartIronTank
 	{
 		super(world, ItemMinecartTank.TankType.EMERALD);
 	}
+
+	@Override
+	public int getMetadata()
+	{
+		return ItemMinecartTank.TankType.EMERALD.ordinal();
+	}
 }
