@@ -1,8 +1,6 @@
 package xyz.brassgoggledcoders.moarcarts.mods.extras.block;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockState;
@@ -10,22 +8,21 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import xyz.brassgoggledcoders.boilerplate.lib.client.models.IHasModel;
 import xyz.brassgoggledcoders.boilerplate.lib.common.blocks.BlockTEBase;
-import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ComparatorUtils;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.Selectors;
-import xyz.brassgoggledcoders.moarcarts.MoarCarts;
 import xyz.brassgoggledcoders.moarcarts.mods.extras.tiles.TileFluidHopper;
 
 import java.util.List;
 
-public class BlockFluidHopper extends BlockTEBase implements IHasModel
+public class BlockFluidHopper extends BlockTEBase
 {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", Selectors.NOT_UP);
 	public static final PropertyBool ENABLED = PropertyBool.create("enabled");
@@ -74,53 +71,19 @@ public class BlockFluidHopper extends BlockTEBase implements IHasModel
 	}
 
 	@Override
-	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
-	{
-		this.updateState(worldIn, pos, state);
-	}
-
-	@Override
-	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
-	{
-		this.updateState(worldIn, pos, state);
-	}
-
-	private void updateState(World worldIn, BlockPos pos, IBlockState state)
-	{
-		boolean flag = !worldIn.isBlockPowered(pos);
-
-		if (flag != state.getValue(ENABLED))
-		{
-			worldIn.setBlockState(pos, state.withProperty(ENABLED, flag), 4);
-		}
-	}
-
-	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
-	{
-		TileEntity tileEntity = worldIn.getTileEntity(pos);
-
-		if (tileEntity instanceof TileFluidHopper)
-		{
-			worldIn.updateComparatorOutputLevel(pos, this);
-		}
-
-		super.breakBlock(worldIn, pos, state);
-	}
-
 	public boolean isFullCube()
 	{
 		return false;
 	}
 
-	/**
-	 * Used to determine ambient occlusion and culling when rebuilding chunks for render
-	 */
+	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
 
 	@SideOnly(Side.CLIENT)
+	@Override
 	public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
 	{
 		return true;
@@ -134,20 +97,6 @@ public class BlockFluidHopper extends BlockTEBase implements IHasModel
 	public static boolean isEnabled(int meta)
 	{
 		return (meta & 8) != 8;
-	}
-
-	public boolean hasComparatorInputOverride()
-	{
-		return true;
-	}
-
-	public int getComparatorInputOverride(World world, BlockPos pos)
-	{
-		if(world.getTileEntity(pos) instanceof IFluidHandler)
-		{
-			return ComparatorUtils.scaleSingleFluidLevelTo(15, (IFluidHandler)world.getTileEntity(pos));
-		}
-		return 0;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -174,20 +123,15 @@ public class BlockFluidHopper extends BlockTEBase implements IHasModel
 		return i;
 	}
 
+	@Override
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, new IProperty[] {FACING, ENABLED});
+		return new BlockState(this, FACING, ENABLED);
 	}
 
 	@Override
 	public Class<? extends TileEntity> getTileEntityClass()
 	{
 		return TileFluidHopper.class;
-	}
-
-	@Override
-	public ResourceLocation[] getResourceLocations()
-	{
-		return new ResourceLocation[]{new ResourceLocation(MoarCarts.instance.getPrefix() + "fluid_hopper")};
 	}
 }
