@@ -1,6 +1,5 @@
 package xyz.brassgoggledcoders.moarcarts.mods.extras.tiles;
 
-import net.minecraft.block.BlockHopper;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -10,6 +9,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import xyz.brassgoggledcoders.boilerplate.lib.common.tileentities.TileEntityFluidBase;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.Selectors;
@@ -67,36 +67,71 @@ public class TileFluidHopper extends TileEntityFluidBase implements ITickable
 	private boolean transferFluidIn()
 	{
 		IFluidHandler fluidHandler = this.getFluidHandlerForTransfer(EnumFacing.UP);
-
-		if (fluidHandler != null)
+		boolean dirty = false;
+		if(getTank().getFluidAmount() < getTank().getCapacity())
 		{
-			FluidStack attempt = fluidHandler.drain(EnumFacing.DOWN, getTank().getCapacity() - getTank().getFluidAmount(), false);
-			FluidStack actual = drain(EnumFacing.UP, attempt, true);
-			fluidHandler.drain(EnumFacing.DOWN, actual.amount, true);
+			if(fluidHandler != null)
+			{
+				if(getTank().getFluidAmount() > 0)
+				{
+					FluidStack canPull = getTank().getFluid().copy();
+					canPull.amount = getTank().getCapacity() - getTank().getFluidAmount();
+					canPull.amount = Math.min(canPull.amount, getTransferRate());
+					FluidStack drained = fluidHandler.drain(EnumFacing.DOWN, canPull, true);
+					if(drained != null && drained.amount > 0)
+					{
+						getTank().fill(drained, true);
+						dirty = true;
+					}
+				} else
+				{
+					FluidTankInfo[] infos = fluidHandler.getTankInfo(EnumFacing.DOWN);
+					if(infos != null)
+					{
+						for (FluidTankInfo info : infos) {
+							if(info.fluid != null && info.fluid.amount > 0)
+							{
+								if(canFill(EnumFacing.UP, info.fluid.getFluid()))
+								{
+									FluidStack canPull = info.fluid.copy();
+									canPull.amount = Math.min(getTransferRate(), canPull.amount);
+									FluidStack drained = fluidHandler.drain(EnumFacing.DOWN, canPull, true);
+									if(drained != null && drained.amount > 0)
+									{
+										getTank().fill(drained, true);
+										dirty = true;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 
-		return false;
+		return dirty;
 	}
 
 	private boolean transferFluidOut()
 	{
 		IFluidHandler fluidHandler = this.getFluidHandlerForTransfer(BlockFluidHopper.getFacing(this.getBlockMetadata()));
-
-		if (fluidHandler != null && getTank().getFluid() != null && getTank().getFluid().getFluid() != null)
-		{
-			EnumFacing enumfacing = BlockHopper.getFacing(this.getBlockMetadata()).getOpposite();
-
-			if (fluidHandler.canFill(enumfacing, getTank().getFluid().getFluid()))
-			{
-				int attempt = fluidHandler.fill(enumfacing, getTank().getFluid(), false);
-				FluidStack actual = drain(enumfacing.getOpposite(), attempt, true);
-				fluidHandler.fill(enumfacing, actual, true);
+		boolean dirty = false;
+		EnumFacing dir = BlockFluidHopper.getFacing(this.getBlockMetadata());
+		if(getTank().getFluidAmount() > 0) {
+			if(fluidHandler != null) {
+				if(fluidHandler.canFill(dir.getOpposite(), getTank().getFluid().getFluid())) {
+					FluidStack push = getTank().getFluid().copy();
+					push.amount = Math.min(push.amount, getTransferRate());
+					int filled = fluidHandler.fill(dir.getOpposite(), push, true);
+					if(filled > 0) {
+						getTank().drain(filled, true);
+						dirty = true;
+					}
+				}
 			}
 		}
-		return false;
+		return dirty;
 	}
-
-
 
 	public IFluidHandler getFluidHandlerForTransfer(EnumFacing enumfacing)
 	{
@@ -118,7 +153,10 @@ public class TileFluidHopper extends TileEntityFluidBase implements ITickable
 
 		if (fluidHandler == null)
 		{
-			List<Entity> list = world.getEntitiesInAABBexcluding(null, new AxisAlignedBB(blockPos, blockPos),
+			float sensitivity = 0.49f;
+			List<Entity> list = world.getEntitiesInAABBexcluding(null, AxisAlignedBB
+					.fromBounds(blockPos.getX() + sensitivity, blockPos.getY() + sensitivity, blockPos.getZ() + sensitivity,
+							blockPos.getX() + 1 - sensitivity, blockPos.getY() + 1 - sensitivity, blockPos.getZ() + 1 - sensitivity),
 					Selectors.IFLUID_HANDLER_ENTITIES);
 
 			if (list.size() > 0)
@@ -157,5 +195,10 @@ public class TileFluidHopper extends TileEntityFluidBase implements ITickable
 	public int getCapacity()
 	{
 		return 16000;
+	}
+
+	public int getTransferRate()
+	{
+		return 500;
 	}
 }

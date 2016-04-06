@@ -10,23 +10,22 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.*;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import xyz.brassgoggledcoders.boilerplate.lib.client.models.IHasModel;
 import xyz.brassgoggledcoders.boilerplate.lib.common.blocks.BlockTEBase;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ComparatorUtils;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.Selectors;
+import xyz.brassgoggledcoders.moarcarts.MoarCarts;
 import xyz.brassgoggledcoders.moarcarts.mods.extras.tiles.TileFluidHopper;
 
 import java.util.List;
 
-public class BlockFluidHopper extends BlockTEBase
+public class BlockFluidHopper extends BlockTEBase implements IHasModel
 {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", Selectors.NOT_UP);
 	public static final PropertyBool ENABLED = PropertyBool.create("enabled");
@@ -184,5 +183,11 @@ public class BlockFluidHopper extends BlockTEBase
 	public Class<? extends TileEntity> getTileEntityClass()
 	{
 		return TileFluidHopper.class;
+	}
+
+	@Override
+	public ResourceLocation[] getResourceLocations()
+	{
+		return new ResourceLocation[]{new ResourceLocation(MoarCarts.instance.getPrefix() + "fluid_hopper")};
 	}
 }
