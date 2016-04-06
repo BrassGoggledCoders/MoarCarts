@@ -7,7 +7,7 @@ import xyz.brassgoggledcoders.moarcarts.mods.extras.block.BlockFluidHopper;
 
 public class ExtrasCompat extends ModCompat
 {
-	public static BlockFluidHopper blockLiquidHopper;
+	public static BlockFluidHopper BLOCK_FLUID_HOPPER;
 
 	@Override
 	public String getName()
@@ -18,7 +18,7 @@ public class ExtrasCompat extends ModCompat
 	@Override
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		blockLiquidHopper = new BlockFluidHopper();
-		BlockRegistry.registerBlock(blockLiquidHopper);
+		BLOCK_FLUID_HOPPER = new BlockFluidHopper();
+		BlockRegistry.registerBlock(BLOCK_FLUID_HOPPER);
 	}
 }

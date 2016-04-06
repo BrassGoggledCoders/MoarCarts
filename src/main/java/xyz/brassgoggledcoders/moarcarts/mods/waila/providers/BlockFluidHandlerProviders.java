@@ -16,12 +16,12 @@ import xyz.brassgoggledcoders.moarcarts.mods.extras.ExtrasCompat;
 
 import java.util.List;
 
-public class BlockFluidHandler implements IWailaDataProvider
+public class BlockFluidHandlerProviders implements IWailaDataProvider
 {
 	@Override
 	public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
-		return new ItemStack(ExtrasCompat.blockLiquidHopper);
+		return new ItemStack(ExtrasCompat.BLOCK_FLUID_HOPPER);
 	}
 
 	@Override
