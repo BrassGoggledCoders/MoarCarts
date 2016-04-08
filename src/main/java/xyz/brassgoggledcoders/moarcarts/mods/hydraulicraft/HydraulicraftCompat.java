@@ -2,7 +2,7 @@ package xyz.brassgoggledcoders.moarcarts.mods.hydraulicraft;
 
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import xyz.brassgoggledcoders.boilerplate.lib.common.modcompat.ModCompat;
+import xyz.brassgoggledcoders.boilerplate.lib.common.modules.Module;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.BlockRegistry;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.EntityRegistry;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.ItemRegistry;
@@ -10,7 +10,7 @@ import xyz.brassgoggledcoders.moarcarts.mods.hydraulicraft.blocks.BlockHydFluidT
 import xyz.brassgoggledcoders.moarcarts.mods.hydraulicraft.entites.EntityMinecartFluidTank;
 import xyz.brassgoggledcoders.moarcarts.mods.hydraulicraft.items.ItemMinecartFluidTank;
 
-public class HydraulicraftCompat extends ModCompat
+public class HydraulicraftCompat extends Module
 {
 	public static BlockHydFluidTank BLOCK_HYD_FLUID_TANK;
 	public static ItemMinecartFluidTank ITEM_MINECART_FLUIDTANK;

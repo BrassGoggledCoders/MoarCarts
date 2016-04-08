@@ -12,7 +12,7 @@
 package xyz.brassgoggledcoders.moarcarts.mods.vanilla;
 
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import xyz.brassgoggledcoders.boilerplate.lib.common.modcompat.ModCompat;
+import xyz.brassgoggledcoders.boilerplate.lib.common.modules.Module;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.BlockRegistry;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.EntityRegistry;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.ItemRegistry;
@@ -24,7 +24,7 @@ import xyz.brassgoggledcoders.moarcarts.mods.vanilla.items.ItemMinecartEnderChes
 /**
  * @author SkySom
  */
-public class VanillaCompat extends ModCompat
+public class VanillaCompat extends Module
 {
 	public static ItemMinecartEnderChest ITEM_MINECART_ENDERCHEST;
 	public static BlockComparatorTrack BLOCK_COMPARATOR_TRACK;

@@ -2,7 +2,6 @@ package xyz.brassgoggledcoders.moarcarts.mods.waila;
 
 import mcp.mobius.waila.api.IWailaRegistrar;
 import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
-import xyz.brassgoggledcoders.boilerplate.lib.common.modcompat.ModCompat;
 import xyz.brassgoggledcoders.boilerplate.lib.common.tileentities.TileEntityFluidBase;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartEnergyHandlerTEBase;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartFluidTEBase;
@@ -20,8 +19,8 @@ public class Register
 		registrar.registerNBTProvider(new EntityMinecartTEBaseProvider(), EntityMinecartTEBaseProvider.class);
 		registrar.registerBodyProvider(new EntityMinecartFluidProvider(), EntityMinecartFluidTEBase.class);
 		registrar.registerBodyProvider(new EntityMinecartRFProvider(), EntityMinecartEnergyHandlerTEBase.class);
-		ModCompat extras = BoilerplateLib.getCompatibilityHandler().getModCompat("extras");
-		if(extras != null && extras.getIsActive())
+
+		if(BoilerplateLib.getModuleHandler().isModuleEnabled("Extras"))
 		{
 			registrar.registerBodyProvider(new BlockFluidHandlerProviders(), TileEntityFluidBase.class);
 		}

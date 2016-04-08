@@ -99,12 +99,12 @@ public class MoarCarts implements IBoilerplateMod
 
 	public void initModCompatHandler()
 	{
-		BoilerplateLib.getCompatibilityHandler().addModCompat(new VanillaCompat());
-		BoilerplateLib.getCompatibilityHandler().addModCompat(new IronChestCompat());
-		BoilerplateLib.getCompatibilityHandler().addModCompat(new WailaCompat());
-		BoilerplateLib.getCompatibilityHandler().addModCompat(new HydraulicraftCompat());
-		BoilerplateLib.getCompatibilityHandler().addModCompat(new NeotechCompat());
-		BoilerplateLib.getCompatibilityHandler().addModCompat(new ExtrasCompat());
+		BoilerplateLib.getModuleHandler().addModule(new VanillaCompat());
+		BoilerplateLib.getModuleHandler().addModule(new IronChestCompat());
+		BoilerplateLib.getModuleHandler().addModule(new WailaCompat());
+		BoilerplateLib.getModuleHandler().addModule(new HydraulicraftCompat());
+		BoilerplateLib.getModuleHandler().addModule(new NeotechCompat());
+		BoilerplateLib.getModuleHandler().addModule(new ExtrasCompat());
 	}
 
 	@Override
@@ -141,29 +141,5 @@ public class MoarCarts implements IBoilerplateMod
 	public String getPrefix()
 	{
 		return MODID + ":";
-	}
-
-	@Override
-	public ModLogger getLogger()
-	{
-		return logger;
-	}
-
-	@Override
-	public Configuration getConfig()
-	{
-		return config;
-	}
-
-	@Override
-	public String getClientProxyPath()
-	{
-		return "xyz.brassgoggledcoders.moarcarts.proxy.ClientProxy";
-	}
-
-	@Override
-	public String getCommonProxyPath()
-	{
-		return "xyz.brassgoggledcoders.moarcarts.proxy.CommonProxy";
 	}
 }

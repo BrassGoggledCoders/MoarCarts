@@ -2,15 +2,15 @@ package xyz.brassgoggledcoders.moarcarts.mods.neotech;
 
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import xyz.brassgoggledcoders.boilerplate.lib.common.modcompat.ModCompat;
+import xyz.brassgoggledcoders.boilerplate.lib.common.modules.Module;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.EntityRegistry;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.ItemRegistry;
 import xyz.brassgoggledcoders.moarcarts.mods.neotech.entities.*;
 import xyz.brassgoggledcoders.moarcarts.mods.neotech.items.ItemMinecartDimensionalChest;
-import xyz.brassgoggledcoders.moarcarts.mods.neotech.items.ItemMinecartTank;
 import xyz.brassgoggledcoders.moarcarts.mods.neotech.items.ItemMinecartFlushableChest;
+import xyz.brassgoggledcoders.moarcarts.mods.neotech.items.ItemMinecartTank;
 
-public class NeotechCompat extends ModCompat
+public class NeotechCompat extends Module
 {
 	public static ItemMinecartFlushableChest ITEM_MINECART_FLUSHABLECHEST;
 	public static ItemMinecartDimensionalChest ITEM_MINECART_DIMENSIONALCHEST;

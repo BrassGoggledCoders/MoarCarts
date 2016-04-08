@@ -12,11 +12,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.IFluidHandler;
-import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
 import xyz.brassgoggledcoders.boilerplate.lib.client.models.IHasModel;
 import xyz.brassgoggledcoders.boilerplate.lib.common.items.IHasRecipe;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ComparatorUtils;
@@ -91,10 +89,9 @@ public class BlockComparatorTrack extends BlockRailDetector implements IHasModel
 	}
 
 	@Override
-	public ResourceLocation[] getResourceLocations()
+	public String[] getResourceLocations()
 	{
-		return new ResourceLocation[] {new ResourceLocation(BoilerplateLib.getMod().getPrefix() + "vanilla/" +
-			getUnlocalizedName().substring(5))};
+		return new String[] {"vanilla/" + getUnlocalizedName().substring(5)};
 	}
 
 	@Override

@@ -25,10 +25,8 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
-import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
 import xyz.brassgoggledcoders.boilerplate.lib.client.renderers.ISpecialRenderedItem;
 import xyz.brassgoggledcoders.boilerplate.lib.common.config.ConfigEntry;
 import xyz.brassgoggledcoders.boilerplate.lib.common.config.IConfigListener;
@@ -150,15 +148,9 @@ public abstract class ItemMinecartBase extends ItemMinecart implements IMinecart
 	}
 
 	@Override
-	public String getSpecialRendererPath()
+	public String[] getResourceLocations()
 	{
-		return "xyz.brassgoggledcoders.moarcarts.renderers.RenderItemMinecartBase";
-	}
-
-	@Override
-	public ResourceLocation[] getResourceLocations()
-	{
-		return new ResourceLocation[] {new ResourceLocation(BoilerplateLib.getMod().getPrefix() + "defaultcart")};
+		return new String[] {"defaultcart"};
 	}
 
 	@Override
