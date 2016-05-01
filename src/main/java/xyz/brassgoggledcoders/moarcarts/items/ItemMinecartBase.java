@@ -171,6 +171,12 @@ public abstract class ItemMinecartBase extends ItemMinecart implements IMinecart
 		}
 	}
 
+	@Override
+	public String getSpecialRendererPath()
+	{
+		return "xyz.brassgoggledcoders.moarcarts.renderers.RenderItemMinecartBase";
+	}
+
 	public abstract Block getCartBlock(ItemStack itemStack);
 
 	public abstract EntityMinecartBase getEntityFromItem(World world, ItemStack itemStack);

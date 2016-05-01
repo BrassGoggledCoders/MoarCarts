@@ -16,13 +16,14 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import xyz.brassgoggledcoders.boilerplate.lib.client.models.IHasModel;
 import xyz.brassgoggledcoders.boilerplate.lib.common.blocks.BlockTEBase;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.Selectors;
 import xyz.brassgoggledcoders.moarcarts.mods.extras.tiles.TileFluidHopper;
 
 import java.util.List;
 
-public class BlockFluidHopper extends BlockTEBase
+public class BlockFluidHopper extends BlockTEBase implements IHasModel
 {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", Selectors.NOT_UP);
 	public static final PropertyBool ENABLED = PropertyBool.create("enabled");
@@ -133,5 +134,11 @@ public class BlockFluidHopper extends BlockTEBase
 	public Class<? extends TileEntity> getTileEntityClass()
 	{
 		return TileFluidHopper.class;
+	}
+
+	@Override
+	public String[] getResourceLocations()
+	{
+		return new String[] {"fluid_hopper"};
 	}
 }
