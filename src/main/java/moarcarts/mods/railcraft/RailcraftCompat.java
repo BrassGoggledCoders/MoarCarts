@@ -20,7 +20,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import moarcarts.MoarCarts;
 import moarcarts.mods.railcraft.entities.EntityMinecartMetalsChest;
 import moarcarts.mods.railcraft.entities.EntityMinecartVoidChest;
 import moarcarts.mods.railcraft.items.ItemMinecartMachineBeta;
@@ -60,9 +59,9 @@ public class RailcraftCompat extends ModCompat
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		ITEM_MINECART_MACHINEBETA = new ItemMinecartMachineBeta();
-		RegistryHelper.registerItem(ITEM_MINECART_MACHINEBETA, MoarCarts.MODID);
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartVoidChest.class, "entityminecartvoidchest");
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartMetalsChest.class, "entityminecartmetalschest");
+		RegistryHelper.registerItem(ITEM_MINECART_MACHINEBETA);
+		RegistryHelper.registerEntity(EntityMinecartVoidChest.class, "entityminecartvoidchest");
+		RegistryHelper.registerEntity(EntityMinecartMetalsChest.class, "entityminecartmetalschest");
 	}
 
 	@Override

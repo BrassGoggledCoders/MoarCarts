@@ -8,7 +8,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import moarcarts.MoarCarts;
 import moarcarts.mods.mfr.entities.EntityMinecartDSU;
 import moarcarts.mods.mfr.items.ItemMinecartDSU;
 import moarcarts.recipes.NBTCartRecipe;
@@ -46,8 +45,8 @@ public class MFRCompat extends ModCompat
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		ITEM_MINECART_DSU = new ItemMinecartDSU();
-		RegistryHelper.registerItem(ITEM_MINECART_DSU, MoarCarts.MODID);
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartDSU.class, "entityminecartdsu");
+		RegistryHelper.registerItem(ITEM_MINECART_DSU);
+		RegistryHelper.registerEntity(EntityMinecartDSU.class, "entityminecartdsu");
 	}
 
 	@Override

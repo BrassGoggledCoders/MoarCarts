@@ -38,6 +38,7 @@ import moarcarts.mods.waila.WailaCompat;
 import moarcarts.network.PacketHandler;
 import moarcarts.proxies.CommonProxy;
 import moarcarts.recipes.NBTCartRecipe;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.RecipeSorter;
 
@@ -113,14 +114,50 @@ public class MoarCarts implements IBoilerplateMod
 	}
 
 	@Override
-	public String getModID()
+	public Object getInstance()
+	{
+		return MoarCarts.instance;
+	}
+
+	@Override
+	public CreativeTabs getCreativeTab()
+	{
+		return moarcartsTab;
+	}
+
+	@Override
+	public String getID()
 	{
 		return MODID;
 	}
 
 	@Override
-	public Object getInstance()
+	public String getName()
 	{
-		return MoarCarts.instance;
+		return MODNAME;
+	}
+
+	@Override
+	public String getVersion()
+	{
+		return MODVERSION;
+	}
+
+	@Override
+	public String getPrefix()
+	{
+		return MODID + ":";
+	}
+
+	@Override
+	public String getClientProxyPath()
+	{
+		return "moarcarts.proxies.ClientProxy";
+	}
+
+	@Override
+	public String getCommonProxyPath()
+	{
+		return "moarcarts.proxies.CommonProxy";
 	}
 }

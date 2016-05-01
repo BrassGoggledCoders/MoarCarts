@@ -39,12 +39,6 @@ public class EntityMinecartWoodenBarrel extends EntityMinecartFluidTEBase implem
 	}
 
 	@Override
-	public boolean shouldAccessPlayerInventory()
-	{
-		return false;
-	}
-
-	@Override
 	public String[] getOverlayText(EntityPlayer entityPlayer, MovingObjectPosition movingObjectPosition, boolean b)
 	{
 		return ((IBlockOverlayText)this.getTileEntity()).getOverlayText(entityPlayer, movingObjectPosition, b);

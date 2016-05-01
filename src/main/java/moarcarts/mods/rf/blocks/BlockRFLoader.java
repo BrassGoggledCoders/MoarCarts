@@ -11,7 +11,6 @@ import moarcarts.mods.rf.tileentities.TileRFLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -25,7 +24,7 @@ public class BlockRFLoader extends SidedBlock
 		super(Material.iron);
 		this.setStepSound(Block.soundTypeMetal);
 		this.setBlockName(MoarCarts.MODID + "." + "blockrfloader");
-		this.setCreativeTab(CreativeTabs.tabTransport);
+		this.setCreativeTab(MoarCarts.moarcartsTab);
 	}
 
 	@Override

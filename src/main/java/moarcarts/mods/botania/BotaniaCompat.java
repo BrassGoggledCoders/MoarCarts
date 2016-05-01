@@ -9,7 +9,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import moarcarts.MoarCarts;
 import moarcarts.mods.botania.entities.EntityMinecartTinyPotato;
 import moarcarts.mods.botania.events.ManaCartComparatorEvent;
 import moarcarts.mods.botania.events.PotatoMinecartEventHandler;
@@ -46,8 +45,8 @@ public class BotaniaCompat extends ModCompat
 	{
 		MinecraftForge.EVENT_BUS.register(new ManaCartComparatorEvent());
 		ITEM_MINECART_TINYPOTATO = new ItemTinyPotatoMinecart();
-		RegistryHelper.registerItem(ITEM_MINECART_TINYPOTATO, MoarCarts.MODID);
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartTinyPotato.class, "entityminecarttinypotato");
+		RegistryHelper.registerItem(ITEM_MINECART_TINYPOTATO);
+		RegistryHelper.registerEntity(EntityMinecartTinyPotato.class, "entityminecarttinypotato");
 	}
 
 	@Override

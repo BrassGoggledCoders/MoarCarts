@@ -49,8 +49,8 @@ public class AvaritiaCompat extends ModCompat
 		if(bringOutThePotatoes)
 		{
 			ITEM_MINECART_INFINITATO = new ItemMinecartInfinitato();
-			RegistryHelper.registerItem(ITEM_MINECART_INFINITATO, MoarCarts.MODID);
-			RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartInfinitato.class, "entityminecartinfinitato");
+			RegistryHelper.registerItem(ITEM_MINECART_INFINITATO);
+			RegistryHelper.registerEntity(EntityMinecartInfinitato.class, "entityminecartinfinitato");
 		}
 	}
 

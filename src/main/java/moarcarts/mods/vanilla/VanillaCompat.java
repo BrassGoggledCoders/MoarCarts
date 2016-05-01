@@ -18,7 +18,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import moarcarts.MoarCarts;
 import moarcarts.mods.vanilla.blocks.BlockComparatorTrack;
 import moarcarts.mods.vanilla.entities.EntityMinecartEnderChest;
 import moarcarts.mods.vanilla.items.ItemMinecartEnderChest;
@@ -48,8 +47,8 @@ public class VanillaCompat extends ModCompat
 		RegistryHelper.registerBlockWithDesc(BLOCK_COMPARATOR_TRACK, "Comparator Track");
 
 		ITEM_MINECART_ENDERCHEST = new ItemMinecartEnderChest();
-		RegistryHelper.registerItem(ITEM_MINECART_ENDERCHEST, MoarCarts.MODID);
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartEnderChest.class, "entityminecartenderchest");
+		RegistryHelper.registerItem(ITEM_MINECART_ENDERCHEST);
+		RegistryHelper.registerEntity(EntityMinecartEnderChest.class, "entityminecartenderchest");
 	}
 
 	@Override

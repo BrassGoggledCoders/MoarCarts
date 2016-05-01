@@ -1,7 +1,6 @@
 package moarcarts.entities;
 
 import moarcarts.MoarCarts;
-import moarcarts.fakeworld.FakePlayer;
 import moarcarts.fakeworld.FakeWorld;
 import moarcarts.network.EntityTileEntityUpdateMessage;
 import moarcarts.network.EntityTileEntityUpdateRequestMessage;
@@ -65,17 +64,11 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 		this.sendUpdateToAllAround();
 		if(!player.isSneaking())
 		{
-			EntityPlayer fakePlayer = new FakePlayer(player, this, this.shouldAccessPlayerInventory());
+			EntityPlayer fakePlayer = MoarCarts.proxy.getFakePlayer(player, this);
 			return this.getCartBlock().onBlockActivated(this.getFakeWorld(), 0, 0, 0, fakePlayer, this.getMetadata(), 0, 0, 0);
 		}
 		return true;
 	}
-
-	public boolean shouldAccessPlayerInventory()
-	{
-		return false;
-	}
-
 
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound nbtTagCompound)

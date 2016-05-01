@@ -55,16 +55,16 @@ public class IEModCompat extends ModCompat
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		ITEM_MINECART_WOODENBARREL = new ItemMinecartWoodenBarrel();
-		RegistryHelper.registerItem(ITEM_MINECART_WOODENBARREL, MoarCarts.MODID);
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartWoodenBarrel.class, "entityminecartwoodenbarrel");
+		RegistryHelper.registerItem(ITEM_MINECART_WOODENBARREL);
+		RegistryHelper.registerEntity(EntityMinecartWoodenBarrel.class, "entityminecartwoodenbarrel");
 
 		ITEM_MINECART_METALBARREL = new ItemMinecartMetalBarrel();
-		RegistryHelper.registerItem(ITEM_MINECART_METALBARREL, MoarCarts.MODID);
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartMetalBarrel.class, "entityminecartmetalbarrel");
+		RegistryHelper.registerItem(ITEM_MINECART_METALBARREL);
+		RegistryHelper.registerEntity(EntityMinecartMetalBarrel.class, "entityminecartmetalbarrel");
 
 		ITEM_MINECART_WOODENCRATE = new ItemMinecartWoodenCrate();
-		RegistryHelper.registerItem(ITEM_MINECART_WOODENCRATE, MoarCarts.MODID);
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartWoodenCrate.class, "entityminecartwoodencrate");
+		RegistryHelper.registerItem(ITEM_MINECART_WOODENCRATE);
+		RegistryHelper.registerEntity(EntityMinecartWoodenCrate.class, "entityminecartwoodencrate");
 
 		ModCompat rfCompat = MoarCarts.compatibilityHandler.getModCompatEnabled().get("RF");
 		isRFModuleEnabled = rfCompat.getIsActive();
@@ -72,11 +72,11 @@ public class IEModCompat extends ModCompat
 		if(isRFModuleEnabled)
 		{
 			ITEM_MINECART_CAPACITOR = new ItemMinecartCapacitor();
-			RegistryHelper.registerItem(ITEM_MINECART_CAPACITOR, MoarCarts.MODID);
-			RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartCapacitorLV.class, "entityminecartcapacitorlv");
-			RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartCapacitorMV.class, "entityminecartcapacitormv");
-			RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartCapacitorHV.class, "entityminecartcapacitorhv");
-			RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartCapacitorCreative.class, "entityminecartcapacitorcreative");
+			RegistryHelper.registerItem(ITEM_MINECART_CAPACITOR);
+			RegistryHelper.registerEntity(EntityMinecartCapacitorLV.class, "entityminecartcapacitorlv");
+			RegistryHelper.registerEntity(EntityMinecartCapacitorMV.class, "entityminecartcapacitormv");
+			RegistryHelper.registerEntity(EntityMinecartCapacitorHV.class, "entityminecartcapacitorhv");
+			RegistryHelper.registerEntity(EntityMinecartCapacitorCreative.class, "entityminecartcapacitorcreative");
 		}
 
 		Shaders.initShaders();

@@ -8,7 +8,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import moarcarts.MoarCarts;
 import moarcarts.mods.ironchest.entities.*;
 import moarcarts.mods.ironchest.items.ItemMinecartIronChest;
 import moarcarts.recipes.NBTCartRecipe;
@@ -58,20 +57,20 @@ public class IronChestCompat extends ModCompat
 
 	public void registerEntities()
 	{
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartCopperChest.class, "entityminecartcopperchest");
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartCrystalChest.class, "entityminecartcrystalchest");
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartDiamondChest.class, "entityminecartdiamondchest");
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartDirtChest.class, "entityminecartdirtchest");
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartGoldChest.class, "entityminecartgoldchest");
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartIronChest.class, "entityminecartironchest");
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartObsidianChest.class, "entityminecartobsidianchest");
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartSilverChest.class, "entityminecartsilverchest");
+		RegistryHelper.registerEntity(EntityMinecartCopperChest.class, "entityminecartcopperchest");
+		RegistryHelper.registerEntity(EntityMinecartCrystalChest.class, "entityminecartcrystalchest");
+		RegistryHelper.registerEntity(EntityMinecartDiamondChest.class, "entityminecartdiamondchest");
+		RegistryHelper.registerEntity(EntityMinecartDirtChest.class, "entityminecartdirtchest");
+		RegistryHelper.registerEntity(EntityMinecartGoldChest.class, "entityminecartgoldchest");
+		RegistryHelper.registerEntity(EntityMinecartIronChest.class, "entityminecartironchest");
+		RegistryHelper.registerEntity(EntityMinecartObsidianChest.class, "entityminecartobsidianchest");
+		RegistryHelper.registerEntity(EntityMinecartSilverChest.class, "entityminecartsilverchest");
 	}
 
 	public void registerItems()
 	{
 		ITEM_MINECART_IRONCHEST = new ItemMinecartIronChest();
-		RegistryHelper.registerItem(ITEM_MINECART_IRONCHEST, MoarCarts.MODID);
+		RegistryHelper.registerItem(ITEM_MINECART_IRONCHEST);
 	}
 
 	public void registerRecipes()

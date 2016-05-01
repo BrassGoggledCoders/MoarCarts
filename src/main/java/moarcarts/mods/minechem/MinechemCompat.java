@@ -8,7 +8,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import moarcarts.MoarCarts;
 import moarcarts.mods.minechem.entities.EntityMinecartLeadedChest;
 import moarcarts.mods.minechem.items.ItemMinecartLeadedChest;
 import moarcarts.recipes.NBTCartRecipe;
@@ -41,8 +40,8 @@ public class MinechemCompat extends ModCompat
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		ITEM_MINECART_LEADEDCHEST = new ItemMinecartLeadedChest();
-		RegistryHelper.registerItem(ITEM_MINECART_LEADEDCHEST, MoarCarts.MODID);
-		RegistryHelper.registerEntity(MoarCarts.instance, EntityMinecartLeadedChest.class, "entityminecartleadedchest");
+		RegistryHelper.registerItem(ITEM_MINECART_LEADEDCHEST);
+		RegistryHelper.registerEntity(EntityMinecartLeadedChest.class, "entityminecartleadedchest");
 	}
 
 	@Override

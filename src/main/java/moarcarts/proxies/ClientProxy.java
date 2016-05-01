@@ -5,8 +5,11 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import moarcarts.MoarCarts;
 import moarcarts.entities.EntityMinecartTEBase;
+import moarcarts.fakeworld.FakePlayerClientMP;
 import moarcarts.renderers.RenderMinecartTEBase;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
 /**
@@ -27,13 +30,25 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityMinecartTEBase.class, new RenderMinecartTEBase());
 	}
 
+	@Override
 	public World getWorld()
 	{
 		return Minecraft.getMinecraft().theWorld;
 	}
 
+	@Override
 	public World getWorld(MessageContext ctx)
 	{
 		return Minecraft.getMinecraft().theWorld;
+	}
+
+	@Override
+	public EntityPlayer getFakePlayer(EntityPlayer entityPlayer, EntityMinecartTEBase entityMinecartBase)
+	{
+		if(entityPlayer instanceof EntityClientPlayerMP)
+		{
+			return new FakePlayerClientMP((EntityClientPlayerMP) entityPlayer, entityMinecartBase, true);
+		}
+		return super.getFakePlayer(entityPlayer, entityMinecartBase);
 	}
 }
