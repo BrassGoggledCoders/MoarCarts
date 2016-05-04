@@ -17,4 +17,10 @@ public class EntityMinecartFluidTank extends EntityMinecartFluidTEBase
 	{
 		return HydraulicraftCompat.ITEM_MINECART_FLUIDTANK;
 	}
+
+	@Override
+	public boolean shouldSaveDataToItem()
+	{
+		return true;
+	}
 }

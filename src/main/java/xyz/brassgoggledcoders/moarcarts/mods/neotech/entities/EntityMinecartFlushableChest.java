@@ -44,4 +44,10 @@ public class EntityMinecartFlushableChest extends EntityMinecartCapableTEBase im
 	{
 		return new ContainerMinecartFlushableChest(player.inventory, this);
 	}
+
+	@Override
+	public boolean shouldSaveDataToItem()
+	{
+		return true;
+	}
 }

@@ -42,6 +42,7 @@ public class NBTCartRecipe extends ShapelessRecipes
 		this.recipeOutput = outputCartItem;
 	}
 
+	@Override
 	public ItemStack getCraftingResult(InventoryCrafting inventoryCrafting)
 	{
 		ItemStack output = this.recipeOutput.copy();

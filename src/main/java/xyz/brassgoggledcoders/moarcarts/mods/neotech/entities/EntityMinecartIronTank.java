@@ -29,4 +29,10 @@ public class EntityMinecartIronTank extends EntityMinecartFluidTEBase
 	{
 		return NeotechCompat.ITEM_MINECART_IRONTANK;
 	}
+
+	@Override
+	public boolean shouldSaveDataToItem()
+	{
+		return true;
+	}
 }
