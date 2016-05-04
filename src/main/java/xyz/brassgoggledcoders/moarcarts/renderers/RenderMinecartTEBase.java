@@ -1,6 +1,5 @@
 package xyz.brassgoggledcoders.moarcarts.renderers;
 
-import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartTEBase;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
@@ -11,6 +10,7 @@ import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
+import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartTEBase;
 
 /**
  * @author SkySom
@@ -113,8 +113,8 @@ public class RenderMinecartTEBase<T extends EntityMinecartTEBase> extends Render
 			case CUSTOM:
 				break;
 			case COMBO:
-				renderTESRModel(entity);
 				renderBlockModel(entity, partialTicks);
+				renderTESRModel(entity);
 				break;
 		}
 

@@ -13,7 +13,7 @@ public class ItemMinecartFluidTank extends ItemMinecartBase
 {
 	public ItemMinecartFluidTank()
 	{
-		super("hydraulicraft", "minecartfluidtank");
+		super("hydraulicraft", "fluidtank");
 	}
 
 	@Override

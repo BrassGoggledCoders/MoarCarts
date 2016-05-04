@@ -2,7 +2,6 @@ package xyz.brassgoggledcoders.moarcarts.entities;
 
 import mods.railcraft.api.carts.IFluidCart;
 import net.minecraft.entity.item.EntityMinecart;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
@@ -11,7 +10,6 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fml.common.Optional;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ComparatorUtils;
-import xyz.brassgoggledcoders.boilerplate.lib.common.utils.FluidUtils;
 
 /**
  * @author SkySom
@@ -38,15 +36,6 @@ public abstract class EntityMinecartFluidTEBase extends EntityMinecartTEBase imp
 		super.entityInit();
 		dataWatcher.addObject(IS_FILLING, (byte) 0);
 	}
-
-	@Override
-	public boolean interactFirst(EntityPlayer player)
-	{
-		FluidUtils.fillFluidHandlerWithPlayerItem(this.worldObj, this, player);
-		return super.interactFirst(player);
-	}
-
-
 
 	@Override
 	public int fill(EnumFacing from, FluidStack resource, boolean doFill)

@@ -1,11 +1,6 @@
 package xyz.brassgoggledcoders.moarcarts.entities;
 
-import xyz.brassgoggledcoders.moarcarts.MoarCarts;
-import xyz.brassgoggledcoders.moarcarts.fakeworld.FakePlayer;
-import xyz.brassgoggledcoders.moarcarts.fakeworld.FakeWorld;
-import xyz.brassgoggledcoders.moarcarts.network.EntityTileEntityUpdateMessage;
-import xyz.brassgoggledcoders.moarcarts.renderers.IRenderBlock;
-import net.minecraft.block.BlockContainer;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -15,6 +10,13 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
 import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
+import xyz.brassgoggledcoders.moarcarts.MoarCarts;
+import xyz.brassgoggledcoders.moarcarts.fakeworld.FakePlayer;
+import xyz.brassgoggledcoders.moarcarts.fakeworld.FakeWorld;
+import xyz.brassgoggledcoders.moarcarts.network.EntityTileEntityUpdateMessage;
+import xyz.brassgoggledcoders.moarcarts.renderers.IRenderBlock;
+
+import java.util.LinkedHashMap;
 
 /**
  * @author SkySom
@@ -30,7 +32,7 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 	public EntityMinecartTEBase(World world, int metadata)
 	{
 		super(world, metadata);
-		if(this.getCartBlock() instanceof BlockContainer)
+		if(this.getCartBlock() instanceof ITileEntityProvider)
 		{
 			this.setTileEntity(this.getCartBlock().createTileEntity(world, this.getDisplayTile()));
 		}
@@ -66,20 +68,17 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 	public boolean interactFirst(EntityPlayer player)
 	{
 		this.sendUpdateToAllAround();
-		if(!player.isSneaking())
-		{
-			EntityPlayer fakePlayer = new FakePlayer(player, this, this.shouldAccessPlayerInventory());
-			return this.getCartBlock().onBlockActivated(this.getFakeWorld(), ORIGIN_POS, this.getDisplayTile(),
-					fakePlayer, EnumFacing.NORTH, 0, 0, 0);
-		}
-		return true;
+		EntityPlayer fakePlayer = new FakePlayer(player, this, this.shouldAccessPlayerInventory());
+		boolean blockActivated = this.getCartBlock().onBlockActivated(this.getFakeWorld(), ORIGIN_POS, this.getDisplayTile(),
+				fakePlayer, EnumFacing.NORTH, 0, 0, 0);
+		this.sendUpdateToAllAround();
+		return blockActivated;
 	}
 
 	public boolean shouldAccessPlayerInventory()
 	{
-		return false;
+		return true;
 	}
-
 
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound nbtTagCompound)
@@ -213,6 +212,14 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 		{
 			this.setTileEntity(tileEntity);
 		}
+	}
+
+	@Override
+	public LinkedHashMap<String, String> getDebugStrings()
+	{
+		LinkedHashMap<String, String> debugStrings = super.getDebugStrings();
+		debugStrings.put("tile", "Cart TE: " + getTileEntity().toString());
+		return debugStrings;
 	}
 
 	public boolean shouldTileUpdate()

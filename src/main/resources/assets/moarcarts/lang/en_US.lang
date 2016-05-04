@@ -29,56 +29,29 @@ entity.moarcarts.entityminecartobsidianchest.name=Obsidian Chest Cart
 entity.moarcarts.entityminecartdirtchest.name=DirtChest 9000! Cart
 
 ## hydraulicraft stuff
-item.minecartfluidtank.name=Fluid Tank Cart
+item.hydraulicraft.minecartfluidtank.name=Fluid Tank Cart
 
 entity.moarcarts.entityminecartfluidtank.name=Fluid Tank Cart
 
-## ie stuff
-item.minecartwoodenbarrel.name=Wooden Barrel Cart
-item.minecartmetalbarrel.name=Metal Barrel Cart
-item.minecartwoodencrate.name=Wooden Storage Crate Cart
-item.minecartcapacitorlv.name=LV Capacitor Cart
-item.minecartcapacitormv.name=MV Capacitor Cart
-item.minecartcapacitorhv.name=HV Capacitor Cart
-item.minecartcapacitorcreative.name=Creative Capacitor Cart
+##neotech stuff
+item.neotech.minecartflushablechest.name=Flushable Chest Cart
+item.neotech.minecartdimensionalchest.name=Dimensional Chest Cart
+item.neotech.minecarttank.iron.name=Iron Fluid Tank Cart
+item.neotech.minecarttank.gold.name=Gold Fluid Tank Cart
+item.neotech.minecarttank.diamond.name=Diamond Fluid Tank Cart
+item.neotech.minecarttank.emerald.name=Creative Fluid Tank Cart
+item.neotech.minecarttank.void.name=Void Fluid Tank Cart
 
-entity.moarcarts.entityminecartwoodenbarrel.name=Wooden Barrel Cart
-entity.moarcarts.entityminecartmetalbarrel.name=Metal Barrel Cart
-entity.moarcarts.entityminecartwoodencrate.name=Wooden Storage Crate Cart
-entity.moarcarts.entityminecartcapacitorlv.name=LV Capacitor Cart
-entity.moarcarts.entityminecartcapacitormv.name=MV Capacitor Cart
-entity.moarcarts.entityminecartcapacitorhv.name=HV Capacitor Cart
-entity.moarcarts.entityminecartcapacitorcreative.name=Creative Capacitor Cart
+entity.moarcarts.entityminecartflushablechest.name=Flushable Chest Cart
+entity.moarcarts.entityminecartdimensionalchest.name=Dimensional Chest Cart
+entity.moarcarts.entityminecartirontank.name=Iron Fluid Tank Cart
+entity.moarcarts.entityminecartgoldtank.name=Gold Fluid Tank Cart
+entity.moarcarts.entityminecartdiamondtank.name=Diamond Fluid Tank Cart
+entity.moarcarts.entityminecartcreativetank.name=Creative Fluid Tank Cart
+entity.moarcarts.entityminecartvoidtank.name=Void Fluid Tank Cart
 
-## mfr stuff
-item.minecartdsu.name=Deep Storage Unit Cart
-
-entity.moarcarts.entityminecartdsu.name=Deep Storage Unit Cart
-
-## minechem stuff
-item.minecartleadedchest.name=Leaded Chest Cart
-
-entity.moarcarts.entityminecartleadedchest.name=Leaded Chest Cart
-
-## rf stuff
-tile.moarcarts.blockrfloader.name=RF Loader
-
-## botania stuff
-item.minecarttinypotato.name=Tiny Potato Cart
-
-entity.moarcarts.entityminecarttinypotato.name=Tiny Potato Cart
-
-## avaritia stuff
-item.minecartinfinitato.name=Infinitato Cart
-
-entity.moarcarts.entityminecartinfinitato.name=Infinitato Cart
-
-## railcraft stuff
-item.minecartmachinebeta.void.name=Void Chest Cart
-item.minecartmachinebeta.metals.name=Metals Chest Cart
-
-entity.moarcarts.entityminecartvoidchest.name=Void Chest Cart
-entity.moarcarts.entityminecartmetalschest.name=Metals Chest Cart
+## extras stuff
+tile.fluid_hopper.name=Fluid Hopper
 
 ##boilerplate
 boilerplate.blockSide.facing=Facing Side

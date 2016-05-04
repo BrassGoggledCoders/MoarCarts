@@ -2,14 +2,16 @@ package xyz.brassgoggledcoders.moarcarts.mods.hydraulicraft;
 
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import xyz.brassgoggledcoders.boilerplate.lib.common.modcompat.ModCompat;
+import xyz.brassgoggledcoders.boilerplate.lib.common.modules.Module;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.EntityRegistry;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.ItemRegistry;
+import xyz.brassgoggledcoders.moarcarts.mods.hydraulicraft.blocks.BlockHydFluidTank;
 import xyz.brassgoggledcoders.moarcarts.mods.hydraulicraft.entites.EntityMinecartFluidTank;
 import xyz.brassgoggledcoders.moarcarts.mods.hydraulicraft.items.ItemMinecartFluidTank;
 
-public class HydraulicraftCompat extends ModCompat
+public class HydraulicraftCompat extends Module
 {
+	public static BlockHydFluidTank BLOCK_HYD_FLUID_TANK;
 	public static ItemMinecartFluidTank ITEM_MINECART_FLUIDTANK;
 
 	@Override
@@ -30,5 +32,10 @@ public class HydraulicraftCompat extends ModCompat
 		ITEM_MINECART_FLUIDTANK = new ItemMinecartFluidTank();
 		ItemRegistry.registerItem(ITEM_MINECART_FLUIDTANK);
 		EntityRegistry.registerEntity(EntityMinecartFluidTank.class);
+
+		/*
+		 *BLOCK_HYD_FLUID_TANK = new BlockHydFluidTank();
+		 *BlockRegistry.registerBlock(BLOCK_HYD_FLUID_TANK, "fluid_tank");
+		 */
 	}
 }

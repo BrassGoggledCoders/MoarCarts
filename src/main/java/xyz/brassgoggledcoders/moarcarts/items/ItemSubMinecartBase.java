@@ -5,11 +5,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
 import xyz.brassgoggledcoders.moarcarts.recipes.NBTCartRecipe;
 
 import java.util.List;
@@ -57,14 +55,13 @@ public abstract class ItemSubMinecartBase extends ItemMinecartBase
 	}
 
 	@Override
-	public ResourceLocation[] getResourceLocations()
+	public String[] getResourceLocations()
 	{
 		int numberOfSubItems = getNumberOfSubItems();
-		ResourceLocation[] locations = new ResourceLocation[getNumberOfSubItems()];
+		String[] locations = new String[getNumberOfSubItems()];
 		for(int i = 0; i < numberOfSubItems; i++)
 		{
-			locations[i] = new ResourceLocation(BoilerplateLib.getMod().getPrefix() +
-					getUnlocalizedName().substring(5) + getUnlocalizedNameMetaExtension(i));
+			locations[i] = getUnlocalizedName().substring(5) + getUnlocalizedNameMetaExtension(i);
 		}
 		return locations;
 	}

@@ -19,6 +19,7 @@ import xyz.brassgoggledcoders.boilerplate.lib.client.renderers.math.Transformati
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ItemStackUtils;
 import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
 
+@SuppressWarnings("deprecation")
 public class RenderItemMinecartBase extends ItemSpecialRenderer<RenderItemMinecartBase.DummyTile>
 {
 	private static final ResourceLocation minecartTextures = new ResourceLocation("textures/entity/minecart.png");

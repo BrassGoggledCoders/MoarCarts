@@ -2,7 +2,7 @@ package xyz.brassgoggledcoders.moarcarts.mods.ironchest;
 
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import xyz.brassgoggledcoders.boilerplate.lib.common.modcompat.ModCompat;
+import xyz.brassgoggledcoders.boilerplate.lib.common.modules.Module;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.EntityRegistry;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.ItemRegistry;
 import xyz.brassgoggledcoders.moarcarts.mods.ironchest.entities.*;
@@ -11,7 +11,7 @@ import xyz.brassgoggledcoders.moarcarts.mods.ironchest.items.ItemMinecartIronChe
 /**
  * @author SkySom
  */
-public class IronChestCompat extends ModCompat
+public class IronChestCompat extends Module
 {
 	public static ItemMinecartIronChest ITEM_MINECART_IRONCHEST;
 

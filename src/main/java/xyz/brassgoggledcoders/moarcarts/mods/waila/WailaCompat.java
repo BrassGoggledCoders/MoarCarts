@@ -1,14 +1,14 @@
 package xyz.brassgoggledcoders.moarcarts.mods.waila;
 
-import xyz.brassgoggledcoders.boilerplate.lib.common.modcompat.ModCompat;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
+import xyz.brassgoggledcoders.boilerplate.lib.common.modules.Module;
 
 /**
  * @author SkySom
  */
-public class WailaCompat extends ModCompat
+public class WailaCompat extends Module
 {
 	@Override
 	public String getName()
