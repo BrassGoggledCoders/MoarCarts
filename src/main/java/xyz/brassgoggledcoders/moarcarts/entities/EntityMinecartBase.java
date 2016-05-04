@@ -11,7 +11,6 @@
  */
 package xyz.brassgoggledcoders.moarcarts.entities;
 
-import mods.railcraft.api.carts.IMinecart;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityMinecart;
@@ -24,9 +23,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.minecart.MinecartInteractEvent;
-import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
-import xyz.brassgoggledcoders.boilerplate.api.IDebuggable;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.ConfigRegistry;
 import xyz.brassgoggledcoders.moarcarts.MoarCarts;
 import xyz.brassgoggledcoders.moarcarts.api.IComparatorCart;
@@ -34,18 +31,12 @@ import xyz.brassgoggledcoders.moarcarts.fakeworld.CartBlockPos;
 import xyz.brassgoggledcoders.moarcarts.fakeworld.FakeWorld;
 import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
 
-import java.util.LinkedHashMap;
 import java.util.Random;
 
 /**
  * @author SkySom
  */
-
-@Optional.InterfaceList({
-		@Optional.Interface(iface = "mods.railcraft.api.carts.IMinecart", modid = "RailcraftAPI|carts"),
-		@Optional.Interface(iface = "xyz.brassgoggledcoders.boilerplate.api.IDebuggable", modid = "boilerplate")
-})
-public abstract class EntityMinecartBase extends EntityMinecart implements IMinecart, IComparatorCart, IDebuggable
+public abstract class EntityMinecartBase extends EntityMinecart implements IComparatorCart
 {
 	protected Random random;
 	protected FakeWorld fakeWorld;
@@ -164,14 +155,6 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	}
 
 	@Override
-	@Optional.Method(modid = "RailcraftAPI|carts")
-	public boolean doesCartMatchFilter(ItemStack itemStack, EntityMinecart entityMinecart)
-	{
-		return itemStack != null && entityMinecart instanceof EntityMinecartBase &&
-				itemStack.isItemEqual(entityMinecart.getCartItem());
-	}
-
-	@Override
 	public int getComparatorInputOverride()
 	{
 		if(this.getCartBlock().hasComparatorInputOverride())
@@ -224,16 +207,5 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 	public void setFakeWorld(FakeWorld fakeWorld)
 	{
 		this.fakeWorld = fakeWorld;
-	}
-
-	@Override
-	public LinkedHashMap<String, String> getDebugStrings()
-	{
-		LinkedHashMap<String, String> debugString = new LinkedHashMap<String, String>();
-		debugString.put("cartBlock", "Cart Block: " + getCartBlock().getLocalizedName());
-		debugString.put("itemstack", "Cart Item: " + getCartItem().toString());
-		debugString.put("metadata", "Cart Metadata: " + getMetadata());
-		debugString.put("pos", "Cart Position: " + getPosition());
-		return debugString;
 	}
 }

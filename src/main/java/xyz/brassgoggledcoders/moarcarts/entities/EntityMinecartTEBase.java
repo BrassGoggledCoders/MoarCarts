@@ -16,8 +16,6 @@ import xyz.brassgoggledcoders.moarcarts.fakeworld.FakeWorld;
 import xyz.brassgoggledcoders.moarcarts.network.EntityTileEntityUpdateMessage;
 import xyz.brassgoggledcoders.moarcarts.renderers.IRenderBlock;
 
-import java.util.LinkedHashMap;
-
 /**
  * @author SkySom
  */
@@ -212,14 +210,6 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 		{
 			this.setTileEntity(tileEntity);
 		}
-	}
-
-	@Override
-	public LinkedHashMap<String, String> getDebugStrings()
-	{
-		LinkedHashMap<String, String> debugStrings = super.getDebugStrings();
-		debugStrings.put("tile", "Cart TE: " + getTileEntity().toString());
-		return debugStrings;
 	}
 
 	public boolean shouldTileUpdate()
