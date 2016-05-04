@@ -15,7 +15,7 @@ import xyz.brassgoggledcoders.moarcarts.mods.rf.events.RFComparatorTrackHandler;
 /**
  * @author SkySom
  */
-public class RFCompat extends Module
+public class RFModule extends Module
 {
 	public static Block RFLOADER;
 
