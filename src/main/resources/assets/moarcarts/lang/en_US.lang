@@ -33,7 +33,7 @@ item.hydraulicraft.minecartfluidtank.name=Fluid Tank Cart
 
 entity.moarcarts.entityminecartfluidtank.name=Fluid Tank Cart
 
-##neotech stuff
+## neotech stuff
 item.neotech.minecartflushablechest.name=Flushable Chest Cart
 item.neotech.minecartdimensionalchest.name=Dimensional Chest Cart
 item.neotech.minecarttank.iron.name=Iron Fluid Tank Cart
@@ -52,6 +52,25 @@ entity.moarcarts.entityminecartvoidtank.name=Void Fluid Tank Cart
 
 ## extras stuff
 tile.fluid_hopper.name=Fluid Hopper
+
+## ie stuff
+item.ie.minecartwoodenbarrel.name=Wooden Barrel Cart
+item.ie.minecartmetalbarrel.name=Metal Barrel Cart
+item.ie.minecartcrate.0.name=Wooden Storage Crate Cart
+item.ie.minecartcrate.1.name=Reinforced Storage Crate Cart
+item.ie.minecartcapacitorlv.name=LV Capacitor Cart
+item.ie.minecartcapacitormv.name=MV Capacitor Cart
+item.ie.minecartcapacitorhv.name=HV Capacitor Cart
+item.ie.minecartcapacitorcreative.name=Creative Capacitor Cart
+
+entity.moarcarts.entityminecartwoodenbarrel.name=Wooden Barrel Cart
+entity.moarcarts.entityminecartmetalbarrel.name=Metal Barrel Cart
+entity.moarcarts.entityminecartwoodencrate.name=Wooden Storage Crate Cart
+entity.moarcarts.entityminecartreinforcedcrate.name=Reinforced Storage Crate Cart
+entity.moarcarts.entityminecartcapacitorlv.name=LV Capacitor Cart
+entity.moarcarts.entityminecartcapacitormv.name=MV Capacitor Cart
+entity.moarcarts.entityminecartcapacitorhv.name=HV Capacitor Cart
+entity.moarcarts.entityminecartcapacitorcreative.name=Creative Capacitor Cart
 
 ##boilerplate
 boilerplate.blockSide.facing=Facing Side

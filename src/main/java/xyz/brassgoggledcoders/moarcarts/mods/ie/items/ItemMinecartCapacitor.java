@@ -5,7 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartBase;
-import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
+import xyz.brassgoggledcoders.moarcarts.items.ItemSubMinecartBase;
 import xyz.brassgoggledcoders.moarcarts.mods.ie.entities.EntityMinecartCapacitorCreative;
 import xyz.brassgoggledcoders.moarcarts.mods.ie.entities.EntityMinecartCapacitorHV;
 import xyz.brassgoggledcoders.moarcarts.mods.ie.entities.EntityMinecartCapacitorLV;
@@ -14,18 +14,18 @@ import xyz.brassgoggledcoders.moarcarts.mods.ie.entities.EntityMinecartCapacitor
 /**
  * @author SkySom
  */
-public class ItemMinecartCapacitor extends ItemMinecartBase
+public class ItemMinecartCapacitor extends ItemSubMinecartBase
 {
 	public ItemMinecartCapacitor()
 	{
-		super("ie", "minecartcapacitor");
+		super("ie", "capacitor");
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack itemstack)
+	public String getUnlocalizedNameMetaExtension(int meta)
 	{
-		String unlocalizedName = "item.minecartcapacitor";
-		switch(itemstack.getItemDamage())
+		String unlocalizedName = "";
+		switch(meta)
 		{
 			case 0:
 				unlocalizedName += "lv";
@@ -43,6 +43,11 @@ public class ItemMinecartCapacitor extends ItemMinecartBase
 				break;
 		}
 		return unlocalizedName;
+	}
+
+	@Override
+	public int getNumberOfSubItems() {
+		return 4;
 	}
 
 	@Override

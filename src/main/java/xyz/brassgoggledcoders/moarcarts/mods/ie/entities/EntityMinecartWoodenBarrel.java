@@ -5,14 +5,14 @@ import blusunrize.immersiveengineering.common.blocks.wooden.TileEntityWoodenBarr
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartFluidTEBase;
+import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartCapableTEBase;
 import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
 import xyz.brassgoggledcoders.moarcarts.mods.ie.IEModule;
 
 /**
  * @author SkySom
  */
-public class EntityMinecartWoodenBarrel extends EntityMinecartFluidTEBase implements IBlockOverlayText
+public class EntityMinecartWoodenBarrel extends EntityMinecartCapableTEBase implements IBlockOverlayText
 {
 	public EntityMinecartWoodenBarrel(World world)
 	{
@@ -22,7 +22,7 @@ public class EntityMinecartWoodenBarrel extends EntityMinecartFluidTEBase implem
 	public EntityMinecartWoodenBarrel(World world, int metadata)
 	{
 		super(world, metadata);
-		TileEntityWoodenBarrel tileEntityWoodenBarrel = (TileEntityWoodenBarrel)this.getFluidTileEntity();
+		TileEntityWoodenBarrel tileEntityWoodenBarrel = (TileEntityWoodenBarrel)this.getTileEntity();
 		tileEntityWoodenBarrel.sideConfig[0] = 1;
 	}
 

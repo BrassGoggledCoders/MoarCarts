@@ -6,7 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import xyz.brassgoggledcoders.boilerplate.lib.client.guis.IOpenableGUI;
-import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartInventoryTEBase;
+import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartCapableTEBase;
 import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
 import xyz.brassgoggledcoders.moarcarts.mods.ie.IEModule;
 import xyz.brassgoggledcoders.moarcarts.mods.ie.container.ContainerMinecartWoodenCrate;
@@ -14,11 +14,22 @@ import xyz.brassgoggledcoders.moarcarts.mods.ie.container.ContainerMinecartWoode
 /**
  * @author SkySom
  */
-public class EntityMinecartWoodenCrate extends EntityMinecartInventoryTEBase implements IOpenableGUI
+public class EntityMinecartWoodenCrate extends EntityMinecartCapableTEBase implements IOpenableGUI
 {
 	public EntityMinecartWoodenCrate(World world)
 	{
-		super(world, 4);
+		this(world, 0);
+	}
+
+	public EntityMinecartWoodenCrate(World world, int meta)
+	{
+		super(world, meta);
+	}
+
+	@Override
+	public int getMetadata()
+	{
+		return super.getMetadata() == 0 ? 0 : 1;
 	}
 
 	@Override

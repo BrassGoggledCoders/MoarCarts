@@ -22,6 +22,6 @@ public class ContainerMinecartWoodenCrate extends ContainerCrate
 	@Override
 	public boolean canInteractWith(EntityPlayer entityPlayer)
 	{
-		return this.entityMinecartWoodenCrate.isUseableByPlayer(entityPlayer);
+		return !entityMinecartWoodenCrate.isDead && entityPlayer.getDistanceSqToEntity(entityMinecartWoodenCrate) <= 64.0D;
 	}
 }

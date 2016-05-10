@@ -5,14 +5,15 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartBase;
-import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
+import xyz.brassgoggledcoders.moarcarts.items.ItemSubMinecartBase;
+import xyz.brassgoggledcoders.moarcarts.mods.ie.entities.EntityMinecartReinforcedCrate;
 import xyz.brassgoggledcoders.moarcarts.mods.ie.entities.EntityMinecartWoodenCrate;
 
-public class ItemMinecartWoodenCrate extends ItemMinecartBase
+public class ItemMinecartCrate extends ItemSubMinecartBase
 {
-	public ItemMinecartWoodenCrate()
+	public ItemMinecartCrate()
 	{
-		super("ie", "woodencrate");
+		super("ie", "crate");
 	}
 
 	@Override
@@ -24,12 +25,19 @@ public class ItemMinecartWoodenCrate extends ItemMinecartBase
 	@Override
 	public int getCartBlockMetadata(ItemStack itemStack)
 	{
-		return 4;
+		return itemStack.getItemDamage() == 0 ? 0 : 5;
+	}
+
+	@Override
+	public int getNumberOfSubItems()
+	{
+		return 2;
 	}
 
 	@Override
 	public EntityMinecartBase getEntityFromItem(World world, ItemStack itemStack)
 	{
-		return new EntityMinecartWoodenCrate(world);
+		return itemStack.getItemDamage() == 0 ? new EntityMinecartWoodenCrate(world):
+				new EntityMinecartReinforcedCrate(world);
 	}
 }
