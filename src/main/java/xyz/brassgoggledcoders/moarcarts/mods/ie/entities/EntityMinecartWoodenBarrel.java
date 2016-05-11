@@ -5,14 +5,14 @@ import blusunrize.immersiveengineering.common.blocks.wooden.TileEntityWoodenBarr
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartCapableTEBase;
+import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartInventoryTEBase;
 import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
 import xyz.brassgoggledcoders.moarcarts.mods.ie.IEModule;
 
 /**
  * @author SkySom
  */
-public class EntityMinecartWoodenBarrel extends EntityMinecartCapableTEBase implements IBlockOverlayText
+public class EntityMinecartWoodenBarrel extends EntityMinecartInventoryTEBase implements IBlockOverlayText
 {
 	public EntityMinecartWoodenBarrel(World world)
 	{
