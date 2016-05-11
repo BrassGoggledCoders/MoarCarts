@@ -14,10 +14,7 @@ import xyz.brassgoggledcoders.boilerplate.lib.common.registries.EntityRegistry;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.ItemRegistry;
 import xyz.brassgoggledcoders.moarcarts.mods.ie.entities.*;
 import xyz.brassgoggledcoders.moarcarts.mods.ie.events.ClientEvents;
-import xyz.brassgoggledcoders.moarcarts.mods.ie.items.ItemMinecartCapacitor;
-import xyz.brassgoggledcoders.moarcarts.mods.ie.items.ItemMinecartMetalBarrel;
-import xyz.brassgoggledcoders.moarcarts.mods.ie.items.ItemMinecartWoodenBarrel;
-import xyz.brassgoggledcoders.moarcarts.mods.ie.items.ItemMinecartCrate;
+import xyz.brassgoggledcoders.moarcarts.mods.ie.items.*;
 import xyz.brassgoggledcoders.moarcarts.mods.rf.RFModule;
 import xyz.brassgoggledcoders.moarcarts.recipes.NBTCartRecipe;
 
@@ -27,6 +24,7 @@ public class IEModule extends Module
 	public static ItemMinecartMetalBarrel ITEM_MINECART_METALBARREL;
 	public static ItemMinecartCrate ITEM_MINECART_WOODENCRATE;
 	public static ItemMinecartCapacitor ITEM_MINECART_CAPACITOR;
+	public static ItemMinecartGunPowderBarrel ITEM_MINECART_GUNPOWDER_BARREL;
 
 	public static Block WOODEN_DEVICE;
 	public static Block METAL_DEVICE;
@@ -62,6 +60,9 @@ public class IEModule extends Module
 		EntityRegistry.registerEntity(EntityMinecartWoodenCrate.class, "entityminecartwoodencrate");
 		EntityRegistry.registerEntity(EntityMinecartReinforcedCrate.class, "entityminecartreinforcedcrate");
 
+		ITEM_MINECART_GUNPOWDER_BARREL = new ItemMinecartGunPowderBarrel();
+		ItemRegistry.registerItem(ITEM_MINECART_GUNPOWDER_BARREL);
+		EntityRegistry.registerEntity(EntityMinecartGunPowderBarrel.class, "entityminecartgunpowderbarrel");
 
 		isRFModuleEnabled = isOtherModuleActive("RF");
 

@@ -138,7 +138,8 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 		return false;
 	}
 
-	public void dropCart(ItemStack cartItem)
+	@Override
+	public void dropCartItemStack(ItemStack cartItem)
 	{
 		if(this.shouldSaveDataToItem())
 		{
@@ -156,7 +157,7 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 			itemNBTTagCompound.setTag("tilenbt", nbtTagCompound);
 			cartItem.setTagCompound(itemNBTTagCompound);
 		}
-		super.dropCart(cartItem);
+		super.dropCartItemStack(cartItem);
 	}
 
 	public TileEntity createTileEntity()

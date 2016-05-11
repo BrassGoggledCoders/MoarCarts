@@ -157,10 +157,10 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IMine
 				blockCartItemStack.setStackDisplayName(this.getName());
 			}
 		}
-		this.dropItemStack(blockCartItemStack);
+		this.dropCartItemStack(blockCartItemStack);
 	}
 
-	public void dropItemStack(ItemStack cartItem)
+	public void dropCartItemStack(ItemStack cartItem)
 	{
 		if(!worldObj.isRemote)
 		{
