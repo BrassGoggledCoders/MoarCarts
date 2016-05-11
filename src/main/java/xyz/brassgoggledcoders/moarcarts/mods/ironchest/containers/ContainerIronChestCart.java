@@ -13,7 +13,7 @@ public class ContainerIronChestCart extends ContainerIronChest
 	private EntityMinecartIronChest entityMinecartIronChest;
 	public ContainerIronChestCart(IInventory playerInventory, EntityMinecartIronChest minecartIronChest)
 	{
-		super(playerInventory, minecartIronChest.getIInventoryTileEntity(), minecartIronChest.getIronChestType(),
+		super(playerInventory, (IInventory)minecartIronChest.getTileEntity(), minecartIronChest.getIronChestType(),
 				ContainerSize.values()[minecartIronChest.getIronChestType().ordinal()].xSize,
 				ContainerSize.values()[minecartIronChest.getIronChestType().ordinal()].ySize);
 		entityMinecartIronChest = minecartIronChest;

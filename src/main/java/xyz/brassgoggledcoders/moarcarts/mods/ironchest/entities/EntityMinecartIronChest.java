@@ -3,19 +3,19 @@ package xyz.brassgoggledcoders.moarcarts.mods.ironchest.entities;
 import cpw.mods.ironchest.IronChestType;
 import cpw.mods.ironchest.TileEntityIronChest;
 import cpw.mods.ironchest.client.GUIChest;
-import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartInventoryTEBase;
-import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
-import xyz.brassgoggledcoders.moarcarts.mods.ironchest.IronChestCompat;
-import xyz.brassgoggledcoders.moarcarts.mods.ironchest.containers.ContainerIronChestCart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import xyz.brassgoggledcoders.boilerplate.lib.client.guis.IOpenableGUI;
+import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartCapableTEBase;
+import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
+import xyz.brassgoggledcoders.moarcarts.mods.ironchest.IronChestCompat;
+import xyz.brassgoggledcoders.moarcarts.mods.ironchest.containers.ContainerIronChestCart;
 
 /**
  * @author SkySom
  */
-public class EntityMinecartIronChest extends EntityMinecartInventoryTEBase implements IOpenableGUI
+public class EntityMinecartIronChest extends EntityMinecartCapableTEBase implements IOpenableGUI
 {
 	public EntityMinecartIronChest(World world)
 	{
