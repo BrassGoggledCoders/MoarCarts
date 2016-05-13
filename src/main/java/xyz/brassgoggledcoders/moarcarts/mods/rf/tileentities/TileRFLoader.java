@@ -80,12 +80,12 @@ public class TileRFLoader extends TileEntitySidedBase implements IEnergyProvider
 
 	public IBlockState writeBlockState(IBlockState blockState)
 	{
-		blockState.withProperty(Properties.SIDECONFIG[0], getSideValue(0));
-		blockState.withProperty(Properties.SIDECONFIG[1], getSideValue(1));
-		blockState.withProperty(Properties.SIDECONFIG[2], getSideValue(2));
-		blockState.withProperty(Properties.SIDECONFIG[3], getSideValue(3));
-		blockState.withProperty(Properties.SIDECONFIG[4], getSideValue(4));
-		blockState.withProperty(Properties.SIDECONFIG[5], getSideValue(5));
+		blockState = blockState.withProperty(Properties.SIDECONFIG[0], getSideValue(0));
+		blockState = blockState.withProperty(Properties.SIDECONFIG[1], getSideValue(1));
+		blockState = blockState.withProperty(Properties.SIDECONFIG[2], getSideValue(2));
+		blockState = blockState.withProperty(Properties.SIDECONFIG[3], getSideValue(3));
+		blockState = blockState.withProperty(Properties.SIDECONFIG[4], getSideValue(4));
+		blockState = blockState.withProperty(Properties.SIDECONFIG[5], getSideValue(5));
 
 		return blockState;
 	}
