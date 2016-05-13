@@ -35,7 +35,7 @@ public class RFModule extends Module
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		RFLOADER = new BlockRFLoader();
-		BlockRegistry.registerBlock(RFLOADER, "blockrfloader");
+		BlockRegistry.registerBlock(RFLOADER);
 		MinecraftForge.EVENT_BUS.register(new RFComparatorTrackHandler());
 	}
 

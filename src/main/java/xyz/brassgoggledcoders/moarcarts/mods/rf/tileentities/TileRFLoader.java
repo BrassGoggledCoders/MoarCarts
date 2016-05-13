@@ -3,6 +3,7 @@ package xyz.brassgoggledcoders.moarcarts.mods.rf.tileentities;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyProvider;
 import cofh.api.energy.IEnergyReceiver;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
@@ -10,6 +11,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
+import xyz.brassgoggledcoders.boilerplate.lib.common.blocks.Properties;
 import xyz.brassgoggledcoders.boilerplate.lib.common.blocks.SideType;
 import xyz.brassgoggledcoders.boilerplate.lib.common.tileentities.TileEntitySidedBase;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.BlockUtils;
@@ -74,6 +76,18 @@ public class TileRFLoader extends TileEntitySidedBase implements IEnergyProvider
 				}
 			}
 		}
+	}
+
+	public IBlockState writeBlockState(IBlockState blockState)
+	{
+		blockState.withProperty(Properties.SIDECONFIG[0], getSideValue(0));
+		blockState.withProperty(Properties.SIDECONFIG[1], getSideValue(1));
+		blockState.withProperty(Properties.SIDECONFIG[2], getSideValue(2));
+		blockState.withProperty(Properties.SIDECONFIG[3], getSideValue(3));
+		blockState.withProperty(Properties.SIDECONFIG[4], getSideValue(4));
+		blockState.withProperty(Properties.SIDECONFIG[5], getSideValue(5));
+
+		return blockState;
 	}
 
 	public void unLoadCart(EnumFacing facing, IEnergyProvider provider)

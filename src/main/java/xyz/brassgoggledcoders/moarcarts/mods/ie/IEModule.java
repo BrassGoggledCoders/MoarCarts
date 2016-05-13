@@ -16,7 +16,6 @@ import xyz.brassgoggledcoders.moarcarts.mods.ie.entities.*;
 import xyz.brassgoggledcoders.moarcarts.mods.ie.events.ClientEvents;
 import xyz.brassgoggledcoders.moarcarts.mods.ie.items.*;
 import xyz.brassgoggledcoders.moarcarts.mods.rf.RFModule;
-import xyz.brassgoggledcoders.moarcarts.recipes.NBTCartRecipe;
 
 public class IEModule extends Module
 {
@@ -86,15 +85,8 @@ public class IEModule extends Module
 		METAL_DEVICE = GameRegistry.findBlock("ImmersiveEngineering", "metalDevice0");
 		METAL_DEVICE2 = GameRegistry.findBlock("ImmersiveEngineering", "metalDevice1");
 
-		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_WOODENBARREL, WOODEN_DEVICE, 6));
-		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_METALBARREL, METAL_DEVICE2, 7));
-		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_WOODENCRATE, WOODEN_DEVICE, 4));
 		if(isRFModuleEnabled)
 		{
-			GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_CAPACITOR, 0, METAL_DEVICE, 1));
-			GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_CAPACITOR, 1, METAL_DEVICE, 4));
-			GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_CAPACITOR, 2, METAL_DEVICE, 7));
-			GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_CAPACITOR, 3, METAL_DEVICE2, 8));
 			RFModule.registerRFLoaderRecipe(new ItemStack(METAL_DEVICE, 1, 1));
 			RFModule.registerRFLoaderRecipe(new ItemStack(METAL_DEVICE, 1, 4));
 			RFModule.registerRFLoaderRecipe(new ItemStack(METAL_DEVICE, 1, 7));
