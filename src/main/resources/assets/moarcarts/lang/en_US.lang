@@ -56,12 +56,12 @@ tile.fluid_hopper.name=Fluid Hopper
 ## ie stuff
 item.ie.minecartwoodenbarrel.name=Wooden Barrel Cart
 item.ie.minecartmetalbarrel.name=Metal Barrel Cart
-item.ie.minecartcrate.0.name=Wooden Storage Crate Cart
-item.ie.minecartcrate.1.name=Reinforced Storage Crate Cart
-item.ie.minecartcapacitorlv.name=LV Capacitor Cart
-item.ie.minecartcapacitormv.name=MV Capacitor Cart
-item.ie.minecartcapacitorhv.name=HV Capacitor Cart
-item.ie.minecartcapacitorcreative.name=Creative Capacitor Cart
+item.ie.minecartcrate.wooden.name=Wooden Storage Crate Cart
+item.ie.minecartcrate.reinforced.name=Reinforced Storage Crate Cart
+item.ie.minecartcapacitor.lv.name=LV Capacitor Cart
+item.ie.minecartcapacitor.mv.name=MV Capacitor Cart
+item.ie.minecartcapacitor.hv.name=HV Capacitor Cart
+item.ie.minecartcapacitor.creative.name=Creative Capacitor Cart
 item.ie.minecartgunpowderbarrel.name=Gunpowder Barrel Cart
 
 entity.moarcarts.entityminecartwoodenbarrel.name=Wooden Barrel Cart
@@ -73,6 +73,9 @@ entity.moarcarts.entityminecartcapacitormv.name=MV Capacitor Cart
 entity.moarcarts.entityminecartcapacitorhv.name=HV Capacitor Cart
 entity.moarcarts.entityminecartcapacitorcreative.name=Creative Capacitor Cart
 entity.moarcarts.entityminecartgunpowderbarrel.name=Gunpowder Barrel Cart
+
+## rf stuff
+tile.rf_loader.name=RF Loader
 
 ##boilerplate
 boilerplate.blockSide.facing=Facing Side

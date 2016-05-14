@@ -9,6 +9,6 @@ public class EntityMinecartCapacitorCreative extends EntityMinecartCapacitorLV
 {
 	public EntityMinecartCapacitorCreative(World world)
 	{
-		super(world, 8);
+		super(world, 3);
 	}
 }

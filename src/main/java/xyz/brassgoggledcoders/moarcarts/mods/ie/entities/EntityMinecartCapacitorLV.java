@@ -3,7 +3,6 @@ package xyz.brassgoggledcoders.moarcarts.mods.ie.entities;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IBlockOverlayText;
 import blusunrize.immersiveengineering.common.blocks.metal.TileEntityCapacitorLV;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartEnergyHandlerTEBase;
@@ -17,7 +16,7 @@ public class EntityMinecartCapacitorLV extends EntityMinecartEnergyHandlerTEBase
 {
 	public EntityMinecartCapacitorLV(World world)
 	{
-		this(world, 1);
+		this(world, 0);
 	}
 
 	public EntityMinecartCapacitorLV(World world, int metadata)
@@ -26,30 +25,6 @@ public class EntityMinecartCapacitorLV extends EntityMinecartEnergyHandlerTEBase
 		TileEntityCapacitorLV tileEntityCapacitorLV = (TileEntityCapacitorLV)this.getIEnergyHandler();
 		tileEntityCapacitorLV.sideConfig[1] = 0;
 		tileEntityCapacitorLV.sideConfig[0] = 1;
-	}
-
-	@Override
-	public ItemStack getCartItem()
-	{
-		int itemDamage = 0;
-		switch(this.getMetadata())
-		{
-			case 1:
-				itemDamage = 0;
-				break;
-			case 3:
-				itemDamage = 1;
-				break;
-			case 7:
-				itemDamage = 2;
-				break;
-			case 8:
-				itemDamage = 3;
-				break;
-			default:
-				break;
-		}
-		return new ItemStack(this.getItem(), 1, itemDamage);
 	}
 
 	@Override

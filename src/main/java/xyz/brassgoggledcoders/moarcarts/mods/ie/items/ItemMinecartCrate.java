@@ -29,6 +29,16 @@ public class ItemMinecartCrate extends ItemSubMinecartBase
 	}
 
 	@Override
+	public String getUnlocalizedNameMetaExtension(int meta)
+	{
+		if(meta == 0)
+		{
+			return "wooden";
+		}
+		return "reinforced";
+	}
+
+	@Override
 	public int getNumberOfSubItems()
 	{
 		return 2;
