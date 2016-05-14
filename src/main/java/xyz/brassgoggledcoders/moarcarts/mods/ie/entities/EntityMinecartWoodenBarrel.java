@@ -16,7 +16,7 @@ public class EntityMinecartWoodenBarrel extends EntityMinecartInventoryTEBase im
 {
 	public EntityMinecartWoodenBarrel(World world)
 	{
-		this(world, 6);
+		this(world, 1);
 	}
 
 	public EntityMinecartWoodenBarrel(World world, int metadata)
