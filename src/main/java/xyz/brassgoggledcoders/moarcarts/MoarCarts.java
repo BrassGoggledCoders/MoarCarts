@@ -31,8 +31,10 @@ import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ModLogger;
 import xyz.brassgoggledcoders.moarcarts.items.MoarCartsCreativeTab;
 import xyz.brassgoggledcoders.moarcarts.mods.extras.ExtrasCompat;
 import xyz.brassgoggledcoders.moarcarts.mods.hydraulicraft.HydraulicraftCompat;
+import xyz.brassgoggledcoders.moarcarts.mods.ie.IEModule;
 import xyz.brassgoggledcoders.moarcarts.mods.ironchest.IronChestCompat;
 import xyz.brassgoggledcoders.moarcarts.mods.neotech.NeotechCompat;
+import xyz.brassgoggledcoders.moarcarts.mods.rf.RFModule;
 import xyz.brassgoggledcoders.moarcarts.mods.vanilla.VanillaCompat;
 import xyz.brassgoggledcoders.moarcarts.mods.waila.WailaCompat;
 import xyz.brassgoggledcoders.moarcarts.network.EntityTileEntityUpdateMessage;
@@ -105,6 +107,8 @@ public class MoarCarts implements IBoilerplateMod
 		BoilerplateLib.getModuleHandler().addModule(new HydraulicraftCompat());
 		BoilerplateLib.getModuleHandler().addModule(new NeotechCompat());
 		BoilerplateLib.getModuleHandler().addModule(new ExtrasCompat());
+		BoilerplateLib.getModuleHandler().addModule(new RFModule());
+		BoilerplateLib.getModuleHandler().addModule(new IEModule());
 	}
 
 	@Override

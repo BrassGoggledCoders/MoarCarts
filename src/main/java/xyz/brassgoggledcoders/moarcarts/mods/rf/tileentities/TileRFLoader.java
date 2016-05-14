@@ -3,6 +3,7 @@ package xyz.brassgoggledcoders.moarcarts.mods.rf.tileentities;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyProvider;
 import cofh.api.energy.IEnergyReceiver;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
@@ -10,6 +11,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
+import xyz.brassgoggledcoders.boilerplate.lib.common.blocks.Properties;
 import xyz.brassgoggledcoders.boilerplate.lib.common.blocks.SideType;
 import xyz.brassgoggledcoders.boilerplate.lib.common.tileentities.TileEntitySidedBase;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.BlockUtils;
@@ -34,9 +36,9 @@ public class TileRFLoader extends TileEntitySidedBase implements IEnergyProvider
 				if(this.getSideValue(facing.ordinal()) == SideType.INPUT)
 				{
 					IEnergyProvider energyProvider = null;
-					if(BlockUtils.isRailBlock(this.worldObj.getBlockState(pos)))
+					if(BlockUtils.isRailBlock(this.worldObj.getBlockState(pos.offset(facing))))
 					{
-						EntityMinecart entityMinecart = getMinecartsAt(worldObj, pos.offset(facing), 1f).get(0);
+						EntityMinecart entityMinecart = getMinecartAt(worldObj, pos.offset(facing), 1f);
 						if(entityMinecart instanceof IEnergyProvider)
 						{
 							energyProvider = (IEnergyProvider)entityMinecart;
@@ -55,9 +57,9 @@ public class TileRFLoader extends TileEntitySidedBase implements IEnergyProvider
 				if(this.getSideValue(facing.ordinal()) == SideType.OUTPUT)
 				{
 					IEnergyReceiver energyReceiver = null;
-					if(BlockUtils.isRailBlock(this.worldObj.getBlockState(pos)))
+					if(BlockUtils.isRailBlock(this.worldObj.getBlockState(pos.offset(facing))))
 					{
-						EntityMinecart entityMinecart = getMinecartsAt(worldObj, pos.offset(facing), 1f).get(0);
+						EntityMinecart entityMinecart = getMinecartAt(worldObj, pos.offset(facing), 1f);
 						if(entityMinecart instanceof IEnergyReceiver)
 						{
 							energyReceiver = (IEnergyReceiver)entityMinecart;
@@ -74,6 +76,18 @@ public class TileRFLoader extends TileEntitySidedBase implements IEnergyProvider
 				}
 			}
 		}
+	}
+
+	public IBlockState writeBlockState(IBlockState blockState)
+	{
+		blockState = blockState.withProperty(Properties.SIDECONFIG[0], getSideValue(0));
+		blockState = blockState.withProperty(Properties.SIDECONFIG[1], getSideValue(1));
+		blockState = blockState.withProperty(Properties.SIDECONFIG[2], getSideValue(2));
+		blockState = blockState.withProperty(Properties.SIDECONFIG[3], getSideValue(3));
+		blockState = blockState.withProperty(Properties.SIDECONFIG[4], getSideValue(4));
+		blockState = blockState.withProperty(Properties.SIDECONFIG[5], getSideValue(5));
+
+		return blockState;
 	}
 
 	public void unLoadCart(EnumFacing facing, IEnergyProvider provider)
@@ -139,16 +153,31 @@ public class TileRFLoader extends TileEntitySidedBase implements IEnergyProvider
 		return this.getSideValue(from.ordinal()) != SideType.NONE;
 	}
 
-	public static List<EntityMinecart> getMinecartsAt(World world, BlockPos pos, float sensitivity) {
+	public static EntityMinecart getMinecartAt(World world, BlockPos pos, float sensitivity)
+	{
+		List<EntityMinecart> minecarts = getMinecartsAt(world, pos, sensitivity);
+		if(minecarts.size() > 0)
+		{
+			return minecarts.get(0);
+		}
+		return null;
+	}
+
+	//Pulled from RailCraft-API Thanks CovertJaguar!
+	public static List<EntityMinecart> getMinecartsAt(World world, BlockPos pos, float sensitivity)
+	{
 		sensitivity = Math.min(sensitivity, 0.49f);
 		List entities = world.getEntitiesWithinAABB(EntityMinecart.class, AxisAlignedBB
 				.fromBounds(pos.getX() + sensitivity, pos.getY() + sensitivity, pos.getZ() + sensitivity,
-				pos.getX() + 1 - sensitivity, pos.getY() + 1 - sensitivity, pos.getZ() + 1 - sensitivity));
-		List<EntityMinecart> carts = new ArrayList<EntityMinecart>();
-		for (Object o : entities) {
+						pos.getX() + 1 - sensitivity, pos.getY() + 1 - sensitivity, pos.getZ() + 1 - sensitivity));
+		List<EntityMinecart> carts = new ArrayList<>();
+		for (Object o : entities)
+		{
 			EntityMinecart cart = (EntityMinecart) o;
 			if (!cart.isDead)
+			{
 				carts.add((EntityMinecart) o);
+			}
 		}
 		return carts;
 	}

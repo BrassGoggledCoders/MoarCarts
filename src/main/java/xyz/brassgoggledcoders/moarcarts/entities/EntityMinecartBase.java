@@ -125,6 +125,11 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IComp
 	public void setDead()
 	{
 		super.setDead();
+		dropCart();
+	}
+
+	public void dropCart()
+	{
 		ItemStack blockCartItemStack;
 
 		if(ConfigRegistry.getBoolean("breakOnDrop", false))
@@ -143,10 +148,10 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IComp
 				blockCartItemStack.setStackDisplayName(this.getName());
 			}
 		}
-		this.dropCart(blockCartItemStack);
+		this.dropCartItemStack(blockCartItemStack);
 	}
 
-	public void dropCart(ItemStack cartItem)
+	public void dropCartItemStack(ItemStack cartItem)
 	{
 		if(!worldObj.isRemote)
 		{

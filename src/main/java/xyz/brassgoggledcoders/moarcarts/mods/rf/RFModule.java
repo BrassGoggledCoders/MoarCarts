@@ -15,7 +15,7 @@ import xyz.brassgoggledcoders.moarcarts.mods.rf.events.RFComparatorTrackHandler;
 /**
  * @author SkySom
  */
-public class RFCompat extends Module
+public class RFModule extends Module
 {
 	public static Block RFLOADER;
 
@@ -35,7 +35,7 @@ public class RFCompat extends Module
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		RFLOADER = new BlockRFLoader();
-		BlockRegistry.registerBlock(RFLOADER, "blockrfloader");
+		BlockRegistry.registerBlock(RFLOADER);
 		MinecraftForge.EVENT_BUS.register(new RFComparatorTrackHandler());
 	}
 
