@@ -13,6 +13,7 @@ import xyz.brassgoggledcoders.moarcarts.mods.extras.ExtrasModule;
 import xyz.brassgoggledcoders.moarcarts.mods.neotech.entities.*;
 import xyz.brassgoggledcoders.moarcarts.mods.neotech.items.ItemMinecartDimensionalChest;
 import xyz.brassgoggledcoders.moarcarts.mods.neotech.items.ItemMinecartFlushableChest;
+import xyz.brassgoggledcoders.moarcarts.mods.neotech.items.ItemMinecartRFStorage;
 import xyz.brassgoggledcoders.moarcarts.mods.neotech.items.ItemMinecartTank;
 import xyz.brassgoggledcoders.moarcarts.mods.rf.RFModule;
 
@@ -24,6 +25,7 @@ public class NeotechModule extends Module
 	public static ItemMinecartFlushableChest ITEM_MINECART_FLUSHABLECHEST;
 	public static ItemMinecartDimensionalChest ITEM_MINECART_DIMENSIONALCHEST;
 	public static ItemMinecartTank ITEM_MINECART_IRONTANK;
+	public static ItemMinecartRFStorage ITEM_MINECART_RFSTORAGE;
 
 	@Override
 	public String getName()
@@ -51,6 +53,13 @@ public class NeotechModule extends Module
 		EntityRegistry.registerEntity(EntityMinecartDiamondTank.class);
 		EntityRegistry.registerEntity(EntityMinecartCreativeTank.class);
 		EntityRegistry.registerEntity(EntityMinecartVoidTank.class);
+
+		ITEM_MINECART_RFSTORAGE = new ItemMinecartRFStorage();
+		ItemRegistry.registerItem(ITEM_MINECART_RFSTORAGE);
+		EntityRegistry.registerEntity(EntityMinecartBasicRFStorage.class);
+		EntityRegistry.registerEntity(EntityMinecartAdvancedRFStorage.class);
+		EntityRegistry.registerEntity(EntityMinecartEliteRFStorage.class);
+		EntityRegistry.registerEntity(EntityMinecartCreativeRFStorage.class);
 	}
 
 	@Override

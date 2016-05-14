@@ -41,6 +41,10 @@ item.neotech.minecarttank.gold.name=Gold Fluid Tank Cart
 item.neotech.minecarttank.diamond.name=Diamond Fluid Tank Cart
 item.neotech.minecarttank.emerald.name=Creative Fluid Tank Cart
 item.neotech.minecarttank.void.name=Void Fluid Tank Cart
+item.neotech.minecartrfstorage.basic.name=Basic RF Storage Cart
+item.neotech.minecartrfstorage.advanced.name=Advanced RF Storage Cart
+item.neotech.minecartrfstorage.elite.name=Elite RF Storage Cart
+item.neotech.minecartrfstorage.creative.name=Creative RF Storage Cart
 
 entity.moarcarts.entityminecartflushablechest.name=Flushable Chest Cart
 entity.moarcarts.entityminecartdimensionalchest.name=Dimensional Chest Cart
@@ -49,6 +53,11 @@ entity.moarcarts.entityminecartgoldtank.name=Gold Fluid Tank Cart
 entity.moarcarts.entityminecartdiamondtank.name=Diamond Fluid Tank Cart
 entity.moarcarts.entityminecartcreativetank.name=Creative Fluid Tank Cart
 entity.moarcarts.entityminecartvoidtank.name=Void Fluid Tank Cart
+entity.moarcarts.entityminecartbasicrfstorage.name=Basic RF Storage Cart
+entity.moarcarts.entityminecartadvancedrfstorage.name=Advanced RF Storage Cart
+entity.moarcarts.entityminecarteliterfstorage.name=Elite RF Storage Cart
+entity.moarcarts.entityminecartcreativerfstorage.name=Creative RF Storage Cart
+
 
 ## extras stuff
 tile.fluid_hopper.name=Fluid Hopper
