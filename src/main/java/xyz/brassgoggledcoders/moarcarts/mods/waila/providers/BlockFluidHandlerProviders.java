@@ -7,7 +7,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
-import xyz.brassgoggledcoders.moarcarts.mods.extras.ExtrasCompat;
+import xyz.brassgoggledcoders.moarcarts.mods.extras.ExtrasModule;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class BlockFluidHandlerProviders extends BlockProviderBase
 	@Override
 	public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
-		return new ItemStack(ExtrasCompat.BLOCK_FLUID_HOPPER);
+		return new ItemStack(ExtrasModule.BLOCK_FLUID_HOPPER);
 	}
 
 	@Override

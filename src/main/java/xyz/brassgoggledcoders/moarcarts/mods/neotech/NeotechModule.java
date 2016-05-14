@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import xyz.brassgoggledcoders.boilerplate.lib.common.modules.Module;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.EntityRegistry;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.ItemRegistry;
-import xyz.brassgoggledcoders.moarcarts.mods.extras.ExtrasCompat;
+import xyz.brassgoggledcoders.moarcarts.mods.extras.ExtrasModule;
 import xyz.brassgoggledcoders.moarcarts.mods.neotech.entities.*;
 import xyz.brassgoggledcoders.moarcarts.mods.neotech.items.ItemMinecartDimensionalChest;
 import xyz.brassgoggledcoders.moarcarts.mods.neotech.items.ItemMinecartFlushableChest;
@@ -19,7 +19,7 @@ import xyz.brassgoggledcoders.moarcarts.mods.rf.RFModule;
 import java.util.Arrays;
 import java.util.List;
 
-public class NeotechCompat extends Module
+public class NeotechModule extends Module
 {
 	public static ItemMinecartFlushableChest ITEM_MINECART_FLUSHABLECHEST;
 	public static ItemMinecartDimensionalChest ITEM_MINECART_DIMENSIONALCHEST;
@@ -64,7 +64,7 @@ public class NeotechCompat extends Module
 				Block tank = GameRegistry.findBlock("neotech", name);
 				if(tank != null)
 				{
-					ExtrasCompat.registerFluidLoaderRecipe(new ItemStack(tank, 1, 0));
+					ExtrasModule.registerFluidLoaderRecipe(new ItemStack(tank, 1, 0));
 				}
 			}
 		}

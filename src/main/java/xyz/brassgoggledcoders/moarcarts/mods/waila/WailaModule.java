@@ -8,7 +8,7 @@ import xyz.brassgoggledcoders.boilerplate.lib.common.modules.Module;
 /**
  * @author SkySom
  */
-public class WailaCompat extends Module
+public class WailaModule extends Module
 {
 	@Override
 	public String getName()

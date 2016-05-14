@@ -8,7 +8,7 @@ import xyz.brassgoggledcoders.boilerplate.lib.common.modules.Module;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.BlockRegistry;
 import xyz.brassgoggledcoders.moarcarts.mods.extras.block.BlockFluidHopper;
 
-public class ExtrasCompat extends Module
+public class ExtrasModule extends Module
 {
 	public static BlockFluidHopper BLOCK_FLUID_HOPPER;
 

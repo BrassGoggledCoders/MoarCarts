@@ -9,7 +9,7 @@ import xyz.brassgoggledcoders.moarcarts.mods.hydraulicraft.blocks.BlockHydFluidT
 import xyz.brassgoggledcoders.moarcarts.mods.hydraulicraft.entites.EntityMinecartFluidTank;
 import xyz.brassgoggledcoders.moarcarts.mods.hydraulicraft.items.ItemMinecartFluidTank;
 
-public class HydraulicraftCompat extends Module
+public class HydraulicraftModule extends Module
 {
 	public static BlockHydFluidTank BLOCK_HYD_FLUID_TANK;
 	public static ItemMinecartFluidTank ITEM_MINECART_FLUIDTANK;

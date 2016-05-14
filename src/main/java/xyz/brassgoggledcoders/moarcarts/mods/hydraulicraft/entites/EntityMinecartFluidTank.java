@@ -3,7 +3,7 @@ package xyz.brassgoggledcoders.moarcarts.mods.hydraulicraft.entites;
 import net.minecraft.world.World;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartFluidTEBase;
 import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
-import xyz.brassgoggledcoders.moarcarts.mods.hydraulicraft.HydraulicraftCompat;
+import xyz.brassgoggledcoders.moarcarts.mods.hydraulicraft.HydraulicraftModule;
 
 public class EntityMinecartFluidTank extends EntityMinecartFluidTEBase
 {
@@ -15,7 +15,7 @@ public class EntityMinecartFluidTank extends EntityMinecartFluidTEBase
 	@Override
 	public ItemMinecartBase getItem()
 	{
-		return HydraulicraftCompat.ITEM_MINECART_FLUIDTANK;
+		return HydraulicraftModule.ITEM_MINECART_FLUIDTANK;
 	}
 
 	@Override

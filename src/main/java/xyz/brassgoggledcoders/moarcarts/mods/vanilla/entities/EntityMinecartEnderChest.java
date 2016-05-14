@@ -16,7 +16,7 @@ import net.minecraft.inventory.InventoryEnderChest;
 import net.minecraft.world.World;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartBase;
 import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
-import xyz.brassgoggledcoders.moarcarts.mods.vanilla.VanillaCompat;
+import xyz.brassgoggledcoders.moarcarts.mods.vanilla.VanillaModule;
 
 /**
  * @author SkySom
@@ -31,7 +31,7 @@ public class EntityMinecartEnderChest extends EntityMinecartBase
 	@Override
 	public ItemMinecartBase getItem()
 	{
-		return VanillaCompat.ITEM_MINECART_ENDERCHEST;
+		return VanillaModule.ITEM_MINECART_ENDERCHEST;
 	}
 
 	@Override

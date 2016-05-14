@@ -24,7 +24,7 @@ import xyz.brassgoggledcoders.moarcarts.mods.vanilla.items.ItemMinecartEnderChes
 /**
  * @author SkySom
  */
-public class VanillaCompat extends Module
+public class VanillaModule extends Module
 {
 	public static ItemMinecartEnderChest ITEM_MINECART_ENDERCHEST;
 	public static BlockComparatorTrack BLOCK_COMPARATOR_TRACK;

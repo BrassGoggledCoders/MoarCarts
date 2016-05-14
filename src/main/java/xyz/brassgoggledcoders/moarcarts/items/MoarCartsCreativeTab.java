@@ -1,7 +1,7 @@
 package xyz.brassgoggledcoders.moarcarts.items;
 
 import xyz.brassgoggledcoders.boilerplate.lib.common.BaseCreativeTab;
-import xyz.brassgoggledcoders.moarcarts.mods.vanilla.VanillaCompat;
+import xyz.brassgoggledcoders.moarcarts.mods.vanilla.VanillaModule;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 
@@ -16,8 +16,8 @@ public class MoarCartsCreativeTab extends BaseCreativeTab
 	}
 
 	public Item getTabIconItem() {
-		if(VanillaCompat.ITEM_MINECART_ENDERCHEST != null) {
-			return VanillaCompat.ITEM_MINECART_ENDERCHEST;
+		if(VanillaModule.ITEM_MINECART_ENDERCHEST != null) {
+			return VanillaModule.ITEM_MINECART_ENDERCHEST;
 		}
 		return Items.minecart;
 	}

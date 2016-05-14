@@ -3,7 +3,7 @@ package xyz.brassgoggledcoders.moarcarts.mods.neotech.entities;
 import net.minecraft.world.World;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartFluidTEBase;
 import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
-import xyz.brassgoggledcoders.moarcarts.mods.neotech.NeotechCompat;
+import xyz.brassgoggledcoders.moarcarts.mods.neotech.NeotechModule;
 import xyz.brassgoggledcoders.moarcarts.mods.neotech.items.ItemMinecartTank;
 
 public class EntityMinecartIronTank extends EntityMinecartFluidTEBase
@@ -27,7 +27,7 @@ public class EntityMinecartIronTank extends EntityMinecartFluidTEBase
 	@Override
 	public ItemMinecartBase getItem()
 	{
-		return NeotechCompat.ITEM_MINECART_IRONTANK;
+		return NeotechModule.ITEM_MINECART_IRONTANK;
 	}
 
 	@Override

@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 import xyz.brassgoggledcoders.boilerplate.lib.client.guis.IOpenableGUI;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartInventoryTEBase;
 import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
-import xyz.brassgoggledcoders.moarcarts.mods.neotech.NeotechCompat;
+import xyz.brassgoggledcoders.moarcarts.mods.neotech.NeotechModule;
 import xyz.brassgoggledcoders.moarcarts.mods.neotech.containers.ContainerMinecartFlushableChest;
 
 public class EntityMinecartFlushableChest extends EntityMinecartInventoryTEBase implements IOpenableGUI
@@ -22,7 +22,7 @@ public class EntityMinecartFlushableChest extends EntityMinecartInventoryTEBase 
 	@Override
 	public ItemMinecartBase getItem()
 	{
-		return NeotechCompat.ITEM_MINECART_FLUSHABLECHEST;
+		return NeotechModule.ITEM_MINECART_FLUSHABLECHEST;
 	}
 
 	@Override

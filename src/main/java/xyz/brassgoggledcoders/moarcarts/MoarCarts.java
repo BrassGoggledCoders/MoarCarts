@@ -29,14 +29,14 @@ import xyz.brassgoggledcoders.boilerplate.lib.common.config.Type;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.ConfigRegistry;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ModLogger;
 import xyz.brassgoggledcoders.moarcarts.items.MoarCartsCreativeTab;
-import xyz.brassgoggledcoders.moarcarts.mods.extras.ExtrasCompat;
-import xyz.brassgoggledcoders.moarcarts.mods.hydraulicraft.HydraulicraftCompat;
+import xyz.brassgoggledcoders.moarcarts.mods.extras.ExtrasModule;
+import xyz.brassgoggledcoders.moarcarts.mods.hydraulicraft.HydraulicraftModule;
 import xyz.brassgoggledcoders.moarcarts.mods.ie.IEModule;
 import xyz.brassgoggledcoders.moarcarts.mods.ironchest.IronChestCompat;
-import xyz.brassgoggledcoders.moarcarts.mods.neotech.NeotechCompat;
+import xyz.brassgoggledcoders.moarcarts.mods.neotech.NeotechModule;
 import xyz.brassgoggledcoders.moarcarts.mods.rf.RFModule;
-import xyz.brassgoggledcoders.moarcarts.mods.vanilla.VanillaCompat;
-import xyz.brassgoggledcoders.moarcarts.mods.waila.WailaCompat;
+import xyz.brassgoggledcoders.moarcarts.mods.vanilla.VanillaModule;
+import xyz.brassgoggledcoders.moarcarts.mods.waila.WailaModule;
 import xyz.brassgoggledcoders.moarcarts.network.EntityTileEntityUpdateMessage;
 import xyz.brassgoggledcoders.moarcarts.proxies.CommonProxy;
 import xyz.brassgoggledcoders.moarcarts.recipes.NBTCartRecipe;
@@ -101,12 +101,12 @@ public class MoarCarts implements IBoilerplateMod
 
 	public void initModCompatHandler()
 	{
-		BoilerplateLib.getModuleHandler().addModule(new VanillaCompat());
+		BoilerplateLib.getModuleHandler().addModule(new VanillaModule());
 		BoilerplateLib.getModuleHandler().addModule(new IronChestCompat());
-		BoilerplateLib.getModuleHandler().addModule(new WailaCompat());
-		BoilerplateLib.getModuleHandler().addModule(new HydraulicraftCompat());
-		BoilerplateLib.getModuleHandler().addModule(new NeotechCompat());
-		BoilerplateLib.getModuleHandler().addModule(new ExtrasCompat());
+		BoilerplateLib.getModuleHandler().addModule(new WailaModule());
+		BoilerplateLib.getModuleHandler().addModule(new HydraulicraftModule());
+		BoilerplateLib.getModuleHandler().addModule(new NeotechModule());
+		BoilerplateLib.getModuleHandler().addModule(new ExtrasModule());
 		BoilerplateLib.getModuleHandler().addModule(new RFModule());
 		BoilerplateLib.getModuleHandler().addModule(new IEModule());
 	}

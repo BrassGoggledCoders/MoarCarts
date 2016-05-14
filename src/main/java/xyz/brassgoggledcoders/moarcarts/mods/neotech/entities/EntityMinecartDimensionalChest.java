@@ -3,7 +3,7 @@ package xyz.brassgoggledcoders.moarcarts.mods.neotech.entities;
 import net.minecraft.world.World;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartCapableTEBase;
 import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
-import xyz.brassgoggledcoders.moarcarts.mods.neotech.NeotechCompat;
+import xyz.brassgoggledcoders.moarcarts.mods.neotech.NeotechModule;
 
 public class EntityMinecartDimensionalChest extends EntityMinecartCapableTEBase
 {
@@ -27,6 +27,6 @@ public class EntityMinecartDimensionalChest extends EntityMinecartCapableTEBase
 	@Override
 	public ItemMinecartBase getItem()
 	{
-		return NeotechCompat.ITEM_MINECART_DIMENSIONALCHEST;
+		return NeotechModule.ITEM_MINECART_DIMENSIONALCHEST;
 	}
 }
