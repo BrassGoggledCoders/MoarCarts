@@ -36,9 +36,9 @@ public class TileRFLoader extends TileEntitySidedBase implements IEnergyProvider
 				if(this.getSideValue(facing.ordinal()) == SideType.INPUT)
 				{
 					IEnergyProvider energyProvider = null;
-					if(BlockUtils.isRailBlock(this.worldObj.getBlockState(pos)))
+					if(BlockUtils.isRailBlock(this.worldObj.getBlockState(pos.offset(facing))))
 					{
-						EntityMinecart entityMinecart = getMinecartsAt(worldObj, pos.offset(facing), 1f).get(0);
+						EntityMinecart entityMinecart = getMinecartAt(worldObj, pos.offset(facing), 1f);
 						if(entityMinecart instanceof IEnergyProvider)
 						{
 							energyProvider = (IEnergyProvider)entityMinecart;
@@ -57,9 +57,9 @@ public class TileRFLoader extends TileEntitySidedBase implements IEnergyProvider
 				if(this.getSideValue(facing.ordinal()) == SideType.OUTPUT)
 				{
 					IEnergyReceiver energyReceiver = null;
-					if(BlockUtils.isRailBlock(this.worldObj.getBlockState(pos)))
+					if(BlockUtils.isRailBlock(this.worldObj.getBlockState(pos.offset(facing))))
 					{
-						EntityMinecart entityMinecart = getMinecartsAt(worldObj, pos.offset(facing), 1f).get(0);
+						EntityMinecart entityMinecart = getMinecartAt(worldObj, pos.offset(facing), 1f);
 						if(entityMinecart instanceof IEnergyReceiver)
 						{
 							energyReceiver = (IEnergyReceiver)entityMinecart;
@@ -153,16 +153,31 @@ public class TileRFLoader extends TileEntitySidedBase implements IEnergyProvider
 		return this.getSideValue(from.ordinal()) != SideType.NONE;
 	}
 
-	public static List<EntityMinecart> getMinecartsAt(World world, BlockPos pos, float sensitivity) {
+	public static EntityMinecart getMinecartAt(World world, BlockPos pos, float sensitivity)
+	{
+		List<EntityMinecart> minecarts = getMinecartsAt(world, pos, sensitivity);
+		if(minecarts.size() > 0)
+		{
+			return minecarts.get(0);
+		}
+		return null;
+	}
+
+	//Pulled from RailCraft-API Thanks CovertJaguar!
+	public static List<EntityMinecart> getMinecartsAt(World world, BlockPos pos, float sensitivity)
+	{
 		sensitivity = Math.min(sensitivity, 0.49f);
 		List entities = world.getEntitiesWithinAABB(EntityMinecart.class, AxisAlignedBB
 				.fromBounds(pos.getX() + sensitivity, pos.getY() + sensitivity, pos.getZ() + sensitivity,
-				pos.getX() + 1 - sensitivity, pos.getY() + 1 - sensitivity, pos.getZ() + 1 - sensitivity));
-		List<EntityMinecart> carts = new ArrayList<EntityMinecart>();
-		for (Object o : entities) {
+						pos.getX() + 1 - sensitivity, pos.getY() + 1 - sensitivity, pos.getZ() + 1 - sensitivity));
+		List<EntityMinecart> carts = new ArrayList<>();
+		for (Object o : entities)
+		{
 			EntityMinecart cart = (EntityMinecart) o;
 			if (!cart.isDead)
+			{
 				carts.add((EntityMinecart) o);
+			}
 		}
 		return carts;
 	}
