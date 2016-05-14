@@ -74,7 +74,7 @@ public abstract class ItemSubMinecartBase extends ItemMinecartBase
 		for(int i = 0; i < numberOfSubItems; i++)
 		{
 			ItemStack itemStack = new ItemStack(this, 1, i);
-			recipes[i] = new NBTCartRecipe(this, i, getCartBlock(itemStack), i);
+			recipes[i] = new NBTCartRecipe(this, i, getCartBlock(itemStack), getCartBlockMetadata(itemStack));
 		}
 		return recipes;
 	}

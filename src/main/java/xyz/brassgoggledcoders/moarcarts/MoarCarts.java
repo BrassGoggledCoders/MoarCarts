@@ -53,7 +53,7 @@ public class MoarCarts implements IBoilerplateMod
 	public static final String MODID = "moarcarts";
 	public static final String MODNAME = "MoarCarts";
 	public static final String MODVERSION = "@VERSION@";
-	public static final String DEPENDENCIES = "after:ironchest;";
+	public static final String DEPENDENCIES = "after:IronChest;";
 
 	public static ModLogger logger;
 

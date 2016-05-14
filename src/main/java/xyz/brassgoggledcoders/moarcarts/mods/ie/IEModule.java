@@ -27,7 +27,6 @@ public class IEModule extends Module
 
 	public static Block WOODEN_DEVICE;
 	public static Block METAL_DEVICE;
-	public static Block METAL_DEVICE2;
 
 	public boolean isRFModuleEnabled = false;
 
@@ -83,14 +82,13 @@ public class IEModule extends Module
 	{
 		WOODEN_DEVICE = GameRegistry.findBlock("ImmersiveEngineering", "woodenDevice0");
 		METAL_DEVICE = GameRegistry.findBlock("ImmersiveEngineering", "metalDevice0");
-		METAL_DEVICE2 = GameRegistry.findBlock("ImmersiveEngineering", "metalDevice1");
 
 		if(isRFModuleEnabled)
 		{
-			RFModule.registerRFLoaderRecipe(new ItemStack(METAL_DEVICE, 1, 1));
-			RFModule.registerRFLoaderRecipe(new ItemStack(METAL_DEVICE, 1, 4));
-			RFModule.registerRFLoaderRecipe(new ItemStack(METAL_DEVICE, 1, 7));
-			RFModule.registerRFLoaderRecipe(new ItemStack(METAL_DEVICE2, 1, 8));
+			for(int i = 0; i < 4; i++)
+			{
+				RFModule.registerRFLoaderRecipe(new ItemStack(METAL_DEVICE, 1, i));
+			}
 		}
 	}
 

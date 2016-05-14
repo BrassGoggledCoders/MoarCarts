@@ -158,7 +158,7 @@ public abstract class ItemMinecartBase extends ItemMinecart implements IMinecart
 	{
 		Item itemMinecartBase = ItemRegistry.getItem(this.getUnlocalizedName().substring(5));
 		ItemStack itemStack = new ItemStack(itemMinecartBase, 1, 0);
-		return new IRecipe[]{new NBTCartRecipe(itemMinecartBase, getCartBlock(itemStack))};
+		return new IRecipe[]{new NBTCartRecipe(itemMinecartBase, getCartBlock(itemStack), getCartBlockMetadata(itemStack))};
 	}
 
 	@Override

@@ -28,7 +28,7 @@ public class ItemMinecartWoodenBarrel extends ItemMinecartBase
 	@Override
 	public int getCartBlockMetadata(ItemStack itemStack)
 	{
-		return 6;
+		return 1;
 	}
 
 	@Override

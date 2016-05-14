@@ -41,6 +41,12 @@ public class ItemMinecartTank extends ItemSubMinecartBase
 	}
 
 	@Override
+	public int getCartBlockMetadata(ItemStack itemStack)
+	{
+		return 0;
+	}
+
+	@Override
 	public EntityMinecartBase getEntityFromItem(World world, ItemStack itemStack)
 	{
 		EntityMinecartBase minecartBase;
