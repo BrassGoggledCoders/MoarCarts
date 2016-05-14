@@ -48,7 +48,7 @@ public class TileFluidHopper extends TileEntityFluidBase implements ITickable
 					this.markDirty();
 				}
 
-				this.setTransferCoolDown(20);
+				this.setTransferCoolDown(100);
 			}
 		}
 	}
