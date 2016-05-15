@@ -15,7 +15,7 @@ import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartTEBase;
 /**
  * @author SkySom
  */
-public class RenderMinecartTEBase<T extends EntityMinecartTEBase> extends RenderMinecart<EntityMinecartTEBase>
+public class RenderMinecartTEBase<EM extends EntityMinecartTEBase> extends RenderMinecart<EntityMinecartTEBase>
 {
 	public enum Factory implements IRenderFactory<EntityMinecartTEBase>
 	{
@@ -28,12 +28,13 @@ public class RenderMinecartTEBase<T extends EntityMinecartTEBase> extends Render
 		}
 	}
 
-	public RenderMinecartTEBase(RenderManager renderManagerIn)
+	public RenderMinecartTEBase(RenderManager renderManager)
 	{
-		super(renderManagerIn);
+		super(renderManager);
 	}
 
-	public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks)
+	@Override
+	public void doRender(EntityMinecartTEBase entity, double x, double y, double z, float entityYaw, float partialTicks)
 	{
 		GlStateManager.pushMatrix();
 		this.bindEntityTexture(entity);
@@ -127,7 +128,7 @@ public class RenderMinecartTEBase<T extends EntityMinecartTEBase> extends Render
 		GlStateManager.popMatrix();
 	}
 
-	protected void renderTESRModel(T entity)
+	protected void renderTESRModel(EntityMinecartTEBase entity)
 	{
 		GlStateManager.pushMatrix();
 		GlStateManager.rotate(90F, 0F, 1F, 0F);
@@ -136,7 +137,7 @@ public class RenderMinecartTEBase<T extends EntityMinecartTEBase> extends Render
 		GlStateManager.popMatrix();
 	}
 
-	protected void renderBlockModel(T entity, float partialTicks)
+	protected void renderBlockModel(EntityMinecartTEBase entity, float partialTicks)
 	{
 		GlStateManager.pushMatrix();
 		IBlockState iblockstate = entity.getDisplayTile();
