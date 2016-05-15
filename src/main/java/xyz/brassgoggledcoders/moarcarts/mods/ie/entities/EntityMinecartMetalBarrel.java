@@ -11,7 +11,7 @@ public class EntityMinecartMetalBarrel extends EntityMinecartWoodenBarrel
 {
 	public EntityMinecartMetalBarrel(World world)
 	{
-		super(world, 7);
+		super(world, 4);
 	}
 
 	@Override
