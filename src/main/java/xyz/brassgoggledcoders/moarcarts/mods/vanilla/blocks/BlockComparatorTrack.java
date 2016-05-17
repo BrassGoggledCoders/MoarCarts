@@ -12,9 +12,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.IFluidHandler;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import xyz.brassgoggledcoders.boilerplate.lib.client.models.IHasModel;
 import xyz.brassgoggledcoders.boilerplate.lib.common.items.IHasRecipe;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ComparatorUtils;
@@ -44,7 +48,6 @@ public class BlockComparatorTrack extends BlockRailDetector implements IHasModel
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public int getComparatorInputOverride(World world, BlockPos blockPos)
 	{
 		int comparatorOutput = 0;
@@ -63,6 +66,10 @@ public class BlockComparatorTrack extends BlockRailDetector implements IHasModel
 				} else if(minecart instanceof IInventory)
 				{
 					comparatorOutput = Container.calcRedstoneFromInventory((IInventory)minecart);
+				} else if(minecart.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP))
+				{
+					comparatorOutput = scaleIItemHandlerLevelTo(15, minecart.getCapability(
+							CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null));
 				} else if(minecart.canBeRidden())
 				{
 					comparatorOutput = (minecart.riddenByEntity != null) ? 15 : 0;
@@ -102,6 +109,29 @@ public class BlockComparatorTrack extends BlockRailDetector implements IHasModel
 		materials.add(new ItemStack(Blocks.detector_rail));
 		return new IRecipe[]{new ShapelessRecipes(new ItemStack(this), materials)};
 	}
+
+	public static int scaleIItemHandlerLevelTo(int scale, IItemHandler itemHandler)
+	{
+		if(itemHandler != null)
+		{
+			int numItemStacks = 0;
+			float redstoneLevel = 0.0F;
+
+			for (int slotNum = 0; slotNum < itemHandler.getSlots(); ++slotNum)
+			{
+				ItemStack itemstack = itemHandler.getStackInSlot(slotNum);
+
+				if (itemstack != null)
+				{
+					redstoneLevel += (float)itemstack.stackSize / (float) itemstack.getMaxStackSize();
+					++numItemStacks;
+				}
+			}
+			redstoneLevel = redstoneLevel / (float)itemHandler.getSlots();
+			return MathHelper.floor_float(redstoneLevel * (float)scale) + (numItemStacks > 0 ? 1 : 0);
+		}
+		return 0;
+	}
 }
 
 class MinecartPredicate implements Predicate<Entity>
@@ -109,6 +139,6 @@ class MinecartPredicate implements Predicate<Entity>
 	@Override
 	public boolean apply(@Nullable Entity input)
 	{
-		return false;
+		return input instanceof EntityMinecart && !input.isDead;
 	}
 }

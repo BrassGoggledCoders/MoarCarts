@@ -11,6 +11,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ComparatorUtils;
 
 /**
  * @author SkySom
@@ -85,7 +86,6 @@ public abstract class EntityMinecartInventoryTEBase extends EntityMinecartCapabl
 		super.travelToDimension(dimension);
 	}
 
-	//TODO Move to Boilerplate. Added Comparator stuff for Capabilities
 	public IItemHandler getItemHandler()
 	{
 		if(hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP))
@@ -93,6 +93,16 @@ public abstract class EntityMinecartInventoryTEBase extends EntityMinecartCapabl
 			return getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
 		}
 		return null;
+	}
+
+	public int getComparatorInputOverride()
+	{
+		if(!this.getCartBlock().hasComparatorInputOverride())
+		{
+			return ComparatorUtils.scaleIItemHandlerLevelTo(15, getCapability(
+					CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null));
+		}
+		return super.getComparatorInputOverride();
 	}
 
 	@Override
