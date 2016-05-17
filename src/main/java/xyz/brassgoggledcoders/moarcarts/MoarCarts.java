@@ -76,7 +76,7 @@ public class MoarCarts implements IBoilerplateMod
 		ConfigRegistry.addCategoryComment("Tweaks",
 				"Most these values will be overwritten by Railcraft values, if it is installed");
 		ConfigRegistry.addEntry(new ConfigEntry("Tweaks", "breakOnDrop", Type.BOOLEAN, "false",
-				"change to '{t}=true' to restore vanilla behavior"));
+				"change to 'true' to restore vanilla behavior"));
 		ConfigRegistry.addEntry(new ConfigEntry("Tweaks", "maxStackSize", Type.INTEGER, "3",
 				"change the value to your desired minecart stack size, vanilla=1, default=3, max=64"));
 
