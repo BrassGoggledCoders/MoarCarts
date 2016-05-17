@@ -61,7 +61,7 @@ public abstract class ItemSubMinecartBase extends ItemMinecartBase
 		String[] locations = new String[getNumberOfSubItems()];
 		for(int i = 0; i < numberOfSubItems; i++)
 		{
-			locations[i] = getUnlocalizedName().substring(5) + getUnlocalizedNameMetaExtension(i);
+			locations[i] = "defaultcart";
 		}
 		return locations;
 	}
