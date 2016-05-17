@@ -12,6 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import xyz.brassgoggledcoders.boilerplate.lib.common.modules.Module;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.EntityRegistry;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.ItemRegistry;
+import xyz.brassgoggledcoders.moarcarts.mods.extras.ExtrasModule;
 import xyz.brassgoggledcoders.moarcarts.mods.ie.entities.*;
 import xyz.brassgoggledcoders.moarcarts.mods.ie.events.ClientEvents;
 import xyz.brassgoggledcoders.moarcarts.mods.ie.items.*;
@@ -89,6 +90,12 @@ public class IEModule extends Module
 			{
 				RFModule.registerRFLoaderRecipe(new ItemStack(METAL_DEVICE, 1, i));
 			}
+		}
+
+		if(isOtherModuleActive("Extras"))
+		{
+			ExtrasModule.registerFluidLoaderRecipe(new ItemStack(WOODEN_DEVICE, 1, 1));
+			ExtrasModule.registerFluidLoaderRecipe(new ItemStack(METAL_DEVICE, 1, 4));
 		}
 	}
 
