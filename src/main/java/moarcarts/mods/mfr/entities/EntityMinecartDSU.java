@@ -46,6 +46,12 @@ public class EntityMinecartDSU extends EntityMinecartDeepStorageTEBase implement
 	}
 
 	@Override
+	public boolean shouldTileUpdate()
+	{
+		return true;
+	}
+
+	@Override
 	public int getItemQuantity()
 	{
 		return ((TileEntityDeepStorageUnit)this.getTileEntity()).getQuantity();
