@@ -3,7 +3,6 @@ package moarcarts.fakeworld;
 import moarcarts.MoarCarts;
 import moarcarts.entities.EntityMinecartTEBase;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryEnderChest;
@@ -15,16 +14,16 @@ import net.minecraft.world.World;
 /**
  * @author SkySom
  */
-public class FakePlayerClientMP extends EntityClientPlayerMP
+public class FakePlayerSP extends EntityPlayerSP
 {
 	protected EntityPlayerSP entityPlayer;
 	private EntityMinecartTEBase entityMinecartTEBase;
 	private boolean accessInventory;
 
-	public FakePlayerClientMP(EntityClientPlayerMP entityPlayer, EntityMinecartTEBase entityMinecartTEBase, boolean accessInventory)
+	public FakePlayerSP(EntityPlayerSP entityPlayer, EntityMinecartTEBase entityMinecartTEBase, boolean accessInventory)
 	{
 		super(Minecraft.getMinecraft(), entityPlayer.getEntityWorld(), Minecraft.getMinecraft().getSession(),
-				entityPlayer.sendQueue, entityPlayer.getStatFileWriter());
+				entityPlayer.dimension);
 		this.accessInventory = accessInventory;
 		if(this.accessInventory)
 		{
