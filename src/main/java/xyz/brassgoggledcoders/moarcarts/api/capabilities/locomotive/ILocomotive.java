@@ -6,13 +6,15 @@ import xyz.brassgoggledcoders.moarcarts.api.capabilities.rollingstock.IRollingSt
 import java.util.List;
 
 public interface ILocomotive {
+    int getID();
+
+    void setID(int id);
+
     List<IRollingStock> getRollingStock();
 
-    List<Integer> getRollingStockIDs();
-
-    void setRollingStockIDs(List<Integer> rollingStockIDs);
-
     void addRollingStock(IRollingStock rollingStock);
+
+    void setRollingStock(List<IRollingStock> rollingStockList);
 
     void setLocomotiveEntity(EntityMinecart locomotive);
 
