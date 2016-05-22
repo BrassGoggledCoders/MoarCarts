@@ -5,6 +5,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import xyz.brassgoggledcoders.boilerplate.lib.common.modules.Module;
 import xyz.brassgoggledcoders.moarcarts.api.capabilities.couplable.CouplingCapability;
 import xyz.brassgoggledcoders.moarcarts.api.capabilities.couplingdevice.CouplingDeviceCapability;
+import xyz.brassgoggledcoders.moarcarts.mods.coupling.events.CoupledMotionHandler;
 import xyz.brassgoggledcoders.moarcarts.mods.coupling.events.CouplingCapAttachHandler;
 
 public class CouplingModule extends Module
@@ -22,5 +23,6 @@ public class CouplingModule extends Module
 		CouplingDeviceCapability.init();
 		CouplingData.init();
 		MinecraftForge.EVENT_BUS.register(new CouplingCapAttachHandler());
+		MinecraftForge.EVENT_BUS.register(new CoupledMotionHandler());
 	}
 }

@@ -26,6 +26,8 @@ public interface ICoupling
 
 	int setCartPositionInTrain(int position);
 
+	int getTrainSize();
+
 	ICoupling getFrontCart();
 
 	boolean isReady();

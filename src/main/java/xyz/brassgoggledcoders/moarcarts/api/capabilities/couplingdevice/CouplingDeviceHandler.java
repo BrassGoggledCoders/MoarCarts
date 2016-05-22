@@ -22,7 +22,7 @@ public class CouplingDeviceHandler implements ICouplingDevice, ICapabilityProvid
 			EntityMinecart firstCouplingEntity = firstCoupling.getCartEntity();
 			EntityMinecart secondCouplingEntity = coupling.getCartEntity();
 			//TODO: Figure out proper spacing
-			if(firstCouplingEntity.getDistanceSqToEntity(secondCouplingEntity) <= .5F)
+			if(firstCouplingEntity.getDistanceSqToEntity(secondCouplingEntity) <= 1.5F)
 			{
 				coupledSuccessful = firstCoupling.addCartToTrain(coupling) > -1;
 			}

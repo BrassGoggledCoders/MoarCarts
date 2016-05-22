@@ -15,8 +15,8 @@ public class CouplingHandler implements ICoupling, INBTSerializable<NBTTagCompou
 {
 	private int id = -1;
 	private int cartPosition = 0;
+	private int trainSize;
 	private boolean isReady = false;
-	private int[] trainIDs;
 	private List<ICoupling> train;
 	private EntityMinecart cart;
 
@@ -65,6 +65,7 @@ public class CouplingHandler implements ICoupling, INBTSerializable<NBTTagCompou
 		} else {
 			train.add(cartPosition, newCoupling);
 		}
+		this.trainSize = train.size();
 		int newCouplingCartPosition = train.indexOf(newCoupling);
 		newCoupling.setCartPositionInTrain(newCouplingCartPosition);
 		newCoupling.setTrain(this.getTrain());
@@ -75,6 +76,7 @@ public class CouplingHandler implements ICoupling, INBTSerializable<NBTTagCompou
 	public void setTrain(List<ICoupling> train)
 	{
 		this.isReady = true;
+		this.trainSize = train.size();
 		this.train = train;
 	}
 
@@ -100,6 +102,11 @@ public class CouplingHandler implements ICoupling, INBTSerializable<NBTTagCompou
 	public int setCartPositionInTrain(int position)
 	{
 		return this.cartPosition = position;
+	}
+
+	@Override public int getTrainSize()
+	{
+		return 0;
 	}
 
 	@Override
