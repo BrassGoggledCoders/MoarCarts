@@ -29,6 +29,7 @@ import xyz.brassgoggledcoders.boilerplate.lib.common.config.Type;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.ConfigRegistry;
 import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ModLogger;
 import xyz.brassgoggledcoders.moarcarts.items.MoarCartsCreativeTab;
+import xyz.brassgoggledcoders.moarcarts.mods.coupling.CouplingModule;
 import xyz.brassgoggledcoders.moarcarts.mods.extras.ExtrasModule;
 import xyz.brassgoggledcoders.moarcarts.mods.hydraulicraft.HydraulicraftModule;
 import xyz.brassgoggledcoders.moarcarts.mods.ie.IEModule;
@@ -109,6 +110,7 @@ public class MoarCarts implements IBoilerplateMod
 		BoilerplateLib.getModuleHandler().addModule(new ExtrasModule());
 		BoilerplateLib.getModuleHandler().addModule(new RFModule());
 		BoilerplateLib.getModuleHandler().addModule(new IEModule());
+		BoilerplateLib.getModuleHandler().addModule(new CouplingModule());
 	}
 
 	@Override
