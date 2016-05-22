@@ -9,6 +9,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.minecart.MinecartInteractEvent;
 import xyz.brassgoggledcoders.boilerplate.lib.BoilerplateLib;
 import xyz.brassgoggledcoders.moarcarts.MoarCarts;
 import xyz.brassgoggledcoders.moarcarts.fakeworld.FakePlayer;
@@ -65,12 +67,17 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 	@Override
 	public boolean interactFirst(EntityPlayer player)
 	{
-		this.sendUpdateToAllAround();
-		EntityPlayer fakePlayer = new FakePlayer(player, this, this.shouldAccessPlayerInventory());
-		boolean blockActivated = this.getCartBlock().onBlockActivated(this.getFakeWorld(), ORIGIN_POS, this.getDisplayTile(),
-				fakePlayer, EnumFacing.NORTH, 0, 0, 0);
-		this.sendUpdateToAllAround();
-		return blockActivated;
+		if(!MinecraftForge.EVENT_BUS.post(new MinecartInteractEvent(this, player)))
+		{
+			this.sendUpdateToAllAround();
+			EntityPlayer fakePlayer = new FakePlayer(player, this, this.shouldAccessPlayerInventory());
+			boolean blockActivated = this.getCartBlock()
+					.onBlockActivated(this.getFakeWorld(), ORIGIN_POS, this.getDisplayTile(), fakePlayer,
+							EnumFacing.NORTH, 0, 0, 0);
+			this.sendUpdateToAllAround();
+			return blockActivated;
+		}
+		return true;
 	}
 
 	public boolean shouldAccessPlayerInventory()
