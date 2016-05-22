@@ -12,7 +12,9 @@ public interface ICoupling
 
 	List<ICoupling> getTrain();
 
-	void addCartToTrain(int cartPosition, ICoupling newCoupling);
+	int addCartToTrain(ICoupling newCoupling);
+
+	int addCartToTrain(int cartPosition, ICoupling newCoupling);
 
 	void setTrain(List<ICoupling> train);
 

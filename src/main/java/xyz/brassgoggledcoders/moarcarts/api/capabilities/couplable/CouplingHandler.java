@@ -51,7 +51,13 @@ public class CouplingHandler implements ICoupling, INBTSerializable<NBTTagCompou
 	}
 
 	@Override
-	public void addCartToTrain(int cartPosition, ICoupling newCoupling)
+	public int addCartToTrain(ICoupling newCoupling)
+	{
+		return this.addCartToTrain(this.train.size(), newCoupling);
+	}
+
+	@Override
+	public int addCartToTrain(int cartPosition, ICoupling newCoupling)
 	{
 		if(cartPosition >= train.size())
 		{
@@ -59,6 +65,10 @@ public class CouplingHandler implements ICoupling, INBTSerializable<NBTTagCompou
 		} else {
 			train.add(cartPosition, newCoupling);
 		}
+		int newCouplingCartPosition = train.indexOf(newCoupling);
+		newCoupling.setCartPositionInTrain(newCouplingCartPosition);
+		newCoupling.setTrain(this.getTrain());
+		return newCouplingCartPosition;
 	}
 
 	@Override
