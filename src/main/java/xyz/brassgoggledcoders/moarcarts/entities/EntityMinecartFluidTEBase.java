@@ -16,7 +16,7 @@ import xyz.brassgoggledcoders.boilerplate.lib.common.utils.ComparatorUtils;
  * TODO: Railcraft IFluidcart
  */
 @Optional.Interface(iface = "mods.railcraft.api.carts.IFluidCart", modid = "RailcraftAPI|carts")
-public abstract class EntityMinecartFluidTEBase extends EntityMinecartTEBase implements IFluidHandler, IFluidCart
+public abstract class EntityMinecartFluidTEBase extends EntityMinecartCapableTEBase implements IFluidHandler, IFluidCart
 {
 	private static int IS_FILLING = 29;
 

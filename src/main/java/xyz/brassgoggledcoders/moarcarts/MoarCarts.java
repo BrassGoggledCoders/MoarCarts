@@ -35,6 +35,7 @@ import xyz.brassgoggledcoders.moarcarts.mods.ie.IEModule;
 import xyz.brassgoggledcoders.moarcarts.mods.ironchest.IronChestCompat;
 import xyz.brassgoggledcoders.moarcarts.mods.neotech.NeotechModule;
 import xyz.brassgoggledcoders.moarcarts.mods.rf.RFModule;
+import xyz.brassgoggledcoders.moarcarts.mods.tinkers.TinkersModule;
 import xyz.brassgoggledcoders.moarcarts.mods.vanilla.VanillaModule;
 import xyz.brassgoggledcoders.moarcarts.mods.waila.WailaModule;
 import xyz.brassgoggledcoders.moarcarts.network.EntityTileEntityUpdateMessage;
@@ -67,7 +68,7 @@ public class MoarCarts implements IBoilerplateMod
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		logger = new ModLogger(MODID);
-		initModCompatHandler();
+		initModuleHandler();
 
 		BoilerplateLib.getInstance().preInitStart(event);
 		BoilerplateLib.getPacketHandler().registerPacket(EntityTileEntityUpdateMessage.Handler.class,
@@ -99,7 +100,7 @@ public class MoarCarts implements IBoilerplateMod
 		BoilerplateLib.getInstance().postInit(event);
 	}
 
-	public void initModCompatHandler()
+	public void initModuleHandler()
 	{
 		BoilerplateLib.getModuleHandler().addModule(new VanillaModule());
 		BoilerplateLib.getModuleHandler().addModule(new IronChestCompat());
@@ -109,6 +110,7 @@ public class MoarCarts implements IBoilerplateMod
 		BoilerplateLib.getModuleHandler().addModule(new ExtrasModule());
 		BoilerplateLib.getModuleHandler().addModule(new RFModule());
 		BoilerplateLib.getModuleHandler().addModule(new IEModule());
+		BoilerplateLib.getModuleHandler().addModule(new TinkersModule());
 	}
 
 	@Override
