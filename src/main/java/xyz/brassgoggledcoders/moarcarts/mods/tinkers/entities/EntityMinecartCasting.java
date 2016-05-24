@@ -7,6 +7,7 @@ import xyz.brassgoggledcoders.moarcarts.mods.tinkers.TinkersModule;
 
 public class EntityMinecartCasting extends EntityMinecartFluidTEBase
 {
+	//TODO INVENTORY STUFF IS A BLOCK STATE THE WORLD IS A LIE. THAT IS ALL
 	public EntityMinecartCasting(World world, int meta)
 	{
 		super(world, meta);
