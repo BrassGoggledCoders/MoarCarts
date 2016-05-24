@@ -58,7 +58,6 @@ entity.moarcarts.entityminecartadvancedrfstorage.name=Advanced RF Storage Cart
 entity.moarcarts.entityminecarteliterfstorage.name=Elite RF Storage Cart
 entity.moarcarts.entityminecartcreativerfstorage.name=Creative RF Storage Cart
 
-
 ## extras stuff
 tile.fluid_hopper.name=Fluid Hopper
 
@@ -85,6 +84,15 @@ entity.moarcarts.entityminecartgunpowderbarrel.name=Gunpowder Barrel Cart
 
 ## rf stuff
 tile.rf_loader.name=RF Loader
+
+## tinkers stuff
+item.tinkers.minecartcasting.table.name=Casting Table
+item.tinkers.minecartcasting.basin.name=Casting Basin
+
+entity.moarcarts.entityminecartcastingtable.name=Casting Table
+entity.moarcarts.entityminecartcastinbasin.name=Casting Basin
+
+tile.cart_faucet.name=Cart Faucet
 
 ##boilerplate
 boilerplate.blockSide.facing=Facing Side

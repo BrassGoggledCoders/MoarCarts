@@ -1,6 +1,5 @@
 package xyz.brassgoggledcoders.moarcarts.entities;
 
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -32,10 +31,7 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 	public EntityMinecartTEBase(World world, int metadata)
 	{
 		super(world, metadata);
-		if(this.getCartBlock() instanceof ITileEntityProvider)
-		{
-			this.setTileEntity(this.getCartBlock().createTileEntity(world, this.getDisplayTile()));
-		}
+		this.setTileEntity(this.getCartBlock().createTileEntity(world, this.getDisplayTile()));
 		this.setDirty(true);
 	}
 

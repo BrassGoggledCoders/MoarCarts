@@ -15,7 +15,7 @@ public class ItemMinecartCasting extends ItemSubMinecartBase
 {
 	public ItemMinecartCasting()
 	{
-		super("tinkers", "Casting");
+		super("tinkers", "casting");
 	}
 
 	@Override

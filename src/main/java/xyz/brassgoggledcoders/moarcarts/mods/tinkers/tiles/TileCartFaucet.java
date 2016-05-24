@@ -78,4 +78,31 @@ public class TileCartFaucet extends TileFaucet
 		// draining unsuccessful
 		reset();
 	}
+
+	protected void pour() {
+		if(drained == null) {
+			return;
+		}
+
+		EntityMinecart fillMinecart = Utils.getMinecartAt(worldObj, pos.down(), 1f);
+		if(fillMinecart instanceof IFluidHandler)  {
+			IFluidHandler toFill = (IFluidHandler) fillMinecart;
+
+			FluidStack fillStack = drained.copy();
+			fillStack.amount = Math.min(drained.amount, LIQUID_TRANSFER);
+
+			// can we fill?
+			int filled = toFill.fill(EnumFacing.UP, fillStack, false);
+			if(filled > 0) {
+				// transfer it
+				this.drained.amount -= filled;
+				fillStack.amount = filled;
+				toFill.fill(EnumFacing.UP, fillStack, true);
+			}
+		}
+		else {
+			// filling TE got lost. reset. all liquid buffered is lost.
+			reset();
+		}
+	}
 }

@@ -1,7 +1,5 @@
 package xyz.brassgoggledcoders.moarcarts.fakeworld;
 
-import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartBase;
-import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartTEBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -12,7 +10,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
+import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartBase;
+import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartTEBase;
 
 import java.util.List;
 
@@ -132,6 +133,12 @@ public class FakeWorld extends World
 	public void playSoundEffect(double posX, double posY, double posZ, String sound, float noice, float soundTimes)
 	{
 		this.getCartWorld().playSoundAtEntity(this.getEntityMinecartBase(), sound, noice, soundTimes);
+	}
+
+	@Override
+	public Chunk getChunkFromChunkCoords(int chunkX, int chunkZ)
+	{
+		return this.getCartWorld().getChunkFromChunkCoords(chunkX, chunkZ);
 	}
 
 	@Override
