@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
@@ -27,6 +28,8 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 	private static int IS_DIRTY_DW = 30;
 	private static int IS_CLIENT_NEEDY = 28;
 	private static int UPDATE_TICKS = 200;
+	private boolean isReallyDirty = false;
+	protected boolean shouldUpdateBlockState = false;
 
 	public EntityMinecartTEBase(World world, int metadata)
 	{
@@ -47,16 +50,26 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 	public void onUpdate()
 	{
 		super.onUpdate();
-		if(!this.worldObj.isRemote && (this.isClientNeedy() ||
-				(this.isDirty() && random.nextInt(UPDATE_TICKS) == 0)))
+		if(!this.worldObj.isRemote && (this.isClientNeedy() || (this.isDirty() &&
+				random.nextInt(UPDATE_TICKS) == 0) || (this.isReallyDirty() && random.nextInt(UPDATE_TICKS / 10) == 0)))
 		{
 			this.setDirty(false);
 			this.setClientNeedy(false);
+			this.setReallyDirty(false);
 			this.sendUpdateToAllAround();
 		}
 		if(shouldTileUpdate() && this.getTileEntity() instanceof ITickable)
 		{
 			((ITickable)this.getTileEntity()).update();
+		}
+		if(shouldUpdateBlockState)
+		{
+			IBlockState blockState = this.getBlockState(this.getMetadata());
+			blockState = this.getCartBlock().getActualState(blockState, getFakeWorld(), BlockPos.ORIGIN);
+			blockState = this.getCartBlock().getExtendedState(blockState, getFakeWorld(), BlockPos.ORIGIN);
+			this.func_174899_a(blockState);
+			this.shouldUpdateBlockState = false;
+			this.sendUpdateToAllAround();
 		}
 	}
 
@@ -229,6 +242,16 @@ public abstract class EntityMinecartTEBase extends EntityMinecartBase implements
 	public void setDirty(boolean isDirty)
 	{
 		dataWatcher.updateObject(IS_DIRTY_DW, isDirty ? 1 : (byte) 0);
+	}
+
+	public boolean isReallyDirty()
+	{
+		return this.isReallyDirty;
+	}
+
+	public void setReallyDirty(boolean isReallyDirty)
+	{
+		this.isReallyDirty = isReallyDirty;
 	}
 
 	public boolean isClientNeedy()

@@ -40,18 +40,21 @@ public abstract class EntityMinecartFluidTEBase extends EntityMinecartCapableTEB
 	@Override
 	public int fill(EnumFacing from, FluidStack resource, boolean doFill)
 	{
+		this.setReallyDirty(true);
 		return this.getFluidTileEntity().fill(from, resource, doFill);
 	}
 
 	@Override
 	public FluidStack drain(EnumFacing from, FluidStack resource, boolean doDrain)
 	{
+		this.setReallyDirty(true);
 		return this.getFluidTileEntity().drain(from, resource, doDrain);
 	}
 
 	@Override
 	public FluidStack drain(EnumFacing from, int maxDrain, boolean doDrain)
 	{
+		this.setReallyDirty(true);
 		return this.getFluidTileEntity().drain(from, maxDrain, doDrain);
 	}
 

@@ -90,7 +90,7 @@ item.tinkers.minecartcasting.table.name=Casting Table
 item.tinkers.minecartcasting.basin.name=Casting Basin
 
 entity.moarcarts.entityminecartcastingtable.name=Casting Table
-entity.moarcarts.entityminecartcastinbasin.name=Casting Basin
+entity.moarcarts.entityminecartcastingbasin.name=Casting Basin
 
 tile.cart_faucet.name=Cart Faucet
 
