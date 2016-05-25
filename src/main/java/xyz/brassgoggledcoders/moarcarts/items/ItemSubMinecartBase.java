@@ -40,7 +40,6 @@ public abstract class ItemSubMinecartBase extends ItemMinecartBase
 		return meta + "";
 	}
 
-
 	public abstract int getNumberOfSubItems();
 
 	@Override
