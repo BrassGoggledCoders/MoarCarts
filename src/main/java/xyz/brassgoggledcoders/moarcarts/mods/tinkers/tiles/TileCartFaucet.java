@@ -15,35 +15,6 @@ import xyz.brassgoggledcoders.moarcarts.utils.Utils;
 public class TileCartFaucet extends TileFaucet
 {
 	@Override
-	public void update() {
-		if(worldObj.isRemote) {
-			return;
-		}
-		// nothing to do if not pouring
-		if(!isPouring) {
-			return;
-		}
-
-		if(drained != null) {
-			// done draining
-			if(drained.amount <= 0) {
-				drained = null;
-				// pour me another, if we want to.
-				if(!stopPouring) {
-					doTransfer();
-				}
-				else {
-					reset();
-				}
-			}
-			else {
-				// reduce amount (cooldown)
-				pour();
-			}
-		}
-	}
-
-	@Override
 	protected void doTransfer() {
 		// still got content left
 		if(drained != null) {
@@ -68,7 +39,7 @@ public class TileCartFaucet extends TileFaucet
 
 					// sync to clients
 					if(!worldObj.isRemote && worldObj instanceof WorldServer) {
-						TinkerNetwork.sendToClients((WorldServer) worldObj, pos, new FaucetActivationPacket(pos, drained));
+						TinkerNetwork.sendToClients((WorldServer)worldObj, pos, new FaucetActivationPacket(pos, drained));
 					}
 
 					return;
@@ -79,6 +50,7 @@ public class TileCartFaucet extends TileFaucet
 		reset();
 	}
 
+	@Override
 	protected void pour() {
 		if(drained == null) {
 			return;

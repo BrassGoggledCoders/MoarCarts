@@ -86,11 +86,13 @@ entity.moarcarts.entityminecartgunpowderbarrel.name=Gunpowder Barrel Cart
 tile.rf_loader.name=RF Loader
 
 ## tinkers stuff
-item.tinkers.minecartcasting.table.name=Casting Table
-item.tinkers.minecartcasting.basin.name=Casting Basin
+item.tinkers.minecartcasting.table.name=Casting Table Cart
+item.tinkers.minecartcasting.basin.name=Casting Basin Cart
+item.tinkers.minecartsearedtank.name=Seared Tank Cart
 
-entity.moarcarts.entityminecartcastingtable.name=Casting Table
-entity.moarcarts.entityminecartcastingbasin.name=Casting Basin
+entity.moarcarts.entityminecartcastingtable.name=Casting Table Cart
+entity.moarcarts.entityminecartcastingbasin.name=Casting Basin Cart
+entity.moarcarts.entityminecartsearedtank.name=Seared Tank Cart
 
 tile.cart_faucet.name=Cart Faucet
 

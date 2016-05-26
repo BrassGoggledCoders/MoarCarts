@@ -13,6 +13,12 @@ public class EntityMinecartSearedTank extends EntityMinecartFluidTEBase
 	}
 
 	@Override
+	public boolean shouldSaveDataToItem()
+	{
+		return true;
+	}
+
+	@Override
 	public ItemMinecartBase getItem()
 	{
 		return TinkersModule.ITEM_MINECART_SEARED_TANK;

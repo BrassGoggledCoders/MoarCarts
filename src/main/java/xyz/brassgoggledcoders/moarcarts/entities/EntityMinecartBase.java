@@ -42,7 +42,7 @@ public abstract class EntityMinecartBase extends EntityMinecart implements IComp
 	protected FakeWorld fakeWorld;
 	protected CartBlockPos cartBlockPos;
 
-	protected static BlockPos ORIGIN_POS = new BlockPos(0, 0, 0);
+	public BlockPos ORIGIN_POS = new BlockPos(0, 0, 0);
 
 	public EntityMinecartBase(World world, int metadata)
 	{

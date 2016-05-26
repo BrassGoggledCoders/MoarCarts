@@ -7,6 +7,7 @@ import slimeknights.tconstruct.tools.TinkerTools;
 import slimeknights.tconstruct.tools.block.BlockToolTable;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartBase;
 import xyz.brassgoggledcoders.moarcarts.items.ItemSubMinecartBase;
+import xyz.brassgoggledcoders.moarcarts.mods.tinkers.entities.EntityMinecartPartChest;
 import xyz.brassgoggledcoders.moarcarts.mods.tinkers.entities.EntityMinecartPatternChest;
 
 public class ItemMinecartTinkersChest extends ItemSubMinecartBase
@@ -37,7 +38,8 @@ public class ItemMinecartTinkersChest extends ItemSubMinecartBase
 	@Override
 	public EntityMinecartBase getEntityFromItem(World world, ItemStack itemStack)
 	{
-		return new EntityMinecartPatternChest(world);
+		return itemStack.getItemDamage() == 0 ? new EntityMinecartPatternChest(world) :
+				new EntityMinecartPartChest(world);
 	}
 
 	@Override

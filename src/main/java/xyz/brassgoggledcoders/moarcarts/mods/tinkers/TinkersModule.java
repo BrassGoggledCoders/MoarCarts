@@ -44,12 +44,12 @@ public class TinkersModule extends Module
 		ITEM_MINECART_SEARED_TANK = new ItemMinecartSearedTank();
 		ItemRegistry.registerItem(ITEM_MINECART_SEARED_TANK);
 		EntityRegistry.registerEntity(EntityMinecartSearedTank.class);
-
+		/*
 		ITEM_MINECART_TINKERS_CHEST = new ItemMinecartTinkersChest();
 		ItemRegistry.registerItem(ITEM_MINECART_TINKERS_CHEST);
 		EntityRegistry.registerEntity(EntityMinecartPartChest.class);
 		EntityRegistry.registerEntity(EntityMinecartPatternChest.class);
-
+		*/
 		BLOCK_CART_FAUCET = new BlockCartFaucet();
 		BlockRegistry.registerBlock(BLOCK_CART_FAUCET);
 	}
