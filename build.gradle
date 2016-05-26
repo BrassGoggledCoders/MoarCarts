@@ -76,9 +76,9 @@ dependencies {
     compile "k4unl:HydCraft:${minecraftversion}-${hydraulicraftversion}:deobf"
     deobfCompile "MCMultiPart:MCMultiPart:${mcmultipartversion}:universal"
     compile "com.dyonovan.neotech:NeoTech:${minecraftversion}-${neotechversion}:dev"
+    deobfCompile "slimeknights:TConstruct:${minecraftversion}-${tinkersversion}"
+    deobfCompile "slimeknights.mantle:Mantle:${minecraftversion}-${mantleversion}"
 }
-
-
 
 task getLibraries {
     def libsFolder = new File('libs')
@@ -94,16 +94,8 @@ task getLibraries {
     def ie = 'ImmersiveEngineering-' + minecraftversion + '-' + ieversion + '.jar'
     def ieSource = 'http://minecraft.curseforge.com/projects/immersive-engineering/files/2299810/download'
 
-    def tinkers = 'TConstruct-' + minecraftversion + '-' + tinkersversion + '.jar'
-    def tinkersSource = 'http://addons.curse.cursecdn.com/files/2290/938/' + tinkers
-
-    def mantle = 'Mantle-' + minecraftversion + '-' + mantleversion + '.jar'
-    def mantleSource = 'http://minecraft.curseforge.com/projects/mantle/files/2288937/download'
-
     downloads.add(new Tuple(ironchest, ironchestSource))
     downloads.add(new Tuple(ie, ieSource))
-    downloads.add(new Tuple(tinkers, tinkersSource))
-    downloads.add(new Tuple(mantle, mantleSource))
 
     libsFolder.listFiles().each { file ->
         def isInDownloadList = false;
