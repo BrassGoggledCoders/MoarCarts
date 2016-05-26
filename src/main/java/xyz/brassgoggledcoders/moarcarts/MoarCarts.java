@@ -36,6 +36,7 @@ import xyz.brassgoggledcoders.moarcarts.mods.ironchest.IronChestCompat;
 import xyz.brassgoggledcoders.moarcarts.mods.neotech.NeotechModule;
 import xyz.brassgoggledcoders.moarcarts.mods.rf.RFModule;
 import xyz.brassgoggledcoders.moarcarts.mods.tinkers.TinkersModule;
+import xyz.brassgoggledcoders.moarcarts.mods.rails.RailsModule;
 import xyz.brassgoggledcoders.moarcarts.mods.vanilla.VanillaModule;
 import xyz.brassgoggledcoders.moarcarts.mods.waila.WailaModule;
 import xyz.brassgoggledcoders.moarcarts.network.EntityTileEntityUpdateMessage;
@@ -111,6 +112,7 @@ public class MoarCarts implements IBoilerplateMod
 		BoilerplateLib.getModuleHandler().addModule(new RFModule());
 		BoilerplateLib.getModuleHandler().addModule(new IEModule());
 		BoilerplateLib.getModuleHandler().addModule(new TinkersModule());
+		BoilerplateLib.getModuleHandler().addModule(new RailsModule());
 	}
 
 	@Override
