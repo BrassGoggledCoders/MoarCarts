@@ -1,0 +1,34 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {
+            "rail": "moarcarts:blocks/rails/boarding_rail"
+        },
+        "transform": "forge:default-block",
+        "model": "rail_flat"
+    },
+    "variants": {
+        "normal": [{}],
+        "inventory": [{}],
+        "powered": {
+            "true": {
+                "textures": {
+                    "rail": "moarcarts:blocks/vanilla/boarding_rail_powered"
+                }
+            },
+            "false": {}
+        },
+        "direction=true,shape=north_south": {
+
+        },
+        "direction=true,shape=east_west": {
+            "y": 90
+        },
+        "direction=false,shape=north_south": {
+            "y": 180
+        },
+        "direction=false,shape=east_west": {
+            "y": 270
+        }
+    }
+}
