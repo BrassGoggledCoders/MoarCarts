@@ -7,6 +7,7 @@ import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartBase;
 import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
 import xyz.brassgoggledcoders.moarcarts.mods.tinkers.entities.EntityMinecartSearedTank;
+import xyz.brassgoggledcoders.moarcarts.renderers.IRenderBlock.RenderMethod;
 
 public class ItemMinecartSearedTank extends ItemMinecartBase
 {
@@ -19,6 +20,12 @@ public class ItemMinecartSearedTank extends ItemMinecartBase
 	public Block getCartBlock(ItemStack itemStack)
 	{
 		return TinkerSmeltery.searedTank;
+	}
+
+	@Override
+	public RenderMethod getCartBlockRenderMethod(ItemStack itemStack)
+	{
+		return RenderMethod.COMBO;
 	}
 
 	@Override
