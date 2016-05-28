@@ -3,14 +3,11 @@ package xyz.brassgoggledcoders.moarcarts.mods.tinkers.entities;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
-import xyz.brassgoggledcoders.boilerplate.lib.client.guis.IOpenableGUI;
-import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartInventoryTEBase;
-import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
-import xyz.brassgoggledcoders.moarcarts.mods.tinkers.TinkersModule;
+import slimeknights.tconstruct.tools.client.GuiPatternChest;
+import slimeknights.tconstruct.tools.tileentity.TilePatternChest;
 import xyz.brassgoggledcoders.moarcarts.mods.tinkers.containers.ContainerMinecartPatternChest;
-import xyz.brassgoggledcoders.moarcarts.mods.tinkers.guis.GuiMinecartPatternChest;
 
-public class EntityMinecartPatternChest extends EntityMinecartInventoryTEBase implements IOpenableGUI
+public class EntityMinecartPatternChest extends EntityMinecartTinkersChest
 {
 	public EntityMinecartPatternChest(World world)
 	{
@@ -18,15 +15,11 @@ public class EntityMinecartPatternChest extends EntityMinecartInventoryTEBase im
 	}
 
 	@Override
-	public ItemMinecartBase getItem()
-	{
-		return TinkersModule.ITEM_MINECART_TINKERS_CHEST;
-	}
-
-	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, BlockPos blockPos)
 	{
-		return new GuiMinecartPatternChest(player.inventory, this);
+		GuiPatternChest chest = new GuiPatternChest(player.inventory, world, blockPos, (TilePatternChest)this.getTileEntity());
+		chest.inventorySlots = new ContainerMinecartPatternChest(player.inventory, this);
+		return chest;
 	}
 
 	@Override

@@ -89,10 +89,14 @@ tile.rf_loader.name=RF Loader
 item.tinkers.minecartcasting.table.name=Casting Table Cart
 item.tinkers.minecartcasting.basin.name=Casting Basin Cart
 item.tinkers.minecartsearedtank.name=Seared Tank Cart
+item.tinkers.minecarttinkerschest.partchest.name=Part Chest Cart
+item.tinkers.minecarttinkerschest.patternchest.name=Pattern Chest Cart
 
 entity.moarcarts.entityminecartcastingtable.name=Casting Table Cart
 entity.moarcarts.entityminecartcastingbasin.name=Casting Basin Cart
 entity.moarcarts.entityminecartsearedtank.name=Seared Tank Cart
+entity.moarcarts.entityminecartpartchest.name=Part Chest Cart
+entity.moarcarts.entityminecartpatternchest.name=Pattern Chest Cart
 
 tile.cart_faucet.name=Cart Faucet
 

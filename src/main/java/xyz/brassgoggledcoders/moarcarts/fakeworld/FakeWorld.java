@@ -70,9 +70,11 @@ public class FakeWorld extends World
 	@Override
 	public TileEntity getTileEntity(BlockPos blockPos)
 	{
-		if(this.getEntityMinecartTEBase() != null)
-		{
-			return this.getEntityMinecartTEBase().getTileEntity();
+		if(blockPos.equals(this.getEntityMinecartBase().ORIGIN_POS)) {
+			if(this.getEntityMinecartTEBase() != null)
+			{
+				return this.getEntityMinecartTEBase().getTileEntity();
+			}
 		}
 		return null;
 	}
@@ -94,7 +96,10 @@ public class FakeWorld extends World
 	@Override
 	public IBlockState getBlockState(BlockPos blockPos)
 	{
-		return this.getEntityMinecartBase().getDisplayTile();
+		if(blockPos.equals(this.getEntityMinecartBase().ORIGIN_POS)) {
+			return this.getEntityMinecartBase().getDisplayTile();
+		}
+		return this.getEntityMinecartBase().getDefaultDisplayTile();
 	}
 
 	//Enderchest Particles
