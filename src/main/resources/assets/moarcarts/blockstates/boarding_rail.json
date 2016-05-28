@@ -10,25 +10,40 @@
     "variants": {
         "normal": [{}],
         "inventory": [{}],
-        "powered": {
-            "true": {
-                "textures": {
-                    "rail": "moarcarts:blocks/vanilla/boarding_rail_powered"
-                }
-            },
-            "false": {}
-        },
-        "direction=true,shape=north_south": {
+        "north_east=true,powered=false,shape=north_south": [{
 
-        },
-        "direction=true,shape=east_west": {
+        }],
+        "north_east=true,powered=false,shape=east_west": [{
             "y": 90
-        },
-        "direction=false,shape=north_south": {
+        }],
+        "north_east=false,powered=false,shape=north_south": [{
             "y": 180
-        },
-        "direction=false,shape=east_west": {
+        }],
+        "north_east=false,powered=false,shape=east_west": [{
             "y": 270
-        }
+        }],
+        "north_east=true,powered=true,shape=north_south": [{
+            "textures": {
+                "rail": "moarcarts:blocks/rails/boarding_rail_powered"
+            }
+        }],
+        "north_east=true,powered=true,shape=east_west": [{
+            "textures": {
+                "rail": "moarcarts:blocks/rails/boarding_rail_powered"
+            },
+            "y": 90
+        }],
+        "north_east=false,powered=true,shape=north_south": [{
+            "textures": {
+                "rail": "moarcarts:blocks/rails/boarding_rail_powered"
+            },
+            "y": 180
+        }],
+        "north_east=false,powered=true,shape=east_west": [{
+            "textures": {
+                "rail": "moarcarts:blocks/rails/boarding_rail_powered"
+            },
+            "y": 270
+        }]
     }
 }
