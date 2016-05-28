@@ -25,7 +25,7 @@ public class BlockRailBoarding extends BlockRailBase implements IHasModel, IHasR
 	public static final PropertyEnum<EnumRailDirection>
 			SHAPE = PropertyEnum.create("shape", BlockRailBase.EnumRailDirection.class, Predicates.FLAT_STRAIGHT);
 	public static final PropertyBool POWERED = PropertyBool.create("powered");
-	public static final PropertyBool DIRECTION = PropertyBool.create("direction");
+	public static final PropertyBool NORTH_EAST = PropertyBool.create("direction");
 
 	public BlockRailBoarding()
 	{
@@ -34,7 +34,7 @@ public class BlockRailBoarding extends BlockRailBase implements IHasModel, IHasR
 		this.setCreativeTab(MoarCarts.moarcartsTab);
 		this.setDefaultState(this.blockState.getBaseState()
 				.withProperty(SHAPE, EnumRailDirection.NORTH_SOUTH).withProperty(POWERED, false)
-				.withProperty(DIRECTION, true));
+				.withProperty(NORTH_EAST, true));
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class BlockRailBoarding extends BlockRailBase implements IHasModel, IHasR
 	@Override
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, SHAPE, POWERED, DIRECTION);
+		return new BlockState(this, SHAPE, POWERED, NORTH_EAST);
 	}
 
 	@Override
