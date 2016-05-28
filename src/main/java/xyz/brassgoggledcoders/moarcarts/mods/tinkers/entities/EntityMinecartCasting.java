@@ -6,7 +6,7 @@ import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartFluidTEBase;
 import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
 import xyz.brassgoggledcoders.moarcarts.mods.tinkers.TinkersModule;
 
-public class EntityMinecartCasting extends EntityMinecartFluidTEBase
+public abstract class EntityMinecartCasting extends EntityMinecartFluidTEBase
 {
 	public EntityMinecartCasting(World world, int meta)
 	{
