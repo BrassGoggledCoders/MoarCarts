@@ -5,23 +5,13 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import slimeknights.tconstruct.tools.client.GuiPartChest;
 import slimeknights.tconstruct.tools.tileentity.TilePartChest;
-import xyz.brassgoggledcoders.boilerplate.lib.client.guis.IOpenableGUI;
-import xyz.brassgoggledcoders.moarcarts.entities.EntityMinecartInventoryTEBase;
-import xyz.brassgoggledcoders.moarcarts.items.ItemMinecartBase;
-import xyz.brassgoggledcoders.moarcarts.mods.tinkers.TinkersModule;
 import xyz.brassgoggledcoders.moarcarts.mods.tinkers.containers.ContainerMinecartPartChest;
 
-public class EntityMinecartPartChest extends EntityMinecartInventoryTEBase implements IOpenableGUI
+public class EntityMinecartPartChest extends EntityMinecartTinkersChest
 {
 	public EntityMinecartPartChest(World world)
 	{
 		super(world, 5);
-	}
-
-	@Override
-	public ItemMinecartBase getItem()
-	{
-		return TinkersModule.ITEM_MINECART_TINKERS_CHEST;
 	}
 
 	@Override
