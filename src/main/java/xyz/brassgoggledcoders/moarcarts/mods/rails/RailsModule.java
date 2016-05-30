@@ -5,11 +5,13 @@ import xyz.brassgoggledcoders.boilerplate.lib.common.modules.Module;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.BlockRegistry;
 import xyz.brassgoggledcoders.moarcarts.mods.rails.blocks.BlockRailBoarding;
 import xyz.brassgoggledcoders.moarcarts.mods.rails.blocks.BlockRailCrossing;
+import xyz.brassgoggledcoders.moarcarts.mods.rails.blocks.BlockRailSwitch;
 
 public class RailsModule extends Module
 {
 	public static BlockRailBoarding BOARDING_RAIL;
 	public static BlockRailCrossing CROSSING_RAIL;
+	public static BlockRailSwitch SWITCH_RAIL;
 
 	@Override
 	public String getName()
@@ -26,5 +28,7 @@ public class RailsModule extends Module
 		CROSSING_RAIL = new BlockRailCrossing();
 		BlockRegistry.registerBlock(CROSSING_RAIL);
 
+		SWITCH_RAIL = new BlockRailSwitch();
+		BlockRegistry.registerBlock(SWITCH_RAIL);
 	}
 }
