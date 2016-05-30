@@ -1,0 +1,20 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {
+            "rail": "moarcarts:blocks/rails/crossing_rail"
+        },
+        "transform": "forge:default-block",
+        "model": "rail_flat"
+    },
+    "variants": {
+        "normal": [{}],
+        "inventory": [{}],
+        "shape=north_south": [{
+
+        }],
+        "shape=east_west": [{
+
+        }]
+    }
+}

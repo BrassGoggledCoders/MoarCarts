@@ -100,6 +100,10 @@ entity.moarcarts.entityminecartpatternchest.name=Pattern Chest Cart
 
 tile.cart_faucet.name=Cart Faucet
 
+## rails stuff
+tile.boarding_rail.name=Boarding Rail
+tile.crossing_rail.name=Crossing Rail
+
 ##boilerplate
 boilerplate.blockSide.facing=Facing Side
 boilerplate.blockSide.opposite=Opposite Side
