@@ -1,7 +1,7 @@
 {
   "parent": "builtin/generated",
   "textures": {
-    "layer0": "moarcarts:blocks/rails/switch_rail_straight_right"
+    "layer0": "moarcarts:blocks/rails/switch_rail_straight_left"
   },
   "display": {
     "thirdperson": {

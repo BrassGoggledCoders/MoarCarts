@@ -20,7 +20,12 @@ public abstract class BlockRailsBase extends BlockRailBase implements IHasModel,
 
 	protected BlockRailsBase(String name)
 	{
-		super(false);
+		this(name, false);
+	}
+
+	protected BlockRailsBase(String name, boolean powered)
+	{
+		super(powered);
 		name += "_rail";
 		this.name = name;
 		this.setUnlocalizedName(name);

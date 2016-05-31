@@ -1,11 +1,13 @@
 package xyz.brassgoggledcoders.moarcarts.mods.rails;
 
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import xyz.brassgoggledcoders.boilerplate.lib.common.modules.Module;
 import xyz.brassgoggledcoders.boilerplate.lib.common.registries.BlockRegistry;
 import xyz.brassgoggledcoders.moarcarts.mods.rails.blocks.BlockRailBoarding;
 import xyz.brassgoggledcoders.moarcarts.mods.rails.blocks.BlockRailCrossing;
 import xyz.brassgoggledcoders.moarcarts.mods.rails.blocks.BlockRailSwitch;
+import xyz.brassgoggledcoders.moarcarts.mods.rails.events.CheckCartDirection;
 
 public class RailsModule extends Module
 {
@@ -30,5 +32,7 @@ public class RailsModule extends Module
 
 		SWITCH_RAIL = new BlockRailSwitch();
 		BlockRegistry.registerBlock(SWITCH_RAIL);
+
+		MinecraftForge.EVENT_BUS.register(new CheckCartDirection());
 	}
 }
