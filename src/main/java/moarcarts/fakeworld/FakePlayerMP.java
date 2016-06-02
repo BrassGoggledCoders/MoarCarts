@@ -34,6 +34,12 @@ public class FakePlayerMP extends EntityPlayerMP
 	}
 
 	@Override
+	public boolean isSneaking()
+	{
+		return this.getEntityPlayer().isSneaking();
+	}
+
+	@Override
 	public void addChatMessage(IChatComponent iChatComponent)
 	{
 		this.getEntityPlayer().addChatComponentMessage(iChatComponent);
