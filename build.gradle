@@ -37,8 +37,8 @@ minecraft {
 repositories {
     mavenLocal()
     maven {
-        name "K4Repo"
-        url "http://maven.k-4u.nl"
+        name "BrassGoggledCoders"
+        url "https://maven.brassgoggledcoders.xyz"
     }
     maven {
         name "Chickenbones"
