@@ -25,6 +25,7 @@ public class FakePlayerMP extends EntityPlayerMP
 		super(entityPlayer.mcServer, entityPlayer.getServerForPlayer(), entityPlayer.getGameProfile(),
 				entityPlayer.theItemInWorldManager);
 		this.accessInventory = accessInventory;
+		this.playerNetServerHandler = entityPlayer.playerNetServerHandler;
 		if(this.accessInventory)
 		{
 			this.inventory = entityPlayer.inventory;

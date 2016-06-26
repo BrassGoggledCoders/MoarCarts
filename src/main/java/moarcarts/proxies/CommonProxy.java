@@ -37,4 +37,12 @@ public class CommonProxy
 		}
 		return null;
 	}
+
+	public void resetPlayer(EntityPlayer player)
+	{
+		if(player instanceof EntityPlayerMP)
+		{
+			((EntityPlayerMP) player).theItemInWorldManager.thisPlayerMP = (EntityPlayerMP)player;
+		}
+	}
 }
