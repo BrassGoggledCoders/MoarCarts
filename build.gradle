@@ -18,7 +18,7 @@ buildscript {
 apply plugin: 'forge'
 
 project.ext {
-    buildNum = System.getenv("BUILD_NUMBER")
+    buildNum = System.getenv("bamboo_buildNumber")
     mcVersion = "${project.minecraft.version}"
     mocversion = "${moarcartsversion}-${project.ext.buildNum}"
 }
@@ -196,7 +196,7 @@ artifacts {
 
 task("uploadJars", dependsOn: "reobf") {
     description = "uploads JARs"
-    if (System.getenv("local_maven") != null) {
+    if (System.getenv("bamboo_local_maven") != null) {
         apply plugin: 'maven'
         uploadArchives {
             repositories {
