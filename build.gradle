@@ -111,7 +111,7 @@ task getLibraries {
     libsFolder.listFiles().each { file ->
         def isInDownloadList = false;
         downloads.each {download ->
-            if(file.name.equals(download.get(0).toString())) {
+            if(file.name.equalsIgnoreCase(download.get(0).toString())) {
                 isInDownloadList = true;
             }
         }
