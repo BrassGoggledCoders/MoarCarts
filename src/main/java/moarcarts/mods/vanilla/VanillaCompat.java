@@ -24,6 +24,8 @@ import moarcarts.mods.vanilla.items.ItemMinecartEnderChest;
 import moarcarts.recipes.NBTCartRecipe;
 import moarcarts.renderers.RenderItemMinecartBase;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.MinecraftForgeClient;
 
 /**
@@ -55,6 +57,7 @@ public class VanillaCompat extends ModCompat
 	public void init(FMLInitializationEvent event)
 	{
 		GameRegistry.addRecipe(new NBTCartRecipe(ITEM_MINECART_ENDERCHEST, Blocks.ender_chest));
+		GameRegistry.addShapelessRecipe(new ItemStack(BLOCK_COMPARATOR_TRACK), Blocks.detector_rail, Items.comparator);
 	}
 
 	@Override
