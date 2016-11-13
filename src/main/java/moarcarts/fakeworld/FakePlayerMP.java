@@ -2,14 +2,16 @@ package moarcarts.fakeworld;
 
 import moarcarts.MoarCarts;
 import moarcarts.entities.EntityMinecartTEBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryEnderChest;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 /**
  * @author SkySom
@@ -32,6 +34,9 @@ public class FakePlayerMP extends EntityPlayerMP
 		}
 		this.setEntityPlayer(entityPlayer);
 		this.setEntityMinecartTEBase(entityMinecartTEBase);
+		this.theItemInWorldManager.thisPlayerMP = entityPlayer;
+		this.capabilities = entityPlayer.capabilities;
+		this.openContainer = entityPlayer.openContainer;
 	}
 
 	@Override
@@ -78,6 +83,11 @@ public class FakePlayerMP extends EntityPlayerMP
 	}
 
 	@Override
+	public ItemStack getCurrentEquippedItem() {
+		return this.getEntityPlayer().getCurrentEquippedItem();
+	}
+
+	@Override
 	public ItemStack getEquipmentInSlot(int slot)
 	{
 		return this.getEntityPlayer().getEquipmentInSlot(slot);
@@ -98,7 +108,9 @@ public class FakePlayerMP extends EntityPlayerMP
 	{
 		if(this.accessInventory)
 		{
+			this.getEntityPlayer().inventory = this.inventory;
 			this.getEntityPlayer().setCurrentItemOrArmor(slot, itemStack);
+			this.inventory = this.getEntityPlayer().inventory;
 		}
 	}
 
@@ -120,7 +132,22 @@ public class FakePlayerMP extends EntityPlayerMP
 		return "MoarCarts FakePlayer";
 	}
 
-	public EntityPlayer getEntityPlayer()
+	@Override
+	public void sendContainerToPlayer(Container container)
+	{
+		this.getEntityPlayer().inventory = this.inventory;
+		this.getEntityPlayer().openContainer = this.openContainer;
+		this.getEntityPlayer().sendContainerToPlayer(container);
+	}
+
+	public void sendContainerAndContentsToPlayer(Container container, List contents)
+	{
+		this.getEntityPlayer().inventory = this.inventory;
+		this.getEntityPlayer().openContainer = this.openContainer;
+		this.getEntityPlayer().sendContainerAndContentsToPlayer(container, contents);
+	}
+
+	public EntityPlayerMP getEntityPlayer()
 	{
 		return entityPlayer;
 	}

@@ -51,10 +51,4 @@ public class ClientProxy extends CommonProxy
 		}
 		return super.getFakePlayer(entityPlayer, entityMinecartBase);
 	}
-
-	@Override
-	public void resetPlayer(EntityPlayer player)
-	{
-
-	}
 }
